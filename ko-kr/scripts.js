@@ -1043,13 +1043,11 @@ const utils = {
 
     // Body scroll management for modals
     disableBodyScroll() {
-        document.body.style.overflow = 'hidden';
-        document.body.style.paddingRight = '0px'; // Prevent layout shift
+        document.body.classList.add('modal-open');
     },
 
     enableBodyScroll() {
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
+        document.body.classList.remove('modal-open');
     },
 
     // 개발자 모드 관련 기능들
