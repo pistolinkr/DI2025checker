@@ -154,13 +154,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - FDA OpenFDA for comprehensive drug data
 - AI providers for advanced analysis capabilities
 - Medical professionals for guidance on drug interactions
-- Korean medical institutions: 식약처, 드러그인포, 건강보험심사평가원, 국민건강정보
+- Korean medical institutions: 식약처, 드러그인포, 심평원, 국민건강정보
 
 ### 🔗 Medical Resources
 
 - [식약처 공식 사이트](https://www.mfds.go.kr) - 한국 식품의약품안전처
 - [드러그인포](https://www.druginfo.co.kr) - 약물 정보 데이터베이스
-- [건강보험심사평가원](https://www.hira.or.kr) - 건강보험심사평가원
+- [심평원](https://www.hira.or.kr) - 건강보험심사평가원
 - [국민건강정보](https://health.cdc.go.kr) - 질병관리청 국민건강정보
 
 ---
@@ -309,11 +309,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 포괄적인 약물 데이터를 제공하는 FDA OpenFDA
 - 고급 분석 기능을 제공하는 AI 서비스 제공업체들
 - 약물 상호작용에 대한 지침을 제공한 의료 전문가들
-- 한국 의료 기관: 식약처, 드러그인포, 건강보험심사평가원, 국민건강정보
+- 한국 의료 기관: 식약처, 드러그인포, 심평원, 국민건강정보
 
 ### 🔗 의료 자료
 
 - [식약처 공식 사이트](https://www.mfds.go.kr) - 한국 식품의약품안전처
 - [드러그인포](https://www.druginfo.co.kr) - 약물 정보 데이터베이스
-- [건강보험심사평가원](https://www.hira.or.kr) - 건강보험심사평가원
+- [심평원](https://www.hira.or.kr) - 건강보험심사평가원
 - [국민건강정보](https://health.cdc.go.kr) - 질병관리청 국민건강정보 

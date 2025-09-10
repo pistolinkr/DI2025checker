@@ -470,7 +470,8 @@ const state = {
     isLoading: false,
     recentSearches: JSON.parse(SecurityUtils.secureLocalStorage.getItem('recentDrugs') || '[]'),
     drugCache: new Map(),
-    developerMode: SecurityUtils.secureLocalStorage.getItem('developer_mode') === 'true'
+    developerMode: SecurityUtils.secureLocalStorage.getItem('developer_mode') === 'true',
+    isFirstVisit: true // 사이트 방문 처음인지 추적
 };
 
 // 개발자 모드 설정
@@ -2816,7 +2817,17 @@ function selectDrug(inputId, drugName) {
             }
         }
         
-        // 자동 상호작용 확인 제거됨 - 사용자가 직접 버튼을 눌러야 함
+        // 모바일에서만 자동 상호작용 확인
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile && inputId === 'drug2') {
+            // 두 번째 약물이 선택되면 자동으로 상호작용 확인 시작
+            setTimeout(() => {
+                const checkButton = document.querySelector('.btn.btn-primary.btn-block');
+                if (checkButton) {
+                    checkButton.click();
+                }
+            }, 500);
+        }
         
         console.log('✅ 약물 선택 완료:', {
             inputId: inputId,
@@ -3388,15 +3399,22 @@ function updateRecentSearches() {
     const displayCount = isMobile ? Math.min(state.recentSearches.length, 4) : state.recentSearches.length;
     const searchesToShow = state.recentSearches.slice(0, displayCount);
     
-    list.innerHTML = searchesToShow.map((term, index) => `
-        <span class="tag scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)}" onclick="useRecentSearch('${term}')">${term}</span>
-    `).join('');
+    list.innerHTML = searchesToShow.map((term, index) => {
+        // 사이트 방문 처음에만 애니메이션 클래스 추가
+        const animationClass = state.isFirstVisit ? 'scroll-hidden' : '';
+        const delayClass = state.isFirstVisit ? `scroll-delay-${Math.min(index % 4 + 1, 4)}` : '';
+        
+        return `<span class="tag ${animationClass} ${delayClass}" onclick="useRecentSearch('${term}')">${term}</span>`;
+    }).join('');
     
-    // 새로 추가된 태그들에 애니메이션 적용
-    setTimeout(() => {
-        const newTags = list.querySelectorAll('.scroll-hidden');
-        newTags.forEach(tag => tag.classList.add('scroll-visible'));
-    }, 50);
+    // 사이트 방문 처음에만 애니메이션 적용
+    if (state.isFirstVisit) {
+        setTimeout(() => {
+            const newTags = list.querySelectorAll('.scroll-hidden');
+            newTags.forEach(tag => tag.classList.add('scroll-visible'));
+        }, 50);
+        state.isFirstVisit = false; // 첫 방문 플래그 해제
+    }
 }
 
 // Use recent search
@@ -4562,7 +4580,7 @@ function showDataSources() {
             <ul style="margin-left: 1rem;">
                 <li><a href="https://nedrug.mfds.go.kr" target="_blank" rel="noopener" style="color: var(--primary);">의약품안전나라</a></li>
                 <li><a href="https://health.kr" target="_blank" rel="noopener" style="color: var(--primary);">약학정보원</a></li>
-                <li><a href="https://opendata.hira.or.kr" target="_blank" rel="noopener" style="color: var(--primary);">건강보험심사평가원</a></li>
+                <li><a href="https://opendata.hira.or.kr" target="_blank" rel="noopener" style="color: var(--primary);">심평원</a></li>
             </ul>
             
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 업데이트</h5>
@@ -5283,8 +5301,9 @@ function selectDrugGlobal(inputId, drugName) {
                 setTimeout(() => { drug2Element.focus(); }, 300);
             }
         }
-        // drug2 선택 시 자동 검사
-        if (inputId === 'drug2') {
+        // 모바일에서만 drug2 선택 시 자동 검사
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile && inputId === 'drug2') {
             const drug1Element = document.getElementById('drug1');
             if (drug1Element && drug1Element.value) {
                 setTimeout(() => { checkInteraction(); }, 500);
