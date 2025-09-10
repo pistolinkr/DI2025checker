@@ -1,8 +1,12 @@
-# 💊 Drug Interaction Checker
+# 💊 Drug Interaction Checker v2.1
 
 > **Professional drug interaction analysis with AI-powered insights and intelligent search capabilities**
 
 [🇺🇸 English](#english) | [🇰🇷 한국어](#korean)
+
+![Version](https://img.shields.io/badge/version-2.1-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Language](https://img.shields.io/badge/language-Korean%20%7C%20English-orange)
 
 ---
 
@@ -37,10 +41,11 @@ Drug Interaction Checker is a sophisticated web application that helps users ide
 
 #### 🎨 **Modern UI/UX**
 - **Glassmorphism design** with blur effects
-- **Monochrome theme** (black/white professional look)
+- **Professional gray theme** with subtle gradients
 - **Dark/Light mode** support
 - **Responsive design** for all devices
 - **Accessibility** features with ARIA labels
+- **Clean footer layout** with medical resource links
 
 ### 🛠 Technology Stack
 
@@ -65,8 +70,8 @@ Drug Interaction Checker is a sophisticated web application that helps users ide
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/drug-interaction-checker.git
-   cd drug-interaction-checker
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
    ```
 
 2. **Open in browser**
@@ -149,6 +154,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - FDA OpenFDA for comprehensive drug data
 - AI providers for advanced analysis capabilities
 - Medical professionals for guidance on drug interactions
+- Korean medical institutions: 식약처, 드러그인포, 건강보험심사평가원, 국민건강정보
+
+### 🔗 Medical Resources
+
+- [식약처 공식 사이트](https://www.mfds.go.kr) - 한국 식품의약품안전처
+- [드러그인포](https://www.druginfo.co.kr) - 약물 정보 데이터베이스
+- [건강보험심사평가원](https://www.hira.or.kr) - 건강보험심사평가원
+- [국민건강정보](https://health.cdc.go.kr) - 질병관리청 국민건강정보
 
 ---
 
@@ -183,10 +196,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 #### 🎨 **모던 UI/UX**
 - **글래스모피즘 디자인** (블러 효과)
-- **모노크롬 테마** (흑백 전문가 룩)
+- **전문가용 회색 테마** (세련된 그라데이션)
 - **다크/라이트 모드** 지원
 - **반응형 디자인** (모든 기기 지원)
 - **접근성** 기능 (ARIA 라벨)
+- **깔끔한 푸터 레이아웃** (의료 자료 링크)
 
 ### 🛠 기술 스택
 
@@ -211,8 +225,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 1. **저장소 복제**
    ```bash
-   git clone https://github.com/yourusername/drug-interaction-checker.git
-   cd drug-interaction-checker
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
    ```
 
 2. **브라우저에서 열기**
@@ -292,6 +306,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 🙏 감사의 말
 
-- 포괄적인 약물 데이터를 제공하는 FDA OpenFDA(식약처의 api로 대체할 예정)
+- 포괄적인 약물 데이터를 제공하는 FDA OpenFDA
 - 고급 분석 기능을 제공하는 AI 서비스 제공업체들
-- 약물 상호작용에 대한 지침을 제공한 의료 전문가들 
+- 약물 상호작용에 대한 지침을 제공한 의료 전문가들
+- 한국 의료 기관: 식약처, 드러그인포, 건강보험심사평가원, 국민건강정보
+
+### 🔗 의료 자료
+
+- [식약처 공식 사이트](https://www.mfds.go.kr) - 한국 식품의약품안전처
+- [드러그인포](https://www.druginfo.co.kr) - 약물 정보 데이터베이스
+- [건강보험심사평가원](https://www.hira.or.kr) - 건강보험심사평가원
+- [국민건강정보](https://health.cdc.go.kr) - 질병관리청 국민건강정보 
