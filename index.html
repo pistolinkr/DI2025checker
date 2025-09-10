@@ -201,7 +201,7 @@
         <!-- 헤더 -->
         <header class="header scroll-fade">
             <h1>약물 상호작용 검사기</h1>
-            <p>안전한 복용을 위한 약물 간의 상호작용을 확인하세요</p>
+            <p>안전한 복용을 위한 약물 간의<br>상호작용을 확인하세요</p>
         </header>
 
         <!-- 약물 검색 섹션 -->
@@ -329,12 +329,23 @@
     <!-- 푸터 -->
     <footer class="footer">
         <div class="footer-container">
+            <!-- 의료 면책조항 -->
+            <div class="footer-disclaimer">
+                <div class="disclaimer-content">
+                    <h4>⚠️ 중요한 의료 면책조항</h4>
+                    <p>
+                        이 도구는 교육 및 정보 제공 목적으로만 사용됩니다. 의료 조언, 진단 또는 치료를 대체할 수 없습니다.
+                        약물 또는 의료 치료에 대한 결정을 내리기 전에 항상 자격을 갖춘 의료 전문가와 상담하시기 바랍니다.
+                        약물 상호작용은 복잡하고 개별적일 수 있습니다.
+                    </p>
+                </div>
+            </div>
+
             <!-- 메인 푸터 컨텐츠 -->
             <div class="footer-content">
                 <!-- 소개 섹션 -->
-                <div class="footer-section footer-about">
-                    <h3>💊 약물 상호작용 검사기</h3>
-                    <p>안전한 약물 사용을 위한 상호작용 검사 도구입니다. 의료진의 조언을 항상 우선시하시기 바랍니다.</p>
+                <div class="footer-section footer-about" style="padding-top: 2rem;">
+                    <p>안전한 약물 사용을 위한 상호작용 검사 도구입니다.<br>의료진의 조언을 항상 우선시하시기 바랍니다.</p>
                     <div class="footer-badges">
                         <span class="badge">FDA 데이터베이스</span>
                         <span class="badge">AI 기반</span>
@@ -342,9 +353,12 @@
                     </div>
                 </div>
 
-                <!-- 빠른 링크 -->
+                <!-- 유사 사이트 -->
                 <div class="footer-section footer-links">
-                    <h4>빠른 링크</h4>
+                    <h4>유사 사이트</h4>
+                    <div class="medical-links">
+                        <a href="https://biolabs.world" target="_blank" rel="noopener">biolabs.world</a>
+                    </div>
                 </div>
 
                 <!-- 의료 자료 -->
@@ -377,8 +391,6 @@
                             justify-content: center;
                             text-align: center;
                             font-size: 0.8rem;
-                            font-weight: 600;
-                            margin-bottom: 0.2rem;
                             color: var(--text-secondary);
                         }
                     </style>
@@ -390,43 +402,30 @@
                             <span>GitHub</span>
                         </a>
                     </div>
-                    <div class="footer-stats">
-                        <div class="stat">
-                            <span class="stat-number" id="footerSearchCount">0</span>
-                            <span class="stat-label">오늘 검색</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- 의료 면책조항 -->
-            <div class="footer-disclaimer">
-                <div class="disclaimer-content">
-                    <h4>⚠️ 중요한 의료 면책조항</h4>
-                    <p>
-                        이 도구는 교육 및 정보 제공 목적으로만 사용됩니다. 의료 조언, 진단 또는 치료를 대체할 수 없습니다.
-                        약물 또는 의료 치료에 대한 결정을 내리기 전에 항상 자격을 갖춘 의료 전문가와 상담하시기 바랍니다.
-                        약물 상호작용은 복잡하고 개별적일 수 있습니다.
-                    </p>
-                </div>
-            </div>
+            <!-- 푸터 구분선 -->
+            <div class="footer-divider"></div>
 
             <!-- 하단 바 -->
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <div class="footer-copyright">
-                        <p>&copy; 2025 Drug Interaction Checker. All rights reserved.</p>
+                    <div class="footer-version-language">
+                        <div class="footer-version">
+                            <a href="version.html" title="버전 정보 보기">v2.1 | G.gear® Pistol™</a>
+                        </div>
+                        <div class="footer-language">
+                            <a href="index_en.html" title="영어 버전으로 전환">⌘ English</a>
+                        </div>
                     </div>
                     <div class="footer-legal">
                         <a href="#" onclick="showPrivacyPolicy()">개인정보처리방침</a>
                         <a href="#" onclick="showTermsOfService()">이용약관</a>
                         <a href="#" onclick="showDataSources()">데이터 출처</a>
                     </div>
-                    <div class="footer-language">
-                        <a href="index_en.html" title="영어 버전으로 전환">⌘ English</a>
-                    </div>
-                    <div class="footer-version">
-                        <span>v2.1 | G.gear® Pistol™ GongSaeng™</span>
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 GongSaeng - DIchecker. All rights reserved.</p>
                     </div>
                 </div>
             </div>

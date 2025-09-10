@@ -202,7 +202,7 @@
         <!-- Header -->
         <header class="header scroll-fade">
             <h1>Drug Interaction Checker</h1>
-            <p>Check the interaction between drugs for safe medication</p>
+            <p>Check the interaction between<br>drugs for safe medication</p>
         </header>
 
         <!-- Drug Search Section -->
@@ -304,11 +304,22 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
+            <!-- Medical Disclaimer -->
+            <div class="footer-disclaimer">
+                <div class="disclaimer-content">
+                    <h4>⚠️ Important Medical Disclaimer</h4>
+                    <p>
+                        This tool is for educational and informational purposes only. It is not intended as medical advice, diagnosis, or treatment. 
+                        Always consult with a qualified healthcare professional before making any decisions about medications or medical treatments.
+                        Drug interactions can be complex and individual.
+                    </p>
+                </div>
+            </div>
+
             <!-- Main Footer Content -->
             <div class="footer-content">
                 <!-- About Section -->
-                <div class="footer-section footer-about">
-                    <h3>💊 Drug Interaction Checker</h3>
+                <div class="footer-section footer-about" style="padding-top: 2rem;">
                     <p>A comprehensive tool for checking drug interactions to help ensure safe medication usage. Always consult healthcare professionals for medical advice.</p>
                     <div class="footer-badges">
                         <span class="badge">FDA Database</span>
@@ -317,26 +328,23 @@
                     </div>
                 </div>
 
-                <!-- Quick Links -->
+                <!-- Similar Sites -->
                 <div class="footer-section footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#" onclick="scrollToTop()">🔝 Back to Top</a></li>
-                        <li><a href="#" onclick="openSettings()">⚙️ AI Settings</a></li>
-                        <li><a href="#" onclick="utils.checkDeveloperCode('dev_2024')">🔧 Developer Mode</a></li>
-                        <li><a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener">📊 FDA API</a></li>
-                    </ul>
+                    <h4>Similar Sites</h4>
+                    <div class="medical-links">
+                        <a href="https://biolabs.world" target="_blank" rel="noopener">biolabs.world</a>
                     </div>
+                </div>
 
                 <!-- Medical Resources -->
                 <div class="footer-section footer-resources">
                     <h4>Medical Resources</h4>
-                    <ul>
-                        <li><a href="https://www.fda.gov" target="_blank" rel="noopener">🏛️ FDA Official</a></li>
-                        <li><a href="https://www.drugs.com/drug_interactions.php" target="_blank" rel="noopener">💊 Drugs.com</a></li>
-                        <li><a href="https://www.webmd.com" target="_blank" rel="noopener">🩺 WebMD</a></li>
-                        <li><a href="https://medlineplus.gov" target="_blank" rel="noopener">📚 MedlinePlus</a></li>
-                    </ul>
+                    <div class="medical-links">
+                        <a href="https://www.fda.gov" target="_blank" rel="noopener">FDA Official</a>
+                        <a href="https://www.drugs.com/drug_interactions.php" target="_blank" rel="noopener">Drugs.com</a>
+                        <a href="https://www.webmd.com" target="_blank" rel="noopener">WebMD</a>
+                        <a href="https://medlineplus.gov" target="_blank" rel="noopener">MedlinePlus</a>
+                    </div>
                 </div>
 
                 <!-- Contact & Social -->
@@ -360,8 +368,6 @@
                             align-items: center;
                             text-align: center;
                             font-size: 0.8rem;
-                            font-weight: 600;
-                            margin-bottom: 0.2rem;
                             color: var(--text-secondary);
                         }
                     </style>
@@ -373,43 +379,30 @@
                             <span>GitHub</span>
                         </a>
                     </div>
-                    <div class="footer-stats">
-                        <div class="stat">
-                            <span class="stat-number" id="footerSearchCount">0</span>
-                            <span class="stat-label">Searches Today</span>
-                        </div>
-                        </div>
                         </div>
                         </div>
 
-            <!-- Medical Disclaimer -->
-            <div class="footer-disclaimer">
-                <div class="disclaimer-content">
-                    <h4>⚠️ Important Medical Disclaimer</h4>
-                    <p>
-                        This tool is for educational and informational purposes only. It is not intended as medical advice, diagnosis, or treatment. 
-                        Always consult qualified healthcare professionals before making any decisions about medications or medical treatments. 
-                        Drug interactions can be complex and individualized.
-                    </p>
-                        </div>
-                                </div>
+            <!-- Footer Divider -->
+            <div class="footer-divider"></div>
 
             <!-- Bottom Bar -->
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <div class="footer-copyright">
-                        <p>&copy; 2025 Drug Interaction Checker. All rights reserved.</p>
+                    <div class="footer-version-language">
+                        <div class="footer-version">
+                            <a href="version_en.html" title="Version Information">Beta v2.1 | G.gear® Pistol™</a>
+                        </div>
+                        <div class="footer-language">
+                            <a href="index.html" title="한국어 버전으로 전환">🇰🇷 한국어</a>
+                        </div>
                     </div>
                     <div class="footer-legal">
                         <a href="#" onclick="showPrivacyPolicy()">Privacy Policy</a>
                         <a href="#" onclick="showTermsOfService()">Terms of Service</a>
                         <a href="#" onclick="showDataSources()">Data Sources</a>
                             </div>
-                    <div class="footer-language">
-                        <a href="/약물상호작용검사기/index.html" title="한국어 버전으로 전환">🇰🇷 한국어</a>
-                    </div>
-                    <div class="footer-version">
-                        <span>Beta v2.1 | G.gear® Pistol™ GongSaeng™</span>
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 GongSaeng - DIchecker. All rights reserved.</p>
                     </div>
                 </div>
             </div>

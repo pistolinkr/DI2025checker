@@ -823,6 +823,84 @@ const drugNameMapping = {
     'colchicine': 'Colchicine'
 };
 
+// 파일 감지 함수
+function detectAvailableFiles() {
+    console.log('📁 사용 가능한 파일들 감지 시작...');
+    
+    // 감지할 파일 목록
+    const filesToDetect = [
+        'index.html',
+        'index_en.html', 
+        'scripts.js',
+        'scripts_en.js',
+        'styles.css',
+        'styles_en.css',
+        'README.md',
+        'Figure/Fig0.PNG',
+        'Figure/Fig1.PNG',
+        'Figure/Fig2.PNG',
+        'Figure/Fig3.PNG',
+        'Figure/Fig4.PNG',
+        'Figure/Fig5.PNG',
+        'Figure/Fig6.PNG'
+    ];
+    
+    const detectedFiles = [];
+    const undetectedFiles = [];
+    let completedChecks = 0;
+    
+    // 각 파일의 존재 여부를 병렬로 확인
+    const checkPromises = filesToDetect.map(filePath => {
+        return fetch(filePath, { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    detectedFiles.push(filePath);
+                    console.log(`✅ 감지됨: ${filePath}`);
+                } else {
+                    undetectedFiles.push(filePath);
+                    console.log(`❌ 감지되지 않음: ${filePath}`);
+                }
+            })
+            .catch(error => {
+                undetectedFiles.push(filePath);
+                console.log(`❌ 감지 실패: ${filePath} - ${error.message}`);
+            })
+            .finally(() => {
+                completedChecks++;
+            });
+    });
+    
+    // 모든 체크가 완료되면 결과 출력
+    Promise.allSettled(checkPromises).then(() => {
+        console.log('📊 파일 감지 결과:');
+        console.log(`✅ 감지된 파일 (${detectedFiles.length}개):`, detectedFiles);
+        console.log(`❌ 감지되지 않은 파일 (${undetectedFiles.length}개):`, undetectedFiles);
+        
+        // 사용자에게 알림 표시
+        if (detectedFiles.length > 0) {
+            showAlert(`📁 ${detectedFiles.length}개의 파일이 감지되었습니다.`, 'success');
+        }
+        
+        // 개발자 콘솔에 상세 정보 표시
+        if (typeof window !== 'undefined' && window.console) {
+            console.group('🔍 파일 감지 상세 정보');
+            console.table(detectedFiles.map(file => ({ 
+                파일명: file, 
+                상태: '✅ 사용 가능',
+                경로: `/${file}`
+            })));
+            if (undetectedFiles.length > 0) {
+                console.table(undetectedFiles.map(file => ({ 
+                    파일명: file, 
+                    상태: '❌ 사용 불가',
+                    경로: `/${file}`
+                })));
+            }
+            console.groupEnd();
+        }
+    });
+}
+
 // Utility functions
 const utils = {
     debounce(func, wait) {
@@ -3766,6 +3844,9 @@ const devTools = {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 한국어 페이지 초기화 시작');
     
+    // 파일 감지 기능 실행
+    detectAvailableFiles();
+    
     // Displaying the recent searches
     updateRecentSearches();
     
@@ -4660,6 +4741,59 @@ function enhanceScrollObserver() {
     // 스크롤 애니메이션 요소들을 관찰
     const scrollElements = document.querySelectorAll('.scroll-hidden, .scroll-slide-left, .scroll-slide-right, .scroll-fade, .scroll-scale');
     scrollElements.forEach(el => observer.observe(el));
+
+    // 푸터 면책조항을 위한 별도 옵저버
+    const footerDisclaimerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const footer = entry.target; // 관찰 중인 푸터 요소
+            const disclaimer = document.querySelector('.footer-disclaimer');
+            const footerContent = document.querySelector('.footer-content');
+            const footerDivider = document.querySelector('.footer-divider');
+            const footerBottom = document.querySelector('.footer-bottom');
+            
+            if (entry.isIntersecting) {
+                // 푸터가 보이기 시작하면 모든 푸터 요소 활성화
+                footer.classList.add('visible');
+                if (disclaimer) {
+                    disclaimer.classList.add('visible');
+                }
+                if (footerContent) {
+                    footerContent.classList.add('visible');
+                }
+                if (footerDivider) {
+                    footerDivider.classList.add('visible');
+                }
+                if (footerBottom) {
+                    footerBottom.classList.add('visible');
+                }
+            } else {
+                // 푸터가 보이지 않으면 모든 푸터 요소 비활성화
+                footer.classList.remove('visible');
+                if (disclaimer) {
+                    disclaimer.classList.remove('visible');
+                }
+                if (footerContent) {
+                    footerContent.classList.remove('visible');
+                }
+                if (footerDivider) {
+                    footerDivider.classList.remove('visible');
+                }
+                if (footerBottom) {
+                    footerBottom.classList.remove('visible');
+                }
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px 0px -20% 0px', // 푸터의 하단 20%가 보일 때 트리거
+        threshold: 0.1
+    });
+
+    // 푸터 요소 관찰
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        footerDisclaimerObserver.observe(footer);
+    }
 }
 
 // 스크롤 이벤트 리스너 등록
