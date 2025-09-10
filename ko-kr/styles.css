@@ -61,6 +61,8 @@ html {
     scroll-padding-top: 2rem;
     /* 오버 스크롤 여백 조정 */
     scroll-padding-bottom: 20px;
+    /* 가로 스크롤 방지 */
+    overflow-x: hidden;
 }
 
 body {
@@ -90,6 +92,8 @@ body {
     margin: 0 auto;
     padding: 20px;
     position: relative;
+    /* 가로 스크롤 방지 */
+    overflow-x: hidden;
 }
 
 /* 상단 그라데이션 오버레이 */
@@ -2971,7 +2975,7 @@ html {
 
 /* Footer Styles */
 .footer {
-    margin-top: -40px;
+    margin-top: -43px;
     padding-bottom: 10px;
     background: linear-gradient(135deg, 
         rgba(var(--surface-rgb), 0.95) 0%, 
@@ -3753,7 +3757,7 @@ html {
 /* Mobile Styles */
 @media (max-width: 768px) {
     .footer {
-        margin-top: -20px;
+        margin-top: -23px;
         z-index: 100;
     }
     
@@ -3904,7 +3908,7 @@ html {
 /* Small Mobile Styles */
 @media (max-width: 370px) {
     .footer {
-        margin-top: -15px;
+        margin-top: -18px;
         z-index: 100;
     }
     
