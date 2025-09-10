@@ -2740,26 +2740,6 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
 
 // 자동 상호작용 확인 기능 제거됨 - 사용자가 직접 버튼을 눌러야 함
 
-// 검색 결과 초기화 함수
-function clearSearchResults() {
-    const searchContainer = document.getElementById('searchResults');
-    const resultsDiv = document.getElementById('searchResultsContent');
-    
-    if (searchContainer) {
-        searchContainer.classList.remove('show');
-    }
-    
-    if (resultsDiv) {
-        resultsDiv.innerHTML = '';
-    }
-    
-    // 검색 입력 필드도 초기화
-    const searchInput = document.getElementById('drugSearch');
-    if (searchInput) {
-        searchInput.value = '';
-    }
-}
-
 // Drug selection
 function selectDrug(inputId, drugName) {
     try {
@@ -2792,8 +2772,11 @@ function selectDrug(inputId, drugName) {
             list.classList.remove('show');
         });
         
-        // 검색 결과 초기화
-        clearSearchResults();
+        // 검색 결과 창도 닫기
+        const searchResults = document.getElementById('searchResults');
+        if (searchResults) {
+            searchResults.classList.remove('show');
+        }
         
         // 성공 메시지 표시 (제거됨)
         const fieldType = inputId === 'drug1' ? '첫 번째' : '두 번째';
@@ -3374,7 +3357,13 @@ async function checkInteraction() {
 // Update recent searches
 function updateRecentSearches() {
     const list = document.getElementById('recentSearchesList');
-    list.innerHTML = state.recentSearches.map((term, index) => `
+    
+    // 모바일에서는 최대 4개까지만 표시
+    const isMobile = window.innerWidth <= 768;
+    const displayCount = isMobile ? Math.min(state.recentSearches.length, 4) : state.recentSearches.length;
+    const searchesToShow = state.recentSearches.slice(0, displayCount);
+    
+    list.innerHTML = searchesToShow.map((term, index) => `
         <span class="tag scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)}" onclick="useRecentSearch('${term}')">${term}</span>
     `).join('');
     
@@ -3400,10 +3389,11 @@ function useExampleDrug(drugName) {
     // Trigger input event to run real-time search
     searchInput.dispatchEvent(new Event('input'));
     
-    // 검색 결과 초기화 (예시 약물 사용 시에도 초기화)
-    setTimeout(() => {
-        clearSearchResults();
-    }, 100);
+    // 검색 결과 창 닫기
+    const searchResults = document.getElementById('searchResults');
+    if (searchResults) {
+        searchResults.classList.remove('show');
+    }
 }
 
 // Toggle FDA data display
@@ -4201,9 +4191,10 @@ function initSettingsFabDrag() {
         }
     });
     
-    // 화면 크기 변경 시 위치 재조정
+    // 화면 크기 변경 시 위치 재조정 및 최근 검색 목록 업데이트
     window.addEventListener('resize', () => {
         adjustSettingsFabPosition(settingsFab);
+        updateRecentSearches(); // 화면 크기 변경 시 최근 검색 목록 업데이트
     });
 }
 
@@ -5255,9 +5246,11 @@ function selectDrugGlobal(inputId, drugName) {
         inputElement.value = sanitizedDrugName;
         document.getElementById('globalDrugResultList').style.display = 'none';
         
-        // 검색 결과 초기화
-        clearSearchResults();
-        
+        // 검색 결과 창도 닫기
+        const searchResults = document.getElementById('searchResults');
+        if (searchResults) {
+            searchResults.classList.remove('show');
+        }
         // drug1 선택 시 drug2로 포커스 이동
         if (inputId === 'drug1') {
             const drug2Element = document.getElementById('drug2');
