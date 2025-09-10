@@ -3093,6 +3093,10 @@ async function checkInteraction() {
         resultSection.style.visibility = 'visible';
         resultSection.style.opacity = '1';
         resultSection.classList.remove('scroll-visible'); // 애니메이션 리셋
+        
+        // 결과창이 표시될 때 푸터도 함께 표시
+        showFooterWithResult();
+        
         console.log('✅ 결과 섹션 표시 설정 완료');
         console.log('결과 섹션 스타일:', {
             display: resultSection.style.display,
@@ -3282,6 +3286,9 @@ async function checkInteraction() {
         resultSection.style.display = 'block';
         resultSection.style.visibility = 'visible';
         resultSection.style.opacity = '1';
+        
+        // 에러 발생 시에도 푸터 표시
+        showFooterWithResult();
         
         // 에러 메시지를 HTML에서 안전하게 표시
         const errorMessage = error.message || '알 수 없는 오류가 발생했습니다.';
@@ -4337,6 +4344,58 @@ function initFooter() {
     updateSearchCount(searchCount);
 }
 
+// 결과창이 표시될 때 푸터도 함께 표시하는 함수
+function showFooterWithResult() {
+    const footer = document.querySelector('.footer');
+    const disclaimer = document.querySelector('.footer-disclaimer');
+    const footerContent = document.querySelector('.footer-content');
+    const footerDivider = document.querySelector('.footer-divider');
+    const footerBottom = document.querySelector('.footer-bottom');
+    
+    if (footer) {
+        footer.classList.add('visible');
+        console.log('✅ 푸터 표시됨 (결과창과 함께)');
+    }
+    if (disclaimer) {
+        disclaimer.classList.add('visible');
+    }
+    if (footerContent) {
+        footerContent.classList.add('visible');
+    }
+    if (footerDivider) {
+        footerDivider.classList.add('visible');
+    }
+    if (footerBottom) {
+        footerBottom.classList.add('visible');
+    }
+}
+
+// 결과창이 숨겨질 때 푸터를 원래 상태로 돌리는 함수
+function hideFooterWithResult() {
+    const footer = document.querySelector('.footer');
+    const disclaimer = document.querySelector('.footer-disclaimer');
+    const footerContent = document.querySelector('.footer-content');
+    const footerDivider = document.querySelector('.footer-divider');
+    const footerBottom = document.querySelector('.footer-bottom');
+    
+    if (footer) {
+        footer.classList.remove('visible');
+        console.log('✅ 푸터 숨김됨 (결과창과 함께)');
+    }
+    if (disclaimer) {
+        disclaimer.classList.remove('visible');
+    }
+    if (footerContent) {
+        footerContent.classList.remove('visible');
+    }
+    if (footerDivider) {
+        footerDivider.classList.remove('visible');
+    }
+    if (footerBottom) {
+        footerBottom.classList.remove('visible');
+    }
+}
+
 // 검색 카운트 업데이트
 function updateSearchCount(count) {
     const countElement = document.getElementById('footerSearchCount');
@@ -4742,10 +4801,17 @@ function enhanceScrollObserver() {
     const scrollElements = document.querySelectorAll('.scroll-hidden, .scroll-slide-left, .scroll-slide-right, .scroll-fade, .scroll-scale');
     scrollElements.forEach(el => observer.observe(el));
 
-    // 푸터 면책조항을 위한 별도 옵저버
+    // 푸터 면책조항을 위한 별도 옵저버 (결과창이 표시되지 않았을 때만 작동)
     const footerDisclaimerObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const footer = entry.target; // 관찰 중인 푸터 요소
+            const resultSection = document.getElementById('resultSection');
+            
+            // 결과창이 표시되어 있으면 옵저버 작동하지 않음
+            if (resultSection && resultSection.style.display === 'block') {
+                return;
+            }
+            
             const disclaimer = document.querySelector('.footer-disclaimer');
             const footerContent = document.querySelector('.footer-content');
             const footerDivider = document.querySelector('.footer-divider');
@@ -4766,21 +4832,9 @@ function enhanceScrollObserver() {
                 if (footerBottom) {
                     footerBottom.classList.add('visible');
                 }
-            } else {
-                // 푸터가 보이지 않으면 모든 푸터 요소 비활성화
-                footer.classList.remove('visible');
-                if (disclaimer) {
-                    disclaimer.classList.remove('visible');
-                }
-                if (footerContent) {
-                    footerContent.classList.remove('visible');
-                }
-                if (footerDivider) {
-                    footerDivider.classList.remove('visible');
-                }
-                if (footerBottom) {
-                    footerBottom.classList.remove('visible');
-                }
+                
+                // 한 번 나타난 후에는 옵저버를 중단
+                footerDisclaimerObserver.unobserve(footer);
             }
         });
     }, {

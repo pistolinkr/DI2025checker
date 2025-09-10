@@ -3678,21 +3678,9 @@ function enhanceScrollObserver() {
                 if (footerBottom) {
                     footerBottom.classList.add('visible');
                 }
-            } else {
-                // 푸터가 보이지 않으면 모든 푸터 요소 비활성화
-                footer.classList.remove('visible');
-                if (disclaimer) {
-                    disclaimer.classList.remove('visible');
-                }
-                if (footerContent) {
-                    footerContent.classList.remove('visible');
-                }
-                if (footerDivider) {
-                    footerDivider.classList.remove('visible');
-                }
-                if (footerBottom) {
-                    footerBottom.classList.remove('visible');
-                }
+                
+                // 한 번 나타난 후에는 옵저버를 중단
+                footerDisclaimerObserver.unobserve(footer);
             }
         });
     }, {

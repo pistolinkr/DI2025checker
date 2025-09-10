@@ -88,9 +88,7 @@ body {
 .container {
     max-width: 900px;
     margin: 0 auto;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
     position: relative;
 }
 
@@ -2364,7 +2362,7 @@ body.scrolling .container::after {
 /* 초소형 화면 (400px 이하) */
 @media (max-width: 370px) {
     .container {
-        padding: 0.5rem;
+        padding: 0.5rem 0.5rem;
     }
 
     .header h1 {
@@ -2973,17 +2971,17 @@ html {
 
 /* Footer Styles */
 .footer {
-    margin-top: -20px;
+    margin-top: -40px;
     padding-bottom: 10px;
     background: linear-gradient(135deg, 
         rgba(var(--surface-rgb), 0.95) 0%, 
         rgba(var(--bg-rgb), 0.98) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid var(--border);
     position: relative;
     overflow: hidden;
-    z-index: 10;
+    z-index: 100;
     /* 초기 상태: 블러 및 투명 */
     filter: blur(10px);
     opacity: 0.3;
@@ -3018,7 +3016,7 @@ html {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 2rem 1rem;
-    z-index: 100001;
+    z-index: 100002;
 }
 
 /* Main Footer Content - Desktop: 4 columns */
@@ -3027,7 +3025,7 @@ html {
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
-    z-index: 10;
+    z-index: 100;
     /* 초기 상태: 블러 및 투명 */
     filter: blur(10px);
     opacity: 0.3;
@@ -3053,7 +3051,7 @@ html {
         rgba(200, 200, 200, 0.3) 80%, 
         transparent 100%);
     margin: 1.5rem 0;
-    z-index: 10;
+    z-index: 100;
     /* 초기 상태: 블러 및 투명 */
     filter: blur(10px);
     opacity: 0.3;
@@ -3254,7 +3252,7 @@ html {
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1.5rem;
-    z-index: 10;
+    z-index: 100;
     /* 초기 상태: 블러 및 투명 */
     filter: blur(10px);
     opacity: 0.3;
@@ -3288,7 +3286,7 @@ html {
 /* Footer Bottom */
 .footer-bottom {
     padding-top: 1rem;
-    z-index: 10;
+    z-index: 100;
     /* 초기 상태: 블러 및 투명 */
     filter: blur(10px);
     opacity: 0.3;
@@ -3755,13 +3753,13 @@ html {
 /* Mobile Styles */
 @media (max-width: 768px) {
     .footer {
-        margin-top: 0.5rem;
-        z-index: 10;
+        margin-top: -20px;
+        z-index: 100;
     }
     
     .footer-container {
         padding: 2rem 1rem 1rem;
-        z-index: 10;
+        z-index: 100002;
     }
     
     .footer-content {
@@ -3905,9 +3903,14 @@ html {
 
 /* Small Mobile Styles */
 @media (max-width: 370px) {
+    .footer {
+        margin-top: -15px;
+        z-index: 100;
+    }
+    
     .footer-container {
         padding: 1.5rem 0.75rem 0.75rem;
-        z-index: 10;
+        z-index: 100002;
     }
     
     .footer-content {
