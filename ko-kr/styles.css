@@ -2216,6 +2216,12 @@ body.scrolling .container::after {
     .example-drugs {
         display: none;
     }
+    
+    /* 모바일에서 검색 결과 창 높이 조정 */
+    .search-results {
+        max-height: 200px;
+        overflow-y: auto;
+    }
 
     /* 모바일에서 맨 위로 가기 버튼 숨기기 */
     .fab {

@@ -2244,6 +2244,9 @@ function displaySearchResults(data) {
     const searchContainer = document.getElementById('searchResults');
     const searchTerm = document.getElementById('drugSearch').value.trim().toLowerCase();
     
+    // 모바일 감지
+    const isMobile = window.innerWidth <= 768;
+    
     // 검색 결과 영역 표시
     searchContainer.classList.add('show');
     
@@ -2312,10 +2315,32 @@ function displaySearchResults(data) {
         });
     });
 
+    // 한국어 결과만 필터링 (한국어 문자 포함)
+    const koreanDrugs = Array.from(uniqueDrugs.values()).filter(drug => {
+        return /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(drug.name);
+    });
+    
+    // 한국어 결과가 없으면 빈 결과 표시
+    if (koreanDrugs.length === 0) {
+        resultsDiv.innerHTML = `
+            <div class="scroll-fade" style="text-align: center; color: var(--text-secondary); padding: 20px;">
+                <p>한국어 약물명을 찾을 수 없습니다.</p>
+                <p style="font-size: 0.9em;">다른 검색어를 시도해보세요.</p>
+            </div>
+        `;
+        
+        setTimeout(() => {
+            const fadeElements = resultsDiv.querySelectorAll('.scroll-fade');
+            fadeElements.forEach(el => el.classList.add('scroll-visible'));
+            setInitialScrollState(searchContainer);
+        }, 50);
+        return;
+    }
+    
     // Sort by relevance
-    const sortedDrugs = Array.from(uniqueDrugs.values())
+    const sortedDrugs = koreanDrugs
         .sort((a, b) => b.relevanceScore - a.relevanceScore)
-        .slice(0, 12);
+        .slice(0, isMobile ? 1 : 12); // 모바일에서는 1개만, 데스크톱에서는 12개
 
     resultsDiv.innerHTML = sortedDrugs.map((drug, index) => {
         const isExactMatch = drug.relevanceScore >= 90;
