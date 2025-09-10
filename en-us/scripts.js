@@ -2212,9 +2212,6 @@ async function checkInteraction() {
             // 결과 섹션에 스크롤 그라데이션 적용
             setInitialScrollState(resultSection);
             
-            // 푸터도 함께 표시
-            showFooter();
-            
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!resultSection.hasAttribute('data-scroll-listener')) {
                 resultSection.addEventListener('scroll', () => handleElementScroll(resultSection), { passive: true });
@@ -2251,9 +2248,6 @@ async function checkInteraction() {
             
             // 결과 섹션에 스크롤 그라데이션 적용
             setInitialScrollState(resultSection);
-            
-            // 푸터도 함께 표시
-            showFooter();
             
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!resultSection.hasAttribute('data-scroll-listener')) {
@@ -3711,31 +3705,6 @@ function enhanceScrollObserver() {
     const footer = document.querySelector('.footer');
     if (footer) {
         footerDisclaimerObserver.observe(footer);
-    }
-}
-
-// 푸터 표시 함수
-function showFooter() {
-    const footer = document.querySelector('.footer');
-    const disclaimer = document.querySelector('.footer-disclaimer');
-    const footerContent = document.querySelector('.footer-content');
-    const footerDivider = document.querySelector('.footer-divider');
-    const footerBottom = document.querySelector('.footer-bottom');
-    
-    if (footer) {
-        footer.classList.add('visible');
-    }
-    if (disclaimer) {
-        disclaimer.classList.add('visible');
-    }
-    if (footerContent) {
-        footerContent.classList.add('visible');
-    }
-    if (footerDivider) {
-        footerDivider.classList.add('visible');
-    }
-    if (footerBottom) {
-        footerBottom.classList.add('visible');
     }
 }
 

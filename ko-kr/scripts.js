@@ -3258,9 +3258,6 @@ async function checkInteraction() {
                 if (typeof setInitialScrollState === 'function') {
             setInitialScrollState(resultSection);
                 }
-                
-                // 푸터도 함께 표시
-                showFooter();
             
                 // 스크롤 이벤트 리스너가 없다면 추가 (함수가 있는 경우에만)
                 if (!resultSection.hasAttribute('data-scroll-listener') && typeof handleElementScroll === 'function') {
@@ -3329,9 +3326,6 @@ async function checkInteraction() {
                 if (typeof setInitialScrollState === 'function') {
             setInitialScrollState(resultSection);
                 }
-                
-                // 푸터도 함께 표시
-                showFooter();
             
                 // 스크롤 이벤트 리스너가 없다면 추가 (함수가 있는 경우에만)
                 if (!resultSection.hasAttribute('data-scroll-listener') && typeof handleElementScroll === 'function') {
@@ -5210,31 +5204,6 @@ function isValidDrugName(drugName) {
         Object.values(drugNameMapping).some(v => v.toLowerCase() === lower) ||
         Object.keys(drugNameMapping).some(k => k.toLowerCase() === lower)
     );
-}
-
-// 푸터 표시 함수
-function showFooter() {
-    const footer = document.querySelector('.footer');
-    const disclaimer = document.querySelector('.footer-disclaimer');
-    const footerContent = document.querySelector('.footer-content');
-    const footerDivider = document.querySelector('.footer-divider');
-    const footerBottom = document.querySelector('.footer-bottom');
-    
-    if (footer) {
-        footer.classList.add('visible');
-    }
-    if (disclaimer) {
-        disclaimer.classList.add('visible');
-    }
-    if (footerContent) {
-        footerContent.classList.add('visible');
-    }
-    if (footerDivider) {
-        footerDivider.classList.add('visible');
-    }
-    if (footerBottom) {
-        footerBottom.classList.add('visible');
-    }
 }
 
 
