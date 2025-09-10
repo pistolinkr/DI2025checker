@@ -2740,6 +2740,26 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
 
 // 자동 상호작용 확인 기능 제거됨 - 사용자가 직접 버튼을 눌러야 함
 
+// 검색 결과 초기화 함수
+function clearSearchResults() {
+    const searchContainer = document.getElementById('searchResults');
+    const resultsDiv = document.getElementById('searchResultsContent');
+    
+    if (searchContainer) {
+        searchContainer.classList.remove('show');
+    }
+    
+    if (resultsDiv) {
+        resultsDiv.innerHTML = '';
+    }
+    
+    // 검색 입력 필드도 초기화
+    const searchInput = document.getElementById('drugSearch');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+}
+
 // Drug selection
 function selectDrug(inputId, drugName) {
     try {
@@ -2771,6 +2791,9 @@ function selectDrug(inputId, drugName) {
         document.querySelectorAll('.drug-list').forEach(list => {
             list.classList.remove('show');
         });
+        
+        // 검색 결과 초기화
+        clearSearchResults();
         
         // 성공 메시지 표시 (제거됨)
         const fieldType = inputId === 'drug1' ? '첫 번째' : '두 번째';
@@ -3376,6 +3399,11 @@ function useExampleDrug(drugName) {
     searchInput.value = drugName;
     // Trigger input event to run real-time search
     searchInput.dispatchEvent(new Event('input'));
+    
+    // 검색 결과 초기화 (예시 약물 사용 시에도 초기화)
+    setTimeout(() => {
+        clearSearchResults();
+    }, 100);
 }
 
 // Toggle FDA data display
@@ -5226,6 +5254,10 @@ function selectDrugGlobal(inputId, drugName) {
         if (!sanitizedDrugName) return;
         inputElement.value = sanitizedDrugName;
         document.getElementById('globalDrugResultList').style.display = 'none';
+        
+        // 검색 결과 초기화
+        clearSearchResults();
+        
         // drug1 선택 시 drug2로 포커스 이동
         if (inputId === 'drug1') {
             const drug2Element = document.getElementById('drug2');
