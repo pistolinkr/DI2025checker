@@ -75,7 +75,7 @@ body {
     scroll-behavior: smooth;
     /* 오버 스크롤 조정 */
     overscroll-behavior-y: contain;
-    overscroll-behavior-x: contain;
+    overscroll-behavior-x: none;
 }
 
 @keyframes float {
