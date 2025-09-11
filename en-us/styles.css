@@ -623,7 +623,6 @@ body.scrolling .container::after {
 
 .drug-item.exact-match {
     background: rgba(var(--primary-rgb), 0.05);
-    border-left: 3px solid var(--primary);
 }
 
 .drug-item.exact-match:hover {
@@ -669,8 +668,8 @@ body.scrolling .container::after {
 
 /* AI 분석 스타일 */
 .ai-analysis {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(128, 128, 128, 0.05));
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -685,7 +684,7 @@ body.scrolling .container::after {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #000000, #666666);
+    background: var(--primary);
     z-index: 100000;
 }
 
@@ -721,6 +720,75 @@ body.scrolling .container::after {
     font-size: 0.95rem;
 }
 
+/* 다크 테마에서 AI 분석 텍스트 색상 조정 */
+@media (prefers-color-scheme: dark) {
+    .ai-analysis-content {
+        color: #f5f5f5;
+    }
+    
+    .ai-analysis-header h4 {
+        color: #f5f5f5;
+    }
+    
+    .result-main-title {
+        color: #f5f5f5;
+    }
+    
+    .result-subtitle {
+        color: #f5f5f5;
+    }
+    
+    .result-warning .result-content {
+        color: #f5f5f5;
+    }
+    
+    .result-warning .result-title {
+        color: #f5f5f5;
+    }
+    
+    /* 상호작용 설명, 권장사항, 기본 정보 텍스트 색상 */
+    .basic-info {
+        color: #f5f5f5;
+    }
+    
+    .basic-info p {
+        color: #f5f5f5;
+    }
+    
+    .fda-toggle-btn .toggle-text {
+        color: #f5f5f5;
+    }
+    
+    .result-warning .interaction-box {
+        color: #f5f5f5;
+    }
+    
+    .result-warning .recommendation {
+        color: #f5f5f5;
+    }
+    
+    .result-warning .recommendation p {
+        color: #f5f5f5;
+    }
+    
+    /* DUR 시스템 텍스트 색상 */
+    .dur-section {
+        color: #f5f5f5;
+    }
+    
+    .dur-section p {
+        color: #f5f5f5;
+    }
+    
+    .dur-section h4 {
+        color: #f5f5f5;
+    }
+    
+    .dur-section h5 {
+        color: #f5f5f5;
+    }
+}
+
 .ai-analysis-content h2,
 .ai-analysis-content h3,
 .ai-analysis-content h4 {
@@ -749,7 +817,6 @@ body.scrolling .container::after {
     padding: 1rem;
     background: rgba(var(--primary-rgb), 0.03);
     border-radius: var(--radius);
-    border-left: 3px solid var(--primary);
 }
 
 .fda-data h4,
@@ -2640,6 +2707,18 @@ html {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    /* 초기 상태: 아래쪽에 숨겨진 상태 */
+    filter: blur(15px);
+    opacity: 0;
+    transform: translateY(120px);
+    transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 푸터가 보일 때 전체 푸터 활성화 */
+.footer.visible {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .footer::before {
@@ -2918,6 +2997,7 @@ html {
 .footer-version {
     color: var(--text-secondary);
     font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.25rem 0.75rem;
     border-radius: 12px;

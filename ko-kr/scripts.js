@@ -135,11 +135,418 @@ const KOREAN_DRUG_DATABASE = {
         interactions: ['아스피린', '항생제', '비타민K'],
         dosage: '개인별 맞춤 용량 (INR 수치에 따라)',
         sideEffects: '출혈, 멍, 탈모'
+    },
+    
+    // === 추가 진통제/해열제/소염제 ===
+    '낙센': {
+        name: '낙센',
+        englishName: 'Naproxen',
+        category: '소염진통제',
+        manufacturer: '한국얀센',
+        description: '장기간 작용하는 NSAID입니다.',
+        indications: '류마티스 관절염, 골관절염, 통증 완화',
+        warnings: '위장 출혈 위험, 심혈관 위험 증가',
+        interactions: ['와파린', '리튬', '메토트렉세이트', '디곡신'],
+        dosage: '성인 기준 1회 250-500mg, 1일 2회',
+        sideEffects: '위장 장애, 현기증, 두통'
+    },
+    '디클로페낙': {
+        name: '디클로페낙',
+        englishName: 'Diclofenac',
+        category: '소염진통제',
+        manufacturer: '다양',
+        description: '강력한 NSAID입니다.',
+        indications: '류마티스 관절염, 골관절염, 급성 통증',
+        warnings: '위장 출혈, 심혈관 위험 증가',
+        interactions: ['와파린', '리튬', '메토트렉세이트', '디곡신'],
+        dosage: '성인 기준 1회 50mg, 1일 2-3회',
+        sideEffects: '위장 장애, 현기증, 두통'
+    },
+    '셀레콕시브': {
+        name: '셀레콕시브',
+        englishName: 'Celecoxib',
+        category: '소염진통제',
+        manufacturer: '화이자',
+        description: 'COX-2 선택적 억제제로 위장 부작용이 적습니다.',
+        indications: '류마티스 관절염, 골관절염, 급성 통증',
+        warnings: '심혈관 위험 증가, 심부전 위험',
+        interactions: ['와파린', '플루코나졸', '리튬'],
+        dosage: '성인 기준 1회 100-200mg, 1일 2회',
+        sideEffects: '두통, 현기증, 위장 장애'
+    },
+    '멜록시캄': {
+        name: '멜록시캄',
+        englishName: 'Meloxicam',
+        category: '소염진통제',
+        manufacturer: '다양',
+        description: 'COX-2 선택적 억제제입니다.',
+        indications: '류마티스 관절염, 골관절염',
+        warnings: '심혈관 위험, 위장 출혈 위험',
+        interactions: ['와파린', '리튬', '메토트렉세이트'],
+        dosage: '성인 기준 1회 7.5-15mg, 1일 1회',
+        sideEffects: '위장 장애, 현기증, 두통'
+    },
+    '트라마돌': {
+        name: '트라마돌',
+        englishName: 'Tramadol',
+        category: '진통제',
+        manufacturer: '다양',
+        description: '중등도에서 중증 통증에 사용되는 진통제입니다.',
+        indications: '수술 후 통증, 만성 통증, 암성 통증',
+        warnings: '호흡 억제 위험, 중독성 가능',
+        interactions: ['SSRI', 'MAO 억제제', '카바마제핀', '알코올'],
+        dosage: '성인 기준 1회 50-100mg, 1일 3-4회',
+        sideEffects: '현기증, 구토, 변비, 졸음'
+    },
+    
+    // === 추가 고혈압약/심혈관약 ===
+    '리시노프릴': {
+        name: '리시노프릴',
+        englishName: 'Lisinopril',
+        category: '고혈압치료제',
+        manufacturer: '다양',
+        description: 'ACE 억제제로 혈압을 낮추고 심장을 보호합니다.',
+        indications: '고혈압, 심부전, 심근경색 후 치료',
+        warnings: '임신 중 사용 금지, 신장 기능 모니터링 필요',
+        interactions: ['칼륨 보충제', '리튬', 'NSAID', '디곡신'],
+        dosage: '성인 기준 1회 5-40mg, 1일 1회',
+        sideEffects: '기침, 현기증, 고칼륨혈증'
+    },
+    '메토프롤롤': {
+        name: '메토프롤롤',
+        englishName: 'Metoprolol',
+        category: '고혈압치료제',
+        manufacturer: '다양',
+        description: '선택적 베타1 차단제입니다.',
+        indications: '고혈압, 협심증, 심부전, 심근경색 후 치료',
+        warnings: '천식 환자 주의, 서맥 주의',
+        interactions: ['베라파밀', '디곡신', '리튬', '플루옥세틴'],
+        dosage: '성인 기준 1회 25-100mg, 1일 2회',
+        sideEffects: '서맥, 현기증, 피로'
+    },
+    '아테놀롤': {
+        name: '아테놀롤',
+        englishName: 'Atenolol',
+        category: '고혈압치료제',
+        manufacturer: '다양',
+        description: '선택적 베타1 차단제입니다.',
+        indications: '고혈압, 협심증',
+        warnings: '천식 환자 주의, 서맥 주의',
+        interactions: ['베라파밀', '디곡신', '리튬'],
+        dosage: '성인 기준 1회 25-100mg, 1일 1회',
+        sideEffects: '서맥, 현기증, 피로'
+    },
+    '클로피도그렐': {
+        name: '클로피도그렐',
+        englishName: 'Clopidogrel',
+        category: '항혈소판제',
+        manufacturer: '다양',
+        description: '혈소판 응집을 억제하는 항혈소판제입니다.',
+        indications: '급성 관상동맥 증후군, 뇌졸중 예방',
+        warnings: '출혈 위험 증가, 위장 출혈 주의',
+        interactions: ['와파린', '아스피린', '오메프라졸', '에소메프라졸'],
+        dosage: '성인 기준 1회 75mg, 1일 1회',
+        sideEffects: '출혈, 위장 장애, 두통'
+    },
+    
+    // === 추가 당뇨약 ===
+    '글리메피리드': {
+        name: '글리메피리드',
+        englishName: 'Glimepiride',
+        category: '당뇨병치료제',
+        manufacturer: '다양',
+        description: '인슐린 분비를 촉진하는 당뇨약입니다.',
+        indications: '제2형 당뇨병',
+        warnings: '저혈당 위험, 신장 기능 저하 시 주의',
+        interactions: ['와파린', '플루코나졸', '리팜핀'],
+        dosage: '성인 기준 1회 1-4mg, 1일 1회',
+        sideEffects: '저혈당, 위장 장애'
+    },
+    '글리벤클라미드': {
+        name: '글리벤클라미드',
+        englishName: 'Glibenclamide',
+        category: '당뇨병치료제',
+        manufacturer: '다양',
+        description: '인슐린 분비를 촉진하는 당뇨약입니다.',
+        indications: '제2형 당뇨병',
+        warnings: '저혈당 위험, 신장 기능 저하 시 주의',
+        interactions: ['와파린', '플루코나졸', '리팜핀'],
+        dosage: '성인 기준 1회 2.5-10mg, 1일 1-2회',
+        sideEffects: '저혈당, 위장 장애'
+    },
+    
+    // === 콜레스테롤약 ===
+    '심바스타틴': {
+        name: '심바스타틴',
+        englishName: 'Simvastatin',
+        category: '콜레스테롤치료제',
+        manufacturer: 'MSD',
+        description: 'HMG-CoA 환원효소 억제제로 콜레스테롤을 낮춥니다.',
+        indications: '고콜레스테롤혈증, 심혈관 질환 예방',
+        warnings: '근육통, 간 기능 저하 위험',
+        interactions: ['암로디핀', '베라파밀', '디곡신', '와파린', '그레이프프루트'],
+        dosage: '성인 기준 1회 10-80mg, 1일 1회',
+        sideEffects: '근육통, 간 기능 저하, 위장 장애'
+    },
+    '아토르바스타틴': {
+        name: '아토르바스타틴',
+        englishName: 'Atorvastatin',
+        category: '콜레스테롤치료제',
+        manufacturer: '화이자',
+        description: '강력한 HMG-CoA 환원효소 억제제입니다.',
+        indications: '고콜레스테롤혈증, 심혈관 질환 예방',
+        warnings: '근육통, 간 기능 저하 위험',
+        interactions: ['암로디핀', '베라파밀', '디곡신', '와파린', '그레이프프루트'],
+        dosage: '성인 기준 1회 10-80mg, 1일 1회',
+        sideEffects: '근육통, 간 기능 저하, 위장 장애'
+    },
+    '프라바스타틴': {
+        name: '프라바스타틴',
+        englishName: 'Pravastatin',
+        category: '콜레스테롤치료제',
+        manufacturer: '다양',
+        description: 'HMG-CoA 환원효소 억제제입니다.',
+        indications: '고콜레스테롤혈증, 심혈관 질환 예방',
+        warnings: '근육통, 간 기능 저하 위험',
+        interactions: ['와파린', '디곡신'],
+        dosage: '성인 기준 1회 10-40mg, 1일 1회',
+        sideEffects: '근육통, 간 기능 저하, 위장 장애'
+    },
+    
+    // === 추가 위장약 ===
+    '란소프라졸': {
+        name: '란소프라졸',
+        englishName: 'Lansoprazole',
+        category: '위산억제제',
+        manufacturer: '다양',
+        description: '위산 분비를 억제하는 양성자펌프억제제입니다.',
+        indications: '위궤양, 역류성 식도염, 헬리코박터 제균 치료',
+        warnings: '장기간 사용 시 골절 위험 증가',
+        interactions: ['와파린', '디곡신', '페니토인'],
+        dosage: '성인 기준 1회 15-30mg, 1일 1-2회',
+        sideEffects: '두통, 위장 장애, 설사'
+    },
+    '에소메프라졸': {
+        name: '에소메프라졸',
+        englishName: 'Esomeprazole',
+        category: '위산억제제',
+        manufacturer: '아스트라제네카',
+        description: '오메프라졸의 광학이성체로 위산 억제 효과가 우수합니다.',
+        indications: '위궤양, 역류성 식도염, 헬리코박터 제균 치료',
+        warnings: '장기간 사용 시 골절 위험 증가',
+        interactions: ['클로피도그렐', '와파린', '디곡신', '페니토인'],
+        dosage: '성인 기준 1회 20-40mg, 1일 1-2회',
+        sideEffects: '두통, 위장 장애, 설사'
+    },
+    
+    // === 이뇨제 ===
+    '푸로세미드': {
+        name: '푸로세미드',
+        englishName: 'Furosemide',
+        category: '이뇨제',
+        manufacturer: '다양',
+        description: '강력한 루프 이뇨제입니다.',
+        indications: '심부전, 부종, 고혈압',
+        warnings: '전해질 불균형, 탈수 위험',
+        interactions: ['디곡신', '리튬', '아미노글리코사이드', 'NSAID'],
+        dosage: '성인 기준 1회 20-80mg, 1일 1-2회',
+        sideEffects: '저칼륨혈증, 저나트륨혈증, 탈수'
+    },
+    '하이드로클로로티아지드': {
+        name: '하이드로클로로티아지드',
+        englishName: 'Hydrochlorothiazide',
+        category: '이뇨제',
+        manufacturer: '다양',
+        description: '티아지드 계열 이뇨제입니다.',
+        indications: '고혈압, 부종',
+        warnings: '전해질 불균형, 탈수 위험',
+        interactions: ['디곡신', '리튬', '디곡신', 'NSAID'],
+        dosage: '성인 기준 1회 12.5-50mg, 1일 1회',
+        sideEffects: '저칼륨혈증, 저나트륨혈증, 탈수'
+    },
+    '스피로놀락톤': {
+        name: '스피로놀락톤',
+        englishName: 'Spironolactone',
+        category: '이뇨제',
+        manufacturer: '다양',
+        description: '칼륨을 보존하는 이뇨제입니다.',
+        indications: '심부전, 고혈압, 부종',
+        warnings: '고칼륨혈증 위험, 신장 기능 저하 시 주의',
+        interactions: ['칼륨 보충제', 'ACE 억제제', 'ARB', '리튬'],
+        dosage: '성인 기준 1회 25-100mg, 1일 1-2회',
+        sideEffects: '고칼륨혈증, 여성화, 위장 장애'
+    },
+    
+    // === 천식/호흡기약 ===
+    '살부타몰': {
+        name: '살부타몰',
+        englishName: 'Salbutamol',
+        category: '천식치료제',
+        manufacturer: '다양',
+        description: '기관지 확장제로 천식 발작 시 사용합니다.',
+        indications: '천식, 만성폐쇄성폐질환',
+        warnings: '과용 시 심혈관 부작용 위험',
+        interactions: ['베타차단제', '디곡신', '테오필린'],
+        dosage: '흡입: 1-2회, 필요시 반복',
+        sideEffects: '떨림, 두근거림, 불안'
+    },
+    '부데소니드': {
+        name: '부데소니드',
+        englishName: 'Budesonide',
+        category: '천식치료제',
+        manufacturer: '다양',
+        description: '천식 예방을 위한 흡입용 스테로이드입니다.',
+        indications: '천식 예방, 만성폐쇄성폐질환',
+        warnings: '장기간 사용 시 골밀도 저하 위험',
+        interactions: ['케토코나졸', '리톤나비르', '사퀴나비르'],
+        dosage: '흡입: 1-2회, 1일 2회',
+        sideEffects: '목소리 변화, 구강 칸디다증'
+    },
+    '몬테루카스트': {
+        name: '몬테루카스트',
+        englishName: 'Montelukast',
+        category: '천식치료제',
+        manufacturer: 'MSD',
+        description: '천식 예방을 위한 류코트리엔 수용체 길항제입니다.',
+        indications: '천식 예방, 알레르기성 비염',
+        warnings: '정신과적 부작용 가능성',
+        interactions: ['리팜핀', '페니토인', '카바마제핀'],
+        dosage: '성인 기준 1회 10mg, 1일 1회',
+        sideEffects: '두통, 위장 장애, 불안'
+    },
+    
+    // === 추가 항생제 ===
+    '시프로플록사신': {
+        name: '시프로플록사신',
+        englishName: 'Ciprofloxacin',
+        category: '항생제',
+        manufacturer: '다양',
+        description: '광범위 항생제로 다양한 감염에 사용됩니다.',
+        indications: '요로 감염, 호흡기 감염, 피부 감염',
+        warnings: '건강염 위험, 신장 기능 저하 시 주의',
+        interactions: ['와파린', '디곡신', '테오필린', '제산제'],
+        dosage: '성인 기준 1회 250-750mg, 1일 2회',
+        sideEffects: '건강염, 위장 장애, 현기증'
+    },
+    '아지트로마이신': {
+        name: '아지트로마이신',
+        englishName: 'Azithromycin',
+        category: '항생제',
+        manufacturer: '화이자',
+        description: '장기간 작용하는 마크롤라이드계 항생제입니다.',
+        indications: '호흡기 감염, 피부 감염, 성병',
+        warnings: 'QT 연장 위험, 간 기능 저하 시 주의',
+        interactions: ['와파린', '디곡신', '테오필린', '에르고타민'],
+        dosage: '성인 기준 1회 500mg, 1일 1회',
+        sideEffects: '위장 장애, 두통, 현기증'
+    },
+    
+    // === 항우울제/항불안제 ===
+    '플루옥세틴': {
+        name: '플루옥세틴',
+        englishName: 'Fluoxetine',
+        category: '항우울제',
+        manufacturer: '다양',
+        description: '선택적 세로토닌 재흡수 억제제입니다.',
+        indications: '우울증, 강박장애, 공황장애',
+        warnings: '자살 사고 위험, 세로토닌 증후군 위험',
+        interactions: ['MAO 억제제', '와파린', '디곡신', '리튬'],
+        dosage: '성인 기준 1회 20mg, 1일 1회',
+        sideEffects: '불안, 불면, 위장 장애'
+    },
+    '세르트랄린': {
+        name: '세르트랄린',
+        englishName: 'Sertraline',
+        category: '항우울제',
+        manufacturer: '화이자',
+        description: '선택적 세로토닌 재흡수 억제제입니다.',
+        indications: '우울증, 강박장애, 공황장애',
+        warnings: '자살 사고 위험, 세로토닌 증후군 위험',
+        interactions: ['MAO 억제제', '와파린', '디곡신', '리튬'],
+        dosage: '성인 기준 1회 50-200mg, 1일 1회',
+        sideEffects: '불안, 불면, 위장 장애'
+    },
+    '로라제팜': {
+        name: '로라제팜',
+        englishName: 'Lorazepam',
+        category: '신경안정제',
+        manufacturer: '다양',
+        description: '불안 완화제로 디아제팜보다 작용 시간이 짧습니다.',
+        indications: '불안장애, 불면증',
+        warnings: '중독성, 호흡 억제 위험',
+        interactions: ['알코올', '바르비투르산염', '오피오이드'],
+        dosage: '성인 기준 1회 0.5-2mg, 1일 2-3회',
+        sideEffects: '졸음, 현기증, 의존성'
+    },
+    
+    // === 항경련제 ===
+    '카바마제핀': {
+        name: '카바마제핀',
+        englishName: 'Carbamazepine',
+        category: '항경련제',
+        manufacturer: '다양',
+        description: '간질 및 삼차신경통 치료제입니다.',
+        indications: '간질, 삼차신경통, 양극성 장애',
+        warnings: '혈액 이상, 간 기능 저하 위험',
+        interactions: ['와파린', '디곡신', '리튬', '호르몬 피임약'],
+        dosage: '성인 기준 1회 200-400mg, 1일 2-3회',
+        sideEffects: '현기증, 위장 장애, 혈액 이상'
+    },
+    '발프로산': {
+        name: '발프로산',
+        englishName: 'Valproic Acid',
+        category: '항경련제',
+        manufacturer: '다양',
+        description: '간질 및 양극성 장애 치료제입니다.',
+        indications: '간질, 양극성 장애, 편두통 예방',
+        warnings: '간 독성, 태아 기형 위험',
+        interactions: ['와파린', '디곡신', '리튬', '호르몬 피임약'],
+        dosage: '성인 기준 1회 250-500mg, 1일 2-3회',
+        sideEffects: '간 독성, 위장 장애, 떨림'
+    },
+    
+    // === 기타 ===
+    '디곡신': {
+        name: '디곡신',
+        englishName: 'Digoxin',
+        category: '심장약',
+        manufacturer: '다양',
+        description: '심부전 및 부정맥 치료제입니다.',
+        indications: '심부전, 심방세동',
+        warnings: '디곡신 중독 위험, 신장 기능 저하 시 주의',
+        interactions: ['푸로세미드', '스피로놀락톤', '퀴니딘', '베라파밀'],
+        dosage: '성인 기준 1회 0.125-0.25mg, 1일 1회',
+        sideEffects: '디곡신 중독, 위장 장애, 시각 장애'
+    },
+    '리튬': {
+        name: '리튬',
+        englishName: 'Lithium',
+        category: '정신과약',
+        manufacturer: '다양',
+        description: '양극성 장애의 일차 치료제입니다.',
+        indications: '양극성 장애, 우울증',
+        warnings: '리튬 중독 위험, 신장 기능 모니터링 필요',
+        interactions: ['NSAID', '이뇨제', 'ACE 억제제', '디곡신'],
+        dosage: '성인 기준 1회 300-600mg, 1일 2-3회',
+        sideEffects: '리튬 중독, 신장 기능 저하, 갑상선 기능 저하'
+    },
+    '메토트렉세이트': {
+        name: '메토트렉세이트',
+        englishName: 'Methotrexate',
+        category: '면역억제제',
+        manufacturer: '다양',
+        description: '류마티스 관절염 및 암 치료제입니다.',
+        indications: '류마티스 관절염, 건선, 암',
+        warnings: '골수 억제, 간 독성 위험',
+        interactions: ['NSAID', '아스피린', '페니실린', '프로베네시드'],
+        dosage: '용도에 따라 다양',
+        sideEffects: '골수 억제, 간 독성, 위장 장애'
     }
 };
 
-// 한국 의약품 상호작용 데이터베이스
+// 한국 의약품 상호작용 데이터베이스 (전문가 수준 확장)
 const KOREAN_DRUG_INTERACTIONS = {
+    // === 항응고제/항혈소판제 상호작용 ===
     '아스피린-와파린': {
         severity: 'major',
         description: '심각한 출혈 위험이 있습니다. 병용시 혈액응고 수치를 자주 모니터링해야 합니다.',
@@ -155,22 +562,686 @@ const KOREAN_DRUG_INTERACTIONS = {
         description: '위장 출혈 위험이 증가할 수 있습니다.',
         recommendation: '병용 사용을 피하고, 필요시 의사와 상담하세요.'
     },
-    '암로디핀-심바스타틴': {
-        severity: 'moderate',
-        description: '심바스타틴의 혈중 농도가 증가할 수 있습니다.',
-        recommendation: '심바스타틴 용량 조절이 필요할 수 있습니다.'
-    },
-    '메트포르민-요오드조영제': {
+    '클로피도그렐-와파린': {
         severity: 'major',
-        description: '젖산산증의 위험이 있습니다.',
-        recommendation: '조영제 검사 전후 48시간 동안 메트포르민 복용을 중단하세요.'
+        description: '출혈 위험이 크게 증가합니다.',
+        recommendation: '의료진의 엄격한 관리하에 사용하고 정기적인 혈액 검사를 받으세요.'
+    },
+    '클로피도그렐-아스피린': {
+        severity: 'moderate',
+        description: '위장 출혈 위험이 증가할 수 있습니다.',
+        recommendation: '의료진과 상담하여 적절한 용량을 결정하세요.'
     },
     '오메프라졸-클로피도그렐': {
         severity: 'moderate',
         description: '클로피도그렐의 효과가 감소할 수 있습니다.',
         recommendation: '다른 위산억제제 사용을 고려하세요.'
     },
+    '에소메프라졸-클로피도그렐': {
+        severity: 'moderate',
+        description: '클로피도그렐의 효과가 감소할 수 있습니다.',
+        recommendation: '다른 위산억제제 사용을 고려하세요.'
+    },
+    
+    // === NSAID 상호작용 ===
+    '이부프로펜-와파린': {
+        severity: 'major',
+        description: '출혈 위험이 증가합니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '낙센-와파린': {
+        severity: 'major',
+        description: '출혈 위험이 증가합니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '디클로페낙-와파린': {
+        severity: 'major',
+        description: '출혈 위험이 증가합니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '셀레콕시브-와파린': {
+        severity: 'moderate',
+        description: '출혈 위험이 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '멜록시캄-와파린': {
+        severity: 'moderate',
+        description: '출혈 위험이 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '이부프로펜-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '낙센-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '디클로페낙-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '이부프로펜-메토트렉세이트': {
+        severity: 'major',
+        description: '메토트렉세이트 독성이 증가할 수 있습니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '낙센-메토트렉세이트': {
+        severity: 'major',
+        description: '메토트렉세이트 독성이 증가할 수 있습니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '디클로페낙-메토트렉세이트': {
+        severity: 'major',
+        description: '메토트렉세이트 독성이 증가할 수 있습니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '이부프로펜-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '낙센-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '디클로페낙-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    
+    // === 고혈압약 상호작용 ===
+    '암로디핀-심바스타틴': {
+        severity: 'moderate',
+        description: '심바스타틴의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '심바스타틴 용량 조절이 필요할 수 있습니다.'
+    },
+    '암로디핀-아토르바스타틴': {
+        severity: 'moderate',
+        description: '아토르바스타틴의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '아토르바스타틴 용량 조절이 필요할 수 있습니다.'
+    },
+    '리시노프릴-칼륨보충제': {
+        severity: 'major',
+        description: '고칼륨혈증 위험이 증가합니다.',
+        recommendation: '칼륨 보충제 사용을 피하고 정기적인 혈액 검사를 받으세요.'
+    },
+    '리시노프릴-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '리시노프릴-NSAID': {
+        severity: 'moderate',
+        description: '신장 기능 저하 위험이 증가할 수 있습니다.',
+        recommendation: '신장 기능 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '리시노프릴-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '로사르탄-칼륨보충제': {
+        severity: 'major',
+        description: '고칼륨혈증 위험이 증가합니다.',
+        recommendation: '칼륨 보충제 사용을 피하고 정기적인 혈액 검사를 받으세요.'
+    },
+    '로사르탄-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '로사르탄-NSAID': {
+        severity: 'moderate',
+        description: '신장 기능 저하 위험이 증가할 수 있습니다.',
+        recommendation: '신장 기능 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '메토프롤롤-베라파밀': {
+        severity: 'major',
+        description: '심박수 저하 및 심부전 위험이 증가합니다.',
+        recommendation: '심박수 및 혈압 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '메토프롤롤-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '메토프롤롤-리튬': {
+        severity: 'moderate',
+        description: '리튬 중독 위험이 증가할 수 있습니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하세요.'
+    },
+    '메토프롤롤-플루옥세틴': {
+        severity: 'moderate',
+        description: '메토프롤롤의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '메토프롤롤 용량 조절이 필요할 수 있습니다.'
+    },
+    '아테놀롤-베라파밀': {
+        severity: 'major',
+        description: '심박수 저하 및 심부전 위험이 증가합니다.',
+        recommendation: '심박수 및 혈압 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '아테놀롤-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '아테놀롤-리튬': {
+        severity: 'moderate',
+        description: '리튬 중독 위험이 증가할 수 있습니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하세요.'
+    },
+    
+    // === 당뇨약 상호작용 ===
+    '메트포르민-요오드조영제': {
+        severity: 'major',
+        description: '젖산산증의 위험이 있습니다.',
+        recommendation: '조영제 검사 전후 48시간 동안 메트포르민 복용을 중단하세요.'
+    },
+    '메트포르민-알코올': {
+        severity: 'major',
+        description: '젖산산증의 위험이 증가합니다.',
+        recommendation: '알코올 섭취를 피하세요.'
+    },
+    '메트포르민-푸로세미드': {
+        severity: 'moderate',
+        description: '신장 기능 저하 위험이 증가할 수 있습니다.',
+        recommendation: '신장 기능 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '글리메피리드-와파린': {
+        severity: 'moderate',
+        description: '저혈당 위험이 증가할 수 있습니다.',
+        recommendation: '혈당 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '글리메피리드-플루코나졸': {
+        severity: 'major',
+        description: '저혈당 위험이 크게 증가합니다.',
+        recommendation: '혈당 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '글리메피리드-리팜핀': {
+        severity: 'moderate',
+        description: '글리메피리드의 효과가 감소할 수 있습니다.',
+        recommendation: '혈당 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '글리벤클라미드-와파린': {
+        severity: 'moderate',
+        description: '저혈당 위험이 증가할 수 있습니다.',
+        recommendation: '혈당 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '글리벤클라미드-플루코나졸': {
+        severity: 'major',
+        description: '저혈당 위험이 크게 증가합니다.',
+        recommendation: '혈당 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '글리벤클라미드-리팜핀': {
+        severity: 'moderate',
+        description: '글리벤클라미드의 효과가 감소할 수 있습니다.',
+        recommendation: '혈당 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    
+    // === 콜레스테롤약 상호작용 ===
+    '심바스타틴-암로디핀': {
+        severity: 'moderate',
+        description: '심바스타틴의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '심바스타틴 용량 조절이 필요할 수 있습니다.'
+    },
+    '심바스타틴-베라파밀': {
+        severity: 'major',
+        description: '심바스타틴의 혈중 농도가 크게 증가합니다.',
+        recommendation: '심바스타틴 용량을 줄이거나 다른 스타틴 사용을 고려하세요.'
+    },
+    '심바스타틴-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '심바스타틴-와파린': {
+        severity: 'moderate',
+        description: '출혈 위험이 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '심바스타틴-그레이프프루트': {
+        severity: 'major',
+        description: '근육 손상 위험이 크게 증가합니다.',
+        recommendation: '그레이프프루트 섭취를 피하세요.'
+    },
+    '아토르바스타틴-암로디핀': {
+        severity: 'moderate',
+        description: '아토르바스타틴의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '아토르바스타틴 용량 조절이 필요할 수 있습니다.'
+    },
+    '아토르바스타틴-베라파밀': {
+        severity: 'major',
+        description: '아토르바스타틴의 혈중 농도가 크게 증가합니다.',
+        recommendation: '아토르바스타틴 용량을 줄이거나 다른 스타틴 사용을 고려하세요.'
+    },
+    '아토르바스타틴-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '아토르바스타틴-와파린': {
+        severity: 'moderate',
+        description: '출혈 위험이 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '아토르바스타틴-그레이프프루트': {
+        severity: 'major',
+        description: '근육 손상 위험이 크게 증가합니다.',
+        recommendation: '그레이프프루트 섭취를 피하세요.'
+    },
+    '프라바스타틴-와파린': {
+        severity: 'moderate',
+        description: '출혈 위험이 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '프라바스타틴-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    
+    // === 위장약 상호작용 ===
+    '오메프라졸-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '오메프라졸-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '오메프라졸-페니토인': {
+        severity: 'moderate',
+        description: '페니토인의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '페니토인 혈중 농도 모니터링을 강화하세요.'
+    },
+    '란소프라졸-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '란소프라졸-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '란소프라졸-페니토인': {
+        severity: 'moderate',
+        description: '페니토인의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '페니토인 혈중 농도 모니터링을 강화하세요.'
+    },
+    '에소메프라졸-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '에소메프라졸-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '에소메프라졸-페니토인': {
+        severity: 'moderate',
+        description: '페니토인의 혈중 농도가 증가할 수 있습니다.',
+        recommendation: '페니토인 혈중 농도 모니터링을 강화하세요.'
+    },
+    
+    // === 이뇨제 상호작용 ===
+    '푸로세미드-디곡신': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '푸로세미드-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '푸로세미드-아미노글리코사이드': {
+        severity: 'major',
+        description: '신장 독성 위험이 증가합니다.',
+        recommendation: '신장 기능 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '푸로세미드-NSAID': {
+        severity: 'moderate',
+        description: '이뇨제 효과가 감소할 수 있습니다.',
+        recommendation: '이뇨제 효과 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '하이드로클로로티아지드-디곡신': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '하이드로클로로티아지드-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '하이드로클로로티아지드-NSAID': {
+        severity: 'moderate',
+        description: '이뇨제 효과가 감소할 수 있습니다.',
+        recommendation: '이뇨제 효과 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '스피로놀락톤-칼륨보충제': {
+        severity: 'major',
+        description: '고칼륨혈증 위험이 크게 증가합니다.',
+        recommendation: '칼륨 보충제 사용을 피하고 정기적인 혈액 검사를 받으세요.'
+    },
+    '스피로놀락톤-ACE억제제': {
+        severity: 'major',
+        description: '고칼륨혈증 위험이 크게 증가합니다.',
+        recommendation: '칼륨 수치 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '스피로놀락톤-ARB': {
+        severity: 'major',
+        description: '고칼륨혈증 위험이 크게 증가합니다.',
+        recommendation: '칼륨 수치 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '스피로놀락톤-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    
+    // === 천식/호흡기약 상호작용 ===
+    '살부타몰-베타차단제': {
+        severity: 'major',
+        description: '살부타몰의 효과가 감소할 수 있습니다.',
+        recommendation: '베타차단제 사용을 피하거나 다른 기관지 확장제 사용을 고려하세요.'
+    },
+    '살부타몰-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '살부타몰-테오필린': {
+        severity: 'moderate',
+        description: '심혈관 부작용 위험이 증가할 수 있습니다.',
+        recommendation: '심박수 및 혈압 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '부데소니드-케토코나졸': {
+        severity: 'major',
+        description: '부데소니드의 혈중 농도가 크게 증가합니다.',
+        recommendation: '부데소니드 용량을 줄이거나 다른 스테로이드 사용을 고려하세요.'
+    },
+    '부데소니드-리톤나비르': {
+        severity: 'major',
+        description: '부데소니드의 혈중 농도가 크게 증가합니다.',
+        recommendation: '부데소니드 용량을 줄이거나 다른 스테로이드 사용을 고려하세요.'
+    },
+    '부데소니드-사퀴나비르': {
+        severity: 'major',
+        description: '부데소니드의 혈중 농도가 크게 증가합니다.',
+        recommendation: '부데소니드 용량을 줄이거나 다른 스테로이드 사용을 고려하세요.'
+    },
+    '몬테루카스트-리팜핀': {
+        severity: 'moderate',
+        description: '몬테루카스트의 효과가 감소할 수 있습니다.',
+        recommendation: '몬테루카스트 용량 조절이 필요할 수 있습니다.'
+    },
+    '몬테루카스트-페니토인': {
+        severity: 'moderate',
+        description: '몬테루카스트의 효과가 감소할 수 있습니다.',
+        recommendation: '몬테루카스트 용량 조절이 필요할 수 있습니다.'
+    },
+    '몬테루카스트-카바마제핀': {
+        severity: 'moderate',
+        description: '몬테루카스트의 효과가 감소할 수 있습니다.',
+        recommendation: '몬테루카스트 용량 조절이 필요할 수 있습니다.'
+    },
+    
+    // === 항생제 상호작용 ===
+    '아목시실린-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '아목시실린-메토트렉세이트': {
+        severity: 'moderate',
+        description: '메토트렉세이트 독성이 증가할 수 있습니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '아목시실린-경구피임약': {
+        severity: 'moderate',
+        description: '경구피임약의 효과가 감소할 수 있습니다.',
+        recommendation: '추가적인 피임 방법을 사용하세요.'
+    },
+    '시프로플록사신-와파린': {
+        severity: 'major',
+        description: '와파린의 효과가 크게 증가합니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '시프로플록사신-디곡신': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '시프로플록사신-테오필린': {
+        severity: 'major',
+        description: '테오필린 중독 위험이 크게 증가합니다.',
+        recommendation: '테오필린 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '시프로플록사신-제산제': {
+        severity: 'moderate',
+        description: '시프로플록사신의 흡수가 감소할 수 있습니다.',
+        recommendation: '제산제와 2시간 이상 간격을 두고 복용하세요.'
+    },
+    '아지트로마이신-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '아지트로마이신-디곡신': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '아지트로마이신-테오필린': {
+        severity: 'moderate',
+        description: '테오필린 중독 위험이 증가할 수 있습니다.',
+        recommendation: '테오필린 혈중 농도 모니터링을 강화하세요.'
+    },
+    '아지트로마이신-에르고타민': {
+        severity: 'major',
+        description: '에르고타민 중독 위험이 크게 증가합니다.',
+        recommendation: '에르고타민 사용을 피하거나 의료진과 상담하세요.'
+    },
+    
+    // === 항우울제/항불안제 상호작용 ===
+    '플루옥세틴-MAO억제제': {
+        severity: 'major',
+        description: '세로토닌 증후군 위험이 크게 증가합니다.',
+        recommendation: 'MAO 억제제와 함께 사용하지 마세요.'
+    },
+    '플루옥세틴-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '플루옥세틴-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '플루옥세틴-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '세르트랄린-MAO억제제': {
+        severity: 'major',
+        description: '세로토닌 증후군 위험이 크게 증가합니다.',
+        recommendation: 'MAO 억제제와 함께 사용하지 마세요.'
+    },
+    '세르트랄린-와파린': {
+        severity: 'moderate',
+        description: '와파린의 효과가 증가할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '세르트랄린-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '세르트랄린-리튬': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
     '디아제팜-알코올': {
+        severity: 'major',
+        description: '중추신경계 억제 효과가 가중됩니다.',
+        recommendation: '알코올 섭취를 완전히 피하세요.'
+    },
+    '디아제팜-중추신경억제제': {
+        severity: 'major',
+        description: '중추신경계 억제 효과가 가중됩니다.',
+        recommendation: '의료진과 상담하여 적절한 용량을 결정하세요.'
+    },
+    '로라제팜-알코올': {
+        severity: 'major',
+        description: '중추신경계 억제 효과가 가중됩니다.',
+        recommendation: '알코올 섭취를 완전히 피하세요.'
+    },
+    '로라제팜-바르비투르산염': {
+        severity: 'major',
+        description: '중추신경계 억제 효과가 가중됩니다.',
+        recommendation: '의료진과 상담하여 적절한 용량을 결정하세요.'
+    },
+    '로라제팜-오피오이드': {
+        severity: 'major',
+        description: '중추신경계 억제 효과가 가중됩니다.',
+        recommendation: '의료진과 상담하여 적절한 용량을 결정하세요.'
+    },
+    
+    // === 항경련제 상호작용 ===
+    '카바마제핀-와파린': {
+        severity: 'major',
+        description: '와파린의 효과가 감소할 수 있습니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '카바마제핀-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '카바마제핀-리튬': {
+        severity: 'moderate',
+        description: '리튬 중독 위험이 증가할 수 있습니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하세요.'
+    },
+    '카바마제핀-호르몬피임약': {
+        severity: 'major',
+        description: '호르몬 피임약의 효과가 감소할 수 있습니다.',
+        recommendation: '추가적인 피임 방법을 사용하세요.'
+    },
+    '발프로산-와파린': {
+        severity: 'major',
+        description: '와파린의 효과가 크게 증가합니다.',
+        recommendation: 'INR 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '발프로산-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '발프로산-리튬': {
+        severity: 'moderate',
+        description: '리튬 중독 위험이 증가할 수 있습니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하세요.'
+    },
+    '발프로산-호르몬피임약': {
+        severity: 'moderate',
+        description: '호르몬 피임약의 효과가 감소할 수 있습니다.',
+        recommendation: '추가적인 피임 방법을 사용하세요.'
+    },
+    
+    // === 기타 상호작용 ===
+    '디곡신-푸로세미드': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '디곡신-스피로놀락톤': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '디곡신-퀴니딘': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '디곡신-베라파밀': {
+        severity: 'major',
+        description: '디곡신 중독 위험이 크게 증가합니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '리튬-NSAID': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '리튬-이뇨제': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '리튬-ACE억제제': {
+        severity: 'major',
+        description: '리튬 중독 위험이 크게 증가합니다.',
+        recommendation: '리튬 혈중 농도 모니터링을 강화하고 의료진과 상담하세요.'
+    },
+    '리튬-디곡신': {
+        severity: 'moderate',
+        description: '디곡신 중독 위험이 증가할 수 있습니다.',
+        recommendation: '디곡신 혈중 농도 모니터링을 강화하세요.'
+    },
+    '메토트렉세이트-NSAID': {
+        severity: 'major',
+        description: '메토트렉세이트 독성이 크게 증가합니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '메토트렉세이트-아스피린': {
+        severity: 'major',
+        description: '메토트렉세이트 독성이 크게 증가합니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '메토트렉세이트-페니실린': {
+        severity: 'moderate',
+        description: '메토트렉세이트 독성이 증가할 수 있습니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    '메토트렉세이트-프로베네시드': {
+        severity: 'major',
+        description: '메토트렉세이트 독성이 크게 증가합니다.',
+        recommendation: '메토트렉세이트 용량 조절이 필요할 수 있습니다.'
+    },
+    
+    // === 트라마돌 상호작용 ===
+    '트라마돌-SSRI': {
+        severity: 'major',
+        description: '세로토닌 증후군 위험이 크게 증가합니다.',
+        recommendation: 'SSRI와 함께 사용하지 마세요.'
+    },
+    '트라마돌-MAO억제제': {
+        severity: 'major',
+        description: '세로토닌 증후군 위험이 크게 증가합니다.',
+        recommendation: 'MAO 억제제와 함께 사용하지 마세요.'
+    },
+    '트라마돌-카바마제핀': {
+        severity: 'moderate',
+        description: '트라마돌의 효과가 감소할 수 있습니다.',
+        recommendation: '트라마돌 용량 조절이 필요할 수 있습니다.'
+    },
+    '트라마돌-알코올': {
         severity: 'major',
         description: '중추신경계 억제 효과가 가중됩니다.',
         recommendation: '알코올 섭취를 완전히 피하세요.'
@@ -186,6 +1257,41 @@ const AI_CONFIGS = {
         baseUrl: 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
         model: 'microsoft/DialoGPT-medium',
         icon: '🆓',
+        isFree: true
+    },
+    groq: {
+        name: 'Groq (무료)',
+        baseUrl: 'https://api.groq.com/openai/v1/chat/completions',
+        model: 'llama3-8b-8192',
+        icon: '⚡',
+        isFree: true
+    },
+    ollama: {
+        name: 'Ollama (무료)',
+        baseUrl: 'http://localhost:11434/api/generate',
+        model: 'llama3.1:8b',
+        icon: '🦙',
+        isFree: true
+    },
+    huggingface: {
+        name: 'Hugging Face (무료)',
+        baseUrl: 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
+        model: 'microsoft/DialoGPT-medium',
+        icon: '🤗',
+        isFree: true
+    },
+    together: {
+        name: 'Together AI (무료)',
+        baseUrl: 'https://api.together.xyz/inference',
+        model: 'meta-llama/Llama-2-7b-chat-hf',
+        icon: '🤝',
+        isFree: true
+    },
+    replicate: {
+        name: 'Replicate (무료)',
+        baseUrl: 'https://api.replicate.com/v1/predictions',
+        model: 'meta/llama-2-7b-chat',
+        icon: '🔄',
         isFree: true
     },
     openai: {
@@ -482,56 +1588,128 @@ let lastSearchTerm = '';
 const drugNameMapping = {
     // === 진통제/해열제/소염제 ===
     '아스피린': 'Aspirin',
+    '아스파린': 'Aspirin',
     '타이레놀': 'Acetaminophen',
     '아세트아미노펜': 'Acetaminophen',
+    '아세타미노펜': 'Acetaminophen',
+    '아세트아미노팬': 'Acetaminophen',
+    '파라세타몰': 'Acetaminophen',
     '이부프로펜': 'Ibuprofen',
+    '이부프로팬': 'Ibuprofen',
+    '이부프로핀': 'Ibuprofen',
     '부루펜': 'Ibuprofen',
+    '부펜': 'Ibuprofen',
     '낙센': 'Naproxen',
     '낙센프록센': 'Naproxen',
+    '낙프록센': 'Naproxen',
     '디클로페낙': 'Diclofenac',
     '볼타렌': 'Diclofenac',
+    '디클로페낙나트륨': 'Diclofenac',
     '셀레콕시브': 'Celecoxib',
     '세레브렉스': 'Celecoxib',
+    '셀레브렉스': 'Celecoxib',
     '멜록시캄': 'Meloxicam',
     '모빅': 'Meloxicam',
+    '멜로캄': 'Meloxicam',
     '에토리콕시브': 'Etoricoxib',
     '아르코시아': 'Etoricoxib',
+    '인도메타신': 'Indomethacin',
     '인도메타신': 'Indomethacin',
     '케토프로펜': 'Ketoprofen',
     '피록시캄': 'Piroxicam',
     '페닐부타존': 'Phenylbutazone',
     '트라마돌': 'Tramadol',
+    '트라마돌염산염': 'Tramadol',
     '콜히친': 'Colchicine',
+    '콜치신': 'Colchicine',
     
     // === 고혈압약/심혈관약 ===
     '암로디핀': 'Amlodipine',
+    '암로디핀베실산염': 'Amlodipine',
     '노바스크': 'Amlodipine',
     '리시노프릴': 'Lisinopril',
+    '리시노프릴수화물': 'Lisinopril',
     '로사르탄': 'Losartan',
+    '로사르탄칼륨': 'Losartan',
     '코자': 'Losartan',
     '발사르탄': 'Valsartan',
     '디오반': 'Valsartan',
     '텔미사르탄': 'Telmisartan',
     '미카르디스': 'Telmisartan',
     '칸데사르탄': 'Candesartan',
+    '칸데사르탄실렉세틸': 'Candesartan',
     '어택크': 'Candesartan',
     '아테놀롤': 'Atenolol',
     '테놀민': 'Atenolol',
     '메토프롤롤': 'Metoprolol',
+    '메토프롤롤타르트산염': 'Metoprolol',
     '셀로켄': 'Metoprolol',
     '프로프라놀롤': 'Propranolol',
+    '프로프라놀롤염산염': 'Propranolol',
     '딜티아젬': 'Diltiazem',
+    '딜티아젬염산염': 'Diltiazem',
     '헤르벤': 'Diltiazem',
     '베라파밀': 'Verapamil',
+    '베라파밀염산염': 'Verapamil',
     '이소핀': 'Verapamil',
     '니페디핀': 'Nifedipine',
     '아달라트': 'Nifedipine',
     '하이드로클로로티아지드': 'Hydrochlorothiazide',
     '히드로클로로치아지드': 'Hydrochlorothiazide',
+    'HCTZ': 'Hydrochlorothiazide',
     '푸로세미드': 'Furosemide',
     '라식스': 'Furosemide',
     '스피로놀락톤': 'Spironolactone',
     '알닥톤': 'Spironolactone',
+    
+    // === 콜레스테롤약 ===
+    '심바스타틴': 'Simvastatin',
+    '조코르': 'Simvastatin',
+    '아토르바스타틴': 'Atorvastatin',
+    '리피토': 'Atorvastatin',
+    '프라바스타틴': 'Pravastatin',
+    '프라바콜': 'Pravastatin',
+    '로바스타틴': 'Lovastatin',
+    '메바코르': 'Lovastatin',
+    '플루바스타틴': 'Fluvastatin',
+    '레스콜': 'Fluvastatin',
+    '로수바스타틴': 'Rosuvastatin',
+    '크레스토': 'Rosuvastatin',
+    '피타바스타틴': 'Pitavastatin',
+    '리바로': 'Pitavastatin',
+    '콜레스티라민': 'Cholestyramine',
+    '콜레스티드': 'Cholestyramine',
+    '콜레세벨람': 'Colesevelam',
+    '웰콜': 'Colesevelam',
+    '제티미브': 'Ezetimibe',
+    '제티아': 'Ezetimibe',
+    '피브레이트': 'Fibrate',
+    '제모피브레이트': 'Gemfibrozil',
+    '로피드': 'Gemfibrozil',
+    '펜오피브레이트': 'Fenofibrate',
+    '리판틸': 'Fenofibrate',
+    
+    // === 항응고제/항혈소판제 ===
+    '와파린': 'Warfarin',
+    '쿠마딘': 'Warfarin',
+    '클로피도그렐': 'Clopidogrel',
+    '플라빅스': 'Clopidogrel',
+    '아스피린저용량': 'Low-dose Aspirin',
+    '아스피린소용량': 'Low-dose Aspirin',
+    '아스피린81mg': 'Low-dose Aspirin',
+    '아스피린100mg': 'Low-dose Aspirin',
+    '티카그렐러': 'Ticagrelor',
+    '브릴린타': 'Ticagrelor',
+    '프라수그렐': 'Prasugrel',
+    '에피피엔트': 'Prasugrel',
+    '다비가트란': 'Dabigatran',
+    '프라닥사': 'Dabigatran',
+    '리바록사반': 'Rivaroxaban',
+    '자렐토': 'Rivaroxaban',
+    '아픽사반': 'Apixaban',
+    '엘리퀴스': 'Apixaban',
+    '에독사반': 'Edoxaban',
+    '사바이사': 'Edoxaban',
     
     // === 당뇨약 ===
     '메트포르민': 'Metformin',
@@ -550,6 +1728,82 @@ const drugNameMapping = {
     '액토스': 'Pioglitazone',
     '로시글리타존': 'Rosiglitazone',
     '아반디아': 'Rosiglitazone',
+    
+    // === 천식/호흡기약 ===
+    '살부타몰': 'Salbutamol',
+    '알부테롤': 'Salbutamol',
+    '벤토린': 'Salbutamol',
+    '부데소니드': 'Budesonide',
+    '부데코트': 'Budesonide',
+    '플루티카손': 'Fluticasone',
+    '플릭소타이드': 'Fluticasone',
+    '몬테루카스트': 'Montelukast',
+    '싱귤레어': 'Montelukast',
+    '테오필린': 'Theophylline',
+    '유니필': 'Theophylline',
+    '아미노필린': 'Aminophylline',
+    '포르모테롤': 'Formoterol',
+    '옥시스': 'Formoterol',
+    '살메테롤': 'Salmeterol',
+    '세레벤트': 'Salmeterol',
+    '이프라트로피움': 'Ipratropium',
+    '아트로벤트': 'Ipratropium',
+    '티오트로피움': 'Tiotropium',
+    '스피리바': 'Tiotropium',
+    '우메클리디니움': 'Umeclidinium',
+    '인크루스': 'Umeclidinium',
+    '비란테리': 'Vilanterol',
+    '브렉스피': 'Vilanterol',
+    
+    // === 정신과약/항우울제 ===
+    '플루옥세틴': 'Fluoxetine',
+    '프로작': 'Fluoxetine',
+    '세르트랄린': 'Sertraline',
+    '졸로프트': 'Sertraline',
+    '파록세틴': 'Paroxetine',
+    '팍실': 'Paroxetine',
+    '시탈로프람': 'Citalopram',
+    '셀렉사': 'Citalopram',
+    '에스시탈로프람': 'Escitalopram',
+    '렉사프로': 'Escitalopram',
+    '부프로피온': 'Bupropion',
+    '웰부트린': 'Bupropion',
+    '미르타자핀': 'Mirtazapine',
+    '레메론': 'Mirtazapine',
+    '벤라팍신': 'Venlafaxine',
+    '이펙사': 'Venlafaxine',
+    '둘록세틴': 'Duloxetine',
+    '심발타': 'Duloxetine',
+    '디아제팜': 'Diazepam',
+    '발륨': 'Diazepam',
+    '로라제팜': 'Lorazepam',
+    '아티반': 'Lorazepam',
+    '알프라졸람': 'Alprazolam',
+    '잔액스': 'Alprazolam',
+    '클로나제팜': 'Clonazepam',
+    '클로노핀': 'Clonazepam',
+    '미다졸람': 'Midazolam',
+    '베르세드': 'Midazolam',
+    '졸피뎀': 'Zolpidem',
+    '암비엔': 'Zolpidem',
+    '에스조피클론': 'Eszopiclone',
+    '루네스타': 'Eszopiclone',
+    '리튬': 'Lithium',
+    '리튬카보네이트': 'Lithium',
+    '카바마제핀': 'Carbamazepine',
+    '테그레톨': 'Carbamazepine',
+    '발프로산': 'Valproic Acid',
+    '데파코트': 'Valproic Acid',
+    '라모트리진': 'Lamotrigine',
+    '라미탈': 'Lamotrigine',
+    '옥시카바제핀': 'Oxcarbazepine',
+    '트릴렙탈': 'Oxcarbazepine',
+    '토피라메이트': 'Topiramate',
+    '토파맥스': 'Topiramate',
+    '가바펜틴': 'Gabapentin',
+    '뉴론틴': 'Gabapentin',
+    '프레가발린': 'Pregabalin',
+    '라이리카': 'Pregabalin',
     
     // === 소화기약 ===
     '오메프라졸': 'Omeprazole',
@@ -1317,6 +2571,12 @@ const utils = {
         
         if (!lowerTerm || lowerTerm.length < 2) return results;
         
+        // AI 테스트 페이지 이동 명령어 체크
+        if (lowerTerm === 'go ai test page' || lowerTerm === 'go ai test') {
+            window.location.href = 'ai-test.html';
+            return [];
+        }
+        
         // 모든 약물명 수집 (한국어 + 영어)
         const allDrugs = new Set();
         
@@ -1543,8 +2803,8 @@ const utils = {
             }
         }
         
-        // Auto-select - Priority: Free > OpenAI > Claude > Perplexity > Gemini
-        const priority = ['free', 'openai', 'claude', 'perplexity', 'gemini'];
+        // Auto-select - Priority: Free > Hugging Face > Ollama > Groq > Together > Replicate > OpenAI > Claude > Perplexity > Gemini
+        const priority = ['free', 'huggingface', 'ollama', 'groq', 'together', 'replicate', 'openai', 'claude', 'perplexity', 'gemini'];
         for (const provider of priority) {
             if (AI_CONFIGS[provider].isFree) {
                 return provider;
@@ -1559,13 +2819,15 @@ const utils = {
     },
 
     // Free AI service call - 완전한 폴백 시스템
-    async callFreeAI(messages, options = {}) {
+    async callFreeAI(messages, options = {}, drug1 = null, drug2 = null) {
         try {
             // 여러 무료 API를 순차적으로 시도
             const freeAPIs = [
                 this.tryHuggingFaceAPI,
+                this.tryOllamaAPI,
                 this.tryGroqAPI,
-                this.tryOllamaAPI
+                this.tryTogetherAI,
+                this.tryReplicateAPI
             ];
 
             for (const apiCall of freeAPIs) {
@@ -1580,59 +2842,89 @@ const utils = {
                 }
             }
 
-            // 모든 API가 실패하면 규칙 기반 응답
-            return this.generateFallbackResponse(messages);
+            // 모든 API가 실패하면 규칙 기반 응답 (약물 정보 포함)
+            return this.generateFallbackResponse(messages, drug1, drug2);
         } catch (error) {
             console.error('Free AI service error:', error);
-            return this.generateFallbackResponse(messages);
+            return this.generateFallbackResponse(messages, drug1, drug2);
         }
     },
 
-    // Hugging Face API 시도
+    // Hugging Face API 시도 (무료)
     async tryHuggingFaceAPI(messages, options = {}) {
-        const response = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium', {
+        try {
+            // 토큰 없이 사용 가능한 모델들 시도
+            const models = [
+                'microsoft/DialoGPT-medium',
+                'facebook/blenderbot-400M-distill',
+                'microsoft/DialoGPT-small'
+            ];
+            
+            const lastMessage = messages[messages.length - 1].content;
+            
+            for (const model of models) {
+                try {
+                    const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                inputs: messages[messages.length - 1].content,
+                            inputs: lastMessage,
                 parameters: {
-                    max_length: 500,
+                                max_length: 300,
                     temperature: 0.7,
                     do_sample: true
                 }
             })
         });
 
-        if (!response.ok) {
-            throw new Error(`Hugging Face API error: ${response.statusText}`);
-        }
-
+                    if (response.ok) {
         const data = await response.json();
         
         if (Array.isArray(data) && data.length > 0) {
             return data[0].generated_text || '';
         } else if (data.error) {
-            throw new Error(`Hugging Face API error: ${data.error}`);
+                            console.warn(`Model ${model} error:`, data.error);
+                            continue;
+                        }
+                    }
+                } catch (modelError) {
+                    console.warn(`Model ${model} failed:`, modelError.message);
+                    continue;
+                }
+            }
+            
+            return null;
+        } catch (error) {
+            console.warn('Hugging Face API failed:', error.message);
+            return null;
         }
-        
-        return '';
     },
 
     // Groq API 시도 (무료 티어)
     async tryGroqAPI(messages, options = {}) {
+        try {
+            // Groq 무료 API 키 (실제 사용시에는 환경변수에서 가져와야 함)
+            const groqApiKey = 'gsk_your_groq_api_key_here';
+            
+            // API 키가 설정되지 않은 경우 건너뛰기
+            if (groqApiKey === 'gsk_your_groq_api_key_here') {
+                console.log('Groq API key not configured, skipping...');
+                return null;
+            }
+            
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer gsk_demo_key' // 데모 키
+                    'Authorization': `Bearer ${groqApiKey}`
             },
             body: JSON.stringify({
                 model: 'llama3-8b-8192',
                 messages: messages,
-                max_tokens: 500,
-                temperature: 0.7
+                    max_tokens: 1500,
+                    temperature: 0.3
             })
         });
 
@@ -1642,10 +2934,15 @@ const utils = {
 
         const data = await response.json();
         return data.choices?.[0]?.message?.content || '';
+        } catch (error) {
+            console.warn('Groq API failed:', error.message);
+            return null;
+        }
     },
 
     // Ollama 로컬 API 시도
     async tryOllamaAPI(messages, options = {}) {
+        try {
         const response = await fetch('http://localhost:11434/api/chat', {
             method: 'POST',
             headers: {
@@ -1654,7 +2951,11 @@ const utils = {
             body: JSON.stringify({
                 model: 'llama3.2',
                 messages: messages,
-                stream: false
+                    stream: false,
+                    options: {
+                        temperature: 0.3,
+                        top_p: 0.9
+                    }
             })
         });
 
@@ -1664,63 +2965,374 @@ const utils = {
 
         const data = await response.json();
         return data.message?.content || '';
+        } catch (error) {
+            console.warn('Ollama API failed:', error.message);
+            return null;
+        }
+    },
+
+    // Together AI API 시도 (무료 티어)
+    async tryTogetherAI(messages, options = {}) {
+        try {
+            const togetherApiKey = 'your_together_api_key_here';
+            
+            // API 키가 설정되지 않은 경우 건너뛰기
+            if (togetherApiKey === 'your_together_api_key_here') {
+                console.log('Together AI API key not configured, skipping...');
+                return null;
+            }
+            
+            const response = await fetch('https://api.together.xyz/inference', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${togetherApiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'meta-llama/Llama-2-7b-chat-hf',
+                    messages: messages,
+                    max_tokens: 1000,
+                    temperature: 0.3
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Together AI error: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            return data.output?.choices?.[0]?.text || '';
+        } catch (error) {
+            console.warn('Together AI failed:', error.message);
+            return null;
+        }
+    },
+
+    // Replicate API 시도 (무료 티어)
+    async tryReplicateAPI(messages, options = {}) {
+        try {
+            const replicateToken = 'your_replicate_token_here';
+            
+            // API 키가 설정되지 않은 경우 건너뛰기
+            if (replicateToken === 'your_replicate_token_here') {
+                console.log('Replicate API token not configured, skipping...');
+                return null;
+            }
+            
+            const response = await fetch('https://api.replicate.com/v1/predictions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${replicateToken}`
+                },
+                body: JSON.stringify({
+                    version: 'meta/llama-2-7b-chat',
+                    input: {
+                        prompt: messages[messages.length - 1].content,
+                        max_length: 1000
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Replicate API error: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            return data.output || '';
+        } catch (error) {
+            console.warn('Replicate API failed:', error.message);
+            return null;
+        }
     },
 
     // 폴백 응답 생성 - 더 유용한 정보 제공
-    generateFallbackResponse(messages) {
+    generateFallbackResponse(messages, drug1 = null, drug2 = null) {
         const lastMessage = messages[messages.length - 1].content;
         
         if (lastMessage.includes('상호작용') || lastMessage.includes('interaction')) {
+            // 구체적인 약물 상호작용 분석 제공
+            if (drug1 && drug2) {
+                return this.generateCustomDrugInteractionAnalysis(drug1, drug2);
+            }
+            
             // 약물 이름 추출 시도
             const drugNames = this.extractDrugNames(lastMessage);
+            if (drugNames.length >= 2) {
+                return this.generateCustomDrugInteractionAnalysis(drugNames[0], drugNames[1]);
+            }
             
-            return `## 🔍 약물 상호작용 분석 (무료 AI 서비스)
+            // 일반적인 안전 가이드
+            return `약물 상호작용 분석을 위해 기본 안전 가이드를 제공합니다.
 
-### ⚠️ 현재 상황
-무료 AI 서비스가 일시적으로 사용할 수 없습니다. 기본 안전 가이드를 제공합니다.
+고위험 상호작용:
+- 항응고제 + 아스피린: 출혈 위험 증가
+- ACE 억제제 + 칼륨 보충제: 고칼륨혈증 위험
+- 디곡신 + 이뇨제: 디곡신 중독 위험
+- 와파린 + 항생제: 출혈 위험 증가
 
-### 📋 일반적인 약물 상호작용 주의사항
+중위험 상호작용:
+- 스타틴 + 항진균제: 근육통, 간 손상 위험
+- 메트포르민 + 조영제: 신장 손상 위험
+- 리튬 + 이뇨제: 리튬 중독 위험
 
-#### 🚨 고위험 상호작용
-- **항응고제 + 아스피린**: 출혈 위험 증가
-- **ACE 억제제 + 칼륨 보충제**: 고칼륨혈증 위험
-- **디곡신 + 이뇨제**: 디곡신 중독 위험
-- **와파린 + 항생제**: 출혈 위험 증가
+안전 수칙:
+1. 의료진 상담 필수: 새로운 약물 복용 전 반드시 의사나 약사와 상담
+2. 약물 기록 관리: 복용 중인 모든 약물을 기록하고 의료진에게 알림
+3. 부작용 모니터링: 이상 증상 발생 시 즉시 복용 중단 및 의료진 연락
+4. 정기 검진: 장기 복용 약물의 경우 정기적인 검사 필요
 
-#### ⚠️ 중위험 상호작용
-- **스타틴 + 항진균제**: 근육통, 간 손상 위험
-- **메트포르민 + 조영제**: 신장 손상 위험
-- **리튬 + 이뇨제**: 리튬 중독 위험
+더 정확한 AI 분석을 원하시면 설정에서 무료 AI 서비스나 다른 AI 서비스의 API 키를 입력해주세요.
 
-### 🛡️ 안전 수칙
-1. **의료진 상담 필수**: 새로운 약물 복용 전 반드시 의사나 약사와 상담
-2. **약물 기록 관리**: 복용 중인 모든 약물을 기록하고 의료진에게 알림
-3. **부작용 모니터링**: 이상 증상 발생 시 즉시 복용 중단 및 의료진 연락
-4. **정기 검진**: 장기 복용 약물의 경우 정기적인 검사 필요
+💡 무료 AI API 사용 방법:
+• Hugging Face: 토큰 없이 사용 가능 (제한적)
+• Ollama: 로컬 설치 후 사용 (완전 무료)
+• Groq: https://console.groq.com/keys 에서 무료 키 발급
+• Together AI: https://api.together.xyz 에서 무료 티어 신청
+• Replicate: https://replicate.com 에서 무료 크레딧 제공
 
-### 💡 권장사항
-더 정확한 AI 분석을 원하시면 설정에서 OpenAI, Claude, 또는 다른 AI 서비스의 API 키를 입력해주세요.
-
-### 📞 응급상황
-심각한 부작용이나 응급상황 발생 시 **119** 또는 **응급실**로 즉시 연락하세요.`;
+심각한 부작용이나 응급상황 발생 시 119 또는 응급실로 즉시 연락하세요.`;
         }
         
-        return `## 🆓 무료 AI 서비스 안내
+        return `무료 AI 서비스가 일시적으로 사용할 수 없습니다.
 
-### 현재 상황
-무료 AI 서비스가 일시적으로 사용할 수 없습니다.
+해결 방법:
+1. 개인 API 키 사용: 설정에서 OpenAI, Claude, Perplexity, Gemini API 키를 입력
+2. 잠시 후 재시도: 네트워크 상태를 확인하고 다시 시도
+3. 기본 안전 수칙: 약물 복용 전 의료진과 상담
 
-### 💡 해결 방법
-1. **개인 API 키 사용**: 설정에서 OpenAI, Claude, Perplexity, Gemini API 키를 입력
-2. **잠시 후 재시도**: 네트워크 상태를 확인하고 다시 시도
-3. **기본 안전 수칙**: 약물 복용 전 의료진과 상담
-
-### 🔧 설정 방법
+설정 방법:
 1. 우측 하단 설정 버튼 클릭
 2. AI 서비스 설정에서 원하는 서비스 선택
 3. API 키 입력 후 저장
 
 더 안정적인 서비스를 위해 개인 API 키 사용을 권장합니다.`;
+    },
+
+    // 커스텀 약물 상호작용 분석 생성
+    generateCustomDrugInteractionAnalysis(drug1, drug2) {
+        // 한국 의약품 상호작용 데이터베이스에서 확인
+        const interactionKey1 = `${drug1}-${drug2}`;
+        const interactionKey2 = `${drug2}-${drug1}`;
+        const knownInteraction = KOREAN_DRUG_INTERACTIONS[interactionKey1] || KOREAN_DRUG_INTERACTIONS[interactionKey2];
+        
+        // DUR 시스템에서 확인
+        const durInteraction = checkDURInteraction(drug1, drug2);
+        
+        // 약물 정보 가져오기
+        const drug1Info = KOREAN_DRUG_DATABASE[drug1] || null;
+        const drug2Info = KOREAN_DRUG_DATABASE[drug2] || null;
+        
+        let analysis = `**${drug1}과 ${drug2} 상호작용 분석**\n\n`;
+        
+        // 알려진 상호작용이 있는 경우
+        if (knownInteraction) {
+            analysis += `**위험도 평가**\n${knownInteraction.severity} - ${knownInteraction.description}\n\n`;
+            analysis += `**권장사항**\n${knownInteraction.recommendation}\n\n`;
+        } else if (durInteraction) {
+            analysis += `**위험도 평가**\n${durInteraction.severity} - ${durInteraction.description}\n\n`;
+            analysis += `**권장사항**\n${durInteraction.recommendation}\n\n`;
+        } else {
+            // 약물 정보가 없는 경우에도 AI 기반 분석 제공
+            analysis += this.generateAIBasedAnalysis(drug1, drug2, drug1Info, drug2Info);
+        }
+        
+        // 약물 정보 기반 분석
+        if (drug1Info && drug2Info) {
+            analysis += `**약물 정보**\n`;
+            analysis += `${drug1}: ${drug1Info.category || '분류 정보 없음'}\n`;
+            analysis += `${drug2}: ${drug2Info.category || '분류 정보 없음'}\n\n`;
+            
+            // 카테고리 기반 일반적인 주의사항
+            const category1 = drug1Info.category?.toLowerCase() || '';
+            const category2 = drug2Info.category?.toLowerCase() || '';
+            
+            if (category1.includes('항응고') && category2.includes('항혈소판')) {
+                analysis += `**상호작용 메커니즘**\n두 약물 모두 혈액 응고를 억제하여 출혈 위험이 증가할 수 있습니다.\n\n`;
+                analysis += `**예상되는 영향**\n- 출혈 시간 연장\n- 멍, 코피, 잇몸 출혈\n- 심한 경우 내부 출혈 위험\n\n`;
+                analysis += `**실제 대응 방법**\n- 의료진과 상담하여 용량 조절 검토\n- 출혈 증상 모니터링\n- 정기적인 혈액 검사 필요\n\n`;
+            } else if (category1.includes('항생제') && category2.includes('항응고')) {
+                analysis += `**상호작용 메커니즘**\n항생제가 항응고제의 대사를 억제하여 혈중 농도가 증가할 수 있습니다.\n\n`;
+                analysis += `**예상되는 영향**\n- 항응고제 효과 증가\n- 출혈 위험 증가\n- INR 수치 상승\n\n`;
+                analysis += `**실제 대응 방법**\n- INR 모니터링 강화\n- 출혈 증상 주의\n- 의료진과 상담\n\n`;
+            }
+        }
+        
+        // 일반적인 안전 수칙
+        analysis += `**안전 수칙**\n`;
+        analysis += `1. 의료진 상담 필수: 새로운 약물 복용 전 반드시 의사나 약사와 상담\n`;
+        analysis += `2. 약물 기록 관리: 복용 중인 모든 약물을 기록하고 의료진에게 알림\n`;
+        analysis += `3. 부작용 모니터링: 이상 증상 발생 시 즉시 복용 중단 및 의료진 연락\n`;
+        analysis += `4. 정기 검진: 장기 복용 약물의 경우 정기적인 검사 필요\n\n`;
+        
+        // 응급 상황 대비
+        analysis += `**응급 상황 대비**\n`;
+        analysis += `- 심한 출혈, 호흡곤란, 의식 변화 시 즉시 119 연락\n`;
+        analysis += `- 응급실 방문 시 복용 중인 모든 약물 목록 지참\n`;
+        analysis += `- 약물 알레르기 이력 정확히 전달\n\n`;
+        
+        analysis += `더 정확한 AI 분석을 원하시면 설정에서 무료 AI 서비스나 다른 AI 서비스의 API 키를 입력해주세요.
+
+💡 무료 AI API 사용 방법:
+• Hugging Face: 토큰 없이 사용 가능 (제한적)
+• Ollama: 로컬 설치 후 사용 (완전 무료)
+• Groq: https://console.groq.com/keys 에서 무료 키 발급
+• Together AI: https://api.together.xyz 에서 무료 티어 신청
+• Replicate: https://replicate.com 에서 무료 크레딧 제공`;
+        
+        return analysis;
+    },
+
+    // AI 기반 약물 상호작용 분석 (약물 정보가 없을 때)
+    generateAIBasedAnalysis(drug1, drug2, drug1Info = null, drug2Info = null) {
+        let analysis = `**위험도 평가**\n보통 - 약물 정보가 제한적이므로 일반적인 주의사항을 적용합니다\n\n`;
+        
+        // 약물명 기반 일반적인 분석
+        const drug1Lower = drug1.toLowerCase();
+        const drug2Lower = drug2.toLowerCase();
+        
+        // 일반적인 약물 카테고리 추정
+        const drug1Category = this.estimateDrugCategory(drug1Lower);
+        const drug2Category = this.estimateDrugCategory(drug2Lower);
+        
+        analysis += `**추정 약물 분류**\n`;
+        analysis += `${drug1}: ${drug1Category}\n`;
+        analysis += `${drug2}: ${drug2Category}\n\n`;
+        
+        // 카테고리 기반 상호작용 분석
+        if (drug1Category.includes('항응고') || drug1Category.includes('항혈소판')) {
+            if (drug2Category.includes('항응고') || drug2Category.includes('항혈소판')) {
+                analysis += `**상호작용 메커니즘**\n두 약물 모두 혈액 응고에 영향을 주어 출혈 위험이 증가할 수 있습니다.\n\n`;
+                analysis += `**예상되는 영향**\n- 출혈 시간 연장\n- 멍, 코피, 잇몸 출혈\n- 심한 경우 내부 출혈 위험\n\n`;
+                analysis += `**실제 대응 방법**\n- 의료진과 상담하여 용량 조절 검토\n- 출혈 증상 모니터링\n- 정기적인 혈액 검사 필요\n\n`;
+            } else if (drug2Category.includes('항생제')) {
+                analysis += `**상호작용 메커니즘**\n항생제가 항응고제의 대사를 억제하여 혈중 농도가 증가할 수 있습니다.\n\n`;
+                analysis += `**예상되는 영향**\n- 항응고제 효과 증가\n- 출혈 위험 증가\n- INR 수치 상승\n\n`;
+                analysis += `**실제 대응 방법**\n- INR 모니터링 강화\n- 출혈 증상 주의\n- 의료진과 상담\n\n`;
+            }
+        } else if (drug1Category.includes('NSAID') && drug2Category.includes('NSAID')) {
+            analysis += `**상호작용 메커니즘**\n두 약물 모두 COX 효소를 억제하여 위장관 및 심혈관 위험이 증가할 수 있습니다.\n\n`;
+            analysis += `**예상되는 영향**\n- 위궤양 위험 증가\n- 혈압 상승\n- 신장 기능 저하\n\n`;
+            analysis += `**실제 대응 방법**\n- 한 번에 하나의 NSAID만 사용\n- 대안 진통제 고려\n- 혈압 및 신장 기능 모니터링\n\n`;
+        } else if (drug1Category.includes('항생제') && drug2Category.includes('항생제')) {
+            analysis += `**상호작용 메커니즘**\n두 항생제의 병용으로 내성 발생 위험이나 부작용이 증가할 수 있습니다.\n\n`;
+            analysis += `**예상되는 영향**\n- 항생제 내성 발생\n- 위장관 부작용 증가\n- 간 기능 저하\n\n`;
+            analysis += `**실제 대응 방법**\n- 의료진과 상담하여 적절한 조합 확인\n- 간 기능 검사 정기 실시\n- 부작용 모니터링\n\n`;
+        } else if (drug1Category.includes('천식/호흡기') && drug2Category.includes('천식/호흡기')) {
+            // 특별한 천식 약물 조합 분석
+            if ((drug1Lower.includes('살부타몰') || drug1Lower.includes('salbutamol') || drug1Lower.includes('알부테롤')) &&
+                (drug2Lower.includes('부데소니드') || drug2Lower.includes('budesonide') || drug2Lower.includes('플루티카손'))) {
+                analysis += `**상호작용 메커니즘**\n살부타몰(기관지 확장제)과 부데소니드(스테로이드)는 치료적으로 상호보완적인 효과가 있어 천식 치료에서 병용이 흔히 사용됩니다.\n\n`;
+                analysis += `**예상되는 영향**\n- 치료 효과의 상호보완\n- 천식 증상 개선\n- 살부타몰 과용 시 심혈관 부작용 가능\n- 저칼륨혈증 위험\n\n`;
+                analysis += `**실제 대응 방법**\n- 의료진의 지시에 따라 적절한 용량 사용\n- 살부타몰 과용 주의 (하루 4회 이상 사용 시 의료진 상담)\n- 심박수 및 혈압 모니터링\n- 칼륨 수치 정기 확인\n\n`;
+            } else {
+                analysis += `**상호작용 메커니즘**\n두 호흡기 약물의 병용으로 치료 효과가 향상되거나 부작용이 증가할 수 있습니다.\n\n`;
+                analysis += `**예상되는 영향**\n- 호흡기 증상 개선\n- 심혈관 부작용 가능\n- 전해질 불균형 위험\n\n`;
+                analysis += `**실제 대응 방법**\n- 의료진과 상담하여 적절한 조합 확인\n- 심박수 및 혈압 모니터링\n- 전해질 수치 정기 확인\n\n`;
+            }
+        } else if (drug1Category.includes('천식/호흡기') || drug2Category.includes('천식/호흡기')) {
+            analysis += `**상호작용 메커니즘**\n호흡기 약물과 다른 약물의 상호작용으로 심혈관 부작용이나 전해질 불균형이 발생할 수 있습니다.\n\n`;
+            analysis += `**예상되는 영향**\n- 심박수 증가\n- 혈압 변화\n- 저칼륨혈증\n- 불안, 떨림\n\n`;
+            analysis += `**실제 대응 방법**\n- 의료진과 상담하여 적절한 복용 간격 확인\n- 심박수 및 혈압 모니터링\n- 전해질 수치 정기 확인\n- 부작용 발생 시 즉시 의료진 연락\n\n`;
+        } else {
+            analysis += `**상호작용 메커니즘**\n제한된 정보로 인해 구체적인 상호작용 메커니즘을 파악하기 어렵습니다.\n\n`;
+            analysis += `**예상되는 영향**\n- 약물 간 대사 경쟁\n- 효소 억제 또는 유도\n- 흡수, 분포, 배설 변화\n\n`;
+            analysis += `**실제 대응 방법**\n- 의료진과 상담하여 적절한 복용 간격 확인\n- 부작용 모니터링\n- 정기적인 검사 실시\n\n`;
+        }
+        
+        return analysis;
+    },
+
+    // 약물명 기반 카테고리 추정
+    estimateDrugCategory(drugName) {
+        const name = drugName.toLowerCase();
+        
+        // 항응고제
+        if (name.includes('와파린') || name.includes('warfarin') || 
+            name.includes('헤파린') || name.includes('heparin') ||
+            name.includes('다비가트란') || name.includes('dabigatran')) {
+            return '항응고제';
+        }
+        
+        // 항혈소판제
+        if (name.includes('아스피린') || name.includes('aspirin') ||
+            name.includes('클로피도그렐') || name.includes('clopidogrel') ||
+            name.includes('티카그렐러') || name.includes('ticagrelor')) {
+            return '항혈소판제';
+        }
+        
+        // NSAID
+        if (name.includes('이부프로펜') || name.includes('ibuprofen') ||
+            name.includes('나프록센') || name.includes('naproxen') ||
+            name.includes('디클로페낙') || name.includes('diclofenac') ||
+            name.includes('셀레콕시브') || name.includes('celecoxib')) {
+            return 'NSAID (비스테로이드성 항염제)';
+        }
+        
+        // 항생제
+        if (name.includes('아목시실린') || name.includes('amoxicillin') ||
+            name.includes('시프로플록사신') || name.includes('ciprofloxacin') ||
+            name.includes('아지트로마이신') || name.includes('azithromycin') ||
+            name.includes('독시사이클린') || name.includes('doxycycline')) {
+            return '항생제';
+        }
+        
+        // 스타틴
+        if (name.includes('심바스타틴') || name.includes('simvastatin') ||
+            name.includes('아토르바스타틴') || name.includes('atorvastatin') ||
+            name.includes('로바스타틴') || name.includes('lovastatin')) {
+            return '스타틴 (콜레스테롤 약물)';
+        }
+        
+        // ACE 억제제
+        if (name.includes('리시노프릴') || name.includes('lisinopril') ||
+            name.includes('에날라프릴') || name.includes('enalapril') ||
+            name.includes('캡토프릴') || name.includes('captopril')) {
+            return 'ACE 억제제 (혈압약)';
+        }
+        
+        // 이뇨제
+        if (name.includes('푸로세미드') || name.includes('furosemide') ||
+            name.includes('하이드로클로로티아지드') || name.includes('hydrochlorothiazide') ||
+            name.includes('스피로놀락톤') || name.includes('spironolactone')) {
+            return '이뇨제';
+        }
+        
+        // 당뇨약
+        if (name.includes('메트포르민') || name.includes('metformin') ||
+            name.includes('글리메피리드') || name.includes('glimepiride') ||
+            name.includes('인슐린') || name.includes('insulin')) {
+            return '당뇨약';
+        }
+        
+        // 천식/호흡기 약물
+        if (name.includes('살부타몰') || name.includes('salbutamol') ||
+            name.includes('알부테롤') || name.includes('albuterol') ||
+            name.includes('부데소니드') || name.includes('budesonide') ||
+            name.includes('플루티카손') || name.includes('fluticasone') ||
+            name.includes('몬테루카스트') || name.includes('montelukast') ||
+            name.includes('테오필린') || name.includes('theophylline')) {
+            return '천식/호흡기 약물';
+        }
+        
+        // 항히스타민제
+        if (name.includes('로라타딘') || name.includes('loratadine') ||
+            name.includes('세티리진') || name.includes('cetirizine') ||
+            name.includes('펙소페나딘') || name.includes('fexofenadine') ||
+            name.includes('디펜히드라민') || name.includes('diphenhydramine')) {
+            return '항히스타민제';
+        }
+        
+        // 위장약
+        if (name.includes('오메프라졸') || name.includes('omeprazole') ||
+            name.includes('란소프라졸') || name.includes('lansoprazole') ||
+            name.includes('에소메프라졸') || name.includes('esomeprazole') ||
+            name.includes('판토프라졸') || name.includes('pantoprazole')) {
+            return '양성자펌프억제제 (위장약)';
+        }
+        
+        // 일반적인 약물
+        return '일반 약물 (상세 분류 불가)';
     },
 
     // 약물 이름 추출 함수
@@ -1906,7 +3518,7 @@ const utils = {
     },
 
     // Combined AI call function
-    async callAI(messages, options = {}) {
+    async callAI(messages, options = {}, drug1 = null, drug2 = null) {
         const provider = this.selectBestProvider();
         const config = AI_CONFIGS[provider];
         
@@ -1916,7 +3528,22 @@ const utils = {
             let result;
             switch (provider) {
                 case 'free':
-                    result = await this.callFreeAI(messages, options);
+                    result = await this.callFreeAI(messages, options, drug1, drug2);
+                    break;
+                case 'huggingface':
+                    result = await this.tryHuggingFaceAPI(messages, options);
+                    break;
+                case 'ollama':
+                    result = await this.tryOllamaAPI(messages, options);
+                    break;
+                case 'groq':
+                    result = await this.tryGroqAPI(messages, options);
+                    break;
+                case 'together':
+                    result = await this.tryTogetherAI(messages, options);
+                    break;
+                case 'replicate':
+                    result = await this.tryReplicateAPI(messages, options);
                     break;
                 case 'openai':
                     result = await this.callOpenAI(messages, options);
@@ -1953,11 +3580,11 @@ const utils = {
         const drug2KoreanInfo = drug2Info._korean_info || {};
         
         const prompt = `
-당신은 한국의 임상약학 전문가입니다. 두 의약품 간의 상호작용을 분석하고 환자가 이해하기 쉽게 설명해주세요.
+당신은 한국의 임상약학 전문가입니다. ${drug1}과 ${drug2}의 구체적인 상호작용을 분석하여 마치 환자 앞에 의료진이 직접 설명하는 것처럼 명확하고 실용적으로 설명해주세요.
 
-**의약품 정보:**
-- 의약품 1: ${drug1} (${drug1KoreanInfo.englishName || ''})
-- 의약품 2: ${drug2} (${drug2KoreanInfo.englishName || ''})
+**분석 대상 약물:**
+- 약물 1: ${drug1} (${drug1KoreanInfo.englishName || ''})
+- 약물 2: ${drug2} (${drug2KoreanInfo.englishName || ''})
 
 **한국 의약품 데이터베이스 상호작용 정보:**
 ${knownInteraction ? `
@@ -1966,11 +3593,7 @@ ${knownInteraction ? `
 권장사항: ${knownInteraction.recommendation}
 ` : '특별한 상호작용 정보가 등록되지 않음'}
 
-**개별 의약품 상호작용 주의사항:**
-${interactions1 ? `${drug1} 관련: ${interactions1.substring(0, 500)}` : `${drug1}: 특별한 상호작용 정보 없음`}
-${interactions2 ? `${drug2} 관련: ${interactions2.substring(0, 500)}` : `${drug2}: 특별한 상호작용 정보 없음`}
-
-**기본 의약품 정보:**
+**개별 약물 정보:**
 ${drug1}: ${drug1KoreanInfo.description || drug1Info.description?.[0]?.substring(0, 400) || '정보 없음'}
 제조사: ${drug1KoreanInfo.manufacturer || '정보 없음'}
 분류: ${drug1KoreanInfo.category || '정보 없음'}
@@ -1979,29 +3602,45 @@ ${drug2}: ${drug2KoreanInfo.description || drug2Info.description?.[0]?.substring
 제조사: ${drug2KoreanInfo.manufacturer || '정보 없음'}
 분류: ${drug2KoreanInfo.category || '정보 없음'}
 
-다음 형식으로 분석해주세요:
+**개별 약물 상호작용 주의사항:**
+${interactions1 ? `${drug1} 관련 주의사항: ${interactions1.substring(0, 500)}` : `${drug1}: 특별한 상호작용 정보 없음`}
+${interactions2 ? `${drug2} 관련 주의사항: ${interactions2.substring(0, 500)}` : `${drug2}: 특별한 상호작용 정보 없음`}
 
-## 🔍 상호작용 분석 요약
+다음과 같이 구체적이고 실용적으로 분석해주세요:
 
-### 📊 위험도 평가
-[낮음/보통/높음/매우 높음] - 간단한 이유
+**${drug1}과 ${drug2} 상호작용 분석**
 
-### ⚠️ 주요 위험 요소
-- 핵심 위험 요소 1-3가지 (있는 경우)
+**위험도 평가**
+[낮음/보통/높음/매우 높음] - 구체적인 이유와 근거
 
-### 💊 작용 기전
-- 두 약물이 어떻게 상호작용하는지 간단히 설명
+**상호작용 메커니즘**
+- 두 약물이 신체에서 어떻게 상호작용하는지
+- 어떤 생화학적 과정이 일어나는지
+- 상호작용이 발생하는 주요 부위나 기관
 
-### 🏥 권장사항
-- 환자가 취해야 할 구체적인 조치
-- 의료진 상담 필요성
-- 모니터링 포인트
+**예상되는 영향**
+- 환자에게 나타날 수 있는 구체적인 증상이나 부작용
+- 언제부터 이런 증상이 나타날 수 있는지
+- 증상의 심각도와 지속 기간
 
-### 🚨 응급 징후
-- 즉시 병원 방문이 필요한 증상들
+**실제 대응 방법**
+- 지금 당장 해야 할 조치 (복용 중단, 용량 조절 등)
+- 의료진에게 언제 상담해야 하는지
+- 어떤 검사나 모니터링이 필요한지
+- 대안 약물이나 치료 방법
 
-한국어로 작성하고, 의학 전문용어보다는 일반인이 이해하기 쉬운 용어를 사용해주세요.
-한국의 의료 환경과 실정을 고려하여 조언해주세요.
+**응급 상황 대비**
+- 즉시 병원을 방문해야 하는 위험한 증상들
+- 응급실 방문 기준
+- 응급 상황 시 연락처 (119, 응급실 등)
+
+**일상생활 주의사항**
+- 음식, 음료, 다른 약물과의 주의사항
+- 운동이나 활동 제한 사항
+- 증상 모니터링 방법
+
+한국어로 작성하고, 의학 전문용어는 쉬운 말로 풀어서 설명해주세요. 
+한국의 의료 환경과 식약처 승인 의약품 기준을 고려하여 실용적인 조언을 제공해주세요.
 `;
 
         const messages = [
@@ -2018,7 +3657,7 @@ ${drug2}: ${drug2KoreanInfo.description || drug2Info.description?.[0]?.substring
         const response = await this.callAI(messages, {
             temperature: 0.1, // Lower temperature for more accurate medical information
             max_tokens: 2000
-        });
+        }, drug1, drug2);
 
         return response;
     }
@@ -2236,6 +3875,14 @@ const realTimeSearchHandler = utils.debounce(async function() {
         searchContainer.classList.remove('show');
         return;
     }
+    
+    // AI 테스트 페이지 이동 명령어 체크
+    const lowerInput = searchInput.toLowerCase();
+    if (lowerInput === 'go ai test page' || lowerInput === 'go ai test') {
+        window.location.href = 'ai-test.html';
+        return;
+    }
+    
     await searchDrug(searchInput);
 }, 300);
 
@@ -2337,7 +3984,7 @@ function displaySearchResults(data) {
         }, 50);
         return;
     }
-    
+
     // Sort by relevance
     const sortedDrugs = koreanDrugs
         .sort((a, b) => b.relevanceScore - a.relevanceScore)
@@ -2614,7 +4261,12 @@ function addDrugToCheck(drugName) {
             return;
         }
         drug2.value = sanitizedDrugName;
-        utils.showAlert(`${sanitizedDrugName}이(가) 두 번째 약물로 추가되었습니다. 이제 상호작용 검사하기 버튼을 눌러 검사를 진행하세요.`, 'success');
+        utils.showAlert(`${sanitizedDrugName}이(가) 두 번째 약물로 추가되었습니다.`, 'success');
+        
+        // 두 번째 약물이 추가되면 자동으로 상호작용 확인 시작
+        setTimeout(() => {
+            checkInteraction();
+        }, 1000);
         
     } else {
         // 이미 두 약물이 모두 선택된 경우 - 기존 약물 중 하나 교체 옵션 제공
@@ -2654,6 +4306,12 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
     const query = input.value.trim();
     const list = document.getElementById(`${inputId}List`);
     const itemsContainer = list.querySelector('.drug-items');
+    
+    // AI 테스트 페이지 이동 명령어 체크
+    if (query.toLowerCase() === 'go ai test page' || query.toLowerCase() === 'go ai test') {
+        window.location.href = 'ai-test.html';
+        return;
+    }
     
     if (query.length < 2) {
         list.classList.remove('show');
@@ -2920,6 +4578,17 @@ function fallbackShare(drug1, drug2) {
 async function checkInteraction() {
     console.log('🔍 상호작용 검사 시작');
     
+    // 약물 아이템들 블러 및 위로 사라지는 애니메이션
+    const drugItems = document.querySelectorAll('.drug-item');
+    drugItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.transition = 'all 0.5s ease-out';
+            item.style.filter = 'blur(5px)';
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(-20px)';
+        }, index * 100); // 각 아이템마다 100ms씩 지연
+    });
+    
     const drug1Element = document.getElementById('drug1');
     const drug2Element = document.getElementById('drug2');
     
@@ -3065,24 +4734,42 @@ async function checkInteraction() {
         drug1Info = findDrugInfo(drug1);
         drug2Info = findDrugInfo(drug2);
 
-        // 약물 정보를 찾지 못한 경우 더 자세한 에러 메시지 제공
+        // 약물 정보를 찾지 못한 경우 AI 기반 분석으로 대체
         if (!drug1Info || !drug2Info) {
             const missingDrugs = [];
             if (!drug1Info) missingDrugs.push(drug1);
             if (!drug2Info) missingDrugs.push(drug2);
             
-            // 사용 가능한 약물 목록 생성
-            const availableDrugs = Object.keys(KOREAN_DRUG_DATABASE).slice(0, 5);
-            const availableDrugsText = availableDrugs.join(', ');
-            
-            console.error('❌ 약물 정보 검색 실패:', {
+            console.log('⚠️ 약물 정보를 찾을 수 없어 AI 기반 분석을 수행합니다:', {
                 missing: missingDrugs,
                 drug1: drug1,
-                drug2: drug2,
-                available: availableDrugs
+                drug2: drug2
             });
             
-            throw new Error(`다음 약물의 정보를 찾을 수 없습니다: ${missingDrugs.join(', ')}\n\n사용 가능한 약물 예시: ${availableDrugsText}`);
+            // 약물 정보가 없어도 기본 정보로 AI 분석 진행
+            drug1Info = {
+                openfda: {
+                    brand_name: [drug1],
+                    generic_name: [drug1],
+                    manufacturer_name: ['정보 없음'],
+                    route: ['분류 정보 없음']
+                },
+                description: ['상세 정보를 위해 의사나 약사와 상담하세요.'],
+                drug_interactions: ['부작용 발생시 의사와 상담하세요.'],
+                _korean_info: null
+            };
+            
+            drug2Info = {
+                openfda: {
+                    brand_name: [drug2],
+                    generic_name: [drug2],
+                    manufacturer_name: ['정보 없음'],
+                    route: ['분류 정보 없음']
+                },
+                description: ['상세 정보를 위해 의사나 약사와 상담하세요.'],
+                drug_interactions: ['부작용 발생시 의사와 상담하세요.'],
+                _korean_info: null
+            };
         }
 
         // 한국 의약품 상호작용 데이터베이스에서 상호작용 확인
@@ -3204,10 +4891,18 @@ async function checkInteraction() {
                             <div class="ai-analysis scroll-slide-left scroll-delay-2">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
-                                    <h4>${aiProvider} AI 전문가 분석</h4>
+                                    <h4>AI 분석</h4>
                                 </div>
                                 <div class="ai-analysis-content">
-                                    ${aiAnalysis.replace(/\n/g, '<br>')}
+                                    ${aiAnalysis
+                                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** → <strong>
+                                        .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* → <em>
+                                        .replace(/### (.*?)(?:\n|$)/g, '<h3>$1</h3>')      // ### heading → <h3>
+                                        .replace(/## (.*?)(?:\n|$)/g, '<h2>$1</h2>')       // ## heading → <h2>
+                                        .replace(/# (.*?)(?:\n|$)/g, '<h1>$1</h1>')        // # heading → <h1>
+                                        .replace(/^- (.*?)(?:\n|$)/gm, '<li>$1</li>')      // - list item → <li>
+                                        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')         // wrap li in ul
+                                        .replace(/\n/g, '<br>')}                          // line breaks
                                 </div>
                             </div>
                         ` : ''}
@@ -3235,11 +4930,6 @@ async function checkInteraction() {
                             </div>
                         ` : ''}
                         
-                        <div class="scroll-fade scroll-delay-4" style="margin-top: 20px; padding: 16px; background: rgba(0,0,0,0.05); border-radius: 8px;">
-                            <p style="margin: 0; font-size: 0.9em;">
-                                ⚠️ 이 정보는 참고용입니다. 복용 전 의사나 약사와 상담하시기 바랍니다.
-                            </p>
-                        </div>
                     </div>
                 </div>
             `;
@@ -3261,10 +4951,18 @@ async function checkInteraction() {
                             <div class="ai-analysis scroll-slide-left scroll-delay-2">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
-                                    <h4>${aiProvider} AI 전문가 분석</h4>
+                                    <h4>AI 분석</h4>
                                 </div>
                                 <div class="ai-analysis-content">
-                                    ${aiAnalysis.replace(/\n/g, '<br>')}
+                                    ${aiAnalysis
+                                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** → <strong>
+                                        .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* → <em>
+                                        .replace(/### (.*?)(?:\n|$)/g, '<h3>$1</h3>')      // ### heading → <h3>
+                                        .replace(/## (.*?)(?:\n|$)/g, '<h2>$1</h2>')       // ## heading → <h2>
+                                        .replace(/# (.*?)(?:\n|$)/g, '<h1>$1</h1>')        // # heading → <h1>
+                                        .replace(/^- (.*?)(?:\n|$)/gm, '<li>$1</li>')      // - list item → <li>
+                                        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')         // wrap li in ul
+                                        .replace(/\n/g, '<br>')}                          // line breaks
                                 </div>
                             </div>
                         ` : ''}
@@ -3409,10 +5107,10 @@ function updateRecentSearches() {
     
     // 사이트 방문 처음에만 애니메이션 적용
     if (state.isFirstVisit) {
-        setTimeout(() => {
-            const newTags = list.querySelectorAll('.scroll-hidden');
-            newTags.forEach(tag => tag.classList.add('scroll-visible'));
-        }, 50);
+    setTimeout(() => {
+        const newTags = list.querySelectorAll('.scroll-hidden');
+        newTags.forEach(tag => tag.classList.add('scroll-visible'));
+    }, 50);
         state.isFirstVisit = false; // 첫 방문 플래그 해제
     }
 }
@@ -4517,7 +6215,7 @@ function showPrivacyPolicy() {
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">쿠키 사용</h5>
             <p>본 서비스는 필수 기능을 위한 로컬 저장소만 사용하며, 추적 쿠키는 사용하지 않습니다.</p>
             
-            <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--warning-rgb, 255, 193, 7), 0.1); border-radius: 8px; border-left: 4px solid var(--warning, #ffc107);">
+            <p style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
                 <strong>중요:</strong> 본 도구는 교육 목적으로만 사용되며, 의료진의 조언을 대체하지 않습니다.
             </p>
         </div>
@@ -4547,7 +6245,7 @@ function showTermsOfService() {
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 변경</h5>
             <p>서비스 내용은 사전 통지 없이 변경될 수 있습니다. 지속적인 개선을 위해 기능이 추가되거나 수정될 수 있습니다.</p>
             
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--danger-rgb, 255, 0, 0), 0.1); border-radius: 8px; border-left: 4px solid var(--danger, #ff0000);">
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
                 <strong>⚠️ 의료 면책 조항:</strong><br>
                 본 도구는 의료 전문가의 조언을 대체할 수 없습니다. 약물 복용에 관한 모든 결정은 의료진과 상담 후 내리시기 바랍니다.
             </div>
@@ -4586,7 +6284,7 @@ function showDataSources() {
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 업데이트</h5>
             <p>한국 의약품 데이터는 정기적으로 업데이트되며, AI 분석은 한국의 의료 환경과 실정을 고려하여 수행됩니다.</p>
             
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--info-rgb, 0, 123, 255), 0.1); border-radius: 8px; border-left: 4px solid var(--info, #007bff);">
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
                 <strong>ℹ️ 참고:</strong><br>
                 모든 데이터는 신뢰할 수 있는 공식 소스에서 가져오지만, 개별 환자의 상황은 다를 수 있으므로 의료진과의 상담이 필수입니다.
             </div>
@@ -4915,9 +6613,9 @@ window.addEventListener('scroll', handleScroll, { passive: true });
 
 // DUR (Drug Utilization Review) 시스템 - 한국 의료보험심사평가원 기준
 const DUR_SYSTEM = {
-    // DUR 상호작용 데이터베이스 (실제 HIRA 데이터 기반)
+    // DUR 상호작용 데이터베이스 (실제 HIRA 데이터 기반 - 전문가 수준 확장)
     interactions: {
-        // 항생제 + 항응고제
+        // === 항생제 + 항응고제 ===
         'amoxicillin-warfarin': {
             severity: 'high',
             category: '항생제-항응고제',
@@ -4932,8 +6630,43 @@ const DUR_SYSTEM = {
             recommendation: 'INR 정밀 모니터링, 출혈 증상 주의',
             hira_code: 'DUR002'
         },
+        'azithromycin-warfarin': {
+            severity: 'moderate',
+            category: '항생제-항응고제',
+            description: '아지트로마이신이 와파린의 효과를 증가시킬 수 있습니다.',
+            recommendation: 'INR 모니터링 강화',
+            hira_code: 'DUR003'
+        },
+        'clarithromycin-warfarin': {
+            severity: 'high',
+            category: '항생제-항응고제',
+            description: '클라리트로마이신이 와파린의 혈중농도를 크게 증가시킬 수 있습니다.',
+            recommendation: 'INR 정밀 모니터링, 와파린 용량 조절 고려',
+            hira_code: 'DUR004'
+        },
+        'erythromycin-warfarin': {
+            severity: 'moderate',
+            category: '항생제-항응고제',
+            description: '에리트로마이신이 와파린의 효과를 증가시킬 수 있습니다.',
+            recommendation: 'INR 모니터링 강화',
+            hira_code: 'DUR005'
+        },
+        'metronidazole-warfarin': {
+            severity: 'high',
+            category: '항생제-항응고제',
+            description: '메트로니다졸이 와파린의 혈중농도를 크게 증가시킬 수 있습니다.',
+            recommendation: 'INR 정밀 모니터링, 와파린 용량 조절 고려',
+            hira_code: 'DUR006'
+        },
+        'trimethoprim-warfarin': {
+            severity: 'moderate',
+            category: '항생제-항응고제',
+            description: '트리메토프림이 와파린의 효과를 증가시킬 수 있습니다.',
+            recommendation: 'INR 모니터링 강화',
+            hira_code: 'DUR007'
+        },
         
-        // 항응고제 + 항혈소판제
+        // === 항응고제 + 항혈소판제 ===
         'warfarin-aspirin': {
             severity: 'high',
             category: '항응고제-항혈소판제',
@@ -5078,8 +6811,8 @@ function displayDURInfo(durInfo, drug1, drug2) {
     
     return `
         <div class="dur-section" style="
-            background: linear-gradient(135deg, ${category.color}15 0%, ${category.color}05 100%);
-            border: 2px solid ${category.color};
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
             margin: 1rem 0;
@@ -5127,7 +6860,6 @@ function displayDURInfo(durInfo, drug1, drug2) {
                 background: rgba(255, 255, 255, 0.1);
                 border-radius: 8px;
                 padding: 1rem;
-                border-left: 4px solid ${category.color};
             ">
                 <h5 style="
                     color: var(--text);

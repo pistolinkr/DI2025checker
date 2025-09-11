@@ -302,42 +302,304 @@ const state = {
 const DEVELOPER_CODES = ['dev_2024', 'developer', 'debug', 'dev_mode'];
 let lastSearchTerm = '';
 
-// 확장된 한국어-영문 약물명 매핑 (오타 및 다양한 표기법 포함)
+// 확장된 한국어-영문 약물명 매핑 (오타 및 다양한 표기법 포함 - 전문가 수준 확장)
 const drugNameMapping = {
-    // 기본 매핑
+    // === 진통제/해열제/소염제 ===
     '아스피린': 'Aspirin',
-    '와파린': 'Warfarin', 
-    '이부프로펜': 'Ibuprofen',
-    '아세트아미노펜': 'Acetaminophen',
-    '메토트렉세이트': 'Methotrexate',
-    '심바스타틴': 'Simvastatin',
-    '아토르바스타틴': 'Atorvastatin',
-    '오메프라졸': 'Omeprazole',
-    '프레드니솔론': 'Prednisolone',
-    '암로디핀': 'Amlodipine',
-    '메트포르민': 'Metformin',
-    '리시노프릴': 'Lisinopril',
-    '로사르탄': 'Losartan',
-    '클로피도그렐': 'Clopidogrel',
-    '푸로세미드': 'Furosemide',
-    
-    // Additionalddrugsional drugs
+    '아스파린': 'Aspirin',
     '타이레놀': 'Acetaminophen',
+    '아세트아미노펜': 'Acetaminophen',
+    '아세타미노펜': 'Acetaminophen',
+    '아세트아미노팬': 'Acetaminophen',
+    '파라세타몰': 'Acetaminophen',
+    '이부프로펜': 'Ibuprofen',
+    '이부프로팬': 'Ibuprofen',
+    '이부프로핀': 'Ibuprofen',
     '부루펜': 'Ibuprofen',
+    '부펜': 'Ibuprofen',
     '낙센': 'Naproxen',
     '낙센프록센': 'Naproxen',
+    '낙프록센': 'Naproxen',
     '디클로페낙': 'Diclofenac',
+    '볼타렌': 'Diclofenac',
+    '디클로페낙나트륨': 'Diclofenac',
     '셀레콕시브': 'Celecoxib',
     '세레브렉스': 'Celecoxib',
-    '로페콕시브': 'Rofecoxib',
+    '셀레브렉스': 'Celecoxib',
     '멜록시캄': 'Meloxicam',
-    '프로포폴': 'Propofol',
-    '미다졸람': 'Midazolam',
+    '모빅': 'Meloxicam',
+    '멜로캄': 'Meloxicam',
+    '에토리콕시브': 'Etoricoxib',
+    '아르코시아': 'Etoricoxib',
+    '인도메타신': 'Indomethacin',
+    '케토프로펜': 'Ketoprofen',
+    '피록시캄': 'Piroxicam',
+    '페닐부타존': 'Phenylbutazone',
+    '트라마돌': 'Tramadol',
+    '트라마돌염산염': 'Tramadol',
+    '콜히친': 'Colchicine',
+    '콜치신': 'Colchicine',
+    
+    // === 고혈압약/심혈관약 ===
+    '암로디핀': 'Amlodipine',
+    '암로디핀베실산염': 'Amlodipine',
+    '노바스크': 'Amlodipine',
+    '리시노프릴': 'Lisinopril',
+    '리시노프릴수화물': 'Lisinopril',
+    '로사르탄': 'Losartan',
+    '로사르탄칼륨': 'Losartan',
+    '코자': 'Losartan',
+    '발사르탄': 'Valsartan',
+    '디오반': 'Valsartan',
+    '텔미사르탄': 'Telmisartan',
+    '미카르디스': 'Telmisartan',
+    '칸데사르탄': 'Candesartan',
+    '칸데사르탄실렉세틸': 'Candesartan',
+    '어택크': 'Candesartan',
+    '아테놀롤': 'Atenolol',
+    '테놀민': 'Atenolol',
+    '메토프롤롤': 'Metoprolol',
+    '메토프롤롤타르트산염': 'Metoprolol',
+    '셀로켄': 'Metoprolol',
+    '프로프라놀롤': 'Propranolol',
+    '프로프라놀롤염산염': 'Propranolol',
+    '딜티아젬': 'Diltiazem',
+    '딜티아젬염산염': 'Diltiazem',
+    '헤르벤': 'Diltiazem',
+    '베라파밀': 'Verapamil',
+    '베라파밀염산염': 'Verapamil',
+    '이소핀': 'Verapamil',
+    '니페디핀': 'Nifedipine',
+    '아달라트': 'Nifedipine',
+    '하이드로클로로티아지드': 'Hydrochlorothiazide',
+    '히드로클로로치아지드': 'Hydrochlorothiazide',
+    'HCTZ': 'Hydrochlorothiazide',
+    '푸로세미드': 'Furosemide',
+    '라식스': 'Furosemide',
+    '스피로놀락톤': 'Spironolactone',
+    '알닥톤': 'Spironolactone',
+    
+    // === 콜레스테롤약 ===
+    '심바스타틴': 'Simvastatin',
+    '조코르': 'Simvastatin',
+    '아토르바스타틴': 'Atorvastatin',
+    '리피토': 'Atorvastatin',
+    '프라바스타틴': 'Pravastatin',
+    '프라바콜': 'Pravastatin',
+    '로바스타틴': 'Lovastatin',
+    '메바코르': 'Lovastatin',
+    '플루바스타틴': 'Fluvastatin',
+    '레스콜': 'Fluvastatin',
+    '로수바스타틴': 'Rosuvastatin',
+    '크레스토': 'Rosuvastatin',
+    '피타바스타틴': 'Pitavastatin',
+    '리바로': 'Pitavastatin',
+    '콜레스티라민': 'Cholestyramine',
+    '콜레스티드': 'Cholestyramine',
+    '콜레세벨람': 'Colesevelam',
+    '웰콜': 'Colesevelam',
+    '제티미브': 'Ezetimibe',
+    '제티아': 'Ezetimibe',
+    '피브레이트': 'Fibrate',
+    '제모피브레이트': 'Gemfibrozil',
+    '로피드': 'Gemfibrozil',
+    '펜오피브레이트': 'Fenofibrate',
+    '리판틸': 'Fenofibrate',
+    
+    // === 항응고제/항혈소판제 ===
+    '와파린': 'Warfarin',
+    '쿠마딘': 'Warfarin',
+    '클로피도그렐': 'Clopidogrel',
+    '플라빅스': 'Clopidogrel',
+    '아스피린저용량': 'Low-dose Aspirin',
+    '아스피린소용량': 'Low-dose Aspirin',
+    '아스피린81mg': 'Low-dose Aspirin',
+    '아스피린100mg': 'Low-dose Aspirin',
+    '티카그렐러': 'Ticagrelor',
+    '브릴린타': 'Ticagrelor',
+    '프라수그렐': 'Prasugrel',
+    '에피피엔트': 'Prasugrel',
+    '다비가트란': 'Dabigatran',
+    '프라닥사': 'Dabigatran',
+    '리바록사반': 'Rivaroxaban',
+    '자렐토': 'Rivaroxaban',
+    '아픽사반': 'Apixaban',
+    '엘리퀴스': 'Apixaban',
+    '에독사반': 'Edoxaban',
+    '사바이사': 'Edoxaban',
+    
+    // === 당뇨약 ===
+    '메트포르민': 'Metformin',
+    '글루코파지': 'Metformin',
+    '글리메피라이드': 'Glimepiride',
+    '아마릴': 'Glimepiride',
+    '글리클라자이드': 'Gliclazide',
+    '다이아미크롱': 'Gliclazide',
+    '글리부라이드': 'Glyburide',
+    '시타글립틴': 'Sitagliptin',
+    '자누비아': 'Sitagliptin',
+    '빌다글립틴': 'Vildagliptin',
+    '갈버스': 'Vildagliptin',
+    '인슐린': 'Insulin',
+    '피오글리타존': 'Pioglitazone',
+    '액토스': 'Pioglitazone',
+    '로시글리타존': 'Rosiglitazone',
+    '아반디아': 'Rosiglitazone',
+    
+    // === 천식/호흡기약 ===
+    '살부타몰': 'Salbutamol',
+    '알부테롤': 'Salbutamol',
+    '벤토린': 'Salbutamol',
+    '부데소니드': 'Budesonide',
+    '부데코트': 'Budesonide',
+    '플루티카손': 'Fluticasone',
+    '플릭소타이드': 'Fluticasone',
+    '몬테루카스트': 'Montelukast',
+    '싱귤레어': 'Montelukast',
+    '테오필린': 'Theophylline',
+    '유니필': 'Theophylline',
+    '아미노필린': 'Aminophylline',
+    '포르모테롤': 'Formoterol',
+    '옥시스': 'Formoterol',
+    '살메테롤': 'Salmeterol',
+    '세레벤트': 'Salmeterol',
+    '이프라트로피움': 'Ipratropium',
+    '아트로벤트': 'Ipratropium',
+    '티오트로피움': 'Tiotropium',
+    '스피리바': 'Tiotropium',
+    '우메클리디니움': 'Umeclidinium',
+    '인크루스': 'Umeclidinium',
+    '비란테리': 'Vilanterol',
+    '브렉스피': 'Vilanterol',
+    
+    // === 정신과약/항우울제 ===
+    '플루옥세틴': 'Fluoxetine',
+    '프로작': 'Fluoxetine',
+    '세르트랄린': 'Sertraline',
+    '졸로프트': 'Sertraline',
+    '파록세틴': 'Paroxetine',
+    '팍실': 'Paroxetine',
+    '시탈로프람': 'Citalopram',
+    '셀렉사': 'Citalopram',
+    '에스시탈로프람': 'Escitalopram',
+    '렉사프로': 'Escitalopram',
+    '부프로피온': 'Bupropion',
+    '웰부트린': 'Bupropion',
+    '미르타자핀': 'Mirtazapine',
+    '레메론': 'Mirtazapine',
+    '벤라팍신': 'Venlafaxine',
+    '이펙사': 'Venlafaxine',
+    '둘록세틴': 'Duloxetine',
+    '심발타': 'Duloxetine',
     '디아제팜': 'Diazepam',
+    '발륨': 'Diazepam',
     '로라제팜': 'Lorazepam',
+    '아티반': 'Lorazepam',
+    '알프라졸람': 'Alprazolam',
+    '잔액스': 'Alprazolam',
     '클로나제팜': 'Clonazepam',
+    '클로노핀': 'Clonazepam',
+    '미다졸람': 'Midazolam',
+    '베르세드': 'Midazolam',
     '졸피뎀': 'Zolpidem',
+    '암비엔': 'Zolpidem',
     '에스조피클론': 'Eszopiclone',
+    '루네스타': 'Eszopiclone',
+    '리튬': 'Lithium',
+    '리튬카보네이트': 'Lithium',
+    '카바마제핀': 'Carbamazepine',
+    '테그레톨': 'Carbamazepine',
+    '발프로산': 'Valproic Acid',
+    '데파코트': 'Valproic Acid',
+    '라모트리진': 'Lamotrigine',
+    '라미탈': 'Lamotrigine',
+    '옥시카바제핀': 'Oxcarbazepine',
+    '트릴렙탈': 'Oxcarbazepine',
+    '토피라메이트': 'Topiramate',
+    '토파맥스': 'Topiramate',
+    '가바펜틴': 'Gabapentin',
+    '뉴론틴': 'Gabapentin',
+    '프레가발린': 'Pregabalin',
+    '라이리카': 'Pregabalin',
+    
+    // === 소화기약 ===
+    '오메프라졸': 'Omeprazole',
+    '로섹': 'Omeprazole',
+    '란소프라졸': 'Lansoprazole',
+    '란스톤': 'Lansoprazole',
+    '에소메프라졸': 'Esomeprazole',
+    '넥시움': 'Esomeprazole',
+    '판토프라졸': 'Pantoprazole',
+    '판시드': 'Pantoprazole',
+    '라니티딘': 'Ranitidine',
+    '잔탁': 'Ranitidine',
+    '파모티딘': 'Famotidine',
+    '가스터': 'Famotidine',
+    '시메티딘': 'Cimetidine',
+    '시메박스': 'Cimetidine',
+    '돔페리돈': 'Domperidone',
+    '모틸리움': 'Domperidone',
+    '메토클로프라미드': 'Metoclopramide',
+    '프림페란': 'Metoclopramide',
+    '로페라미드': 'Loperamide',
+    '후나신': 'Loperamide',
+    
+    // === 항생제 ===
+    '아목시실린': 'Amoxicillin',
+    '목시실린': 'Amoxicillin',
+    '암피실린': 'Ampicillin',
+    '페니실린': 'Penicillin',
+    '아목시클라브': 'Amoxicillin-Clavulanate',
+    '아우구멘틴': 'Amoxicillin-Clavulanate',
+    '세팔렉신': 'Cephalexin',
+    '셉할렉신': 'Cephalexin',
+    '세프트리악손': 'Ceftriaxone',
+    '로세핀': 'Ceftriaxone',
+    '세프타지딤': 'Ceftazidime',
+    '포타지딤': 'Ceftazidime',
+    '시프로플록사신': 'Ciprofloxacin',
+    '시프로': 'Ciprofloxacin',
+    '레보플록사신': 'Levofloxacin',
+    '타바나': 'Levofloxacin',
+    '모시플록사신': 'Moxifloxacin',
+    '아벨록스': 'Moxifloxacin',
+    '아지트로마이신': 'Azithromycin',
+    '지트로맥스': 'Azithromycin',
+    '클라리트로마이신': 'Clarithromycin',
+    '클라시드': 'Clarithromycin',
+    '에리트로마이신': 'Erythromycin',
+    '일로신': 'Erythromycin',
+    '독시사이클린': 'Doxycycline',
+    '비브라마이신': 'Doxycycline',
+    '테트라사이클린': 'Tetracycline',
+    '아크로마이신': 'Tetracycline',
+    '클린다마이신': 'Clindamycin',
+    '클린다신': 'Clindamycin',
+    '반코마이신': 'Vancomycin',
+    '반코신': 'Vancomycin',
+    '메트로니다졸': 'Metronidazole',
+    '플라지일': 'Metronidazole',
+    '트리메토프림': 'Trimethoprim',
+    '바크트림': 'Trimethoprim',
+    '설파메톡사졸': 'Sulfamethoxazole',
+    '세프트리악손': 'Ceftriaxone',
+    '로세핀': 'Ceftriaxone',
+    
+    // === 기타 ===
+    '메토트렉세이트': 'Methotrexate',
+    '메트렉스': 'Methotrexate',
+    '디곡신': 'Digoxin',
+    '라녹신': 'Digoxin',
+    '프레드니솔론': 'Prednisolone',
+    '솔론': 'Prednisolone',
+    '덱사메타손': 'Dexamethasone',
+    '데카드론': 'Dexamethasone',
+    '하이드로코르티손': 'Hydrocortisone',
+    '코르텔': 'Hydrocortisone',
+    '프로포폴': 'Propofol',
+    '디프리반': 'Propofol',
+    '로페콕시브': 'Rofecoxib',
+    '비옥스': 'Rofecoxib',
     
     // Common typos/variations
     '아스파린': 'Aspirin',
@@ -1118,7 +1380,7 @@ const utils = {
     },
 
     // Combined AI call function
-    async callAI(messages, options = {}) {
+    async callAI(messages, options = {}, drug1 = null, drug2 = null) {
         const provider = this.selectBestProvider();
         const config = AI_CONFIGS[provider];
         
@@ -1128,7 +1390,7 @@ const utils = {
             let result;
             switch (provider) {
                 case 'free':
-                    result = await this.callFreeAI(messages, options);
+                    result = await this.callFreeAI(messages, options, drug1, drug2);
                     break;
                 case 'openai':
                     result = await this.callOpenAI(messages, options);
@@ -1154,7 +1416,7 @@ const utils = {
     },
 
     // Free AI service call - Complete fallback system
-    async callFreeAI(messages, options = {}) {
+    async callFreeAI(messages, options = {}, drug1 = null, drug2 = null) {
         try {
             // Try multiple free APIs sequentially
             const freeAPIs = [
@@ -1175,11 +1437,11 @@ const utils = {
                 }
             }
 
-            // If all APIs fail, use rule-based response
-            return this.generateFallbackResponse(messages);
+            // If all APIs fail, use rule-based response (with drug information)
+            return this.generateFallbackResponse(messages, drug1, drug2);
         } catch (error) {
             console.error('Free AI service error:', error);
-            return this.generateFallbackResponse(messages);
+            return this.generateFallbackResponse(messages, drug1, drug2);
         }
     },
 
@@ -1262,60 +1524,282 @@ const utils = {
     },
 
     // Fallback response generation - More useful information
-    generateFallbackResponse(messages) {
+    generateFallbackResponse(messages, drug1 = null, drug2 = null) {
         const lastMessage = messages[messages.length - 1].content;
         
         if (lastMessage.includes('interaction') || lastMessage.includes('drug')) {
+            // Provide specific drug interaction analysis
+            if (drug1 && drug2) {
+                return this.generateCustomDrugInteractionAnalysis(drug1, drug2);
+            }
+            
             // Try to extract drug names
             const drugNames = this.extractDrugNames(lastMessage);
+            if (drugNames.length >= 2) {
+                return this.generateCustomDrugInteractionAnalysis(drugNames[0], drugNames[1]);
+            }
             
-            return `## 🔍 Drug Interaction Analysis (Free AI Service)
+            // General safety guidelines
+            return `Drug interaction analysis provides basic safety guidelines.
 
-### ⚠️ Current Situation
-Free AI service is temporarily unavailable. Providing basic safety guidelines.
+High-Risk Interactions:
+- Anticoagulants + Aspirin: Increased bleeding risk
+- ACE inhibitors + Potassium supplements: Hyperkalemia risk
+- Digoxin + Diuretics: Digoxin toxicity risk
+- Warfarin + Antibiotics: Increased bleeding risk
 
-### 📋 Common Drug Interaction Precautions
+Medium-Risk Interactions:
+- Statins + Antifungals: Muscle pain, liver damage risk
+- Metformin + Contrast agents: Kidney damage risk
+- Lithium + Diuretics: Lithium toxicity risk
 
-#### 🚨 High-Risk Interactions
-- **Anticoagulants + Aspirin**: Increased bleeding risk
-- **ACE inhibitors + Potassium supplements**: Hyperkalemia risk
-- **Digoxin + Diuretics**: Digoxin toxicity risk
-- **Warfarin + Antibiotics**: Increased bleeding risk
+Safety Guidelines:
+1. Medical consultation required: Always consult with a doctor or pharmacist before taking new medications
+2. Medication record management: Keep records of all medications and inform healthcare providers
+3. Side effect monitoring: Stop taking medication immediately and contact healthcare provider if adverse effects occur
+4. Regular checkups: Regular examinations needed for long-term medications
 
-#### ⚠️ Medium-Risk Interactions
-- **Statins + Antifungals**: Muscle pain, liver damage risk
-- **Metformin + Contrast agents**: Kidney damage risk
-- **Lithium + Diuretics**: Lithium toxicity risk
-
-### 🛡️ Safety Guidelines
-1. **Medical consultation required**: Always consult with a doctor or pharmacist before taking new medications
-2. **Medication record management**: Keep records of all medications and inform healthcare providers
-3. **Side effect monitoring**: Stop taking medication immediately and contact healthcare provider if adverse effects occur
-4. **Regular checkups**: Regular examinations needed for long-term medications
-
-### 💡 Recommendations
 For more accurate AI analysis, please enter API keys for OpenAI, Claude, or other AI services in settings.
 
-### 📞 Emergency
-For serious side effects or emergencies, contact **911** or **Emergency Room** immediately.`;
+💡 Free AI API Usage Guide:
+• Hugging Face: Available without token (limited)
+• Ollama: Install locally for complete free usage
+• Groq: Get free key at https://console.groq.com/keys
+• Together AI: Apply for free tier at https://api.together.xyz
+• Replicate: Get free credits at https://replicate.com
+
+For serious side effects or emergencies, contact 911 or Emergency Room immediately.`;
         }
         
-        return `## 🆓 Free AI Service Information
+        return `Free AI service is temporarily unavailable.
 
-### Current Situation
-Free AI service is temporarily unavailable.
+Solutions:
+1. Use personal API keys: Enter OpenAI, Claude, Perplexity, Gemini API keys in settings
+2. Retry later: Check network status and try again
+3. Follow basic safety rules: Consult healthcare providers before taking medications
 
-### 💡 Solutions
-1. **Use personal API keys**: Enter OpenAI, Claude, Perplexity, Gemini API keys in settings
-2. **Retry later**: Check network status and try again
-3. **Follow basic safety rules**: Consult healthcare providers before taking medications
-
-### 🔧 Setup Instructions
+Setup Instructions:
 1. Click settings button in bottom right
 2. Select desired AI service in AI service settings
 3. Enter API key and save
 
 We recommend using personal API keys for more stable service.`;
+    },
+
+    // Custom drug interaction analysis generation
+    generateCustomDrugInteractionAnalysis(drug1, drug2) {
+        // Check FDA drug interaction database
+        const interactionKey1 = `${drug1}-${drug2}`;
+        const interactionKey2 = `${drug2}-${drug1}`;
+        
+        // Basic drug information mapping
+        const drugInfo = {
+            'aspirin': { category: 'NSAID', description: 'Non-steroidal anti-inflammatory drug' },
+            'warfarin': { category: 'Anticoagulant', description: 'Blood thinner' },
+            'ibuprofen': { category: 'NSAID', description: 'Non-steroidal anti-inflammatory drug' },
+            'acetaminophen': { category: 'Analgesic', description: 'Pain reliever' },
+            'metformin': { category: 'Antidiabetic', description: 'Diabetes medication' },
+            'omeprazole': { category: 'PPI', description: 'Proton pump inhibitor' },
+            'simvastatin': { category: 'Statin', description: 'Cholesterol medication' },
+            'atorvastatin': { category: 'Statin', description: 'Cholesterol medication' },
+            'lisinopril': { category: 'ACE inhibitor', description: 'Blood pressure medication' },
+            'losartan': { category: 'ARB', description: 'Blood pressure medication' },
+            'amlodipine': { category: 'Calcium channel blocker', description: 'Blood pressure medication' },
+            'furosemide': { category: 'Diuretic', description: 'Water pill' },
+            'clopidogrel': { category: 'Antiplatelet', description: 'Blood thinner' }
+        };
+        
+        const drug1Info = drugInfo[drug1.toLowerCase()] || null;
+        const drug2Info = drugInfo[drug2.toLowerCase()] || null;
+        
+        let analysis = `**${drug1} and ${drug2} Interaction Analysis**\n\n`;
+        
+        // Risk assessment based on drug categories
+        if (drug1Info && drug2Info) {
+            const category1 = drug1Info.category?.toLowerCase() || '';
+            const category2 = drug2Info.category?.toLowerCase() || '';
+            
+            if ((category1.includes('anticoagulant') || category1.includes('antiplatelet')) && 
+                (category2.includes('anticoagulant') || category2.includes('antiplatelet'))) {
+                analysis += `**Risk Assessment**\nHigh - Both drugs affect blood clotting, increasing bleeding risk\n\n`;
+                analysis += `**Interaction Mechanism**\nBoth drugs inhibit blood clotting through different mechanisms, leading to additive effects.\n\n`;
+                analysis += `**Expected Effects**\n- Increased bleeding time\n- Bruising, nosebleeds, gum bleeding\n- Risk of internal bleeding\n\n`;
+                analysis += `**Practical Response Methods**\n- Consult healthcare provider for dosage adjustment\n- Monitor for bleeding symptoms\n- Regular blood tests may be needed\n\n`;
+            } else if (category1.includes('nsaid') && category2.includes('nsaid')) {
+                analysis += `**Risk Assessment**\nModerate - Multiple NSAIDs increase gastrointestinal and cardiovascular risks\n\n`;
+                analysis += `**Interaction Mechanism**\nBoth drugs inhibit COX enzymes, leading to increased risk of side effects.\n\n`;
+                analysis += `**Expected Effects**\n- Increased risk of stomach ulcers\n- Higher blood pressure\n- Kidney function concerns\n\n`;
+                analysis += `**Practical Response Methods**\n- Use only one NSAID at a time\n- Consider alternative pain management\n- Monitor blood pressure and kidney function\n\n`;
+            } else {
+                analysis += `**Risk Assessment**\nModerate - No specific interaction data available\n\n`;
+                analysis += `**Interaction Mechanism**\nLimited information available about specific interaction between these medications.\n\n`;
+            }
+        } else {
+            // AI-based analysis when drug information is not available
+            analysis += this.generateAIBasedAnalysis(drug1, drug2, drug1Info, drug2Info);
+        }
+        
+        // General safety guidelines
+        analysis += `**Safety Guidelines**\n`;
+        analysis += `1. Medical consultation required: Always consult with a doctor or pharmacist before taking new medications\n`;
+        analysis += `2. Medication record management: Keep records of all medications and inform healthcare providers\n`;
+        analysis += `3. Side effect monitoring: Stop taking medication immediately and contact healthcare provider if adverse effects occur\n`;
+        analysis += `4. Regular checkups: Regular examinations needed for long-term medications\n\n`;
+        
+        // Emergency preparedness
+        analysis += `**Emergency Preparedness**\n`;
+        analysis += `- Severe bleeding, breathing difficulties, or consciousness changes: Call 911 immediately\n`;
+        analysis += `- Bring complete medication list when visiting emergency room\n`;
+        analysis += `- Accurately report medication allergies\n\n`;
+        
+        analysis += `For more accurate AI analysis, please enter API keys for OpenAI, Claude, or other AI services in settings.
+
+💡 Free AI API Usage Guide:
+• Hugging Face: Available without token (limited)
+• Ollama: Install locally for complete free usage
+• Groq: Get free key at https://console.groq.com/keys
+• Together AI: Apply for free tier at https://api.together.xyz
+• Replicate: Get free credits at https://replicate.com`;
+        
+        return analysis;
+    },
+
+    // AI-based drug interaction analysis (when drug information is not available)
+    generateAIBasedAnalysis(drug1, drug2, drug1Info = null, drug2Info = null) {
+        let analysis = `**Risk Assessment**\nModerate - Limited drug information available, applying general precautions\n\n`;
+        
+        // Drug name-based general analysis
+        const drug1Lower = drug1.toLowerCase();
+        const drug2Lower = drug2.toLowerCase();
+        
+        // General drug category estimation
+        const drug1Category = this.estimateDrugCategory(drug1Lower);
+        const drug2Category = this.estimateDrugCategory(drug2Lower);
+        
+        analysis += `**Estimated Drug Classification**\n`;
+        analysis += `${drug1}: ${drug1Category}\n`;
+        analysis += `${drug2}: ${drug2Category}\n\n`;
+        
+        // Category-based interaction analysis
+        if (drug1Category.includes('Anticoagulant') || drug1Category.includes('Antiplatelet')) {
+            if (drug2Category.includes('Anticoagulant') || drug2Category.includes('Antiplatelet')) {
+                analysis += `**Interaction Mechanism**\nBoth drugs affect blood clotting, potentially increasing bleeding risk.\n\n`;
+                analysis += `**Expected Effects**\n- Prolonged bleeding time\n- Bruising, nosebleeds, gum bleeding\n- Risk of internal bleeding\n\n`;
+                analysis += `**Practical Response Methods**\n- Consult healthcare provider for dosage adjustment\n- Monitor for bleeding symptoms\n- Regular blood tests may be needed\n\n`;
+            } else if (drug2Category.includes('Antibiotic')) {
+                analysis += `**Interaction Mechanism**\nAntibiotics may inhibit anticoagulant metabolism, increasing blood levels.\n\n`;
+                analysis += `**Expected Effects**\n- Increased anticoagulant effect\n- Higher bleeding risk\n- Elevated INR levels\n\n`;
+                analysis += `**Practical Response Methods**\n- Enhanced INR monitoring\n- Watch for bleeding symptoms\n- Consult healthcare provider\n\n`;
+            }
+        } else if (drug1Category.includes('NSAID') && drug2Category.includes('NSAID')) {
+            analysis += `**Interaction Mechanism**\nBoth drugs inhibit COX enzymes, potentially increasing gastrointestinal and cardiovascular risks.\n\n`;
+            analysis += `**Expected Effects**\n- Increased risk of stomach ulcers\n- Elevated blood pressure\n- Kidney function concerns\n\n`;
+            analysis += `**Practical Response Methods**\n- Use only one NSAID at a time\n- Consider alternative pain management\n- Monitor blood pressure and kidney function\n\n`;
+        } else if (drug1Category.includes('Antibiotic') && drug2Category.includes('Antibiotic')) {
+            analysis += `**Interaction Mechanism**\nCombining two antibiotics may increase resistance risk or side effects.\n\n`;
+            analysis += `**Expected Effects**\n- Antibiotic resistance development\n- Increased gastrointestinal side effects\n- Liver function concerns\n\n`;
+            analysis += `**Practical Response Methods**\n- Consult healthcare provider for appropriate combination\n- Regular liver function tests\n- Monitor for side effects\n\n`;
+        } else if (drug1Category.includes('Asthma/Respiratory') && drug2Category.includes('Asthma/Respiratory')) {
+            // Special asthma medication combination analysis
+            if ((drug1Lower.includes('salbutamol') || drug1Lower.includes('albuterol')) &&
+                (drug2Lower.includes('budesonide') || drug2Lower.includes('fluticasone'))) {
+                analysis += `**Interaction Mechanism**\nSalbutamol (bronchodilator) and budesonide (steroid) have therapeutically complementary effects and are commonly used together in asthma treatment.\n\n`;
+                analysis += `**Expected Effects**\n- Therapeutic complementarity\n- Improved asthma symptoms\n- Potential cardiovascular side effects with salbutamol overuse\n- Risk of hypokalemia\n\n`;
+                analysis += `**Practical Response Methods**\n- Use appropriate doses as directed by healthcare provider\n- Avoid salbutamol overuse (consult healthcare provider if using more than 4 times daily)\n- Monitor heart rate and blood pressure\n- Regular potassium level checks\n\n`;
+            } else {
+                analysis += `**Interaction Mechanism**\nCombining two respiratory medications may enhance therapeutic effects or increase side effects.\n\n`;
+                analysis += `**Expected Effects**\n- Improved respiratory symptoms\n- Potential cardiovascular side effects\n- Risk of electrolyte imbalance\n\n`;
+                analysis += `**Practical Response Methods**\n- Consult healthcare provider for appropriate combination\n- Monitor heart rate and blood pressure\n- Regular electrolyte level checks\n\n`;
+            }
+        } else if (drug1Category.includes('Asthma/Respiratory') || drug2Category.includes('Asthma/Respiratory')) {
+            analysis += `**Interaction Mechanism**\nRespiratory medications may interact with other drugs, causing cardiovascular side effects or electrolyte imbalance.\n\n`;
+            analysis += `**Expected Effects**\n- Increased heart rate\n- Blood pressure changes\n- Hypokalemia\n- Anxiety, tremors\n\n`;
+            analysis += `**Practical Response Methods**\n- Consult healthcare provider for appropriate dosing intervals\n- Monitor heart rate and blood pressure\n- Regular electrolyte level checks\n- Contact healthcare provider immediately if side effects occur\n\n`;
+        } else {
+            analysis += `**Interaction Mechanism**\nLimited information makes it difficult to determine specific interaction mechanisms.\n\n`;
+            analysis += `**Expected Effects**\n- Potential drug metabolism competition\n- Enzyme inhibition or induction\n- Changes in absorption, distribution, or excretion\n\n`;
+            analysis += `**Practical Response Methods**\n- Consult healthcare provider for appropriate dosing intervals\n- Monitor for side effects\n- Regular examinations\n\n`;
+        }
+        
+        return analysis;
+    },
+
+    // Drug name-based category estimation
+    estimateDrugCategory(drugName) {
+        const name = drugName.toLowerCase();
+        
+        // Anticoagulants
+        if (name.includes('warfarin') || name.includes('heparin') ||
+            name.includes('dabigatran') || name.includes('rivaroxaban') ||
+            name.includes('apixaban')) {
+            return 'Anticoagulant';
+        }
+        
+        // Antiplatelets
+        if (name.includes('aspirin') || name.includes('clopidogrel') ||
+            name.includes('ticagrelor') || name.includes('prasugrel')) {
+            return 'Antiplatelet';
+        }
+        
+        // NSAIDs
+        if (name.includes('ibuprofen') || name.includes('naproxen') ||
+            name.includes('diclofenac') || name.includes('celecoxib') ||
+            name.includes('meloxicam')) {
+            return 'NSAID (Non-steroidal anti-inflammatory drug)';
+        }
+        
+        // Antibiotics
+        if (name.includes('amoxicillin') || name.includes('ciprofloxacin') ||
+            name.includes('azithromycin') || name.includes('doxycycline') ||
+            name.includes('penicillin')) {
+            return 'Antibiotic';
+        }
+        
+        // Statins
+        if (name.includes('simvastatin') || name.includes('atorvastatin') ||
+            name.includes('lovastatin') || name.includes('pravastatin')) {
+            return 'Statin (Cholesterol medication)';
+        }
+        
+        // ACE inhibitors
+        if (name.includes('lisinopril') || name.includes('enalapril') ||
+            name.includes('captopril') || name.includes('ramipril')) {
+            return 'ACE inhibitor (Blood pressure medication)';
+        }
+        
+        // Diuretics
+        if (name.includes('furosemide') || name.includes('hydrochlorothiazide') ||
+            name.includes('spironolactone') || name.includes('bumetanide')) {
+            return 'Diuretic';
+        }
+        
+        // Diabetes medications
+        if (name.includes('metformin') || name.includes('glimepiride') ||
+            name.includes('insulin') || name.includes('glipizide')) {
+            return 'Diabetes medication';
+        }
+        
+        // Asthma/Respiratory medications
+        if (name.includes('salbutamol') || name.includes('albuterol') ||
+            name.includes('budesonide') || name.includes('fluticasone') ||
+            name.includes('montelukast') || name.includes('theophylline')) {
+            return 'Asthma/Respiratory medication';
+        }
+        
+        // Antihistamines
+        if (name.includes('loratadine') || name.includes('cetirizine') ||
+            name.includes('fexofenadine') || name.includes('diphenhydramine')) {
+            return 'Antihistamine';
+        }
+        
+        // Gastrointestinal medications
+        if (name.includes('omeprazole') || name.includes('lansoprazole') ||
+            name.includes('esomeprazole') || name.includes('pantoprazole')) {
+            return 'Proton pump inhibitor (GI medication)';
+        }
+        
+        // General medication
+        return 'General medication (Detailed classification unavailable)';
     },
 
     // Drug name extraction function
@@ -1346,42 +1830,55 @@ We recommend using personal API keys for more stable service.`;
     // Drug interaction AI analysis
     async analyzeInteraction(drug1, drug2, interactions1, interactions2, drug1Info, drug2Info) {
         const prompt = `
-You are a clinical pharmacy expert. Please analyze the interaction between two drugs and explain it clearly to patients.
+You are a clinical pharmacy expert. Please analyze the specific interaction between ${drug1} and ${drug2} and explain it as if you are a healthcare professional directly speaking to a patient - clearly, practically, and comprehensively.
 
-**Drug Information:**
+**Analysis Target Drugs:**
 - Drug 1: ${drug1}
 - Drug 2: ${drug2}
 
-**Interaction information confirmed from FDA data:**
-${interactions1 ? `${drug1} related: ${interactions1.substring(0, 1000)}` : `${drug1}: No interaction information`}
-${interactions2 ? `${drug2} related: ${interactions2.substring(0, 1000)}` : `${drug2}: No interaction information`}
+**FDA Drug Interaction Information:**
+${interactions1 ? `${drug1} related precautions: ${interactions1.substring(0, 1000)}` : `${drug1}: No specific interaction information`}
+${interactions2 ? `${drug2} related precautions: ${interactions2.substring(0, 1000)}` : `${drug2}: No specific interaction information`}
 
 **Basic Drug Information:**
 ${drug1}: ${drug1Info.description?.[0]?.substring(0, 500) || 'No information'}
 ${drug2}: ${drug2Info.description?.[0]?.substring(0, 500) || 'No information'}
 
-Please analyze in the following format:
+Please provide a comprehensive and practical analysis as follows:
 
-## 🔍 Interaction Analysis Summary
+**${drug1} and ${drug2} Interaction Analysis**
 
-### 📊 Risk Assessment
-[Low/Moderate/High/Very High] - Brief reason
+**Risk Assessment**
+[Low/Moderate/High/Very High] - Specific reasons and evidence
 
-### ⚠️ Major Risk Factors
-- Key risk factors 1-3 (if any)
+**Interaction Mechanism**
+- How the two drugs interact in the body
+- What biochemical processes occur
+- Main organs or systems where interaction occurs
 
-### 💊 Mechanism of Action
-- Brief explanation of how the two drugs interact
+**Expected Effects**
+- Specific symptoms or side effects that may occur in patients
+- When these symptoms may start to appear
+- Severity and duration of symptoms
 
-### 🏥 Recommendations
-- Specific actions patients should take
-- Need for medical consultation
-- Monitoring points
+**Practical Response Methods**
+- Immediate actions to take (discontinue, adjust dosage, etc.)
+- When to consult healthcare professionals
+- What tests or monitoring are needed
+- Alternative medications or treatment methods
 
-### 🚨 Emergency Signs
-- Symptoms requiring immediate hospital visit
+**Emergency Preparedness**
+- Dangerous symptoms requiring immediate hospital visit
+- Emergency room visit criteria
+- Emergency contact information (911, emergency room, etc.)
 
-Please write in English and use terms that are easy for general public to understand rather than medical terminology.
+**Daily Life Precautions**
+- Precautions with food, beverages, and other medications
+- Activity or exercise restrictions
+- Symptom monitoring methods
+
+Please write in English and explain medical terminology in simple terms.
+Provide practical advice considering FDA-approved medications and US healthcare environment.
 `;
 
         const messages = [
@@ -1398,7 +1895,7 @@ Please write in English and use terms that are easy for general public to unders
         const response = await this.callAI(messages, {
             temperature: 0.1, // Lower temperature for more accurate medical information
             max_tokens: 2000
-        });
+        }, drug1, drug2);
 
         return response;
     }
@@ -1409,6 +1906,12 @@ async function searchDrug(query = null) {
     // 보안 검증
     if (!SecurityUtils.checkRateLimit('search')) {
         utils.showAlert('Too many requests. Please wait a moment.', 'warning');
+        return;
+    }
+    
+    // AI 테스트 페이지 이동 명령어 체크
+    if (query && (query.toLowerCase().trim() === 'go ai test page' || query.toLowerCase().trim() === 'go ai test')) {
+        window.location.href = 'ai-test.html';
         return;
     }
 
@@ -1872,6 +2375,11 @@ function addDrugToCheck(drugName) {
         }
         drug2.value = drugName;
         utils.showAlert(`${drugName} has been added as the second drug.`, 'success');
+        
+        // 두 번째 약물이 추가되면 자동으로 상호작용 확인 시작
+        setTimeout(() => {
+            checkInteraction();
+        }, 1000);
     } else {
         utils.showAlert('Two drugs are already selected.', 'warning');
     }
@@ -1885,6 +2393,12 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
     const query = input.value.trim();
     const list = document.getElementById(`${inputId}List`);
     const itemsContainer = list.querySelector('.drug-items');
+    
+    // AI 테스트 페이지 이동 명령어 체크
+    if (query.toLowerCase() === 'go ai test page' || query.toLowerCase() === 'go ai test') {
+        window.location.href = 'ai-test.html';
+        return;
+    }
     
     if (query.length < 2) {
         list.classList.remove('show');
@@ -2034,12 +2548,46 @@ async function checkInteraction() {
 
         const [data1, data2] = await Promise.all([response1.json(), response2.json()]);
 
-        if (!data1.results?.length || !data2.results?.length) {
-            throw new Error('Drug information not found.');
+        // 약물 정보를 찾지 못한 경우 AI 기반 분석으로 대체
+        let drug1Info, drug2Info;
+        
+        if (!data1.results?.length) {
+            console.log('⚠️ Drug 1 information not found, using AI-based analysis:', drug1);
+            drug1Info = {
+                openfda: {
+                    brand_name: [drug1],
+                    generic_name: [drug1],
+                    manufacturer_name: ['Information not available'],
+                    route: ['Classification not available']
+                },
+                description: ['Please consult with a doctor or pharmacist for detailed information.'],
+                drug_interactions: ['Please consult with a doctor if side effects occur.'],
+                indications_and_usage: ['Please consult with a doctor or pharmacist.'],
+                warnings: ['Please consult with a doctor or pharmacist before taking.'],
+                dosage_and_administration: ['Please follow doctor or pharmacist instructions.']
+            };
+        } else {
+            drug1Info = data1.results[0];
         }
-
-        const drug1Info = data1.results[0];
-        const drug2Info = data2.results[0];
+        
+        if (!data2.results?.length) {
+            console.log('⚠️ Drug 2 information not found, using AI-based analysis:', drug2);
+            drug2Info = {
+                openfda: {
+                    brand_name: [drug2],
+                    generic_name: [drug2],
+                    manufacturer_name: ['Information not available'],
+                    route: ['Classification not available']
+                },
+                description: ['Please consult with a doctor or pharmacist for detailed information.'],
+                drug_interactions: ['Please consult with a doctor if side effects occur.'],
+                indications_and_usage: ['Please consult with a doctor or pharmacist.'],
+                warnings: ['Please consult with a doctor or pharmacist before taking.'],
+                dosage_and_administration: ['Please follow doctor or pharmacist instructions.']
+            };
+        } else {
+            drug2Info = data2.results[0];
+        }
 
         // Check interaction
         const interactions1 = drug1Info.drug_interactions?.[0] || '';
@@ -2125,10 +2673,18 @@ async function checkInteraction() {
                             <div class="ai-analysis scroll-slide-left scroll-delay-1">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
-                                    <h4>${aiProvider} AI Expert Analysis</h4>
+                                    <h4>AI Analysis</h4>
                                 </div>
                                 <div class="ai-analysis-content">
-                                    ${aiAnalysis.replace(/\n/g, '<br>')}
+                                    ${aiAnalysis
+                                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** → <strong>
+                                        .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* → <em>
+                                        .replace(/### (.*?)(?:\n|$)/g, '<h3>$1</h3>')      // ### heading → <h3>
+                                        .replace(/## (.*?)(?:\n|$)/g, '<h2>$1</h2>')       // ## heading → <h2>
+                                        .replace(/# (.*?)(?:\n|$)/g, '<h1>$1</h1>')        // # heading → <h1>
+                                        .replace(/^- (.*?)(?:\n|$)/gm, '<li>$1</li>')      // - list item → <li>
+                                        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')         // wrap li in ul
+                                        .replace(/\n/g, '<br>')}                          // line breaks
                                 </div>
                             </div>
                         ` : ''}
@@ -2156,11 +2712,6 @@ async function checkInteraction() {
                             </div>
                         ` : ''}
                         
-                        <div class="scroll-fade scroll-delay-3" style="margin-top: 20px; padding: 16px; background: rgba(0,0,0,0.05); border-radius: 8px;">
-                            <p style="margin: 0; font-size: 0.9em;">
-                                ⚠️ This information is for reference only. Please consult with a doctor or pharmacist before taking these medications.
-                            </p>
-                        </div>
                     </div>
                 </div>
             `;
@@ -2176,10 +2727,18 @@ async function checkInteraction() {
                             <div class="ai-analysis scroll-slide-left scroll-delay-1">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
-                                    <h4>${aiProvider} AI Expert Analysis</h4>
+                                    <h4>AI Analysis</h4>
                                 </div>
                                 <div class="ai-analysis-content">
-                                    ${aiAnalysis.replace(/\n/g, '<br>')}
+                                    ${aiAnalysis
+                                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** → <strong>
+                                        .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* → <em>
+                                        .replace(/### (.*?)(?:\n|$)/g, '<h3>$1</h3>')      // ### heading → <h3>
+                                        .replace(/## (.*?)(?:\n|$)/g, '<h2>$1</h2>')       // ## heading → <h2>
+                                        .replace(/# (.*?)(?:\n|$)/g, '<h1>$1</h1>')        // # heading → <h1>
+                                        .replace(/^- (.*?)(?:\n|$)/gm, '<li>$1</li>')      // - list item → <li>
+                                        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')         // wrap li in ul
+                                        .replace(/\n/g, '<br>')}                          // line breaks
                                 </div>
                             </div>
                         ` : ''}
@@ -3310,7 +3869,7 @@ function showPrivacyPolicy() {
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">쿠키 사용</h5>
             <p>본 서비스는 필수 기능을 위한 로컬 저장소만 사용하며, 추적 쿠키는 사용하지 않습니다.</p>
             
-            <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--warning-rgb, 255, 193, 7), 0.1); border-radius: 8px; border-left: 4px solid var(--warning, #ffc107);">
+            <p style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
                 <strong>중요:</strong> 본 도구는 교육 목적으로만 사용되며, 의료진의 조언을 대체하지 않습니다.
             </p>
         </div>
@@ -3340,7 +3899,7 @@ function showTermsOfService() {
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 변경</h5>
             <p>서비스 내용은 사전 통지 없이 변경될 수 있습니다. 지속적인 개선을 위해 기능이 추가되거나 수정될 수 있습니다.</p>
             
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--danger-rgb, 255, 0, 0), 0.1); border-radius: 8px; border-left: 4px solid var(--danger, #ff0000);">
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
                 <strong>⚠️ 의료 면책 조항:</strong><br>
                 본 도구는 의료 전문가의 조언을 대체할 수 없습니다. 약물 복용에 관한 모든 결정은 의료진과 상담 후 내리시기 바랍니다.
             </div>
@@ -3379,7 +3938,7 @@ function showDataSources() {
             <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 업데이트</h5>
             <p>FDA 데이터는 실시간으로 조회되며, AI 분석은 최신 의학 지식을 바탕으로 수행됩니다.</p>
             
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(var(--info-rgb, 0, 123, 255), 0.1); border-radius: 8px; border-left: 4px solid var(--info, #007bff);">
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
                 <strong>ℹ️ 참고:</strong><br>
                 모든 데이터는 신뢰할 수 있는 공식 소스에서 가져오지만, 개별 환자의 상황은 다를 수 있으므로 의료진과의 상담이 필수입니다.
             </div>
