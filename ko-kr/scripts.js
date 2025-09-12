@@ -7059,6 +7059,121 @@ function isValidDrugName(drugName) {
     );
 }
 
+// 피드백 모달 관련 함수들
+function openFeedbackModal() {
+    const modal = document.getElementById('feedbackModal');
+    if (modal) {
+        modal.classList.add('show');
+        document.body.classList.add('modal-open');
+        
+        // 첫 번째 입력 필드에 포커스
+        const firstInput = modal.querySelector('#feedbackName');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+        }
+    }
+}
+
+function closeFeedbackModal() {
+    const modal = document.getElementById('feedbackModal');
+    if (modal) {
+        modal.classList.add('closing');
+        document.body.classList.remove('modal-open');
+        
+        setTimeout(() => {
+            modal.classList.remove('show', 'closing');
+            // 폼 리셋
+            const form = document.getElementById('feedbackForm');
+            if (form) {
+                form.reset();
+            }
+        }, 400);
+    }
+}
+
+// 피드백 폼 제출 처리
+function handleFeedbackSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // 폼 데이터 수집
+    const feedbackData = {
+        name: document.getElementById('feedbackName').value.trim(),
+        email: document.getElementById('feedbackEmail').value.trim(),
+        subject: document.getElementById('feedbackSubject').value.trim(),
+        message: document.getElementById('feedbackMessage').value.trim()
+    };
+    
+    // 유효성 검사
+    if (!feedbackData.name || !feedbackData.email || !feedbackData.subject || !feedbackData.message) {
+        utils.showAlert('모든 필드를 입력해주세요.', 'warning');
+        return;
+    }
+    
+    // 이메일 형식 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(feedbackData.email)) {
+        utils.showAlert('올바른 이메일 형식을 입력해주세요.', 'warning');
+        return;
+    }
+    
+    // 로딩 표시
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = '전송 중...';
+    submitBtn.disabled = true;
+    
+    // 이메일 전송 시뮬레이션 (실제로는 서버로 전송)
+    setTimeout(() => {
+        // 실제 구현에서는 여기서 서버로 데이터를 전송합니다
+        // 예: fetch('/api/send-feedback', { method: 'POST', body: JSON.stringify(feedbackData) })
+        
+        // 성공 메시지 표시
+        utils.showAlert('피드백이 성공적으로 전송되었습니다!', 'success');
+        
+        // 모달 닫기
+        closeFeedbackModal();
+        
+        // 버튼 상태 복원
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        // 개발자 콘솔에 피드백 내용 출력 (실제 구현에서는 제거)
+        console.log('피드백 내용:', feedbackData);
+        
+    }, 1500);
+}
+
+// 피드백 폼 이벤트 리스너 등록
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', handleFeedbackSubmit);
+    }
+    
+    // 모달 외부 클릭 시 닫기
+    const feedbackModal = document.getElementById('feedbackModal');
+    if (feedbackModal) {
+        feedbackModal.addEventListener('click', function(event) {
+            if (event.target === feedbackModal) {
+                closeFeedbackModal();
+            }
+        });
+    }
+    
+    // ESC 키로 모달 닫기
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modal = document.getElementById('feedbackModal');
+            if (modal && modal.classList.contains('show')) {
+                closeFeedbackModal();
+            }
+        }
+    });
+});
+
 
 
  

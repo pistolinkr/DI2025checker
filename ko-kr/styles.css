@@ -4113,4 +4113,174 @@ html {
 .license-info h5 {
     color: var(--primary);
     margin-bottom: 0.5rem;
+}
+
+/* 피드백 버튼 스타일 */
+.feedback-btn {
+    background: rgba(var(--surface-rgb), 0.5);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: inherit;
+    margin: 0;
+}
+
+.feedback-btn:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.feedback-btn span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.8rem;
+    color: inherit;
+}
+
+/* 피드백 모달 헤더 스타일 */
+.modal-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.modal-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+}
+
+/* 테마별 로고 표시 */
+.logo-dark {
+    display: block;
+}
+
+.logo-light {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-dark {
+        display: none;
+    }
+    
+    .logo-light {
+        display: block;
+    }
+}
+
+/* 피드백 모달 폼 스타일 */
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    transition: var(--transition);
+    font-family: inherit;
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.form-textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+/* 모바일에서 피드백 버튼 스타일 조정 */
+@media (max-width: 768px) {
+    .feedback-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+    }
+    
+    .modal-header-content {
+        gap: 0.75rem;
+    }
+    
+    .logo-image {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .modal-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .feedback-btn {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.7rem;
+    }
+    
+    .modal-header-content {
+        gap: 0.5rem;
+    }
+    
+    .logo-image {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .modal-title {
+        font-size: 1.1rem;
+    }
 } 
