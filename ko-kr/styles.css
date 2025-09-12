@@ -4149,50 +4149,6 @@ html {
     color: inherit;
 }
 
-/* 피드백 모달 헤더 스타일 */
-.modal-header-content {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-}
-
-.modal-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo-image {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
-.logo-image:hover {
-    transform: scale(1.05);
-}
-
-/* 테마별 로고 표시 */
-.logo-dark {
-    display: block;
-}
-
-.logo-light {
-    display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    .logo-dark {
-        display: none;
-    }
-    
-    .logo-light {
-        display: block;
-    }
-}
 
 /* 피드백 모달 폼 스타일 */
 .feedback-form {
@@ -4250,37 +4206,11 @@ html {
     .form-actions .btn {
         width: 100%;
     }
-    
-    .modal-header-content {
-        gap: 0.75rem;
-    }
-    
-    .logo-image {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .modal-title {
-        font-size: 1.2rem;
-    }
 }
 
 @media (max-width: 370px) {
     .feedback-btn {
         padding: 0.35rem 0.5rem;
         font-size: 0.7rem;
-    }
-    
-    .modal-header-content {
-        gap: 0.5rem;
-    }
-    
-    .logo-image {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .modal-title {
-        font-size: 1.1rem;
     }
 } 

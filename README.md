@@ -109,6 +109,33 @@ Drug Interaction Checker is a sophisticated web application that helps users ide
 2. Generate API key
 3. Format: `AI...`
 
+#### EmailJS Setup (for Feedback Feature)
+
+1. **Create EmailJS Account**
+   - Visit [EmailJS](https://www.emailjs.com/)
+   - Create a free account
+
+2. **Connect Email Service**
+   - Add your email service (Gmail, Outlook, etc.)
+   - Note down your Service ID
+
+3. **Create Email Template**
+   - Create a feedback template with these variables:
+     - `{{from_name}}` - Sender's name
+     - `{{from_email}}` - Sender's email
+     - `{{subject}}` - Feedback subject
+     - `{{message}}` - Feedback message
+   - Note down your Template ID
+
+4. **Configure Environment Variables**
+   - Edit `.env` file in the project root
+   - Replace the placeholder values:
+     ```
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
 ### 📖 Usage
 
 1. **Search for drugs**
@@ -263,6 +290,33 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 1. [Google AI Studio](https://aistudio.google.com/app/apikey) 방문
 2. API 키 생성
 3. 형식: `AI...`
+
+#### EmailJS 설정 (피드백 기능용)
+
+1. **EmailJS 계정 생성**
+   - [EmailJS](https://www.emailjs.com/) 방문
+   - 무료 계정 생성
+
+2. **이메일 서비스 연결**
+   - 이메일 서비스 추가 (Gmail, Outlook 등)
+   - 서비스 ID 기록
+
+3. **이메일 템플릿 생성**
+   - 다음 변수들을 포함한 피드백 템플릿 생성:
+     - `{{from_name}}` - 보낸 사람 이름
+     - `{{from_email}}` - 보낸 사람 이메일
+     - `{{subject}}` - 피드백 제목
+     - `{{message}}` - 피드백 메시지
+   - 템플릿 ID 기록
+
+4. **환경변수 설정**
+   - 프로젝트 루트의 `.env` 파일 편집
+   - 플레이스홀더 값들을 실제 값으로 교체:
+     ```
+     EMAILJS_PUBLIC_KEY=실제_공개_키
+     EMAILJS_SERVICE_ID=실제_서비스_ID
+     EMAILJS_TEMPLATE_ID=실제_템플릿_ID
+     ```
 
 ### 📖 사용법
 

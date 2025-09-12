@@ -208,13 +208,7 @@
     <div id="feedbackModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-header-content">
-                    <div class="modal-logo">
-                        <img src="../logo/logo-dark.png" alt="DI2025Checker 로고" class="logo-image logo-dark">
-                        <img src="../logo/logo-light.png" alt="DI2025Checker 로고" class="logo-image logo-light">
-                    </div>
-                    <h3 class="modal-title">피드백 보내기</h3>
-                </div>
+                <h3 class="modal-title">피드백 보내기</h3>
                 <button class="modal-close" onclick="closeFeedbackModal()" aria-label="닫기">×</button>
             </div>
             <div class="modal-body">
@@ -491,6 +485,9 @@
         </div>
     </footer>
 
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../config.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html> 

@@ -7125,29 +7125,53 @@ function handleFeedbackSubmit(event) {
     submitBtn.textContent = '전송 중...';
     submitBtn.disabled = true;
     
-    // 이메일 전송 시뮬레이션 (실제로는 서버로 전송)
-    setTimeout(() => {
-        // 실제 구현에서는 여기서 서버로 데이터를 전송합니다
-        // 예: fetch('/api/send-feedback', { method: 'POST', body: JSON.stringify(feedbackData) })
-        
-        // 성공 메시지 표시
-        utils.showAlert('피드백이 성공적으로 전송되었습니다!', 'success');
-        
-        // 모달 닫기
-        closeFeedbackModal();
-        
-        // 버튼 상태 복원
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        
-        // 개발자 콘솔에 피드백 내용 출력 (실제 구현에서는 제거)
-        console.log('피드백 내용:', feedbackData);
-        
-    }, 1500);
+    // EmailJS를 사용한 실제 이메일 전송
+    const templateParams = {
+        from_name: feedbackData.name,
+        from_email: feedbackData.email,
+        subject: feedbackData.subject,
+        message: feedbackData.message,
+        to_email: 'pistolinkr@icloud.com'
+    };
+    
+    // EmailJS 서비스 ID와 템플릿 ID (config.js에서 환경변수 사용)
+    const serviceID = EMAILJS_CONFIG.SERVICE_ID;
+    const templateID = EMAILJS_CONFIG.TEMPLATE_ID;
+    
+    emailjs.send(serviceID, templateID, templateParams)
+        .then(function(response) {
+            console.log('이메일 전송 성공:', response.status, response.text);
+            utils.showAlert('피드백이 성공적으로 전송되었습니다!', 'success');
+            closeFeedbackModal();
+        })
+        .catch(function(error) {
+            console.error('이메일 전송 실패:', error);
+            utils.showAlert('피드백 전송에 실패했습니다. 다시 시도해주세요.', 'error');
+        })
+        .finally(function() {
+            // 버튼 상태 복원
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
 }
 
-// 피드백 폼 이벤트 리스너 등록
-document.addEventListener('DOMContentLoaded', function() {
+// EmailJS 초기화
+document.addEventListener('DOMContentLoaded', async function() {
+    // 환경변수 로드 완료까지 대기
+    await new Promise(resolve => {
+        const checkConfig = () => {
+            if (EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+                resolve();
+            } else {
+                setTimeout(checkConfig, 100);
+            }
+        };
+        checkConfig();
+    });
+    
+    // EmailJS 초기화 (config.js에서 환경변수 사용)
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    
     const feedbackForm = document.getElementById('feedbackForm');
     if (feedbackForm) {
         feedbackForm.addEventListener('submit', handleFeedbackSubmit);

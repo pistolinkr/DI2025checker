@@ -205,6 +205,64 @@
         </div>
     </div>
 
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Send Feedback</h3>
+                <button class="modal-close" onclick="closeFeedbackModal()" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedbackName" class="form-label">Name</label>
+                        <input type="text" 
+                               id="feedbackName" 
+                               class="form-input" 
+                               placeholder="Enter your name"
+                               required
+                               aria-label="Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackEmail" class="form-label">Email</label>
+                        <input type="email" 
+                               id="feedbackEmail" 
+                               class="form-input" 
+                               placeholder="Enter your email"
+                               required
+                               aria-label="Email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackSubject" class="form-label">Subject</label>
+                        <input type="text" 
+                               id="feedbackSubject" 
+                               class="form-input" 
+                               placeholder="Enter feedback subject"
+                               required
+                               aria-label="Subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackMessage" class="form-label">Message</label>
+                        <textarea id="feedbackMessage" 
+                                  class="form-textarea" 
+                                  placeholder="Enter your feedback"
+                                  rows="5"
+                                  required
+                                  aria-label="Message"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Container -->
     <div class="container">
         <!-- Header -->
@@ -374,6 +432,9 @@
                         <a href="https://github.com/pistolinkr" target="_blank" rel="noopener" title="GitHub">
                             <span>GitHub</span>
                         </a>
+                        <button class="feedback-btn" onclick="openFeedbackModal()" title="Send Feedback">
+                            <span>Feedback</span>
+                        </button>
                     </div>
                         </div>
                         </div>
@@ -405,6 +466,9 @@
         </div>
     </footer>
 
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../config.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html> 

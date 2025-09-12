@@ -4258,4 +4258,143 @@ function enhanceScrollObserver() {
 // 스크롤 이벤트 리스너 등록
 window.addEventListener('scroll', handleScroll, { passive: true });
 
+// 피드백 모달 관련 함수들
+function openFeedbackModal() {
+    const modal = document.getElementById('feedbackModal');
+    if (modal) {
+        modal.classList.add('show');
+        document.body.classList.add('modal-open');
+        
+        // 첫 번째 입력 필드에 포커스
+        const firstInput = modal.querySelector('#feedbackName');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+        }
+    }
+}
+
+function closeFeedbackModal() {
+    const modal = document.getElementById('feedbackModal');
+    if (modal) {
+        modal.classList.add('closing');
+        document.body.classList.remove('modal-open');
+        
+        setTimeout(() => {
+            modal.classList.remove('show', 'closing');
+            // 폼 리셋
+            const form = document.getElementById('feedbackForm');
+            if (form) {
+                form.reset();
+            }
+        }, 400);
+    }
+}
+
+// 피드백 폼 제출 처리
+function handleFeedbackSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // 폼 데이터 수집
+    const feedbackData = {
+        name: document.getElementById('feedbackName').value.trim(),
+        email: document.getElementById('feedbackEmail').value.trim(),
+        subject: document.getElementById('feedbackSubject').value.trim(),
+        message: document.getElementById('feedbackMessage').value.trim()
+    };
+    
+    // 유효성 검사
+    if (!feedbackData.name || !feedbackData.email || !feedbackData.subject || !feedbackData.message) {
+        utils.showAlert('Please fill in all fields.', 'warning');
+        return;
+    }
+    
+    // 이메일 형식 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(feedbackData.email)) {
+        utils.showAlert('Please enter a valid email format.', 'warning');
+        return;
+    }
+    
+    // 로딩 표시
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // EmailJS를 사용한 실제 이메일 전송
+    const templateParams = {
+        from_name: feedbackData.name,
+        from_email: feedbackData.email,
+        subject: feedbackData.subject,
+        message: feedbackData.message,
+        to_email: 'pistolinkr@icloud.com'
+    };
+    
+    // EmailJS 서비스 ID와 템플릿 ID (config.js에서 환경변수 사용)
+    const serviceID = EMAILJS_CONFIG.SERVICE_ID;
+    const templateID = EMAILJS_CONFIG.TEMPLATE_ID;
+    
+    emailjs.send(serviceID, templateID, templateParams)
+        .then(function(response) {
+            console.log('Email sent successfully:', response.status, response.text);
+            utils.showAlert('Feedback sent successfully!', 'success');
+            closeFeedbackModal();
+        })
+        .catch(function(error) {
+            console.error('Email sending failed:', error);
+            utils.showAlert('Failed to send feedback. Please try again.', 'error');
+        })
+        .finally(function() {
+            // 버튼 상태 복원
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+}
+
+// EmailJS 초기화
+document.addEventListener('DOMContentLoaded', async function() {
+    // 환경변수 로드 완료까지 대기
+    await new Promise(resolve => {
+        const checkConfig = () => {
+            if (EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+                resolve();
+            } else {
+                setTimeout(checkConfig, 100);
+            }
+        };
+        checkConfig();
+    });
+    
+    // EmailJS 초기화 (config.js에서 환경변수 사용)
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', handleFeedbackSubmit);
+    }
+    
+    // 모달 외부 클릭 시 닫기
+    const feedbackModal = document.getElementById('feedbackModal');
+    if (feedbackModal) {
+        feedbackModal.addEventListener('click', function(event) {
+            if (event.target === feedbackModal) {
+                closeFeedbackModal();
+            }
+        });
+    }
+    
+    // ESC 키로 모달 닫기
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modal = document.getElementById('feedbackModal');
+            if (modal && modal.classList.contains('show')) {
+                closeFeedbackModal();
+            }
+        }
+    });
+});
+
  
