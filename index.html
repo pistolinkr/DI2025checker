@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Interaction Checker - Loading...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+               body {
+                   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                   background: #ffffff;
+                   min-height: 100vh;
+                   display: flex;
+                   align-items: center;
+                   justify-content: center;
+                   color: #000000;
+               }
+               
+               @media (prefers-color-scheme: dark) {
+                   body {
+                       background: #1a1a1a;
+                       color: #ffffff;
+                   }
+               }
+        
+        .loader-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top: 8px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+        
+        .manual-links {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .manual-links h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .lang-link {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .lang-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+        <h1>💊 Drug Interaction Checker</h1>
+        <p id="statusText">Detecting your language...</p>
+        <p class="status" id="detailText">Please wait...</p>
+        
+        <div class="manual-links" id="manualLinks" style="display: none;">
+            <h3>Or select your language manually:</h3>
+            <div class="lang-grid">
+                <a href="/en-us/index.html" class="lang-link">🇺🇸 English</a>
+                <a href="/ko-kr/index.html" class="lang-link">🇰🇷 한국어</a>
+                <a href="/ja-jp/index.html" class="lang-link">🇯🇵 日本語</a>
+                <a href="/zh-cn/index.html" class="lang-link">🇨🇳 中文</a>
+                <a href="/es-es/index.html" class="lang-link">🇪🇸 Español</a>
+                <a href="/it-it/index.html" class="lang-link">🇮🇹 Italiano</a>
+                <a href="/fr-fr/index.html" class="lang-link">🇫🇷 Français</a>
+                <a href="/de-de/index.html" class="lang-link">🇩🇪 Deutsch</a>
+                <a href="/pt-pt/index.html" class="lang-link">🇵🇹 Português</a>
+                <a href="/ar-sa/index.html" class="lang-link">🇸🇦 العربية</a>
+                <a href="/hi-in/index.html" class="lang-link">🇮🇳 हिन्दी</a>
+                <a href="/ru-ru/index.html" class="lang-link">🇷🇺 Русский</a>
+                <a href="/id-id/index.html" class="lang-link">🇮🇩 Indonesia</a>
+                <a href="/vi-vn/index.html" class="lang-link">🇻🇳 Tiếng Việt</a>
+                <a href="/tr-tr/index.html" class="lang-link">🇹🇷 Türkçe</a>
+                <a href="/es-mx/index.html" class="lang-link">🇲🇽 Español (MX)</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="i18n.js"></script>
+    <script>
+        // 언어 감지 및 리다이렉트
+        async function detectAndRedirect() {
+            const statusText = document.getElementById('statusText');
+            const detailText = document.getElementById('detailText');
+            const manualLinks = document.getElementById('manualLinks');
+            
+            try {
+                // i18n 시스템이 로드될 때까지 대기
+                if (typeof window.i18n === 'undefined') {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                statusText.textContent = 'Detecting your language...';
+                detailText.textContent = 'Using geolocation and browser settings...';
+                
+                // 언어 감지
+                const detectedLang = await window.i18n.detectUserLanguage();
+                
+                statusText.textContent = 'Language detected!';
+                detailText.textContent = `Redirecting to ${window.i18n.translations[detectedLang].name}...`;
+                
+                // 짧은 지연 후 리다이렉트
+                setTimeout(() => {
+                    window.location.href = `/${detectedLang}/index.html`;
+                }, 500);
+                
+            } catch (error) {
+                console.error('Language detection failed:', error);
+                statusText.textContent = 'Unable to detect language';
+                detailText.textContent = 'Please select your language manually:';
+                manualLinks.style.display = 'block';
+            }
+        }
+        
+        // URL 파라미터로 특정 언어 지정 가능
+        const urlParams = new URLSearchParams(window.location.search);
+        const forceLang = urlParams.get('lang');
+        
+        if (forceLang && ['en-us', 'ko-kr', 'ja-jp', 'zh-cn', 'es-es', 'it-it', 'fr-fr', 'de-de', 'pt-pt', 'ar-sa', 'hi-in', 'ru-ru', 'id-id', 'vi-vn', 'tr-tr', 'es-mx'].includes(forceLang)) {
+            window.location.href = `/${forceLang}/index.html`;
+        } else {
+            // 3초 후에도 리다이렉트 안 되면 수동 선택 표시
+            setTimeout(() => {
+                const manualLinks = document.getElementById('manualLinks');
+                if (manualLinks.style.display !== 'block') {
+                    manualLinks.style.display = 'block';
+                }
+            }, 3000);
+            
+            detectAndRedirect();
+        }
+    </script>
+</body>
+</html>
+

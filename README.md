@@ -47,7 +47,46 @@ Drug Interaction Checker is a sophisticated web application that helps users ide
 - **Accessibility** features with ARIA labels
 - **Clean footer layout** with medical resource links
 
-### 🛠 Technology Stack
+### 🔧 Environment Variables Setup
+
+**Unified Configuration Management:**
+All languages use a single root `.env` file for centralized configuration:
+
+```bash
+# Copy the example file
+cp env.example .env
+
+# Edit with your actual values
+nano .env
+```
+
+**Required Configuration:**
+```env
+# EmailJS Configuration (Universal)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# AI Service API Keys (Optional)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Country-specific Drug Database APIs
+FDA_API_KEY=your_fda_api_key_here          # US
+MFDS_API_KEY=your_mfds_api_key_here       # Korea
+PMDA_API_KEY=your_pmda_api_key_here       # Japan
+NMPA_API_KEY=your_nmpa_api_key_here        # China
+# ... and more country-specific APIs
+```
+
+**Benefits of Unified Management:**
+- **Single configuration file** for all 16 languages
+- **Easy maintenance** - no duplicate API keys
+- **Secure** - `.env` file is gitignored
+- **Efficient** - one place to manage all settings
+
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **APIs**: FDA OpenFDA, OpenAI, Anthropic Claude, Perplexity, Google Gemini
@@ -275,7 +314,46 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **디자인**: CSS Grid/Flexbox, 글래스모피즘 효과
 - **기능**: 실시간 검색, AI 통합, 로컬 스토리지
 
-### 🚀 시작하기
+### 🔧 환경 변수 설정
+
+**통합 설정 관리:**
+모든 언어가 하나의 루트 `.env` 파일을 사용하여 중앙 집중식 설정을 관리합니다:
+
+```bash
+# 예시 파일 복사
+cp env.example .env
+
+# 실제 값으로 편집
+nano .env
+```
+
+**필수 설정:**
+```env
+# EmailJS 설정 (범용)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# AI 서비스 API 키 (선택사항)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# 국가별 약물 데이터베이스 API
+FDA_API_KEY=your_fda_api_key_here          # 미국
+MFDS_API_KEY=your_mfds_api_key_here       # 한국
+PMDA_API_KEY=your_pmda_api_key_here       # 일본
+NMPA_API_KEY=your_nmpa_api_key_here        # 중국
+# ... 기타 국가별 API
+```
+
+**통합 관리의 장점:**
+- **단일 설정 파일**로 16개 언어 모두 관리
+- **쉬운 유지보수** - 중복 API 키 없음
+- **보안** - `.env` 파일은 gitignore 처리
+- **효율성** - 한 곳에서 모든 설정 관리
+
 
 #### 🌐 언어 지원
 - **한국어 (기본)**: `index.html` - 한국어 메인 페이지

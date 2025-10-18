@@ -3,6 +3,89 @@
     {
       "source": "/",
       "destination": "/en-us/index.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/en-us/index.html"
+    },
+    {
+      "source": "/ko",
+      "destination": "/ko-kr/index.html"
+    },
+    {
+      "source": "/ja",
+      "destination": "/ja-jp/index.html"
+    },
+    {
+      "source": "/zh",
+      "destination": "/zh-cn/index.html"
+    },
+    {
+      "source": "/es",
+      "destination": "/es-es/index.html"
+    },
+    {
+      "source": "/it",
+      "destination": "/it-it/index.html"
+    },
+    {
+      "source": "/fr",
+      "destination": "/fr-fr/index.html"
+    },
+    {
+      "source": "/de",
+      "destination": "/de-de/index.html"
+    },
+    {
+      "source": "/pt",
+      "destination": "/pt-pt/index.html"
+    },
+    {
+      "source": "/ar",
+      "destination": "/ar-sa/index.html"
+    },
+    {
+      "source": "/hi",
+      "destination": "/hi-in/index.html"
+    },
+    {
+      "source": "/ru",
+      "destination": "/ru-ru/index.html"
+    },
+    {
+      "source": "/id",
+      "destination": "/id-id/index.html"
+    },
+    {
+      "source": "/vi",
+      "destination": "/vi-vn/index.html"
+    },
+    {
+      "source": "/tr",
+      "destination": "/tr-tr/index.html"
+    },
+    {
+      "source": "/mx",
+      "destination": "/es-mx/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }

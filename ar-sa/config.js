@@ -1,18 +1,18 @@
-// EmailJS 설정
-// 루트 .env 파일에서 환경 변수 로드
+// إعدادات EmailJS
+// تحميل متغيرات البيئة من ملف .env الجذر
 let EMAILJS_CONFIG = {
     PUBLIC_KEY: 'your_emailjs_public_key_here',
     SERVICE_ID: 'your_emailjs_service_id_here',
     TEMPLATE_ID: 'your_emailjs_template_id_here'
 };
 
-// .env 파일에서 환경 변수 로드
+// تحميل متغيرات البيئة من ملف .env الجذر
 async function loadEnvConfig() {
     try {
         const response = await fetch('../.env');
         const envText = await response.text();
         
-        // .env 파일 파싱
+        // تحليل ملف .env
         const envLines = envText.split('\n');
         envLines.forEach(line => {
             if (line.trim() && !line.startsWith('#')) {
@@ -33,17 +33,17 @@ async function loadEnvConfig() {
             }
         });
         
-        // 설정 완료 여부 확인
+        // التحقق من اكتمال الإعدادات
         if (EMAILJS_CONFIG.PUBLIC_KEY === 'your_emailjs_public_key_here') {
-            console.warn('⚠️ EmailJS 설정이 필요합니다. .env 파일에서 실제 값으로 교체해주세요.');
+            console.warn('⚠️ إعدادات EmailJS مطلوبة. يرجى استبدالها بقيم حقيقية في ملف .env.');
         } else {
-            console.log('✅ EmailJS 설정이 로드되었습니다.');
+            console.log('✅ تم تحميل إعدادات EmailJS.');
         }
     } catch (error) {
-        console.warn('⚠️ .env 파일을 읽을 수 없습니다. 기본값을 사용합니다.');
-        console.warn('⚠️ EmailJS 설정이 필요합니다. .env 파일에서 실제 값으로 교체해주세요.');
+        console.warn('⚠️ لا يمكن قراءة ملف .env. استخدام القيم الافتراضية.');
+        console.warn('⚠️ إعدادات EmailJS مطلوبة. يرجى استبدالها بقيم حقيقية في ملف .env.');
     }
 }
 
-// 페이지 로드 시 환경 변수 로드
+// تحميل متغيرات البيئة عند تحميل الصفحة
 loadEnvConfig();

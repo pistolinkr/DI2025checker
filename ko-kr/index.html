@@ -26,7 +26,22 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" integrity="sha384-..." crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/ko-kr/styles.css?v=1.0">
+    
+    <!-- 인라인 CSS 테스트 -->
+    <style>
+        /* CSS 로딩 테스트 - 이 스타일이 보이면 CSS가 정상 로드됨 */
+        body {
+            background-color: #ffffff !important;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a !important;
+            }
+        }
+    </style>
+    
     <!-- 기본 파비콘 (라이트 모드용) -->
     <link rel="icon" type="image/png" href="../logo/logo-dark.png">
     
@@ -487,6 +502,8 @@
 
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../i18n.js"></script>
+    <script src="../language-selector.js"></script>
     <script src="config.js"></script>
     <script src="scripts.js"></script>
 </body>

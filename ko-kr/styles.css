@@ -1,3 +1,14 @@
+/* CSS 로딩 테스트 - 이 스타일이 보이면 CSS가 정상 로드됨 */
+body {
+    background-color: #ffffff !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a !important;
+    }
+}
+
 /* 변수 정의 */
 :root {
     --primary: #000000;
@@ -8,7 +19,7 @@
     --warning: #666666;
     --danger: #000000;
     --danger-rgb: 0, 0, 0;
-    --bg: #f5f5f5;
+    --bg: #ffffff;
     --surface: rgba(255, 255, 255, 0.95);
     --text: #000000;
     --text-secondary: #666666;
@@ -20,12 +31,6 @@
     --radius-lg: 24px;
     --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --scroll-transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    --dur-high: #ff4444;
-    --dur-medium: #ffaa44;
-    --dur-low: #44aa44;
-    --dur-high-bg: rgba(255, 68, 68, 0.1);
-    --dur-medium-bg: rgba(255, 170, 68, 0.1);
-    --dur-low-bg: rgba(68, 170, 68, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,7 +39,7 @@
         --primary-dark: #ffffff;
         --primary-light: #cccccc;
         --primary-rgb: 255, 255, 255;
-        --bg: #181a1b;
+        --bg: #1a1a1a;
         --surface: rgba(30, 30, 30, 0.95);
         --text: #ffffff;
         --text-secondary: #cccccc;
@@ -42,9 +47,6 @@
         --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
         --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
         --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-        --dur-high-bg: rgba(255, 68, 68, 0.15);
-        --dur-medium-bg: rgba(255, 170, 68, 0.15);
-        --dur-low-bg: rgba(68, 170, 68, 0.15);
     }
 }
 
@@ -61,8 +63,6 @@ html {
     scroll-padding-top: 2rem;
     /* 오버 스크롤 여백 조정 */
     scroll-padding-bottom: 20px;
-    /* 가로 스크롤 방지 */
-    overflow-x: hidden;
 }
 
 body {
@@ -77,15 +77,7 @@ body {
     scroll-behavior: smooth;
     /* 오버 스크롤 조정 */
     overscroll-behavior-y: contain;
-    overscroll-behavior-x: none;
-}
-
-/* 모달이 열려있을 때 배경 스크롤 방지 */
-body.modal-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
+    overscroll-behavior-x: contain;
 }
 
 @keyframes float {
@@ -98,57 +90,11 @@ body.modal-open {
 .container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 120px 20px 40px;
     position: relative;
-    /* 가로 스크롤 방지 */
-    overflow-x: hidden;
 }
 
-/* 상단 그라데이션 오버레이 */
-.container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: linear-gradient(to bottom, var(--bg) 0%, rgba(255, 255, 255, 0.7) 70%, transparent 100%);
-    z-index: 999999;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.4s ease-in-out;
-}
-
-/* 하단 그라데이션 오버레이 */
-.container::after {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to top, var(--bg) 0%, rgba(255, 255, 255, 0.7) 60%, transparent 100%);
-    z-index: 999999;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.4s ease-in-out;
-}
-
-/* 스크롤 시 그라데이션 오버레이 표시 */
-body.scrolling .container::before,
-body.scrolling .container::after {
-    opacity: 1;
-}
-
-@media (prefers-color-scheme: dark) {
-    .container::before {
-        background: linear-gradient(to bottom, var(--bg) 0%, rgba(24, 26, 27, 0.7) 70%, transparent 100%);
-    }
-    
-    .container::after {
-        background: linear-gradient(to top, var(--bg) 0%, rgba(24, 26, 27, 0.7) 60%, transparent 100%);
-    }
-}
+/* 상단/하단 그라데이션 마스크 제거됨 */
 
 /* 헤더 */
 .header {
@@ -160,10 +106,7 @@ body.scrolling .container::after {
 .header h1 {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary);
     margin-bottom: 0.5rem;
 }
 
@@ -183,23 +126,13 @@ body.scrolling .container::after {
     box-shadow: var(--shadow-md);
     border: 1px solid var(--border);
     transition: var(--transition);
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-iteration-count: 1;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     gap: 1rem !important;
-    z-index: 5;
 }
 
 .card:hover {
     transform: translateY(-4px) scale(1.005);
     box-shadow: var(--shadow-lg);
-}
-
-/* 인풋섹션 하단 보더 제거 - 결과창과의 경계 부드럽게 */
-.card.scroll-delay-3 {
-    border-bottom: none;
-    margin-bottom: 0.5rem;
-    z-index: 100 !important;
-    position: relative;
 }
 
 /* 입력 필드 */
@@ -310,23 +243,7 @@ body.scrolling .container::after {
     display: none;
 }
 
-.mask-top{
-    top: 0;
-    height: 60px;
-    background: linear-gradient(to top, var(--surface) 0%, var(--surface) 30%, rgba(255, 255, 255, 0.9) 70%, transparent 100%);
-    z-index: 100000;
-    position: fixed;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
-
-.mask-bottom{
-    bottom: 0;
-    height: 60px;
-    background: linear-gradient(to bottom, var(--surface) 0%, var(--surface) 30%, rgba(255, 255, 255, 0.9) 70%, transparent 100%);
-    z-index: 100000;
-    position: fixed;
-}
+/* Mask removed */
 
 .search-results {
     max-height: 350px;
@@ -341,159 +258,7 @@ body.scrolling .container::after {
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-    /* 기본 상태에서도 아주 약한 마스크 적용으로 0에서 시작하지 않음 */
-    mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.98) 0px, 
-            black 20px, 
-            black calc(100% - 20px), 
-            rgba(0, 0, 0, 0.98) 100%);
-    -webkit-mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.98) 0px, 
-            black 20px, 
-            black calc(100% - 20px), 
-            rgba(0, 0, 0, 0.98) 100%);
-    mask-mode: alpha;
-    -webkit-mask-mode: alpha;
-    transition: mask 1.4s cubic-bezier(0.16, 1, 0.3, 1), -webkit-mask 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* 호버 시 중간 단계 마스크 */
-.search-results:hover {
-    mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.85) 0px,
-            rgba(0, 0, 0, 0.95) 15px,
-            black 30px, 
-            black calc(100% - 30px), 
-            rgba(0, 0, 0, 0.95) calc(100% - 15px),
-            rgba(0, 0, 0, 0.85) 100%);
-    -webkit-mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.85) 0px,
-            rgba(0, 0, 0, 0.95) 15px,
-            black 30px, 
-            black calc(100% - 30px), 
-            rgba(0, 0, 0, 0.95) calc(100% - 15px),
-            rgba(0, 0, 0, 0.85) 100%);
-    transition: mask 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94), -webkit-mask 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* 스크롤 중일 때 강한 마스크 적용 */
-.search-results.scrolling {
-    mask: 
-        linear-gradient(to bottom, 
-            transparent 0px, 
-            rgba(0, 0, 0, 0.05) 5px,
-            rgba(0, 0, 0, 0.15) 10px,
-            rgba(0, 0, 0, 0.3) 18px,
-            rgba(0, 0, 0, 0.5) 28px,
-            rgba(0, 0, 0, 0.7) 38px,
-            rgba(0, 0, 0, 0.85) 45px,
-            black 55px, 
-            black calc(100% - 55px), 
-            rgba(0, 0, 0, 0.85) calc(100% - 45px),
-            rgba(0, 0, 0, 0.7) calc(100% - 38px),
-            rgba(0, 0, 0, 0.5) calc(100% - 28px),
-            rgba(0, 0, 0, 0.3) calc(100% - 18px),
-            rgba(0, 0, 0, 0.15) calc(100% - 10px),
-            rgba(0, 0, 0, 0.05) calc(100% - 5px),
-            transparent 100%);
-    -webkit-mask: 
-        linear-gradient(to bottom, 
-            transparent 0px, 
-            rgba(0, 0, 0, 0.05) 5px,
-            rgba(0, 0, 0, 0.15) 10px,
-            rgba(0, 0, 0, 0.3) 18px,
-            rgba(0, 0, 0, 0.5) 28px,
-            rgba(0, 0, 0, 0.7) 38px,
-            rgba(0, 0, 0, 0.85) 45px,
-            black 55px, 
-            black calc(100% - 55px), 
-            rgba(0, 0, 0, 0.85) calc(100% - 45px),
-            rgba(0, 0, 0, 0.7) calc(100% - 38px),
-            rgba(0, 0, 0, 0.5) calc(100% - 28px),
-            rgba(0, 0, 0, 0.3) calc(100% - 18px),
-            rgba(0, 0, 0, 0.15) calc(100% - 10px),
-            rgba(0, 0, 0, 0.05) calc(100% - 5px),
-            transparent 100%);
-    transition: mask 1.6s cubic-bezier(0.16, 1, 0.3, 1), -webkit-mask 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* 스크롤이 맨 위에 있을 때 - 상단 마스크 부드럽게 제거 */
-.search-results.scrolling[data-scroll-top="false"] {
-    mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.98) 0px,
-            black 15px, 
-            black calc(100% - 55px), 
-            rgba(0, 0, 0, 0.85) calc(100% - 45px),
-            rgba(0, 0, 0, 0.7) calc(100% - 38px),
-            rgba(0, 0, 0, 0.5) calc(100% - 28px),
-            rgba(0, 0, 0, 0.3) calc(100% - 18px),
-            rgba(0, 0, 0, 0.15) calc(100% - 10px),
-            rgba(0, 0, 0, 0.05) calc(100% - 5px),
-            transparent 100%);
-    -webkit-mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.98) 0px,
-            black 15px, 
-            black calc(100% - 55px), 
-            rgba(0, 0, 0, 0.85) calc(100% - 45px),
-            rgba(0, 0, 0, 0.7) calc(100% - 38px),
-            rgba(0, 0, 0, 0.5) calc(100% - 28px),
-            rgba(0, 0, 0, 0.3) calc(100% - 18px),
-            rgba(0, 0, 0, 0.15) calc(100% - 10px),
-            rgba(0, 0, 0, 0.05) calc(100% - 5px),
-            transparent 100%);
-    transition: mask 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94), -webkit-mask 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* 스크롤이 맨 아래에 있을 때 - 하단 마스크 부드럽게 제거 */
-.search-results.scrolling[data-scroll-bottom="false"] {
-    mask: 
-        linear-gradient(to bottom, 
-            transparent 0px, 
-            rgba(0, 0, 0, 0.05) 5px,
-            rgba(0, 0, 0, 0.15) 10px,
-            rgba(0, 0, 0, 0.3) 18px,
-            rgba(0, 0, 0, 0.5) 28px,
-            rgba(0, 0, 0, 0.7) 38px,
-            rgba(0, 0, 0, 0.85) 45px,
-            black 55px, 
-            black calc(100% - 15px),
-            rgba(0, 0, 0, 0.98) 100%);
-    -webkit-mask: 
-        linear-gradient(to bottom, 
-            transparent 0px, 
-            rgba(0, 0, 0, 0.05) 5px,
-            rgba(0, 0, 0, 0.15) 10px,
-            rgba(0, 0, 0, 0.3) 18px,
-            rgba(0, 0, 0, 0.5) 28px,
-            rgba(0, 0, 0, 0.7) 38px,
-            rgba(0, 0, 0, 0.85) 45px,
-            black 55px, 
-            black calc(100% - 15px),
-            rgba(0, 0, 0, 0.98) 100%);
-    transition: mask 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94), -webkit-mask 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* 스크롤이 맨 위와 맨 아래 둘 다에 있을 때 - 기본 마스크로 돌아가기 */
-.search-results.scrolling[data-scroll-top="false"][data-scroll-bottom="false"] {
-    mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.98) 0px, 
-            black 20px, 
-            black calc(100% - 20px), 
-            rgba(0, 0, 0, 0.98) 100%);
-    -webkit-mask: 
-        linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0.98) 0px, 
-            black 20px, 
-            black calc(100% - 20px), 
-            rgba(0, 0, 0, 0.98) 100%);
-    transition: mask 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), -webkit-mask 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Scroll mask removed */
 }
 
 .search-results.show {
@@ -502,10 +267,7 @@ body.scrolling .container::after {
     transform: translateY(0);
 }
 
-/* 스크롤 종료 후 비활성화시 지연과 함께 부드러운 전환 */
-.search-results:not(.scrolling):not(:hover) {
-    transition: mask 2.0s cubic-bezier(0.16, 1, 0.3, 1) 0.6s, -webkit-mask 2.0s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
-}
+/* Scroll transition removed */
 
 .search-results-content {
     position: relative;
@@ -528,12 +290,10 @@ body.scrolling .container::after {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) ;
     gap: 0.2rem;
     margin-bottom: 0.2rem;
-    z-index: 100;
 }
 
 .drug-select-container {
     position: relative;
-    z-index: 100;
 }
 
 .drug-list {
@@ -567,63 +327,7 @@ body.scrolling .container::after {
     z-index: 100000;
 }
 
-/* 약물 리스트 스크롤 그라데이션 */
-.drug-list::before {
-    content: '';
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 15px;
-    background: linear-gradient(to bottom, var(--surface) 0%, rgba(255, 255, 255, 0.8) 70%, transparent 100%);
-    z-index: 10;
-    pointer-events: none;
-    margin-bottom: -15px;
-    border-radius: var(--radius) var(--radius) 0 0;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.drug-list::after {
-    content: '';
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 15px;
-    background: linear-gradient(to top, var(--surface) 0%, rgba(255, 255, 255, 0.8) 70%, transparent 100%);
-    z-index: 10000 !important;
-    pointer-events: none;
-    margin-top: -15px;
-    border-radius: 0 0 var(--radius) var(--radius);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* 스크롤 중일 때 그라데이션 표시 */
-.drug-list.scrolling::before,
-.drug-list.scrolling::after {
-    opacity: 1;
-}
-
-/* 스크롤 위치에 따른 개별 제어 */
-.drug-list.scrolling[data-scroll-top="false"]::before {
-    opacity: 0;
-}
-
-.drug-list.scrolling[data-scroll-bottom="false"]::after {
-    opacity: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-    .drug-list::before {
-        background: linear-gradient(to bottom, var(--surface) 0%, rgba(30, 30, 30, 0.8) 70%, transparent 100%);
-    }
-    
-    .drug-list::after {
-        background: linear-gradient(to top, var(--surface) 0%, rgba(30, 30, 30, 0.8) 70%, transparent 100%);
-    }
-}
+/* 약물 리스트 스크롤 그라데이션 제거됨 */
 
 .drug-list.show {
     opacity: 1;
@@ -641,7 +345,6 @@ body.scrolling .container::after {
     transition: var(--transition);
     border-bottom: 1px solid var(--border);
     transform: translateX(0);
-    z-index: 1000000;
 }
 
 .drug-item:last-child {
@@ -657,12 +360,10 @@ body.scrolling .container::after {
 
 .drug-item.exact-match {
     background: rgba(var(--primary-rgb), 0.05);
-    z-index: 1000000;
 }
 
 .drug-item.exact-match:hover {
     background: rgba(var(--primary-rgb), 0.15);
-    z-index: 1000000;
 }
 
 .drug-item-name {
@@ -671,7 +372,6 @@ body.scrolling .container::after {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    z-index: 1000000;
 }
 
 .drug-item-info {
@@ -681,7 +381,6 @@ body.scrolling .container::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000000;
 }
 
 .top-result {
@@ -692,7 +391,6 @@ body.scrolling .container::after {
     border-radius: 8px;
     font-weight: 700;
     margin-left: auto;
-    z-index: 100;
 }
 
 .match-type {
@@ -703,7 +401,6 @@ body.scrolling .container::after {
     color: var(--primary);
     margin-left: 0.5rem;
     white-space: nowrap;
-    z-index: 100;
 }
 
 /* AI 분석 스타일 */
@@ -715,7 +412,6 @@ body.scrolling .container::after {
     margin-bottom: 1.5rem;
     position: relative;
     overflow: hidden;
-    z-index: 100;
 }
 
 .ai-analysis::before {
@@ -736,13 +432,11 @@ body.scrolling .container::after {
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    z-index: 100;
 }
 
 .ai-icon {
     font-size: 1.5rem;
     animation: pulse 2s infinite;
-    z-index: 100;
 }
 
 @keyframes pulse {
@@ -755,14 +449,12 @@ body.scrolling .container::after {
     color: var(--text);
     font-size: 1.2rem;
     font-weight: 700;
-    z-index: 100;
 }
 
 .ai-analysis-content {
     color: var(--text);
     line-height: 1.7;
     font-size: 0.95rem;
-    z-index: 100;
 }
 
 /* 다크 테마에서 AI 분석 텍스트 색상 조정 */
@@ -839,26 +531,22 @@ body.scrolling .container::after {
 .ai-analysis-content h4 {
     color: var(--primary);
     margin: 1rem 0 0.5rem 0;
-    z-index: 100;
 }
 
 .ai-analysis-content ul,
 .ai-analysis-content ol {
     margin: 0.5rem 0;
     padding-left: 1.5rem;
-    z-index: 100;
 }
 
 .ai-analysis-content li {
     margin: 0.25rem 0;
-    z-index: 100;
 }
 
 .separator {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border), transparent);
     margin: 1.5rem 0;
-    z-index: 100;
 }
 
 .fda-data,
@@ -866,7 +554,6 @@ body.scrolling .container::after {
     padding: 1rem;
     background: rgba(var(--primary-rgb), 0.03);
     border-radius: var(--radius);
-    z-index: 100;
 }
 
 .fda-data h4,
@@ -874,20 +561,17 @@ body.scrolling .container::after {
     color: var(--primary);
     margin-bottom: 0.75rem;
     font-size: 1.1rem;
-    z-index: 100;
 }
 
 .fda-data h5 {
     color: var(--text);
     font-size: 1rem;
     margin: 1rem 0 0.5rem 0;
-    z-index: 100;
 }
 
 /* FDA Toggle Section */
 .fda-toggle-section {
     margin-top: 20px;
-    z-index: 100;
 }
 
 .fda-toggle-btn {
@@ -906,7 +590,6 @@ body.scrolling .container::after {
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    z-index: 100;
 }
 
 .fda-toggle-btn:hover {
@@ -920,25 +603,21 @@ body.scrolling .container::after {
     background: var(--surface);
     border-color: var(--primary);
     color: var(--text);
-    z-index: 100;
 }
 
 .fda-toggle-btn .toggle-icon {
     margin-right: 8px;
     font-size: 1rem;
-    z-index: 100;
 }
 
 .fda-toggle-btn .toggle-text {
     flex: 1;
     text-align: left;
-    z-index: 100;
 }
 
 .fda-toggle-btn .toggle-arrow {
     font-size: 0.8rem;
     transition: transform 0.3s ease;
-    z-index: 100;
 }
 
 .fda-toggle-btn.expanded .toggle-arrow {
@@ -952,7 +631,6 @@ body.scrolling .container::after {
     border: 1px solid var(--border);
     border-radius: 8px;
     animation: fadeInDown 0.3s ease-out;
-    z-index: 100;
 }
 
 /* 설정 모달 */
@@ -1335,176 +1013,16 @@ body.scrolling .container::after {
     display: none;
     visibility: hidden;
     opacity: 0;
-    height: 600px;
+    animation: fadeIn 0.5s ease;
+    max-height: 80vh;
     overflow-y: auto;
+    scroll-behavior: smooth;
     position: relative;
-    margin-top: -8.85rem;
-    z-index: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    /* 상시 활성화된 상하단 마스크 제거됨 */
 }
 
-/* 결과 섹션이 표시될 때 */
-.result-section.show {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-}
-
-/* 결과 컨테이너 - 기본 카드 스타일 적용 */
-.result-container {
-    background: var(--surface);
-    backdrop-filter: blur(100px);
-    -webkit-backdrop-filter: blur(100px);
-    border-radius: var(--radius-lg);
-    padding: 1rem !important;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--border);
-    transition: var(--transition);
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-iteration-count: 1;
-    gap: 1rem !important;
-}
-
-
-/* 결과 헤더 */
-.result-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1.5rem 1rem 1rem 1rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1rem;
-}
-
-.result-icon-container {
-    margin-right: 1rem;
-}
-
-.result-icon {
-    font-size: 1.5rem;
-    color: var(--primary);
-}
-
-.result-title-container {
-    flex: 1;
-}
-
-.result-main-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text);
-    margin: 0 0 0.25rem 0;
-    line-height: 1.2;
-}
-
-.result-subtitle {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin: 0;
-    font-weight: 400;
-}
-
-.result-actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.result-action-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: var(--radius);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    font-size: 1rem;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.result-action-btn:hover {
-    background: var(--primary);
-    color: var(--bg);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-}
-
-/* 결과 콘텐츠 */
-.result-content {
-    padding: 0;
-    position: relative;
-}
-
-/* 결과 푸터 */
-.result-footer {
-    padding: 1rem 0 0 0;
-    border-top: 1px solid var(--border);
-    margin-top: 1rem;
-}
-
-.result-disclaimer {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: var(--dur-medium-bg);
-    border: 1px solid var(--dur-medium);
-    border-radius: var(--radius);
-    font-size: 0.875rem;
-    color: var(--text);
-}
-
-.disclaimer-icon {
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-
-.disclaimer-text {
-    font-weight: 500;
-    line-height: 1.4;
-}
-
-/* 다크 모드 지원 */
-@media (prefers-color-scheme: dark) {
-    .result-action-btn:hover {
-        background: var(--primary);
-        color: var(--bg);
-    }
-    
-    .result-disclaimer {
-        background: var(--dur-medium-bg);
-        border-color: var(--dur-medium);
-    }
-}
-
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-    .result-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-    }
-    
-    .result-icon-container {
-        margin-right: 0;
-        margin-bottom: 0.5rem;
-    }
-    
-    .result-main-title {
-        font-size: 1.125rem;
-    }
-    
-    .result-actions {
-        justify-content: center;
-    }
-    
-    .result-disclaimer {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.25rem;
-    }
-}
+/* 스크롤 관련 그라데이션 제거됨 - 상시 활성화된 마스크로 변경 */
 
 .result-card {
     padding: 1.5rem;
@@ -1515,177 +1033,13 @@ body.scrolling .container::after {
 
 /* 상단 라인 제거됨 */
 
-/* 결과 경고 섹션 - 개선된 스타일 */
 .result-warning {
-    /* 배경 제거 */
-    background: none;
-    
-    /* 경계선 제거 */
-    border: none;
-    
-    /* 그림자 제거 */
-    box-shadow: none;
-    
-    /* 패딩 제거 */
-    padding: 0;
-    
-    /* 둥근 모서리 제거 */
-    border-radius: 0;
-    
-    /* 기존 속성 유지 */
-    position: relative;
-    overflow: hidden;
-    
-    /* 추가 애니메이션 */
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-/* 호버 시 더 강조 */
-.result-warning:hover {
-    transform: none;
-    box-shadow: none;
-    border: none;
-}
-
-/* 상단 경고 라인 제거됨 */
-
-/* 경고 아이콘 강조 */
-.result-warning .result-icon {
-    font-size: 2.2rem;
-    color: #666666;
-    filter: drop-shadow(0 2px 4px rgba(128, 128, 128, 0.3));
-    animation: iconShake 4s ease-in-out infinite;
-}
-
-@keyframes iconShake {
-    0%, 90%, 100% {
-        transform: translateX(0) rotate(0);
-    }
-    92%, 96% {
-        transform: translateX(-2px) rotate(-2deg);
-    }
-    94%, 98% {
-        transform: translateX(2px) rotate(2deg);
-    }
-}
-
-/* 제목 텍스트 스타일링 강화 */
-.result-warning .result-title {
-    font-size: 1.6rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, 
-        #666666 0%, 
-        #888888 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 1px 2px rgba(128, 128, 128, 0.1);
-}
-
-/* 경고 내용 텍스트 */
-.result-warning .result-content {
-    color: var(--text);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-top: 1rem;
-}
-
-/* DUR 코드 뱃지 스타일 */
-.result-warning .dur-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #666666;
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin: 0.5rem 0.25rem;
-    box-shadow: 0 2px 8px rgba(128, 128, 128, 0.3);
-    transition: all 0.3s ease;
-}
-
-.result-warning .dur-badge:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(128, 128, 128, 0.4);
-}
-
-/* 상호작용 설명 박스 */
-.result-warning .interaction-box {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(128, 128, 128, 0.2);
-    border-radius: 12px;
-    padding: 1rem;
-    margin: 1rem 0;
-}
-
-/* 권장사항 강조 */
-.result-warning .recommendation {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
-        rgba(255, 255, 255, 0.05) 100%);
-    padding: 0.75rem 1rem;
-    margin: 1rem 0;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.95rem;
-}
-
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-.result-warning {
-        background: none;
-        border: none;
-    }
-    
-    .result-warning .interaction-box {
-        background: rgba(0, 0, 0, 0.3);
-        border-color: rgba(128, 128, 128, 0.3);
-    }
-    
-    .result-warning .recommendation {
-        background: linear-gradient(135deg, 
-            rgba(0, 0, 0, 0.4) 0%, 
-            rgba(0, 0, 0, 0.2) 100%);
-    }
-}
-
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-    .result-warning {
-        padding: 0;
-        border: none;
-    }
-    
-    .result-warning .result-icon {
-        font-size: 1.8rem;
-    }
-    
-    .result-warning .result-title {
-        font-size: 1.3rem;
-    }
-    
-    .result-warning .dur-badge {
-        font-size: 0.8rem;
-        padding: 0.3rem 0.6rem;
-    }
-}
-
-@media (max-width: 370px) {
-    .result-warning {
-        padding: 0;
-        border: none;
-    }
-    
-    .result-warning .result-icon {
-        font-size: 1.5rem;
-    }
-    
-    .result-warning .result-title {
-        font-size: 1.1rem;
-    }
+.result-warning::before {
+    background: linear-gradient(90deg, var(--text), var(--text-secondary));
 }
 
 .result-safe {
@@ -1950,6 +1304,59 @@ body.scrolling .container::after {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* 예시 약물 */
+.example-drugs {
+    background: var(--surface);
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    animation: fadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.example-drugs:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.example-drugs h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.example-drugs ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.example-drugs li {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.25rem;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid var(--border);
+}
+
+.example-drugs li:hover {
+    background: var(--bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 
 /* 알림 */
 .alert {
@@ -1987,7 +1394,8 @@ body.scrolling .container::after {
 
 .alert.dismissing {
     top: -100px;
-    transform: translateX(-50%);
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
 }
 
 .alert-success {
@@ -2176,8 +1584,7 @@ body.scrolling .container::after {
     }
 
     .container {
-        margin: -8px;
-        z-index: 100;
+        padding: 80px 1rem 30px;
     }
 
     .header h1 {
@@ -2225,11 +1632,9 @@ body.scrolling .container::after {
         transform: translateX(-50%);
     }
 
-    
-    /* 모바일에서 검색 결과 창 높이 조정 */
-    .search-results {
-        max-height: 200px;
-        overflow-y: auto;
+    /* 모바일에서 예시 약물 창 숨기기 */
+    .example-drugs {
+        display: none;
     }
 
     /* 모바일에서 맨 위로 가기 버튼 숨기기 */
@@ -2312,14 +1717,6 @@ body.scrolling .container::after {
         font-size: 0.8rem;
         font-weight: 500;
         transition: none;
-        z-index: 1;
-    }
-    
-    /* 모바일에서 상호작용 검사하기 버튼 표시 */
-    .btn.btn-primary.btn-block[onclick="checkInteraction()"] {
-        display: block !important;
-        width: 100%;
-        margin-top: 1rem;
     }
     .api-status{
         flex-direction: column;
@@ -2389,7 +1786,7 @@ body.scrolling .container::after {
 /* 초소형 화면 (400px 이하) */
 @media (max-width: 370px) {
     .container {
-        padding: 0.5rem 0.5rem;
+        padding: 60px 0.5rem 20px;
     }
 
     .header h1 {
@@ -2545,6 +1942,9 @@ body.scrolling .container::after {
         transform: translateX(-50%);
     }
 
+    .example-drugs {
+        display: none;
+    }
 
     /* 초소형 화면에서도 Add to interaction check 버튼 아이콘만 표시 */
     .add-to-check-btn {
@@ -2766,14 +2166,14 @@ body.scrolling .container::after {
     border: 1px solid var(--border);
     border-radius: 6px;
     background: var(--surface);
-    color: var(--primary);
+    color: var(--text);
     cursor: pointer;
     transition: var(--transition);
     font-weight: 500;
 }
 
 .dev-btn:hover {
-    background: var(--surface);
+    background: var(--primary);
     color: var(--text);
     transform: translateY(-1px);
 }
@@ -2897,89 +2297,19 @@ body.scrolling .container::after {
     outline-offset: 2px;
 }
 
-/* 스크롤 애니메이션 */
-.scroll-hidden {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(30px) scale(0.95);
-    transition: var(--scroll-transition);
+/* Scroll animations removed - all elements visible by default */
+.scroll-hidden,
+.scroll-fade,
+.scroll-scale {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
 }
 
 .scroll-visible {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1);
-}
-
-.scroll-slide-left {
-    opacity: 0;
-    transform: translateX(-40px) scale(0.95);
-    transition: var(--scroll-transition);
-}
-
-.scroll-slide-left.scroll-visible {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
-
-.scroll-slide-right {
-    opacity: 0;
-    transform: translateX(40px) scale(0.95);
-    transition: var(--scroll-transition);
-}
-
-.scroll-slide-right.scroll-visible {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
-
-.scroll-fade {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-fade.scroll-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 헤더 특별 스타일 */
-header.header.scroll-fade.scroll-visible {
-    padding-top: 35px;
-}
-
-.scroll-scale {
-    opacity: 0;
-    transform: scale(0.8) translateY(20px);
-    transition: var(--scroll-transition);
-}
-
-.scroll-scale.scroll-visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-}
-
-/* 지연 애니메이션 클래스 */
-.scroll-delay-1 {
-    transition-delay: 0.15s;
-}
-
-.scroll-delay-2 {
-    transition-delay: 0.3s;
-}
-
-.scroll-delay-3 {
-    transition-delay: 0.45s;
-}
-
-.scroll-delay-4 {
-    transition-delay: 0.6s;
-}
-
-/* 컨테이너에 스크롤 애니메이션 적용 */
-.container > * {
-    transition: all 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: none;
 }
 
 /* 부드러운 스크롤 */
@@ -2995,17 +2325,17 @@ html {
 
 /* Footer Styles */
 .footer {
-    margin-top: -43px;
+    margin-top: 4rem;
     padding-bottom: 10px;
     background: linear-gradient(135deg, 
         rgba(var(--surface-rgb), 0.95) 0%, 
         rgba(var(--bg-rgb), 0.98) 100%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
     position: relative;
     overflow: hidden;
-    z-index: 100;
+    z-index: 1;
     /* 초기 상태: 아래쪽에 숨겨진 상태 */
     filter: blur(15px);
     opacity: 0;
@@ -3033,14 +2363,13 @@ html {
         var(--primary) 80%, 
         transparent 100%);
     opacity: 0.5;
-    z-index: 1;
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 2rem 1rem;
-    z-index: 100002;
+    padding: 4rem 2rem 2rem;
+    z-index: 100001;
 }
 
 /* Main Footer Content - Desktop: 4 columns */
@@ -3049,63 +2378,6 @@ html {
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
-    z-index: 100;
-    /* 초기 상태: 아래쪽에 숨겨진 상태 */
-    filter: blur(12px);
-    opacity: 0;
-    transform: translateY(80px);
-    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-}
-
-/* 푸터가 보일 때 컨텐츠 활성화 */
-.footer-content.visible {
-    filter: blur(0px);
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 푸터 구분선 */
-.footer-divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(200, 200, 200, 0.3) 20%, 
-        rgba(220, 220, 220, 0.8) 50%, 
-        rgba(200, 200, 200, 0.3) 80%, 
-        transparent 100%);
-    margin: 1.5rem 0;
-    z-index: 100;
-    /* 초기 상태: 블러 및 투명 */
-    filter: blur(10px);
-    opacity: 0.3;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-}
-
-/* 구분선에 추가적인 그라데이션 효과 */
-.footer-divider::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(180, 180, 180, 0.1) 20%, 
-        rgba(200, 200, 200, 0.3) 50%, 
-        rgba(180, 180, 180, 0.1) 80%, 
-        transparent 100%);
-    filter: blur(1px);
-}
-
-/* 푸터가 보일 때 구분선 활성화 */
-.footer-divider.visible {
-    filter: blur(0px);
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .footer-section h3,
@@ -3113,7 +2385,6 @@ html {
     color: var(--text);
     margin-bottom: 1rem;
     font-weight: 600;
-    z-index: 10;
 }
 
 .footer-section h3 {
@@ -3122,32 +2393,27 @@ html {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    z-index: 10;
 }
 
 .footer-section h4 {
     font-size: 1rem;
     color: var(--text-secondary);
-    z-index: 10;
 }
 
 .footer-section p {
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    z-index: 10;
 }
 
 .footer-section ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    z-index: 10;
 }
 
 .footer-section li {
     margin-bottom: 0.75rem;
-    z-index: 10;
 }
 
 .footer-section a {
@@ -3159,32 +2425,11 @@ html {
     gap: 0.5rem;
     padding: 0.25rem 0;
     border-radius: 4px;
-    z-index: 10;
 }
 
 .footer-section a:hover {
     color: var(--primary);
     transform: translateX(4px);
-}
-
-/* Footer Badges */
-.footer-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    z-index: 10;
-}
-
-.footer-badges .badge {
-    background: rgba(var(--primary-rgb), 0.1);
-    color: var(--primary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    border: 1px solid rgba(var(--primary-rgb), 0.2);
-    z-index: 10;
 }
 
 /* Medical Links */
@@ -3218,13 +2463,30 @@ html {
     transform: translateY(-2px);
 }
 
+/* Footer Badges */
+.footer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.footer-badges .badge {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+
 /* Social Links */
 .social-links {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-    z-index: 10;
 }
 
 .social-links a {
@@ -3233,7 +2495,6 @@ html {
     border-radius: 8px;
     border: 1px solid var(--border);
     transition: var(--transition);
-    z-index: 10;
 }
 
 .social-links a:hover {
@@ -3249,7 +2510,6 @@ html {
     border-radius: 12px;
     border: 1px solid var(--border);
     text-align: center;
-    z-index: 10;
 }
 
 .stat-number {
@@ -3258,7 +2518,6 @@ html {
     font-weight: 700;
     color: var(--primary);
     line-height: 1;
-    z-index: 10;
 }
 
 .stat-label {
@@ -3266,7 +2525,6 @@ html {
     color: var(--text-secondary);
     margin-top: 0.25rem;
     display: block;
-    z-index: 10;
 }
 
 /* Medical Disclaimer */
@@ -3276,19 +2534,6 @@ html {
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1.5rem;
-    z-index: 100;
-    /* 초기 상태: 아래쪽에 숨겨진 상태 */
-    filter: blur(12px);
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
-}
-
-/* 푸터가 보일 때 면책조항 활성화 */
-.footer-disclaimer.visible {
-    filter: blur(0px);
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .disclaimer-content h4 {
@@ -3296,7 +2541,6 @@ html {
     margin-bottom: 0.75rem;
     font-size: 1rem;
     font-weight: 600;
-    z-index: 10;
 }
 
 .disclaimer-content p {
@@ -3304,25 +2548,12 @@ html {
     line-height: 1.6;
     margin: 0;
     font-size: 0.9rem;
-    z-index: 10;
 }
 
 /* Footer Bottom */
 .footer-bottom {
+    border-top: 1px solid var(--border);
     padding-top: 1rem;
-    z-index: 100;
-    /* 초기 상태: 아래쪽에 숨겨진 상태 */
-    filter: blur(12px);
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
-}
-
-/* 푸터가 보일 때 하단 바 활성화 */
-.footer-bottom.visible {
-    filter: blur(0px);
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .footer-bottom-content {
@@ -3331,20 +2562,17 @@ html {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    z-index: 10;
 }
 
 .footer-copyright p {
     color: var(--text-secondary);
     font-size: 0.875rem;
     margin: 0;
-    z-index: 10;
 }
 
 .footer-legal {
     display: flex;
     gap: 1.5rem;
-    z-index: 10;
 }
 
 .footer-legal a {
@@ -3352,12 +2580,10 @@ html {
     text-decoration: none;
     font-size: 0.875rem;
     transition: var(--transition);
-    z-index: 10;
 }
 
 .footer-legal a:hover {
     color: var(--primary);
-    z-index: 10;
 }
 
 /* 버전과 언어 전환을 같은 줄에 배치 */
@@ -3366,14 +2592,12 @@ html {
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    z-index: 10;
 }
 
 .footer-language {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
 }
 
 .footer-language a {
@@ -3388,7 +2612,6 @@ html {
     align-items: center;
     gap: 0.25rem;
     font-family: 'Courier New', monospace;
-    z-index: 10;
     height: 1.5rem;
     line-height: 1.5rem;
 }
@@ -3742,88 +2965,71 @@ html {
     .footer-content {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
-        z-index: 10;
     }
     
     .footer-about {
         grid-column: 1 / -1;
-        z-index: 10;
     }
     
     .footer-container {
-        padding: 2.5rem 1.5rem 1rem;
-        z-index: 10;
-
+        padding: 3rem 1.5rem 1.5rem;
     }
     
     .social-links {
         flex-direction: row;
         flex-wrap: wrap;
-        z-index: 10;
     }
     
     .footer-bottom-content {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
-        z-index: 10;
     }
     
     .footer-legal {
         order: -1;
-        z-index: 10;
     }
-    
-    /* 태블릿에서 자주 찾는 약물 섹션 숨기기 */
 }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
     .footer {
-        margin-top: -23px;
-        z-index: 100;
+        margin-top: 0.5rem;
     }
     
     .footer-container {
-        padding: 2rem 1rem 1rem;
-        z-index: 100002;
+        padding: 2.5rem 1rem 1.5rem;
     }
     
     .footer-content {
         grid-template-columns: 1fr;
         gap: 2rem;
         margin-bottom: 2rem;
-        z-index: 10;
     }
     
     .footer-section h3 {
         font-size: 1.1rem;
         text-align: center;
-        z-index: 10;
     }
     
     .footer-section h4 {
         font-size: 0.95rem;
         margin-bottom: 0.75rem;
-        z-index: 10;
     }
     
     .footer-section p {
         font-size: 0.9rem;
         text-align: center;
         margin-bottom: 1rem;
-        z-index: 10;
     }
     
     .footer-badges {
         justify-content: center;
-        z-index: 10;
     }
     
     .footer-badges .badge {
         font-size: 0.7rem;
         padding: 0.2rem 0.6rem;
-        z-index: 10;
     }
     
     .medical-links {
@@ -3835,54 +3041,46 @@ html {
         font-size: 0.8rem;
         padding: 0.4rem 0.8rem;
     }
-
+    
     .social-links {
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
         gap: 0.5rem;
-        z-index: 10;
     }
     
     .social-links a {
         padding: 0.4rem 0.6rem;
         font-size: 0.85rem;
-        z-index: 10;
     }
     
     .footer-stats {
         max-width: 200px;
         margin: 0 auto;
-        z-index: 10;
     }
     
     .stat-number {
         font-size: 1.25rem;
-        z-index: 10;
     }
     
     .stat-label {
         font-size: 0.7rem;
-        z-index: 10;
     }
     
     .footer-disclaimer {
         padding: 1rem;
         margin-bottom: 1.5rem;
-        z-index: 10;
     }
     
     .disclaimer-content h4 {
         font-size: 0.9rem;
         text-align: center;
         margin-bottom: 0.5rem;
-        z-index: 10;
     }
     
     .disclaimer-content p {
         font-size: 0.8rem;
         text-align: center;
-        z-index: 10;
     }
     
     .footer-bottom-content {
@@ -3890,7 +3088,6 @@ html {
         align-items: center;
         text-align: center;
         gap: 1rem;
-        z-index: 10;
     }
     
         .footer-legal {
@@ -3899,178 +3096,78 @@ html {
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        z-index: 10;
     }
 
     .footer-legal a {
         font-size: 0.8rem;
-        z-index: 10;
     }
 
     .footer-language {
         margin: 0.75rem 0;
-        z-index: 10;
     }
 
     .footer-language a {
         padding: 0.4rem 0.8rem;
-        z-index: 10;
     }
 
     .footer-copyright p {
         font-size: 0.8rem;
-        z-index: 10;
     }
 
     .footer-version {
         padding: 0.2rem 0.6rem;
-        z-index: 10;
     }
 }
 
 /* Small Mobile Styles */
 @media (max-width: 370px) {
-    .footer {
-        margin-top: -18px;
-        z-index: 100;
-    }
-    
     .footer-container {
-        padding: 1.5rem 0.75rem 0.75rem;
-        z-index: 100002;
+        padding: 2rem 0.75rem 1rem;
     }
     
     .footer-content {
         gap: 1.5rem;
-        z-index: 10;
     }
     
     .footer-section h3 {
         font-size: 1rem;
-        z-index: 10;
     }
     
     .footer-section h4 {
         font-size: 0.9rem;
-        z-index: 10;
     }
     
     .footer-section p {
         font-size: 0.85rem;
-        z-index: 10;
     }
     
     .social-links a {
         padding: 0.35rem 0.5rem;
         font-size: 0.8rem;
-        z-index: 10;
     }
     
     .footer-disclaimer {
         padding: 0.75rem;
-        z-index: 10;
     }
     
     .disclaimer-content h4 {
         font-size: 0.85rem;
-        z-index: 10;
     }
     
     .disclaimer-content p {
         font-size: 0.75rem;
-        z-index: 10;
     }
     
     .footer-legal a {
         font-size: 0.75rem;
-        z-index: 10;
     }
     
     .footer-copyright p {
         font-size: 0.75rem;
-        z-index: 10;
     }
 }
 
-/* DUR (Drug Utilization Review) 시스템 스타일 */
-.dur-section {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.dur-section:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-}
-
-.dur-analysis {
-    margin-bottom: 1.5rem;
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.dur-badge {
-    animation: pulse 2s infinite;
-}
-
-@keyframes durPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-    }
-}
-
-.dur-badge:hover {
-    animation: durPulse 1s infinite;
-}
-
-/* DUR 위험도별 색상 변수 */
-:root {
-    --dur-high: #ff4444;
-    --dur-medium: #ffaa44;
-    --dur-low: #44aa44;
-    --dur-high-bg: rgba(255, 68, 68, 0.1);
-    --dur-medium-bg: rgba(255, 170, 68, 0.1);
-    --dur-low-bg: rgba(68, 170, 68, 0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --dur-high-bg: rgba(255, 68, 68, 0.15);
-        --dur-medium-bg: rgba(255, 170, 68, 0.15);
-        --dur-low-bg: rgba(68, 170, 68, 0.15);
-    }
-}
-
-/* DUR 섹션 반응형 */
-@media (max-width: 768px) {
-    .dur-section {
-        padding: 1rem !important;
-        margin: 0.5rem 0;
-    }
-    
-    .dur-badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
-    }
-}
-
-@media (max-width: 370px) {
-    .dur-section {
-        padding: 0.8rem !important;
-    }
-    
-    .dur-badge {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.6rem;
-    }
-}
-
-/* 무료 AI 서비스 정보 스타일 */
+/* Free AI Service Information Styles */
 .free-ai-info {
     background: linear-gradient(135deg, var(--surface) 0%, var(--surface-secondary) 100%);
     border: 1px solid var(--border);
@@ -4128,9 +3225,9 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    font-family: inherit;
-    margin: 0;
+    text-decoration: none;
+    min-height: 2.5rem;
+    font-weight: 500;
 }
 
 .feedback-btn:hover {
@@ -4213,4 +3310,4 @@ html {
         padding: 0.35rem 0.5rem;
         font-size: 0.7rem;
     }
-} 
+}
