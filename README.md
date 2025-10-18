@@ -2045,27 +2045,243 @@ O Verificador de Interações Medicamentosas é uma aplicação web avançada qu
 
 ### ✨ Características Principais
 
-- **Pesquisa inteligente em tempo real** com tolerância a erros de digitação
-- **Análise multi-IA**: OpenAI, Claude, Perplexity, Gemini
-- **Avaliação de risco**: Baixo/Moderado/Alto/Muito alto
-- **Base de dados de 50+ medicamentos** com nomes comerciais
-- **Modo escuro/claro** com design glassmorphism
-- **Suporte multilíngue** - 16 idiomas com deteção automática
+#### 🔍 **Motor de Pesquisa Inteligente**
+- **Pesquisa em tempo real** com debounce de 300ms
+- **Tolerância a erros de digitação** e correspondência difusa
+- **Pesquisa parcial** (ex: "aspir" → "Aspirina")
+- **Suporte uso misto** português-inglês
+- **Ordenação baseada em relevância** com algoritmos de similaridade
 
-### 🔧 Configuração
+#### 🤖 **Análise Multi-IA**
+- Suporte para **4 serviços IA principais**: OpenAI, Claude, Perplexity, Gemini
+- **Análise médica profissional** com relatórios estruturados
+- **Avaliação de risco**: Baixo/Moderado/Alto/Muito alto
+- **Recomendações clínicas** e sinais de emergência
+- **Sistema de fallback automático** para conexões falhadas
+
+#### 📊 **Dados Abrangentes**
+- Integração **API FDA OpenFDA**
+- **Base de dados de 50+ medicamentos** com nomes comerciais
+- **Informações detalhadas sobre medicamentos** com detalhes do fabricante
+- **Mecanismos de interação** e avisos
+- **Histórico de pesquisas recentes** e favoritos
+
+#### 🎨 **UI/UX Moderna**
+- **Design glassmorphism** com efeitos de desfoque
+- **Tema cinza profissional** com gradientes subtis
+- **Suporte modo escuro/claro**
+- **Design responsivo** para todos os dispositivos
+- **Funcionalidades de acessibilidade** com etiquetas ARIA
+- **Layout de rodapé limpo** com links para recursos médicos
+
+### 🔧 Configuração de Variáveis de Ambiente
+
+**Gestão de Configuração Unificada:**
+Todos os idiomas utilizam um único ficheiro `.env` root para configuração centralizada:
 
 ```bash
-# Clonar o repositório
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
-
-# Configurar variáveis de ambiente
+# Copiar o ficheiro de exemplo
 cp env.example .env
-# Editar o ficheiro .env com as suas chaves API
 
-# Iniciar o servidor local
-python3 -m http.server 8080
+# Editar com os seus valores reais
+nano .env
 ```
+
+**Configuração Necessária:**
+```env
+# Configuração EmailJS (Universal)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# Chaves API Serviços IA (Opcional)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# APIs Base de Dados de Medicamentos por País
+FDA_API_KEY=your_fda_api_key_here          # Estados Unidos
+MFDS_API_KEY=your_mfds_api_key_here       # Coreia do Sul
+PMDA_API_KEY=your_pmda_api_key_here       # Japão
+NMPA_API_KEY=your_nmpa_api_key_here        # China
+# ... outras APIs por país
+```
+
+**Vantagens da Gestão Unificada:**
+- **Ficheiro de configuração único** para gerir 16 idiomas
+- **Manutenção simples** - sem chaves API duplicadas
+- **Segurança** - ficheiro `.env` gerido por gitignore
+- **Eficiência** - um único local para gerir todas as configurações
+
+### 🚀 Começar
+
+#### 🌐 Suporte Linguístico
+Este projeto está completamente otimizado com pastas de idiomas independentes:
+- **Português**: `/pt-pt/` - Versão portuguesa com conteúdo localizado
+- **Inglês (Padrão)**: `/en-us/` - Versão inglesa com conteúdo localizado
+- **Mudança de idioma**: Use o seletor de idioma no rodapé ou navegue diretamente para as pastas de idioma
+- Cada pasta de idioma contém ficheiros `config.js`, `index.html`, `scripts.js` e `styles.css` independentes
+
+#### 📁 Estrutura do Projeto
+
+```
+DI2025checker/
+├── vercel.json          # Configuração de deployment Vercel
+├── pt-pt/               # Pasta portuguesa
+│   ├── config.js        # Configuração EmailJS portuguesa
+│   ├── index.html       # Página principal portuguesa
+│   ├── ai-test.html     # Página de teste IA portuguesa
+│   ├── scripts.js       # Scripts localizados portugueses
+│   └── styles.css       # Estilos partilhados
+├── en-us/               # Pasta inglesa
+│   ├── config.js        # Configuração EmailJS inglesa
+│   ├── index.html       # Página principal inglesa
+│   ├── ai-test.html     # Página de teste IA inglesa
+│   ├── scripts.js       # Scripts localizados ingleses
+│   └── styles.css       # Estilos partilhados
+├── i18n.js              # Suporte multilingue
+├── language-selector.js # Seletor de idioma
+├── logo/                # Recursos partilhados
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
+```
+
+#### Pré-requisitos
+- Navegador web moderno (Chrome, Firefox, Safari, Edge)
+- Ligação à Internet para acesso API
+- Pelo menos uma chave API IA (opcional mas recomendado)
+
+#### Instalação
+
+1. **Clonar o repositório**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **Desenvolvimento Local**
+   ```bash
+   # Servir com um servidor local
+   python3 -m http.server 8000
+   
+   # Depois aceder:
+   # Português: http://localhost:8000/pt-pt/
+   # Inglês: http://localhost:8000/en-us/
+   ```
+
+3. **Deploy no Vercel (Recomendado)**
+   ```bash
+   # Instalar Vercel CLI
+   npm i -g vercel
+   
+   # Deploy
+   vercel
+   
+   # A configuração vercel.json redireciona automaticamente "/" para "/en-us/index.html"
+   ```
+
+4. **Configurar APIs IA (Opcional)**
+   - Clicar no botão de configurações ⚙️
+   - Adicionar as suas chaves API para os serviços desejados
+   - Testar as conexões usando o botão de teste API 🧪
+
+#### Configuração de Chaves API
+
+##### OpenAI (Recomendado)
+1. Visitar [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Criar uma conta e gerar uma chave API
+3. Formato: `sk-...`
+
+##### Anthropic Claude
+1. Visitar [Anthropic Console](https://console.anthropic.com/)
+2. Gerar uma chave API
+3. Formato: `sk-ant-...`
+
+##### Perplexity AI
+1. Visitar [Perplexity Settings](https://www.perplexity.ai/settings/api)
+2. Gerar uma chave API
+3. Formato: `pplx-...`
+
+##### Google Gemini
+1. Visitar [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Gerar uma chave API
+3. Formato: `AI...`
+
+#### Configuração EmailJS (para Função de Feedback)
+
+1. **Criar Conta EmailJS**
+   - Visitar [EmailJS](https://www.emailjs.com/)
+   - Criar uma conta gratuita
+
+2. **Conectar Serviço de Email**
+   - Adicionar o seu serviço de email (Gmail, Outlook, etc.)
+   - Anotar o seu Service ID
+
+3. **Criar Template de Email**
+   - Criar um template de feedback com estas variáveis:
+     - `{{from_name}}` - Nome do remetente
+     - `{{from_email}}` - Email do remetente
+     - `{{subject}}` - Assunto do feedback
+     - `{{message}}` - Mensagem do feedback
+   - Anotar o seu Template ID
+
+4. **Configurar Variáveis de Ambiente**
+   - Editar o ficheiro `.env` na raiz
+   - Substituir os valores placeholder:
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 Utilização
+
+1. **Pesquisar medicamentos**
+   - Escrever o nome do medicamento na caixa de pesquisa
+   - Usar nomes parciais ou até erros de digitação
+   - Selecionar das sugestões inteligentes
+
+2. **Verificar interações**
+   - Escolher dois medicamentos dos menus suspensos
+   - Clicar em "Verificar Interação"
+   - Rever tanto a análise IA como os dados FDA
+
+3. **Ver informações detalhadas**
+   - Clicar em qualquer nome de medicamento para informações detalhadas
+   - Adicionar medicamentos diretamente ao verificador de interações
+
+### 🔬 Funcionalidades de Análise IA
+
+- **Avaliação de Risco**: Avaliação abrangente do nível de risco
+- **Perspetivas Clínicas**: Recomendações médicas profissionais
+- **Mecanismos de Interação**: Como os medicamentos interagem a nível molecular
+- **Sinais de Emergência**: Quando procurar atenção médica imediata
+- **Relatórios Estruturados**: Análise formatada e fácil de ler
+
+### ⚠️ Importante Aviso Médico
+
+> **Esta ferramenta é apenas para fins informativos e não deve substituir aconselhamento médico profissional. Consulte sempre profissionais de saúde antes de tomar decisões sobre medicamentos.**
+
+### 🤝 Contribuir
+
+1. Fazer fork do repositório
+2. Criar um branch de funcionalidade (`git checkout -b feature/amazing-feature`)
+3. Fazer commit das alterações (`git commit -m 'Add amazing feature'`)
+4. Fazer push para o branch (`git push origin feature/amazing-feature`)
+5. Abrir um Pull Request
+
+### 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT - ver o ficheiro [LICENSE](LICENSE) para detalhes.
+
+### 🙏 Agradecimentos
+
+- FDA OpenFDA pelos dados abrangentes sobre medicamentos
+- Fornecedores de IA pelas capacidades de análise avançada
+- Profissionais médicos pela orientação sobre interações medicamentosas
+- Instituições médicas portuguesas: INFARMED, DGS, Ordem dos Farmacêuticos
 
 ### 🔗 Recursos Médicos
 
