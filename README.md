@@ -3587,27 +3587,243 @@ Dự án này được cấp phép theo Giấy phép MIT - xem file [LICENSE](LI
 
 ### ✨ Ana Özellikler
 
-- **Gerçek zamanlı akıllı arama** yazım hatası toleransıyla
-- **Çoklu-AI analizi**: OpenAI, Claude, Perplexity, Gemini
-- **Risk değerlendirmesi**: Düşük/Orta/Yüksek/Çok Yüksek
-- **50+ ilaç veritabanı** marka isimleriyle
-- **Karanlık/Aydınlık mod** glassmorphism tasarımıyla
-- **Çok dilli destek** - otomatik algılama ile 16 dil
+#### 🔍 **Akıllı Arama Motoru**
+- **Gerçek zamanlı arama** 300ms debounce ile
+- **Yazım hatası toleransı** ve bulanık eşleştirme
+- **Kısmi arama** (örn: "aspir" → "Aspirin")
+- **Karma kullanım desteği** Türkçe-İngilizce
+- **İlgililik tabanlı sıralama** benzerlik algoritmaları ile
 
-### 🔧 Yapılandırma
+#### 🤖 **Çoklu-AI Analizi**
+- **4 ana AI hizmeti için destek**: OpenAI, Claude, Perplexity, Gemini
+- **Profesyonel tıbbi analiz** yapılandırılmış raporlarla
+- **Risk değerlendirmesi**: Düşük/Orta/Yüksek/Çok Yüksek
+- **Klinik öneriler** ve acil durumbelirtileri
+- **Otomatik yedekleme sistemi** başarısız bağlantılar için
+
+#### 📊 **Kapsamlı Veri**
+- **FDA OpenFDA API** entegrasyonu
+- **50+ ilaç veritabanı** marka isimleriyle
+- **Detaylı ilaç bilgisi** üretici detaylarıyla
+- **Etkileşim mekanizmaları** ve uyarılar
+- **Son arama geçmişi** ve favoriler
+
+#### 🎨 **Modern UI/UX**
+- **Glassmorphism tasarım** bulanıklık efektleriyle
+- **Profesyonel gri tema** ince gradyanlarla
+- **Karanlık/Aydınlık mod desteği**
+- **Duyarlı tasarım** tüm cihazlar için
+- **Erişilebilirlik özellikleri** ARIA etiketleriyle
+- **Temiz altbilgi düzeni** tıbbi kaynak bağlantılarıyla
+
+### 🔧 Ortam Değişkenleri Yapılandırması
+
+**Birleşik Yapılandırma Yönetimi:**
+Tüm diller merkezi yapılandırma için tek bir kök `.env` dosyası kullanır:
 
 ```bash
-# Depoyu klonla
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
-
-# Ortam değişkenlerini yapılandır
+# Örnek dosyayı kopyala
 cp env.example .env
-# .env dosyasını API anahtarlarınızla düzenleyin
 
-# Yerel sunucuyu başlat
-python3 -m http.server 8080
+# Gerçek değerlerinizle düzenleyin
+nano .env
 ```
+
+**Gerekli Yapılandırma:**
+```env
+# EmailJS Yapılandırması (Evrensel)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# AI Hizmet API Anahtarları (İsteğe bağlı)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Ülkeye Özel İlaç Veritabanı API'leri
+FDA_API_KEY=your_fda_api_key_here          # ABD
+MFDS_API_KEY=your_mfds_api_key_here       # Güney Kore
+PMDA_API_KEY=your_pmda_api_key_here       # Japonya
+NMPA_API_KEY=your_nmpa_api_key_here        # Çin
+# ... diğer ülkeye özel API'ler
+```
+
+**Birleşik Yönetimin Avantajları:**
+- **Tek yapılandırma dosyası** 16 dili yönetmek için
+- **Kolay bakım** - yinelenen API anahtarları yok
+- **Güvenlik** - `.env` dosyası gitignore tarafından işlenir
+- **Verimlilik** - tüm ayarları yönetmek için tek yer
+
+### 🚀 Başlarken
+
+#### 🌐 Dil Desteği
+Bu proje bağımsız dil klasörleriyle tamamen optimize edilmiştir:
+- **Türkçe**: `/tr-tr/` - Yerelleştirilmiş içerikle Türkçe sürüm
+- **İngilizce (Varsayılan)**: `/en-us/` - Yerelleştirilmiş içerikle İngilizce sürüm
+- **Dil değiştirme**: Altbilgideki dil seçiciyi kullanın veya doğrudan dil klasörlerine gidin
+- Her dil klasörü bağımsız `config.js`, `index.html`, `scripts.js` ve `styles.css` dosyaları içerir
+
+#### 📁 Proje Yapısı
+
+```
+DI2025checker/
+├── vercel.json          # Vercel dağıtım yapılandırması
+├── tr-tr/               # Türkçe klasör
+│   ├── config.js        # Türkçe EmailJS yapılandırması
+│   ├── index.html       # Türkçe ana sayfa
+│   ├── ai-test.html     # Türkçe AI test sayfası
+│   ├── scripts.js       # Yerelleştirilmiş Türkçe betikler
+│   └── styles.css       # Paylaşılan stiller
+├── en-us/               # İngilizce klasör
+│   ├── config.js        # İngilizce EmailJS yapılandırması
+│   ├── index.html       # İngilizce ana sayfa
+│   ├── ai-test.html     # İngilizce AI test sayfası
+│   ├── scripts.js       # Yerelleştirilmiş İngilizce betikler
+│   └── styles.css       # Paylaşılan stiller
+├── i18n.js              # Çok dilli destek
+├── language-selector.js # Dil seçici
+├── logo/                # Paylaşılan kaynaklar
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
+```
+
+#### Ön Koşullar
+- Modern web tarayıcısı (Chrome, Firefox, Safari, Edge)
+- API erişimi için internet bağlantısı
+- En az bir AI API anahtarı (isteğe bağlı ancak önerilir)
+
+#### Kurulum
+
+1. **Depoyu klonla**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **Yerel Geliştirme**
+   ```bash
+   # Yerel sunucu ile çalıştır
+   python3 -m http.server 8000
+   
+   # Ardından erişin:
+   # Türkçe: http://localhost:8000/tr-tr/
+   # İngilizce: http://localhost:8000/en-us/
+   ```
+
+3. **Vercel'e Dağıt (Önerilir)**
+   ```bash
+   # Vercel CLI'yi yükle
+   npm i -g vercel
+   
+   # Dağıt
+   vercel
+   
+   # vercel.json yapılandırması otomatik olarak "/" yolunu "/en-us/index.html"'e yönlendirir
+   ```
+
+4. **AI API'lerini Yapılandır (İsteğe bağlı)**
+   - Ayarlar düğmesine tıklayın ⚙️
+   - İstediğiniz hizmetler için API anahtarlarınızı ekleyin
+   - API test düğmesini kullanarak bağlantıları test edin 🧪
+
+#### API Anahtarı Kurulumu
+
+##### OpenAI (Önerilir)
+1. [OpenAI Platform](https://platform.openai.com/api-keys)'u ziyaret edin
+2. Bir hesap oluşturun ve API anahtarı oluşturun
+3. Format: `sk-...`
+
+##### Anthropic Claude
+1. [Anthropic Console](https://console.anthropic.com/)'u ziyaret edin
+2. API anahtarı oluşturun
+3. Format: `sk-ant-...`
+
+##### Perplexity AI
+1. [Perplexity Settings](https://www.perplexity.ai/settings/api)'i ziyaret edin
+2. API anahtarı oluşturun
+3. Format: `pplx-...`
+
+##### Google Gemini
+1. [Google AI Studio](https://aistudio.google.com/app/apikey)'yu ziyaret edin
+2. API anahtarı oluşturun
+3. Format: `AI...`
+
+#### EmailJS Kurulumu (Geri Bildirim Özelliği için)
+
+1. **EmailJS Hesabı Oluştur**
+   - [EmailJS](https://www.emailjs.com/)'i ziyaret edin
+   - Ücretsiz hesap oluşturun
+
+2. **E-posta Hizmetini Bağla**
+   - E-posta hizmetinizi ekleyin (Gmail, Outlook, vb.)
+   - Service ID'nizi not edin
+
+3. **E-posta Şablonu Oluştur**
+   - Bu değişkenlerle geri bildirim şablonu oluşturun:
+     - `{{from_name}}` - Gönderenin adı
+     - `{{from_email}}` - Gönderenin e-postası
+     - `{{subject}}` - Geri bildirim konusu
+     - `{{message}}` - Geri bildirim mesajı
+   - Template ID'nizi not edin
+
+4. **Ortam Değişkenlerini Yapılandır**
+   - Kök dizindeki `.env` dosyasını düzenleyin
+   - Yer tutucu değerleri değiştirin:
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 Kullanım
+
+1. **İlaç ara**
+   - Arama kutusuna ilaç adını yazın
+   - Kısmi isimler veya yazım hataları kullanın
+   - Akıllı önerilerden seçin
+
+2. **Etkileşimleri kontrol et**
+   - Açılır menülerden iki ilaç seçin
+   - "Etkileşimi Kontrol Et"e tıklayın
+   - Hem AI analizini hem de FDA verilerini inceleyin
+
+3. **Detaylı bilgileri görüntüle**
+   - Detaylı bilgi için herhangi bir ilaç adına tıklayın
+   - İlaçları doğrudan etkileşim kontrolüne ekleyin
+
+### 🔬 AI Analiz Özellikleri
+
+- **Risk Değerlendirmesi**: Kapsamlı risk seviyesi değerlendirmesi
+- **Klinik Görüşler**: Profesyonel tıbbi öneriler
+- **Etkileşim Mekanizmaları**: İlaçların moleküler düzeyde nasıl etkileşime girdiği
+- **Acil Durumİşaretleri**: Ne zaman acil tıbbi yardım aranacağı
+- **Yapılandırılmış Raporlar**: Okunması kolay biçimlendirilmiş analiz
+
+### ⚠️ Önemli Tıbbi Sorumluluk Reddi
+
+> **Bu araç yalnızca bilgilendirme amaçlıdır ve profesyonel tıbbi tavsiyenin yerini almamalıdır. İlaçlarla ilgili kararlar vermeden önce her zaman sağlık hizmeti sağlayıcılarına danışın.**
+
+### 🤝 Katkıda Bulunma
+
+1. Depoyu fork edin
+2. Özellik dalı oluşturun (`git checkout -b feature/amazing-feature`)
+3. Değişiklikleri commit edin (`git commit -m 'Add amazing feature'`)
+4. Dala push edin (`git push origin feature/amazing-feature`)
+5. Pull Request açın
+
+### 📄 Lisans
+
+Bu proje MIT Lisansı altında lisanslanmıştır - detaylar için [LICENSE](LICENSE) dosyasına bakın.
+
+### 🙏 Teşekkürler
+
+- Kapsamlı ilaç verileri için FDA OpenFDA
+- Gelişmiş analiz yetenekleri için AI sağlayıcıları
+- İlaç etkileşimleri konusunda rehberlik için tıp uzmanları
+- Türk tıbbi kurumları: TİTCK, Sağlık Bakanlığı, TEB
 
 ### 🔗 Tıbbi Kaynaklar
 
