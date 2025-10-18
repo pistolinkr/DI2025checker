@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 테스트 페이지 - 약물 상호작용 검사기</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary-color: #764ba2;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-hover: #f8f9ff;
+            
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --border-focus: #667eea;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --bg-tertiary: #334155;
+                --bg-card: #1e293b;
+                --bg-hover: #334155;
+                
+                --text-primary: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --text-muted: #94a3b8;
+                
+                --border-color: #334155;
+                --border-hover: #475569;
+                --border-focus: #667eea;
+            }
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .test-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .test-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .test-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .test-section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .test-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-input-group {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .test-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .test-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: var(--bg-primary);
+        }
+        
+        .test-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .test-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .test-button:hover::before {
+            left: 100%;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .test-button:active {
+            transform: translateY(0);
+        }
+        
+        .test-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .test-results {
+            margin-top: 24px;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .test-result-item {
+            margin-bottom: 16px;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .test-result-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        
+        .test-result-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .test-result-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .test-result-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+        
+        .test-result-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .test-status {
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid;
+        }
+        
+        .test-status.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        
+        .test-status.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        
+        .test-status.loading {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--info-color);
+            border-color: rgba(59, 130, 246, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .test-providers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .test-provider {
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .test-provider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .test-provider:hover {
+            border-color: var(--border-focus);
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .test-provider:hover::before {
+            opacity: 0.05;
+        }
+        
+        .test-provider.selected {
+            border-color: var(--border-focus);
+            background: var(--bg-hover);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .test-provider.selected::before {
+            opacity: 0.1;
+        }
+        
+        .test-provider-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .test-provider-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .test-provider-status {
+            font-size: 13px;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .test-back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .test-back-button:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-color) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .test-back-button:active {
+            transform: translateY(0);
+        }
+        
+        /* 성능 비교 섹션 스타일링 */
+        #performanceComparison {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+        }
+        
+        #performanceComparison p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* 로딩 스피너 개선 */
+        .loading-spinner {
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 반응형 디자인 개선 */
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 16px;
+            }
+            
+            .test-header {
+                padding: 24px 16px;
+                margin-bottom: 24px;
+            }
+            
+            .test-header h1 {
+                font-size: 2rem;
+            }
+            
+            .test-section {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .test-input-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .test-input {
+                min-width: 100%;
+            }
+            
+            .test-providers {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .test-back-button {
+                top: 16px;
+                left: 16px;
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .test-container {
+                padding: 12px;
+            }
+            
+            .test-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .test-section {
+                padding: 16px;
+            }
+            
+            .test-input {
+                padding: 12px 16px;
+            }
+            
+            .test-button {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+        }
+        
+        /* 다크 모드 전용 스타일 */
+        @media (prefers-color-scheme: dark) {
+            .test-header {
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            }
+            
+            .test-section {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .test-result-item {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+            
+            .test-provider {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="test-back-button" onclick="goBack()">← 메인으로</button>
+    
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🤖 AI 테스트 페이지</h1>
+            <p>다양한 AI 서비스의 약물 상호작용 분석 성능을 테스트해보세요</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>📝 테스트 입력</h3>
+            <div class="test-input-group">
+                <input type="text" id="testDrug1" class="test-input" placeholder="첫 번째 약물 (예: 아스피린)" value="아스피린">
+                <input type="text" id="testDrug2" class="test-input" placeholder="두 번째 약물 (예: 와파린)" value="와파린">
+                <button class="test-button" onclick="runAITest()">🧪 AI 테스트 실행</button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎯 AI 서비스 선택</h3>
+            <div class="test-providers" id="testProviders">
+                <!-- AI 서비스들이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 테스트 결과</h3>
+            <div id="testStatus" class="test-status" style="display: none;"></div>
+            <div id="testResults" class="test-results" style="display: none;">
+                <!-- 테스트 결과들이 여기에 표시됩니다 -->
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📈 성능 비교</h3>
+            <div id="performanceComparison">
+                <p>테스트를 실행하면 각 AI 서비스의 응답 시간과 품질을 비교할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts.js"></script>
+    <script>
+        let selectedProvider = 'auto';
+        let testResults = [];
+        
+        // 페이지 로드 시 AI 서비스 목록 생성
+        document.addEventListener('DOMContentLoaded', function() {
+            createProviderList();
+        });
+        
+        function createProviderList() {
+            const providersContainer = document.getElementById('testProviders');
+            providersContainer.innerHTML = '';
+            
+            // 자동 선택 옵션
+            const autoProvider = document.createElement('div');
+            autoProvider.className = 'test-provider';
+            autoProvider.onclick = () => selectProvider('auto');
+            autoProvider.innerHTML = `
+                <div class="test-provider-icon">🎯</div>
+                <div class="test-provider-name">자동 선택</div>
+                <div class="test-provider-status">가장 적합한 AI 서비스 자동 선택</div>
+            `;
+            providersContainer.appendChild(autoProvider);
+            
+            // 각 AI 서비스 옵션
+            Object.keys(AI_CONFIGS).forEach(provider => {
+                const config = AI_CONFIGS[provider];
+                const providerDiv = document.createElement('div');
+                providerDiv.className = 'test-provider';
+                providerDiv.onclick = () => selectProvider(provider);
+                providerDiv.innerHTML = `
+                    <div class="test-provider-icon">${config.icon}</div>
+                    <div class="test-provider-name">${config.name}</div>
+                    <div class="test-provider-status">${config.isFree ? '무료' : '유료'}</div>
+                `;
+                providersContainer.appendChild(providerDiv);
+            });
+            
+            // 기본 선택
+            selectProvider('auto');
+        }
+        
+        function selectProvider(provider) {
+            selectedProvider = provider;
+            
+            // 모든 프로바이더에서 선택 상태 제거
+            document.querySelectorAll('.test-provider').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // 선택된 프로바이더에 선택 상태 추가
+            event.target.closest('.test-provider').classList.add('selected');
+        }
+        
+        async function runAITest() {
+            const drug1 = document.getElementById('testDrug1').value.trim();
+            const drug2 = document.getElementById('testDrug2').value.trim();
+            
+            if (!drug1 || !drug2) {
+                alert('두 약물을 모두 입력해주세요.');
+                return;
+            }
+            
+            // 테스트 결과 초기화
+            testResults = [];
+            document.getElementById('testResults').style.display = 'none';
+            document.getElementById('testStatus').style.display = 'block';
+            document.getElementById('testStatus').className = 'test-status loading';
+            document.getElementById('testStatus').textContent = '🧪 AI 테스트를 실행하고 있습니다...';
+            
+            try {
+                if (selectedProvider === 'auto') {
+                    // 모든 AI 서비스 테스트
+                    await testAllProviders(drug1, drug2);
+                } else {
+                    // 선택된 AI 서비스만 테스트
+                    await testSingleProvider(selectedProvider, drug1, drug2);
+                }
+                
+                displayTestResults();
+            } catch (error) {
+                console.error('테스트 실행 중 오류:', error);
+                document.getElementById('testStatus').className = 'test-status error';
+                document.getElementById('testStatus').textContent = `❌ 테스트 실행 중 오류가 발생했습니다: ${error.message}`;
+            }
+        }
+        
+        async function testAllProviders(drug1, drug2) {
+            const providers = Object.keys(AI_CONFIGS);
+            
+            for (const provider of providers) {
+                try {
+                    const startTime = Date.now();
+                    const result = await testSingleProvider(provider, drug1, drug2);
+                    const endTime = Date.now();
+                    
+                    testResults.push({
+                        provider: provider,
+                        name: AI_CONFIGS[provider].name,
+                        icon: AI_CONFIGS[provider].icon,
+                        result: result,
+                        responseTime: endTime - startTime,
+                        success: true
+                    });
+                } catch (error) {
+                    testResults.push({
+                        provider: provider,
+                        name: AI_CONFIGS[provider].name,
+                        icon: AI_CONFIGS[provider].icon,
+                        error: error.message,
+                        success: false
+                    });
+                }
+            }
+        }
+        
+        async function testSingleProvider(provider, drug1, drug2) {
+            const config = AI_CONFIGS[provider];
+            
+            const messages = [
+                {
+                    role: 'system',
+                    content: `당신은 약물 상호작용 전문가입니다. ${drug1}과 ${drug2}의 상호작용을 분석해주세요.`
+                },
+                {
+                    role: 'user',
+                    content: `${drug1}과 ${drug2}의 약물 상호작용을 분석해주세요. 위험도, 메커니즘, 예방 방법, 주의사항을 포함해서 설명해주세요.`
+                }
+            ];
+            
+            const options = {
+                temperature: 0.3,
+                max_tokens: 1000
+            };
+            
+            return await utils.analyzeInteraction(drug1, drug2, [], [], null, null, provider);
+        }
+        
+        function displayTestResults() {
+            const resultsContainer = document.getElementById('testResults');
+            const statusElement = document.getElementById('testStatus');
+            
+            resultsContainer.innerHTML = '';
+            
+            if (testResults.length === 0) {
+                statusElement.className = 'test-status error';
+                statusElement.textContent = '❌ 테스트 결과가 없습니다.';
+                return;
+            }
+            
+            const successCount = testResults.filter(r => r.success).length;
+            const totalCount = testResults.length;
+            
+            if (successCount === totalCount) {
+                statusElement.className = 'test-status success';
+                statusElement.textContent = `✅ 모든 AI 서비스 테스트 완료 (${successCount}/${totalCount})`;
+            } else {
+                statusElement.className = 'test-status error';
+                statusElement.textContent = `⚠️ 일부 AI 서비스 테스트 실패 (${successCount}/${totalCount})`;
+            }
+            
+            testResults.forEach(result => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'test-result-item';
+                
+                if (result.success) {
+                    resultDiv.innerHTML = `
+                        <div class="test-result-header">
+                            <span class="test-result-icon">${result.icon}</span>
+                            <span class="test-result-title">${result.name}</span>
+                            <span style="margin-left: auto; font-size: 12px; color: #666;">${result.responseTime}ms</span>
+                        </div>
+                        <div class="test-result-content">${result.result}</div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="test-result-header">
+                            <span class="test-result-icon">❌</span>
+                            <span class="test-result-title">${result.name}</span>
+                            <span style="margin-left: auto; font-size: 12px; color: #e74c3c;">실패</span>
+                        </div>
+                        <div class="test-result-content" style="color: #e74c3c;">오류: ${result.error}</div>
+                    `;
+                }
+                
+                resultsContainer.appendChild(resultDiv);
+            });
+            
+            resultsContainer.style.display = 'block';
+        }
+        
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
