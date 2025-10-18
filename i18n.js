@@ -944,7 +944,7 @@ const countryToLanguage = {
 
 // 각 나라의 주요 도시 정보
 const majorCities = {
-    'US': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'San Francisco', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'Austin', 'Jacksonville', 'Fort Worth', 'Columbus', 'Charlotte', 'San Jose', 'Indianapolis', 'Seattle', 'Denver', 'Washington', 'Boston', 'El Paso', 'Nashville', 'Detroit', 'Oklahoma City', 'Portland', 'Las Vegas', 'Memphis', 'Louisville', 'Baltimore', 'Milwaukee', 'Albuquerque', 'Tucson', 'Fresno', 'Sacramento', 'Mesa', 'Kansas City', 'Atlanta', 'Long Beach', 'Colorado Springs', 'Raleigh', 'Miami', 'Virginia Beach', 'Omaha', 'Oakland', 'Minneapolis', 'Tulsa', 'Arlington', 'Tampa', 'New Orleans'],
+    'US': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'San Francisco', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'Austin', 'Jacksonville', 'Fort Worth', 'Columbus', 'Charlotte', 'San Jose', 'Indianapolis', 'Seattle', 'Denver', 'Washington', 'Boston', 'El Paso', 'Nashville', 'Detroit', 'Oklahoma City', 'Portland', 'Las Vegas', 'Memphis', 'Louisville', 'Baltimore', 'Milwaukee', 'Albuquerque', 'Tucson', 'Fresno', 'Sacramento', 'Mesa', 'Kansas City', 'Atlanta', 'Long Beach', 'Colorado Springs', 'Raleigh', 'Miami', 'Virginia Beach', 'Omaha', 'Oakland', 'Minneapolis', 'Tulsa', 'Arlington', 'Tampa', 'New Orleans', 'Santa Clara', 'San Jose', 'Fremont', 'Hayward', 'Sunnyvale', 'Santa Ana', 'Anaheim', 'Riverside', 'Stockton', 'Irvine', 'Chula Vista', 'Fremont', 'San Bernardino', 'Modesto', 'Fontana', 'Oxnard', 'Moreno Valley', 'Huntington Beach', 'Glendale', 'Santa Clarita', 'Garden Grove', 'Oceanside', 'Rancho Cucamonga', 'Santa Rosa', 'Ontario', 'Lancaster', 'Elk Grove', 'Corona', 'Palmdale', 'Salinas', 'Pomona', 'Torrance', 'Hayward', 'Escondido', 'Sunnyvale', 'Pasadena', 'Orange', 'Fullerton', 'Thousand Oaks', 'Visalia', 'Simi Valley', 'Concord', 'Roseville', 'Vallejo', 'Santa Clara', 'Victorville', 'El Cajon', 'Berkeley', 'Downey', 'Costa Mesa', 'Inglewood', 'Ventura', 'West Covina', 'Norwalk', 'Carlsbad', 'Fairfield', 'Richmond', 'Murrieta', 'Antioch', 'Temecula', 'Daly City', 'Santa Monica', 'El Monte', 'Clovis', 'Compton', 'Jurupa Valley', 'Vista', 'South Gate', 'Mission Viejo', 'Vacaville', 'Carson', 'Hesperia', 'Santa Barbara', 'Redding', 'Santa Cruz', 'Chico', 'Newport Beach', 'San Leandro', 'Hawthorne', 'Citrus Heights', 'Tracy', 'Alhambra', 'Livermore', 'Buena Park', 'Lakewood', 'Merced', 'Hemet', 'Chino', 'Menifee', 'Lake Forest', 'Napa', 'Redwood City', 'Bellflower', 'Indio', 'Whittier', 'Newman', 'San Marcos', 'Dublin', 'Madera', 'Chino Hills', 'Turlock', 'Baldwin Park', 'Chico', 'Redlands', 'Mountain View', 'Alameda', 'Folsom', 'La Habra', 'San Ramon', 'Pleasanton', 'Union City', 'Perris', 'Manteca', 'Lynwood', 'Apple Valley', 'Redondo Beach', 'Tustin', 'Lake Elsinore', 'Milpitas', 'Colton', 'Yucaipa', 'Pacifica', 'Huntington Park', 'San Rafael', 'La Mesa', 'Arcadia', 'Monrovia', 'Maywood', 'Culver City', 'Martinez', 'San Gabriel', 'Cypress', 'La Mirada', 'Pittsburg', 'Hollister', 'Lomita', 'La Puente', 'Covina', 'Glendora', 'Placentia', 'Calexico', 'Bell Gardens', 'Norco', 'Cudahy', 'San Dimas', 'La Verne', 'Montebello', 'San Fernando', 'South Pasadena', 'La Canada', 'Beverly Hills', 'San Marino', 'Rolling Hills', 'Rolling Hills Estates', 'Hidden Hills', 'Industry', 'Vernon', 'Commerce', 'Cudahy', 'Bell', 'Maywood', 'Huntington Park', 'South Gate', 'Lynwood', 'Compton', 'Carson', 'Gardena', 'Hawthorne', 'Inglewood', 'Westchester', 'Playa del Rey', 'Marina del Rey', 'Venice', 'Santa Monica', 'Pacific Palisades', 'Brentwood', 'Westwood', 'Bel Air', 'Beverly Glen', 'Sherman Oaks', 'Studio City', 'Toluca Lake', 'North Hollywood', 'Valley Village', 'Van Nuys', 'Reseda', 'Tarzana', 'Woodland Hills', 'Canoga Park', 'Chatsworth', 'Northridge', 'Granada Hills', 'Mission Hills', 'Sylmar', 'Pacoima', 'Sun Valley', 'Sunland', 'Tujunga', 'La Crescenta', 'Montrose', 'La Canada Flintridge', 'Altadena', 'Pasadena', 'South Pasadena', 'San Marino', 'Alhambra', 'San Gabriel', 'Monterey Park', 'Rosemead', 'Temple City', 'Arcadia', 'Sierra Madre', 'Duarte', 'Monrovia', 'Bradbury', 'Azusa', 'Glendora', 'San Dimas', 'La Verne', 'Claremont', 'Pomona', 'Diamond Bar', 'Walnut', 'Rowland Heights', 'Hacienda Heights', 'La Puente', 'City of Industry', 'West Covina', 'Covina', 'Irwindale', 'Baldwin Park', 'El Monte', 'South El Monte', 'Temple City', 'Arcadia', 'Sierra Madre', 'Duarte', 'Monrovia', 'Bradbury', 'Azusa', 'Glendora', 'San Dimas', 'La Verne', 'Claremont', 'Pomona', 'Diamond Bar', 'Walnut', 'Rowland Heights', 'Hacienda Heights', 'La Puente', 'City of Industry', 'West Covina', 'Covina', 'Irwindale', 'Baldwin Park', 'El Monte', 'South El Monte'],
     'KR': ['Seoul', 'Busan', 'Incheon', 'Daegu', 'Daejeon', 'Gwangju', 'Ulsan', 'Sejong', 'Suwon', 'Yongin', 'Goyang', 'Seongnam', 'Bucheon', 'Ansan', 'Anyang', 'Namyangju', 'Hwaseong', 'Cheongju', 'Jeonju', 'Cheonan', 'Gimhae', 'Jeju', 'Gangneung', 'Wonju', 'Chuncheon', 'Mokpo', 'Yeosu', 'Gunsan', 'Iksan', 'Jeongeup'],
     'JP': ['Tokyo', 'Osaka', 'Yokohama', 'Nagoya', 'Sapporo', 'Fukuoka', 'Kobe', 'Kyoto', 'Kawasaki', 'Saitama', 'Hiroshima', 'Sendai', 'Kitakyushu', 'Chiba', 'Sakai', 'Niigata', 'Hamamatsu', 'Okayama', 'Kumamoto', 'Shizuoka', 'Sagamihara', 'Kagoshima', 'Funabashi', 'Hachioji', 'Matsudo', 'Matsuyama', 'Kashiwa', 'Nishinomiya', 'Kawaguchi', 'Ichikawa'],
     'CN': ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Chengdu', 'Hangzhou', 'Wuhan', 'Xi\'an', 'Nanjing', 'Tianjin', 'Suzhou', 'Zhengzhou', 'Changsha', 'Dongguan', 'Qingdao', 'Shenyang', 'Dalian', 'Ningbo', 'Xiamen', 'Fuzhou', 'Hefei', 'Kunming', 'Shijiazhuang', 'Taiyuan', 'Nanning', 'Haikou', 'Guiyang', 'Lanzhou', 'Urumqi', 'Hohhot'],
@@ -974,11 +974,11 @@ async function detectUserLanguage() {
         return urlLang;
     }
     
-    // 2. 로컬 스토리지 확인
-    const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang && translations[savedLang]) {
-        return savedLang;
-    }
+    // 2. 로컬 스토리지 확인 (위치 기반 감지를 위해 비활성화)
+    // const savedLang = localStorage.getItem('preferredLanguage');
+    // if (savedLang && translations[savedLang]) {
+    //     return savedLang;
+    // }
     
     // 3. 위치 기반 언어 감지 (Geolocation API)
     try {
@@ -1011,18 +1011,7 @@ async function detectUserLanguage() {
         return langCode;
     }
     
-    // 언어 코드만 확인 (en-us, en-gb -> en)
-    const baseLang = langCode.split('-')[0];
-    console.log(`🔍 Checking base language: ${baseLang}`);
-    
-    for (const key in translations) {
-        if (key.startsWith(baseLang)) {
-            console.log(`✅ Matched browser language: ${langCode} -> ${key}`);
-            return key;
-        }
-    }
-    
-    // 영어 특별 처리 (en, en-US, en-GB 등)
+    // 영어 특별 처리 (en, en-US, en-GB 등) - 최우선
     if (langCode.startsWith('en')) {
         console.log('🇺🇸 Detected English browser language -> en-us');
         return 'en-us';
@@ -1032,6 +1021,17 @@ async function detectUserLanguage() {
     if (langCode.startsWith('ko')) {
         console.log('🇰🇷 Detected Korean browser language -> ko-kr');
         return 'ko-kr';
+    }
+    
+    // 언어 코드만 확인 (en-us, en-gb -> en)
+    const baseLang = langCode.split('-')[0];
+    console.log(`🔍 Checking base language: ${baseLang}`);
+    
+    for (const key in translations) {
+        if (key.startsWith(baseLang)) {
+            console.log(`✅ Matched browser language: ${langCode} -> ${key}`);
+            return key;
+        }
     }
     
     // 5. 기본값: 영어
