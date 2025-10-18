@@ -962,41 +962,60 @@ async function detectUserLanguage() {
     
     // 3. 위치 기반 언어 감지 (Geolocation API)
     try {
+        console.log('🌍 Starting location-based language detection...');
         const countryCode = await getCountryFromLocation();
+        console.log(`📍 Detected country code: ${countryCode}`);
+        
         if (countryCode && countryToLanguage[countryCode]) {
-            return countryToLanguage[countryCode];
+            const detectedLang = countryToLanguage[countryCode];
+            console.log(`✅ Location-based language detected: ${detectedLang} (${countryCode})`);
+            localStorage.setItem('preferredLanguage', detectedLang);
+            return detectedLang;
+        } else {
+            console.log(`⚠️ Country ${countryCode} not mapped to a supported language`);
         }
     } catch (error) {
-        console.log('Geolocation not available:', error);
+        console.log('❌ Geolocation language detection failed:', error);
     }
     
     // 4. 브라우저 언어 설정
+    console.log('🌐 Starting browser language detection...');
     const browserLang = navigator.language || navigator.userLanguage;
     const langCode = browserLang.toLowerCase();
     
-    console.log(`Browser language: ${browserLang}`);
+    console.log(`🌐 Browser language: ${browserLang} -> ${langCode}`);
     
     // 정확한 매칭 확인
     if (translations[langCode]) {
+        console.log(`✅ Exact browser language match: ${langCode}`);
         return langCode;
     }
     
     // 언어 코드만 확인 (en-us, en-gb -> en)
     const baseLang = langCode.split('-')[0];
+    console.log(`🔍 Checking base language: ${baseLang}`);
+    
     for (const key in translations) {
         if (key.startsWith(baseLang)) {
-            console.log(`Matched browser language: ${langCode} -> ${key}`);
+            console.log(`✅ Matched browser language: ${langCode} -> ${key}`);
             return key;
         }
     }
     
+    // 영어 특별 처리 (en, en-US, en-GB 등)
+    if (langCode.startsWith('en')) {
+        console.log('🇺🇸 Detected English browser language -> en-us');
+        return 'en-us';
+    }
+    
     // 한국어 특별 처리 (ko, ko-KR 등)
     if (langCode.startsWith('ko')) {
-        console.log('Detected Korean browser language');
+        console.log('🇰🇷 Detected Korean browser language -> ko-kr');
         return 'ko-kr';
     }
     
     // 5. 기본값: 영어
+    console.log('🔄 No specific language detected, defaulting to en-us');
     return 'en-us';
 }
 
@@ -1023,7 +1042,7 @@ async function getCountryFromLocation() {
                 }
                 
                 if (countryCode) {
-                    console.log(`Detected country: ${countryCode} from ${service}`);
+                    console.log(`Detected country: ${countryCode} (${data.country_name || 'Unknown'}) via ${service}`);
                     return countryCode;
                 }
             } catch (serviceError) {
@@ -1089,6 +1108,16 @@ function changeLanguage(langCode) {
     // 이벤트 발생
     window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: langCode } }));
 }
+
+// 전역 객체로 노출 (루트 index.html에서 사용)
+window.i18n = {
+    detectUserLanguage,
+    changeLanguage,
+    translations,
+    countryToLanguage,
+    getCountryFromLocation,
+    currentLanguage: () => currentLanguage
+};
 
 // 페이지 텍스트 업데이트
 function updatePageText() {
