@@ -942,6 +942,26 @@ const countryToLanguage = {
     'MX': 'es-mx'
 };
 
+// 각 나라의 주요 도시 정보
+const majorCities = {
+    'US': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'San Francisco', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'Austin', 'Jacksonville', 'Fort Worth', 'Columbus', 'Charlotte', 'San Jose', 'Indianapolis', 'Seattle', 'Denver', 'Washington', 'Boston', 'El Paso', 'Nashville', 'Detroit', 'Oklahoma City', 'Portland', 'Las Vegas', 'Memphis', 'Louisville', 'Baltimore', 'Milwaukee', 'Albuquerque', 'Tucson', 'Fresno', 'Sacramento', 'Mesa', 'Kansas City', 'Atlanta', 'Long Beach', 'Colorado Springs', 'Raleigh', 'Miami', 'Virginia Beach', 'Omaha', 'Oakland', 'Minneapolis', 'Tulsa', 'Arlington', 'Tampa', 'New Orleans'],
+    'KR': ['Seoul', 'Busan', 'Incheon', 'Daegu', 'Daejeon', 'Gwangju', 'Ulsan', 'Sejong', 'Suwon', 'Yongin', 'Goyang', 'Seongnam', 'Bucheon', 'Ansan', 'Anyang', 'Namyangju', 'Hwaseong', 'Cheongju', 'Jeonju', 'Cheonan', 'Gimhae', 'Jeju', 'Gangneung', 'Wonju', 'Chuncheon', 'Mokpo', 'Yeosu', 'Gunsan', 'Iksan', 'Jeongeup'],
+    'JP': ['Tokyo', 'Osaka', 'Yokohama', 'Nagoya', 'Sapporo', 'Fukuoka', 'Kobe', 'Kyoto', 'Kawasaki', 'Saitama', 'Hiroshima', 'Sendai', 'Kitakyushu', 'Chiba', 'Sakai', 'Niigata', 'Hamamatsu', 'Okayama', 'Kumamoto', 'Shizuoka', 'Sagamihara', 'Kagoshima', 'Funabashi', 'Hachioji', 'Matsudo', 'Matsuyama', 'Kashiwa', 'Nishinomiya', 'Kawaguchi', 'Ichikawa'],
+    'CN': ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Chengdu', 'Hangzhou', 'Wuhan', 'Xi\'an', 'Nanjing', 'Tianjin', 'Suzhou', 'Zhengzhou', 'Changsha', 'Dongguan', 'Qingdao', 'Shenyang', 'Dalian', 'Ningbo', 'Xiamen', 'Fuzhou', 'Hefei', 'Kunming', 'Shijiazhuang', 'Taiyuan', 'Nanning', 'Haikou', 'Guiyang', 'Lanzhou', 'Urumqi', 'Hohhot'],
+    'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Zaragoza', 'Málaga', 'Murcia', 'Palma', 'Las Palmas', 'Bilbao', 'Alicante', 'Córdoba', 'Valladolid', 'Vigo', 'Gijón', 'Hospitalet', 'A Coruña', 'Vitoria', 'Granada', 'Elche', 'Santa Cruz', 'Oviedo', 'Badalona', 'Cartagena', 'Terrassa', 'Jerez', 'Sabadell', 'Móstoles', 'Alcalá', 'Pamplona'],
+    'MX': ['Mexico City', 'Guadalajara', 'Monterrey', 'Puebla', 'Tijuana', 'León', 'Juárez', 'Torreón', 'Querétaro', 'San Luis Potosí', 'Mérida', 'Mexicali', 'Aguascalientes', 'Acapulco', 'Saltillo', 'Hermosillo', 'Morelia', 'Cancún', 'Villahermosa', 'Chihuahua', 'Durango', 'Toluca', 'Cuernavaca', 'Reynosa', 'Tuxtla', 'Culiacán', 'Veracruz', 'Mazatlán', 'Irapuato', 'Nuevo Laredo'],
+    'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Florence', 'Bologna', 'Genoa', 'Bari', 'Catania', 'Venice', 'Verona', 'Messina', 'Padua', 'Trieste', 'Brescia', 'Parma', 'Taranto', 'Prato', 'Reggio', 'Modena', 'Ravenna', 'Livorno', 'Cagliari', 'Foggia', 'Rimini', 'Salerno', 'Ferrara', 'Sassari', 'Monza', 'Bergamo'],
+    'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille', 'Rennes', 'Reims', 'Le Havre', 'Saint-Étienne', 'Toulon', 'Grenoble', 'Dijon', 'Angers', 'Nîmes', 'Villeurbanne', 'Saint-Denis', 'Le Mans', 'Aix-en-Provence', 'Clermont-Ferrand', 'Brest', 'Tours', 'Amiens', 'Limoges', 'Annecy', 'Perpignan'],
+    'DE': ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt', 'Stuttgart', 'Düsseldorf', 'Dortmund', 'Essen', 'Leipzig', 'Bremen', 'Dresden', 'Hannover', 'Nuremberg', 'Duisburg', 'Bochum', 'Wuppertal', 'Bielefeld', 'Bonn', 'Münster', 'Karlsruhe', 'Mannheim', 'Augsburg', 'Wiesbaden', 'Gelsenkirchen', 'Mönchengladbach', 'Braunschweig', 'Chemnitz', 'Kiel', 'Aachen'],
+    'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Funchal', 'Setúbal', 'Aveiro', 'Évora', 'Faro', 'Leiria', 'Viseu', 'Vila Nova', 'Amadora', 'Almada', 'Barreiro', 'Fafe', 'Guimarães', 'Póvoa', 'Sintra', 'Viana', 'Cascais', 'Loures', 'Oeiras', 'Odivelas', 'Seixal', 'Gondomar', 'Matosinhos', 'Valongo', 'Vila Nova', 'Maia'],
+    'SA': ['Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dammam', 'Khobar', 'Dhahran', 'Taif', 'Buraidah', 'Tabuk', 'Khamis', 'Hail', 'Hafar', 'Jubail', 'Yanbu', 'Abha', 'Najran', 'Sakaka', 'Arar', 'Qatif', 'Al-Kharj', 'Al-Hofuf', 'Al-Mubarraz', 'Al-Qunfudhah', 'Al-Baha', 'Al-Jouf', 'Al-Qurayyat', 'Al-Wajh', 'Al-Ula', 'Al-Dawadmi'],
+    'IN': ['New Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Chennai', 'Hyderabad', 'Pune', 'Ahmedabad', 'Jaipur', 'Surat', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Thane', 'Bhopal', 'Visakhapatnam', 'Pimpri', 'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik', 'Faridabad', 'Meerut', 'Rajkot', 'Kalyan', 'Vasai', 'Varanasi'],
+    'RU': ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Kazan', 'Nizhny Novgorod', 'Chelyabinsk', 'Samara', 'Omsk', 'Rostov-on-Don', 'Ufa', 'Krasnoyarsk', 'Perm', 'Voronezh', 'Volgograd', 'Krasnodar', 'Saratov', 'Tyumen', 'Tolyatti', 'Izhevsk', 'Barnaul', 'Ulyanovsk', 'Irkutsk', 'Vladivostok', 'Yaroslavl', 'Makhachkala', 'Tomsk', 'Orenburg', 'Kemerovo', 'Ryazan'],
+    'ID': ['Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang', 'Makassar', 'Palembang', 'Tangerang', 'Depok', 'Bekasi', 'Padang', 'Malang', 'Surakarta', 'Yogyakarta', 'Banjarmasin', 'Pontianak', 'Manado', 'Balikpapan', 'Jambi', 'Denpasar', 'Mataram', 'Kupang', 'Jayapura', 'Manokwari', 'Sorong', 'Ambon', 'Kendari', 'Palu', 'Mamuju', 'Gorontalo'],
+    'VN': ['Hanoi', 'Ho Chi Minh', 'Da Nang', 'Hai Phong', 'Can Tho', 'Bien Hoa', 'Hue', 'Nha Trang', 'Buon Ma Thuot', 'Qui Nhon', 'Vung Tau', 'Thai Nguyen', 'Nam Dinh', 'Thanh Hoa', 'Vinh', 'Ha Long', 'Pleiku', 'My Tho', 'Rach Gia', 'Long Xuyen', 'Ca Mau', 'Tra Vinh', 'Soc Trang', 'Bac Lieu', 'Dong Hoi', 'Tam Ky', 'Kon Tum', 'Dong Ha', 'Lao Cai', 'Son La'],
+    'TR': ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Antalya', 'Adana', 'Konya', 'Gaziantep', 'Mersin', 'Diyarbakir', 'Kayseri', 'Eskisehir', 'Urfa', 'Malatya', 'Erzurum', 'Van', 'Batman', 'Elazig', 'Isparta', 'Trabzon', 'Ordu', 'Afyon', 'Denizli', 'Samsun', 'Kahramanmaras', 'Erzincan', 'Sivas', 'Tokat', 'Zonguldak', 'Balikesir']
+};
+
 // 현재 언어
 let currentLanguage = 'en-us';
 
@@ -1019,6 +1039,26 @@ async function detectUserLanguage() {
     return 'en-us';
 }
 
+// 도시명으로 국가 코드 감지
+function detectCountryFromCity(cityName) {
+    if (!cityName) return null;
+    
+    const normalizedCity = cityName.toLowerCase().trim();
+    
+    for (const [countryCode, cities] of Object.entries(majorCities)) {
+        for (const city of cities) {
+            if (city.toLowerCase() === normalizedCity || 
+                city.toLowerCase().includes(normalizedCity) ||
+                normalizedCity.includes(city.toLowerCase())) {
+                console.log(`🏙️ City detected: ${city} -> ${countryCode}`);
+                return countryCode;
+            }
+        }
+    }
+    
+    return null;
+}
+
 // 위치 기반 국가 코드 가져오기
 async function getCountryFromLocation() {
     try {
@@ -1043,6 +1083,17 @@ async function getCountryFromLocation() {
                 
                 if (countryCode) {
                     console.log(`Detected country: ${countryCode} (${data.country_name || 'Unknown'}) via ${service}`);
+                    
+                    // 도시 정보도 확인 (추가 검증)
+                    if (data.city) {
+                        const cityCountry = detectCountryFromCity(data.city);
+                        if (cityCountry && cityCountry === countryCode) {
+                            console.log(`✅ City verification successful: ${data.city} -> ${countryCode}`);
+                        } else if (cityCountry) {
+                            console.log(`⚠️ City-country mismatch: ${data.city} suggests ${cityCountry}, but IP suggests ${countryCode}`);
+                        }
+                    }
+                    
                     return countryCode;
                 }
             } catch (serviceError) {
@@ -1060,7 +1111,20 @@ async function getCountryFromLocation() {
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             console.log(`Using timezone: ${timezone}`);
             
-            // 시간대 기반 국가 추정
+            // 시간대에서 도시명 추출하여 감지
+            const timezoneParts = timezone.split('/');
+            if (timezoneParts.length > 1) {
+                const cityFromTimezone = timezoneParts[timezoneParts.length - 1].replace(/_/g, ' ');
+                console.log(`🌍 Extracted city from timezone: ${cityFromTimezone}`);
+                
+                const detectedCountry = detectCountryFromCity(cityFromTimezone);
+                if (detectedCountry) {
+                    console.log(`✅ Timezone-based city detection: ${cityFromTimezone} -> ${detectedCountry}`);
+                    return detectedCountry;
+                }
+            }
+            
+            // 기존 시간대 기반 국가 추정 (백업)
             if (timezone.includes('Seoul') || timezone.includes('Asia/Seoul')) {
                 return 'KR';
             } else if (timezone.includes('Tokyo') || timezone.includes('Asia/Tokyo')) {
@@ -1115,6 +1179,8 @@ window.i18n = {
     changeLanguage,
     translations,
     countryToLanguage,
+    majorCities,
+    detectCountryFromCity,
     getCountryFromLocation,
     currentLanguage: () => currentLanguage
 };
