@@ -831,74 +831,172 @@ NMPA_API_KEY=your_nmpa_api_key_here        # 中国
 
 ### 🚀 快速开始
 
-```bash
-# 克隆仓库
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
+#### 🌐 语言支持
+本项目通过独立的语言文件夹进行完全优化：
+- **中文**: `/zh-cn/` - 中文本地化内容
+- **英语（默认）**: `/en-us/` - 英语本地化内容
+- **语言切换**: 使用页脚语言切换器或直接导航到语言文件夹
+- 每个语言文件夹包含独立的 `config.js`、`index.html`、`scripts.js` 和 `styles.css`
 
-# 设置环境变量
-cp env.example .env
-# 编辑.env文件添加API密钥
-
-# 启动本地服务器
-python3 -m http.server 8080
-
-# 浏览器访问
-open http://localhost:8080
-```
-
-### 📁 项目结构
+#### 📁 项目结构
 
 ```
-drug-interaction-checker/
-├── en-us/                    # 🇺🇸 英语版
-├── ko-kr/                    # 🇰🇷 韩语版
-├── ja-jp/                    # 🇯🇵 日语版
-├── zh-cn/                    # 🇨🇳 中文版
-├── es-es/                    # 🇪🇸 西班牙语版
-├── fr-fr/                    # 🇫🇷 法语版
-├── de-de/                    # 🇩🇪 德语版
-├── it-it/                    # 🇮🇹 意大利语版
-├── pt-pt/                    # 🇵🇹 葡萄牙语版
-├── ar-sa/                    # 🇸🇦 阿拉伯语版
-├── hi-in/                    # 🇮🇳 印地语版
-├── ru-ru/                    # 🇷🇺 俄语版
-├── id-id/                    # 🇮🇩 印尼语版
-├── vi-vn/                    # 🇻🇳 越南语版
-├── tr-tr/                    # 🇹🇷 土耳其语版
-├── es-mx/                    # 🇲🇽 墨西哥西班牙语版
-├── i18n.js                   # 🌍 多语言支持
-├── language-selector.js      # 🔄 语言切换
-├── vercel.json              # ⚡ Vercel配置
-├── .env                     # 🔐 环境变量（统一）
-└── env.example              # 📋 设置模板
+DI2025checker/
+├── vercel.json          # Vercel部署配置
+├── zh-cn/               # 中文文件夹
+│   ├── config.js        # 中文EmailJS配置
+│   ├── index.html       # 中文主页
+│   ├── ai-test.html     # 中文AI测试页
+│   ├── scripts.js       # 中文本地化脚本
+│   └── styles.css       # 共享样式
+├── en-us/               # 英语文件夹
+│   ├── config.js        # 英语EmailJS配置
+│   ├── index.html       # 英语主页
+│   ├── ai-test.html     # 英语AI测试页
+│   ├── scripts.js       # 英语本地化脚本
+│   └── styles.css       # 共享样式
+├── i18n.js              # 多语言支持
+├── language-selector.js # 语言切换
+├── logo/                # 共享资源
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
 ```
 
-### 🌍 多语言支持
+#### 前提条件
+- 现代Web浏览器（Chrome、Firefox、Safari、Edge）
+- 用于API访问的互联网连接
+- 至少一个AI API密钥（可选但推荐）
 
-**自动语言检测：**
-- **基于位置检测** - 根据用户IP位置自动选择语言
-- **浏览器语言** - 基于浏览器设置的备用方案
-- **URL参数** - `?lang=zh-cn`手动指定语言
-- **本地存储** - 记住用户选择
+#### 安装步骤
 
-**支持语言：**
-- 🇺🇸 **英语** (en-us) - 美国、加拿大、英国、澳大利亚
-- 🇰🇷 **韩语** (ko-kr) - 韩国
-- 🇯🇵 **日语** (ja-jp) - 日本
-- 🇨🇳 **中文** (zh-cn) - 中国
-- 🇪🇸 **西班牙语** (es-es) - 西班牙
-- 🇫🇷 **法语** (fr-fr) - 法国、加拿大
-- 🇩🇪 **德语** (de-de) - 德国、奥地利
-- 🇮🇹 **意大利语** (it-it) - 意大利
-- 🇵🇹 **葡萄牙语** (pt-pt) - 葡萄牙、巴西
-- 🇸🇦 **阿拉伯语** (ar-sa) - 沙特阿拉伯、阿联酋
-- 🇮🇳 **印地语** (hi-in) - 印度
-- 🇷🇺 **俄语** (ru-ru) - 俄罗斯
-- 🇮🇩 **印尼语** (id-id) - 印度尼西亚
-- 🇻🇳 **越南语** (vi-vn) - 越南
-- 🇹🇷 **土耳其语** (tr-tr) - 土耳其
-- 🇲🇽 **墨西哥西班牙语** (es-mx) - 墨西哥
+1. **克隆仓库**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **本地开发**
+   ```bash
+   # 使用本地服务器提供服务
+   python3 -m http.server 8000
+   
+   # 然后访问：
+   # 中文: http://localhost:8000/zh-cn/
+   # 英语: http://localhost:8000/en-us/
+   ```
+
+3. **部署到Vercel（推荐）**
+   ```bash
+   # 安装Vercel CLI
+   npm i -g vercel
+   
+   # 部署
+   vercel
+   
+   # vercel.json配置会自动将"/"重定向到"/en-us/index.html"
+   ```
+
+4. **配置AI API（可选）**
+   - 点击⚙️设置按钮
+   - 为所需服务添加API密钥
+   - 使用🧪 API测试按钮测试连接
+
+#### API密钥设置
+
+##### OpenAI（推荐）
+1. 访问 [OpenAI Platform](https://platform.openai.com/api-keys)
+2. 创建账户并生成API密钥
+3. 格式：`sk-...`
+
+##### Anthropic Claude
+1. 访问 [Anthropic Console](https://console.anthropic.com/)
+2. 生成API密钥
+3. 格式：`sk-ant-...`
+
+##### Perplexity AI
+1. 访问 [Perplexity Settings](https://www.perplexity.ai/settings/api)
+2. 生成API密钥
+3. 格式：`pplx-...`
+
+##### Google Gemini
+1. 访问 [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. 生成API密钥
+3. 格式：`AI...`
+
+#### EmailJS设置（用于反馈功能）
+
+1. **创建EmailJS账户**
+   - 访问 [EmailJS](https://www.emailjs.com/)
+   - 创建免费账户
+
+2. **连接邮件服务**
+   - 添加您的邮件服务（Gmail、Outlook等）
+   - 记下您的服务ID
+
+3. **创建邮件模板**
+   - 创建包含以下变量的反馈模板：
+     - `{{from_name}}` - 发送者姓名
+     - `{{from_email}}` - 发送者邮箱
+     - `{{subject}}` - 反馈主题
+     - `{{message}}` - 反馈消息
+   - 记下您的模板ID
+
+4. **配置环境变量**
+   - 编辑根目录的 `.env` 文件
+   - 替换占位符值：
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 使用方法
+
+1. **搜索药物**
+   - 在搜索框中输入药物名称
+   - 使用部分名称甚至拼写错误
+   - 从智能建议中选择
+
+2. **检查相互作用**
+   - 从下拉菜单中选择两种药物
+   - 点击"检查相互作用"
+   - 查看AI分析和FDA数据
+
+3. **查看详细信息**
+   - 点击任何药物名称查看详细信息
+   - 直接将药物添加到相互作用检查器
+
+### 🔬 AI分析功能
+
+- **风险评估**: 全面的风险级别评估
+- **临床见解**: 专业医疗建议
+- **相互作用机制**: 分子级别的药物相互作用
+- **紧急迹象**: 何时需要立即就医
+- **结构化报告**: 易于阅读的格式化分析
+
+### ⚠️ 重要医疗免责声明
+
+> **此工具仅供参考，不应替代专业医疗建议。在做出用药决定之前，请务必咨询医疗保健提供者。**
+
+### 🤝 贡献
+
+1. Fork本仓库
+2. 创建功能分支（`git checkout -b feature/amazing-feature`）
+3. 提交更改（`git commit -m 'Add amazing feature'`）
+4. 推送到分支（`git push origin feature/amazing-feature`）
+5. 打开Pull Request
+
+### 📄 许可证
+
+本项目根据MIT许可证授权 - 详见 [LICENSE](LICENSE) 文件。
+
+### 🙏 致谢
+
+- FDA OpenFDA提供的全面药物数据
+- AI提供商提供的高级分析功能
+- 医疗专业人士提供的药物相互作用指导
+- 中国医疗机构：国家药监局、国家卫健委、中国药学会
 
 ### 🔗 医疗资源
 
