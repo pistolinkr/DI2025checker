@@ -1531,27 +1531,243 @@ Der Arzneimittelwechselwirkungsprüfer ist eine fortschrittliche Webanwendung, d
 
 ### ✨ Hauptmerkmale
 
-- **Intelligente Echtzeitsuche** mit Tippfehlertoleranz
-- **Multi-KI-Analyse**: OpenAI, Claude, Perplexity, Gemini
-- **Risikobewertung**: Niedrig/Mittel/Hoch/Sehr hoch
-- **Datenbank mit 50+ Medikamenten** mit Markennamen
-- **Dunkler/Heller Modus** mit Glassmorphismus-Design
-- **Mehrsprachige Unterstützung** - 16 Sprachen mit automatischer Erkennung
+#### 🔍 **Intelligente Suchmaschine**
+- **Echtzeitsuche** mit 300ms Debounce
+- **Tippfehlertoleranz** und Fuzzy-Matching
+- **Teilsuche** (z.B.: "Aspir" → "Aspirin")
+- **Gemischte Nutzung** Deutsch-Englisch Unterstützung
+- **Relevanzbasierte Sortierung** mit Ähnlichkeitsalgorithmen
 
-### 🔧 Konfiguration
+#### 🤖 **Multi-KI-Analyse**
+- Unterstützung für **4 große KI-Dienste**: OpenAI, Claude, Perplexity, Gemini
+- **Professionelle medizinische Analyse** mit strukturierten Berichten
+- **Risikobewertung**: Niedrig/Mittel/Hoch/Sehr hoch
+- **Klinische Empfehlungen** und Notfallzeichen
+- **Automatisches Fallback-System** bei fehlgeschlagenen Verbindungen
+
+#### 📊 **Umfassende Daten**
+- **FDA OpenFDA API** Integration
+- **50+ Arzneimitteldatenbank** mit Markennamen
+- **Detaillierte Arzneimittelinformationen** mit Herstellerdetails
+- **Wechselwirkungsmechanismen** und Warnungen
+- **Kürzliche Suchhistorie** und Favoriten
+
+#### 🎨 **Moderne UI/UX**
+- **Glassmorphismus-Design** mit Blur-Effekten
+- **Professionelles graues Theme** mit subtilen Verläufen
+- **Dunkler/Heller Modus** Unterstützung
+- **Responsives Design** für alle Geräte
+- **Barrierefreiheitsfunktionen** mit ARIA-Labels
+- **Sauberes Footer-Layout** mit Links zu medizinischen Ressourcen
+
+### 🔧 Umgebungsvariablen-Konfiguration
+
+**Einheitliches Konfigurationsmanagement:**
+Alle Sprachen verwenden eine einzige `.env`-Datei im Stammverzeichnis für zentrale Konfiguration:
 
 ```bash
-# Repository klonen
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
-
-# Umgebungsvariablen konfigurieren
+# Beispieldatei kopieren
 cp env.example .env
-# .env-Datei mit Ihren API-Schlüsseln bearbeiten
 
-# Lokalen Server starten
-python3 -m http.server 8080
+# Mit Ihren tatsächlichen Werten bearbeiten
+nano .env
 ```
+
+**Erforderliche Konfiguration:**
+```env
+# EmailJS-Konfiguration (Universal)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# KI-Dienst-API-Schlüssel (Optional)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Länderspezifische Arzneimitteldatenbank-APIs
+FDA_API_KEY=your_fda_api_key_here          # USA
+MFDS_API_KEY=your_mfds_api_key_here       # Südkorea
+PMDA_API_KEY=your_pmda_api_key_here       # Japan
+NMPA_API_KEY=your_nmpa_api_key_here        # China
+# ... weitere länderspezifische APIs
+```
+
+**Vorteile des einheitlichen Managements:**
+- **Einzelne Konfigurationsdatei** für alle 16 Sprachen
+- **Einfache Wartung** - keine doppelten API-Schlüssel
+- **Sicherheit** - `.env`-Datei wird von gitignore verarbeitet
+- **Effizienz** - ein Ort für alle Einstellungen
+
+### 🚀 Erste Schritte
+
+#### 🌐 Sprachunterstützung
+Dieses Projekt ist vollständig mit unabhängigen Sprachordnern optimiert:
+- **Deutsch**: `/de-de/` - Deutsche Version mit lokalisierten Inhalten
+- **Englisch (Standard)**: `/en-us/` - Englische Version mit lokalisierten Inhalten
+- **Sprachwechsel**: Verwenden Sie den Sprachumschalter in der Fußzeile oder navigieren Sie direkt zu den Sprachordnern
+- Jeder Sprachordner enthält unabhängige `config.js`, `index.html`, `scripts.js` und `styles.css` Dateien
+
+#### 📁 Projektstruktur
+
+```
+DI2025checker/
+├── vercel.json          # Vercel-Bereitstellungskonfiguration
+├── de-de/               # Deutscher Ordner
+│   ├── config.js        # Deutsche EmailJS-Konfiguration
+│   ├── index.html       # Deutsche Hauptseite
+│   ├── ai-test.html     # Deutsche KI-Testseite
+│   ├── scripts.js       # Lokalisierte deutsche Skripte
+│   └── styles.css       # Gemeinsame Styles
+├── en-us/               # Englischer Ordner
+│   ├── config.js        # Englische EmailJS-Konfiguration
+│   ├── index.html       # Englische Hauptseite
+│   ├── ai-test.html     # Englische KI-Testseite
+│   ├── scripts.js       # Lokalisierte englische Skripte
+│   └── styles.css       # Gemeinsame Styles
+├── i18n.js              # Mehrsprachige Unterstützung
+├── language-selector.js # Sprachumschalter
+├── logo/                # Gemeinsame Ressourcen
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
+```
+
+#### Voraussetzungen
+- Moderner Webbrowser (Chrome, Firefox, Safari, Edge)
+- Internetverbindung für API-Zugriff
+- Mindestens ein KI-API-Schlüssel (optional, aber empfohlen)
+
+#### Installation
+
+1. **Repository klonen**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **Lokale Entwicklung**
+   ```bash
+   # Mit lokalem Server bereitstellen
+   python3 -m http.server 8000
+   
+   # Dann zugreifen:
+   # Deutsch: http://localhost:8000/de-de/
+   # Englisch: http://localhost:8000/en-us/
+   ```
+
+3. **Auf Vercel bereitstellen (Empfohlen)**
+   ```bash
+   # Vercel CLI installieren
+   npm i -g vercel
+   
+   # Bereitstellen
+   vercel
+   
+   # Die vercel.json-Konfiguration leitet "/" automatisch zu "/en-us/index.html" um
+   ```
+
+4. **KI-APIs konfigurieren (Optional)**
+   - Klicken Sie auf die Einstellungsschaltfläche ⚙️
+   - Fügen Sie Ihre API-Schlüssel für gewünschte Dienste hinzu
+   - Testen Sie Verbindungen mit der API-Test-Schaltfläche 🧪
+
+#### API-Schlüssel-Einrichtung
+
+##### OpenAI (Empfohlen)
+1. Besuchen Sie [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Erstellen Sie ein Konto und generieren Sie einen API-Schlüssel
+3. Format: `sk-...`
+
+##### Anthropic Claude
+1. Besuchen Sie [Anthropic Console](https://console.anthropic.com/)
+2. Generieren Sie einen API-Schlüssel
+3. Format: `sk-ant-...`
+
+##### Perplexity AI
+1. Besuchen Sie [Perplexity Settings](https://www.perplexity.ai/settings/api)
+2. Generieren Sie einen API-Schlüssel
+3. Format: `pplx-...`
+
+##### Google Gemini
+1. Besuchen Sie [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Generieren Sie einen API-Schlüssel
+3. Format: `AI...`
+
+#### EmailJS-Einrichtung (für Feedback-Funktion)
+
+1. **EmailJS-Konto erstellen**
+   - Besuchen Sie [EmailJS](https://www.emailjs.com/)
+   - Erstellen Sie ein kostenloses Konto
+
+2. **E-Mail-Dienst verbinden**
+   - Fügen Sie Ihren E-Mail-Dienst hinzu (Gmail, Outlook, etc.)
+   - Notieren Sie Ihre Service-ID
+
+3. **E-Mail-Vorlage erstellen**
+   - Erstellen Sie eine Feedback-Vorlage mit diesen Variablen:
+     - `{{from_name}}` - Name des Absenders
+     - `{{from_email}}` - E-Mail des Absenders
+     - `{{subject}}` - Feedback-Betreff
+     - `{{message}}` - Feedback-Nachricht
+   - Notieren Sie Ihre Template-ID
+
+4. **Umgebungsvariablen konfigurieren**
+   - Bearbeiten Sie die `.env`-Datei im Stammverzeichnis
+   - Ersetzen Sie die Platzhalterwerte:
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 Verwendung
+
+1. **Medikamente suchen**
+   - Geben Sie den Medikamentennamen in das Suchfeld ein
+   - Verwenden Sie Teilnamen oder sogar Tippfehler
+   - Wählen Sie aus intelligenten Vorschlägen
+
+2. **Wechselwirkungen prüfen**
+   - Wählen Sie zwei Medikamente aus den Dropdown-Menüs
+   - Klicken Sie auf "Wechselwirkung prüfen"
+   - Überprüfen Sie sowohl KI-Analyse als auch FDA-Daten
+
+3. **Detaillierte Informationen anzeigen**
+   - Klicken Sie auf einen Medikamentennamen für detaillierte Informationen
+   - Fügen Sie Medikamente direkt zum Wechselwirkungsprüfer hinzu
+
+### 🔬 KI-Analysefunktionen
+
+- **Risikobewertung**: Umfassende Risikostufenbewertung
+- **Klinische Erkenntnisse**: Professionelle medizinische Empfehlungen
+- **Wechselwirkungsmechanismen**: Wie Medikamente auf molekularer Ebene interagieren
+- **Notfallzeichen**: Wann sofortige medizinische Hilfe erforderlich ist
+- **Strukturierte Berichte**: Leicht lesbare formatierte Analyse
+
+### ⚠️ Wichtiger medizinischer Haftungsausschluss
+
+> **Dieses Tool dient nur zu Informationszwecken und sollte keine professionelle medizinische Beratung ersetzen. Konsultieren Sie immer Gesundheitsdienstleister, bevor Sie Entscheidungen über Medikamente treffen.**
+
+### 🤝 Mitwirken
+
+1. Forken Sie das Repository
+2. Erstellen Sie einen Feature-Branch (`git checkout -b feature/amazing-feature`)
+3. Committen Sie Ihre Änderungen (`git commit -m 'Add amazing feature'`)
+4. Pushen Sie zum Branch (`git push origin feature/amazing-feature`)
+5. Öffnen Sie einen Pull Request
+
+### 📄 Lizenz
+
+Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die [LICENSE](LICENSE)-Datei für Details.
+
+### 🙏 Danksagungen
+
+- FDA OpenFDA für umfassende Arzneimitteldaten
+- KI-Anbieter für fortgeschrittene Analysefähigkeiten
+- Medizinische Fachkräfte für Anleitung zu Arzneimittelwechselwirkungen
+- Deutsche medizinische Einrichtungen: BfArM, PEI, ABDA
 
 ### 🔗 Medizinische Ressourcen
 
