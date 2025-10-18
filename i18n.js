@@ -980,19 +980,20 @@ async function detectUserLanguage() {
     //     return savedLang;
     // }
     
-    // 3. 위치 기반 언어 감지 (Geolocation API)
+    // 3. 위치 기반 언어 감지 (Geolocation API) - 최우선!
+    let detectedCountryCode = null;
     try {
         console.log('🌍 Starting location-based language detection...');
-        const countryCode = await getCountryFromLocation();
-        console.log(`📍 Detected country code: ${countryCode}`);
+        detectedCountryCode = await getCountryFromLocation();
+        console.log(`📍 Detected country code: ${detectedCountryCode}`);
         
-        if (countryCode && countryToLanguage[countryCode]) {
-            const detectedLang = countryToLanguage[countryCode];
-            console.log(`✅ Location-based language detected: ${detectedLang} (${countryCode})`);
+        if (detectedCountryCode && countryToLanguage[detectedCountryCode]) {
+            const detectedLang = countryToLanguage[detectedCountryCode];
+            console.log(`✅ Location-based language detected: ${detectedLang} (${detectedCountryCode})`);
             localStorage.setItem('preferredLanguage', detectedLang);
             return detectedLang;
         } else {
-            console.log(`⚠️ Country ${countryCode} not mapped to a supported language`);
+            console.log(`⚠️ Country ${detectedCountryCode} not mapped to a supported language`);
         }
     } catch (error) {
         console.log('❌ Geolocation language detection failed:', error);
@@ -1023,9 +1024,55 @@ async function detectUserLanguage() {
         return 'ko-kr';
     }
     
+    // 스페인어 특별 처리 - 멕시코 우선 (es-MX)
+    if (langCode === 'es-mx' || langCode === 'es_mx') {
+        console.log('🇲🇽 Detected Mexican Spanish browser language -> es-mx');
+        return 'es-mx';
+    }
+    
+    // 스페인 스페인어
+    if (langCode === 'es-es' || langCode === 'es_es') {
+        console.log('🇪🇸 Detected Spanish browser language -> es-es');
+        return 'es-es';
+    }
+    
     // 언어 코드만 확인 (en-us, en-gb -> en)
     const baseLang = langCode.split('-')[0];
     console.log(`🔍 Checking base language: ${baseLang}`);
+    
+    // 스페인어(es)인 경우 위치를 확인하여 멕시코인지 판단
+    if (baseLang === 'es') {
+        console.log('🔍 Spanish detected, checking location to determine Spanish variant...');
+        
+        // 이미 감지된 국가 코드가 있으면 재사용
+        if (detectedCountryCode) {
+            console.log(`🔄 Reusing detected country code: ${detectedCountryCode}`);
+            if (detectedCountryCode === 'MX') {
+                console.log('🇲🇽 Location is Mexico -> es-mx');
+                return 'es-mx';
+            } else if (detectedCountryCode === 'ES') {
+                console.log('🇪🇸 Location is Spain -> es-es');
+                return 'es-es';
+            }
+        }
+        
+        // 국가 코드가 없으면 다시 시도
+        try {
+            const countryCode = await getCountryFromLocation();
+            if (countryCode === 'MX') {
+                console.log('🇲🇽 Location is Mexico -> es-mx');
+                return 'es-mx';
+            } else if (countryCode === 'ES') {
+                console.log('🇪🇸 Location is Spain -> es-es');
+                return 'es-es';
+            }
+        } catch (err) {
+            console.log('⚠️ Location check failed for Spanish, defaulting to es-es');
+        }
+        // 위치 확인 실패 시 스페인 스페인어로 기본 설정
+        console.log('🇪🇸 Defaulting to Spain Spanish -> es-es');
+        return 'es-es';
+    }
     
     for (const key in translations) {
         if (key.startsWith(baseLang)) {
@@ -1141,7 +1188,9 @@ async function getCountryFromLocation() {
                 return 'DE';
             } else if (timezone.includes('Lisbon') || timezone.includes('Europe/Lisbon')) {
                 return 'PT';
-            } else if (timezone.includes('America/New_York') || timezone.includes('America/Los_Angeles')) {
+            } else if (timezone.includes('America/Mexico') || timezone.includes('Mexico_City') || timezone.includes('America/Cancun') || timezone.includes('America/Monterrey') || timezone.includes('America/Tijuana')) {
+                return 'MX';
+            } else if (timezone.includes('America/New_York') || timezone.includes('America/Los_Angeles') || timezone.includes('America/Chicago') || timezone.includes('America/Denver')) {
                 return 'US';
             }
         } catch (tzError) {
