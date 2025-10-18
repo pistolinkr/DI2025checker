@@ -268,6 +268,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [심평원](https://www.hira.or.kr) - 건강보험심사평가원
 - [국민건강정보](https://health.cdc.go.kr) - 질병관리청 국민건강정보
 
+[⬆️ Back to Top](#-drug-interaction-checker-v21)
+
 ---
 
 ## Korean
@@ -489,6 +491,8 @@ NMPA_API_KEY=your_nmpa_api_key_here        # 중국
 - [심평원](https://www.hira.or.kr) - 건강보험심사평가원
 - [국민건강정보](https://health.cdc.go.kr) - 질병관리청 국민건강정보
 
+[⬆️ 맨 위로 돌아가기](#-drug-interaction-checker-v21)
+
 ---
 
 ## Japanese
@@ -645,6 +649,8 @@ drug-interaction-checker/
 - [厚生労働省](https://www.mhlw.go.jp) - 厚生労働省
 - [日本薬剤師会](https://www.nichiyaku.or.jp) - 日本薬剤師会
 - [医薬品医療機器レギュラトリーサイエンス財団](https://www.pmda.go.jp) - PMDA
+
+[⬆️ トップに戻る](#-drug-interaction-checker-v21)
 
 ---
 
@@ -803,6 +809,8 @@ drug-interaction-checker/
 - [中国药学会](https://www.cpa.org.cn) - 中国药学会
 - [药品审评中心](https://www.cde.org.cn) - 国家药品监督管理局药品审评中心
 
+[⬆️ 返回顶部](#-drug-interaction-checker-v21)
+
 ---
 
 ## Spanish
@@ -960,6 +968,8 @@ drug-interaction-checker/
 - [Colegio Oficial de Farmacéuticos](https://www.portalfarma.com) - Consejo General de Colegios Oficiales de Farmacéuticos
 - [Base de Datos de Medicamentos](https://www.aemps.gob.es/cima) - Centro de Información online de Medicamentos de la AEMPS
 
+[⬆️ Volver arriba](#-drug-interaction-checker-v21)
+
 ---
 
 ## French
@@ -998,6 +1008,8 @@ python3 -m http.server 8080
 - [Ministère de la Santé](https://www.sante.gouv.fr) - Ministère de la Santé et de la Prévention
 - [Ordre des Pharmaciens](https://www.ordre.pharmacien.fr) - Ordre National des Pharmaciens
 - [Base Claude Bernard](https://www.resip.fr) - Base de données des médicaments
+
+[⬆️ Retour en haut](#-drug-interaction-checker-v21)
 
 ---
 
@@ -1038,6 +1050,8 @@ python3 -m http.server 8080
 - [ABDA](https://www.abda.de) - Bundesvereinigung Deutscher Apothekerverbände
 - [Rote Liste](https://www.rote-liste.de) - Arzneimittel-Datenbank
 
+[⬆️ Nach oben](#-drug-interaction-checker-v21)
+
 ---
 
 ## Italian
@@ -1076,6 +1090,8 @@ python3 -m http.server 8080
 - [Ministero della Salute](https://www.salute.gov.it) - Ministero della Salute
 - [Federfarma](https://www.federfarma.it) - Federazione Nazionale Farmacisti Italiani
 - [Farmadati](https://www.farmadati.it) - Banca Dati Farmaci
+
+[⬆️ Torna su](#-drug-interaction-checker-v21)
 
 ---
 
@@ -1116,6 +1132,8 @@ python3 -m http.server 8080
 - [Ordem dos Farmacêuticos](https://www.ordemfarmaceuticos.pt) - Ordem dos Farmacêuticos
 - [Infomed](https://www.infarmed.pt/infomed) - Base de Dados de Medicamentos
 
+[⬆️ Voltar ao topo](#-drug-interaction-checker-v21)
+
 ---
 
 ## Arabic
@@ -1154,6 +1172,8 @@ python3 -m http.server 8080
 - [وزارة الصحة](https://www.moh.gov.sa) - وزارة الصحة السعودية
 - [الهيئة السعودية للتخصصات الصحية](https://www.scfhs.org.sa) - الهيئة السعودية للتخصصات الصحية
 - [الصيدلة السعودية](https://www.saudipharmacy.sa) - الجمعية السعودية الصيدلية
+
+[⬆️ العودة إلى الأعلى](#-drug-interaction-checker-v21)
 
 ---
 
@@ -1194,6 +1214,8 @@ python3 -m http.server 8080
 - [IPA](https://www.ipapharma.org) - इंडियन फार्मास्यूटिकल एसोसिएशन
 - [AYUSH](https://www.ayush.gov.in) - आयुष मंत्रालय
 
+[⬆️ शीर्ष पर वापस जाएं](#-drug-interaction-checker-v21)
+
 ---
 
 ## Russian
@@ -1232,6 +1254,8 @@ python3 -m http.server 8080
 - [Минздрав России](https://minzdrav.gov.ru) - Министерство здравоохранения Российской Федерации
 - [РФА](https://www.rpharms.ru) - Российская Фармацевтическая Ассоциация
 - [ГРЛС](https://grls.rosminzdrav.ru) - Государственный реестр лекарственных средств
+
+[⬆️ Вернуться наверх](#-drug-interaction-checker-v21)
 
 ---
 
@@ -1272,6 +1296,8 @@ python3 -m http.server 8080
 - [IAI](https://www.iaiglobal.or.id) - Ikatan Apoteker Indonesia
 - [PIONAS](https://pionas.pom.go.id) - Pusat Informasi Obat Nasional
 
+[⬆️ Kembali ke atas](#-drug-interaction-checker-v21)
+
 ---
 
 ## Vietnamese
@@ -1310,6 +1336,8 @@ python3 -m http.server 8080
 - [Cục Quản lý Dược](https://dav.gov.vn) - Cục Quản lý Dược
 - [Hội Dược học](https://www.vps.org.vn) - Hội Dược học Việt Nam
 - [Drugbank.vn](https://drugbank.vn) - Cơ sở dữ liệu thuốc Việt Nam
+
+[⬆️ Quay lại đầu trang](#-drug-interaction-checker-v21)
 
 ---
 
@@ -1350,6 +1378,8 @@ python3 -m http.server 8080
 - [TEB](https://www.teb.org.tr) - Türk Eczacıları Birliği
 - [İlaç Bilgi Bankası](https://www.titck.gov.tr/kubkt) - Kısa Ürün Bilgisi ve Kullanma Talimatı
 
+[⬆️ Başa dön](#-drug-interaction-checker-v21)
+
 ---
 
 ## Mexican Spanish
@@ -1388,3 +1418,5 @@ python3 -m http.server 8080
 - [Secretaría de Salud](https://www.gob.mx/salud) - Secretaría de Salud de México
 - [CONAMED](https://www.gob.mx/conamed) - Comisión Nacional de Arbitraje Médico
 - [IMSS](https://www.imss.gob.mx) - Instituto Mexicano del Seguro Social
+
+[⬆️ Volver arriba](#-drug-interaction-checker-v21)
