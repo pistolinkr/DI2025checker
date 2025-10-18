@@ -77,31 +77,31 @@
         <div class="settings-content">
             <div class="settings-header">
                 <h3 class="settings-title">
-                    🤖 AI Analysis Settings
+                    🤖 KI-Analyse-Einstellungen
                 </h3>
                 <button class="modal-close" onclick="closeSettings()" aria-label="Close">×</button>
             </div>
             <div class="settings-body">
                 <!-- AI Service Selection -->
                 <div class="form-group">
-                    <label for="aiProvider" class="form-label">🎯 AI Service to Use</label>
+                    <label for="aiProvider" class="form-label">🎯 Zu verwendender KI-Service</label>
                     <select id="aiProvider" class="form-select">
-                        <option value="free">🆓 Free AI Service (Default)</option>
+                        <option value="free">🆓 Kostenloser KI-Service (Standard)</option>
                         <option value="openai">OpenAI (GPT-4o-mini)</option>
                         <option value="claude">Anthropic Claude</option>
                         <option value="perplexity">Perplexity AI</option>
                         <option value="gemini">Google Gemini</option>
-                        <option value="auto">🎲 Auto Select (Available)</option>
+                        <option value="auto">🎲 Automatische Auswahl (Verfügbar)</option>
                     </select>
                     <div class="form-help">
-                        Free AI service is provided by default. For higher quality analysis, enter your personal API keys.
+                        Standardmäßig wird ein kostenloser KI-Service bereitgestellt. Für eine höhere Analysequalität geben Sie Ihre persönlichen API-Schlüssel ein.
                     </div>
                 </div>
                 
                 <!-- Free AI Service Information -->
                 <div class="form-group ai-config" data-provider="free">
                     <div class="free-ai-info">
-                        <h4>🆓 Free AI Service</h4>
+                        <h4>🆓 Kostenloser KI-Service</h4>
                         <p>This service uses the following free AI APIs:</p>
                         <ul>
                             <li><strong>Hugging Face Inference API</strong> - Open source models</li>
@@ -213,8 +213,8 @@
                 </div>
             </div>
             <div class="settings-actions">
-                <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
-                <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+                <button class="btn btn-secondary" onclick="closeSettings()">Abbrechen</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Speichern</button>
                 <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 API Test</button>
             </div>
         </div>

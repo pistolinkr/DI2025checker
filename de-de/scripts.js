@@ -716,7 +716,7 @@ const utils = {
         };
     },
 
-    showLoading(message = 'Processing...') {
+    showLoading(message = 'Verarbeitung...') {
         const overlay = document.getElementById('loadingOverlay');
         const text = document.getElementById('loadingText');
         text.textContent = message;
@@ -2535,7 +2535,7 @@ async function checkInteraction() {
         return;
     }
 
-    utils.showLoading('Checking drug interactions...');
+    utils.showLoading('Überprüfung von Arzneimittelwechselwirkungen...');
     const resultSection = document.getElementById('resultSection');
     const resultDiv = document.getElementById('result');
 
@@ -2666,14 +2666,14 @@ async function checkInteraction() {
                 <div class="result-card result-warning scroll-scale">
                     <div class="result-header">
                         <span class="result-icon">⚠️</span>
-                        <h3 class="result-title">Attention is needed</h3>
+                        <h3 class="result-title">Aufmerksamkeit erforderlich</h3>
                     </div>
                     <div class="result-content">
                         ${aiAnalysis ? `
                             <div class="ai-analysis scroll-slide-left scroll-delay-1">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
-                                    <h4>AI Analysis</h4>
+                                    <h4>KI-Analyse</h4>
                                 </div>
                                 <div class="ai-analysis-content">
                                     ${aiAnalysis
@@ -2727,7 +2727,7 @@ async function checkInteraction() {
                             <div class="ai-analysis scroll-slide-left scroll-delay-1">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
-                                    <h4>AI Analysis</h4>
+                                    <h4>KI-Analyse</h4>
                                 </div>
                                 <div class="ai-analysis-content">
                                     ${aiAnalysis
@@ -2790,11 +2790,11 @@ async function checkInteraction() {
             <div class="result-card result-warning scroll-scale">
                 <div class="result-header">
                     <span class="result-icon">❌</span>
-                    <h3 class="result-title">Error occurred</h3>
+                    <h3 class="result-title">Ein Fehler ist aufgetreten</h3>
                 </div>
                 <div class="result-content scroll-fade scroll-delay-1">
-                    <p>An error occurred while checking the drug information.</p>
-                    <p>Please try again or contact support.</p>
+                    <p>Bei der Überprüfung der Arzneimittelinformationen ist ein Fehler aufgetreten.</p>
+                    <p>Bitte versuchen Sie es erneut oder wenden Sie sich an den Support.</p>
                 </div>
             </div>
         `;
@@ -3132,7 +3132,7 @@ async function testAllAPIs() {
         return;
     }
     
-    utils.showLoading('Testing API connections...');
+    utils.showLoading('API-Verbindungen werden getestet...');
     
     const results = [];
     
