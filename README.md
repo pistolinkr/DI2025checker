@@ -3073,27 +3073,243 @@ Pemeriksa Interaksi Obat adalah aplikasi web canggih yang membantu pengguna meng
 
 ### ✨ Fitur Utama
 
-- **Pencarian cerdas real-time** dengan toleransi kesalahan ketik
-- **Analisis Multi-AI**: OpenAI, Claude, Perplexity, Gemini
-- **Penilaian risiko**: Rendah/Sedang/Tinggi/Sangat Tinggi
-- **Database 50+ obat** dengan nama merek
-- **Mode gelap/terang** dengan desain glassmorphism
-- **Dukungan multibahasa** - 16 bahasa dengan deteksi otomatis
+#### 🔍 **Mesin Pencari Cerdas**
+- **Pencarian real-time** dengan debounce 300ms
+- **Toleransi kesalahan ketik** dan pencocokan fuzzy
+- **Pencarian parsial** (mis: "aspir" → "Aspirin")
+- **Dukungan penggunaan campuran** Indonesia-Inggris
+- **Penyortiran berbasis relevansi** dengan algoritma kemiripan
 
-### 🔧 Konfigurasi
+#### 🤖 **Analisis Multi-AI**
+- Dukungan untuk **4 layanan AI utama**: OpenAI, Claude, Perplexity, Gemini
+- **Analisis medis profesional** dengan laporan terstruktur
+- **Penilaian risiko**: Rendah/Sedang/Tinggi/Sangat Tinggi
+- **Rekomendasi klinis** dan tanda darurat
+- **Sistem fallback otomatis** untuk koneksi yang gagal
+
+#### 📊 **Data Komprehensif**
+- Integrasi **API FDA OpenFDA**
+- **Database 50+ obat** dengan nama merek
+- **Informasi obat terperinci** dengan detail produsen
+- **Mekanisme interaksi** dan peringatan
+- **Riwayat pencarian terbaru** dan favorit
+
+#### 🎨 **UI/UX Modern**
+- **Desain glassmorphism** dengan efek blur
+- **Tema abu-abu profesional** dengan gradien halus
+- **Dukungan mode gelap/terang**
+- **Desain responsif** untuk semua perangkat
+- **Fitur aksesibilitas** dengan label ARIA
+- **Tata letak footer bersih** dengan tautan ke sumber daya medis
+
+### 🔧 Konfigurasi Variabel Lingkungan
+
+**Manajemen Konfigurasi Terpadu:**
+Semua bahasa menggunakan satu file `.env` root untuk konfigurasi terpusat:
 
 ```bash
-# Clone repositori
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
-
-# Konfigurasi variabel lingkungan
+# Salin file contoh
 cp env.example .env
-# Edit file .env dengan kunci API Anda
 
-# Jalankan server lokal
-python3 -m http.server 8080
+# Edit dengan nilai sebenarnya
+nano .env
 ```
+
+**Konfigurasi yang Diperlukan:**
+```env
+# Konfigurasi EmailJS (Universal)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# Kunci API Layanan AI (Opsional)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# API Database Obat per Negara
+FDA_API_KEY=your_fda_api_key_here          # Amerika Serikat
+MFDS_API_KEY=your_mfds_api_key_here       # Korea Selatan
+PMDA_API_KEY=your_pmda_api_key_here       # Jepang
+NMPA_API_KEY=your_nmpa_api_key_here        # Tiongkok
+# ... API lain per negara
+```
+
+**Keuntungan Manajemen Terpadu:**
+- **File konfigurasi tunggal** untuk mengelola 16 bahasa
+- **Pemeliharaan mudah** - tidak ada kunci API duplikat
+- **Keamanan** - file `.env` dikelola oleh gitignore
+- **Efisiensi** - satu tempat untuk mengelola semua pengaturan
+
+### 🚀 Memulai
+
+#### 🌐 Dukungan Bahasa
+Proyek ini sepenuhnya dioptimalkan dengan folder bahasa independen:
+- **Indonesia**: `/id-id/` - Versi Indonesia dengan konten lokal
+- **Inggris (Default)**: `/en-us/` - Versi Inggris dengan konten lokal
+- **Ganti bahasa**: Gunakan pemilih bahasa di footer atau navigasi langsung ke folder bahasa
+- Setiap folder bahasa berisi file `config.js`, `index.html`, `scripts.js` dan `styles.css` independen
+
+#### 📁 Struktur Proyek
+
+```
+DI2025checker/
+├── vercel.json          # Konfigurasi deployment Vercel
+├── id-id/               # Folder Indonesia
+│   ├── config.js        # Konfigurasi EmailJS Indonesia
+│   ├── index.html       # Halaman utama Indonesia
+│   ├── ai-test.html     # Halaman tes AI Indonesia
+│   ├── scripts.js       # Script lokal Indonesia
+│   └── styles.css       # Gaya bersama
+├── en-us/               # Folder Inggris
+│   ├── config.js        # Konfigurasi EmailJS Inggris
+│   ├── index.html       # Halaman utama Inggris
+│   ├── ai-test.html     # Halaman tes AI Inggris
+│   ├── scripts.js       # Script lokal Inggris
+│   └── styles.css       # Gaya bersama
+├── i18n.js              # Dukungan multibahasa
+├── language-selector.js # Pemilih bahasa
+├── logo/                # Sumber daya bersama
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
+```
+
+#### Prasyarat
+- Browser web modern (Chrome, Firefox, Safari, Edge)
+- Koneksi internet untuk akses API
+- Setidaknya satu kunci API AI (opsional tapi disarankan)
+
+#### Instalasi
+
+1. **Clone repositori**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **Pengembangan Lokal**
+   ```bash
+   # Jalankan dengan server lokal
+   python3 -m http.server 8000
+   
+   # Kemudian akses:
+   # Indonesia: http://localhost:8000/id-id/
+   # Inggris: http://localhost:8000/en-us/
+   ```
+
+3. **Deploy ke Vercel (Disarankan)**
+   ```bash
+   # Instal Vercel CLI
+   npm i -g vercel
+   
+   # Deploy
+   vercel
+   
+   # Konfigurasi vercel.json otomatis mengarahkan "/" ke "/en-us/index.html"
+   ```
+
+4. **Konfigurasi AI APIs (Opsional)**
+   - Klik tombol pengaturan ⚙️
+   - Tambahkan kunci API Anda untuk layanan yang diinginkan
+   - Uji koneksi menggunakan tombol tes API 🧪
+
+#### Pengaturan Kunci API
+
+##### OpenAI (Disarankan)
+1. Kunjungi [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Buat akun dan generate kunci API
+3. Format: `sk-...`
+
+##### Anthropic Claude
+1. Kunjungi [Anthropic Console](https://console.anthropic.com/)
+2. Generate kunci API
+3. Format: `sk-ant-...`
+
+##### Perplexity AI
+1. Kunjungi [Perplexity Settings](https://www.perplexity.ai/settings/api)
+2. Generate kunci API
+3. Format: `pplx-...`
+
+##### Google Gemini
+1. Kunjungi [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Generate kunci API
+3. Format: `AI...`
+
+#### Pengaturan EmailJS (untuk Fitur Umpan Balik)
+
+1. **Buat Akun EmailJS**
+   - Kunjungi [EmailJS](https://www.emailjs.com/)
+   - Buat akun gratis
+
+2. **Hubungkan Layanan Email**
+   - Tambahkan layanan email Anda (Gmail, Outlook, dll)
+   - Catat Service ID Anda
+
+3. **Buat Template Email**
+   - Buat template umpan balik dengan variabel ini:
+     - `{{from_name}}` - Nama pengirim
+     - `{{from_email}}` - Email pengirim
+     - `{{subject}}` - Subjek umpan balik
+     - `{{message}}` - Pesan umpan balik
+   - Catat Template ID Anda
+
+4. **Konfigurasi Variabel Lingkungan**
+   - Edit file `.env` di root
+   - Ganti nilai placeholder:
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 Penggunaan
+
+1. **Cari obat**
+   - Ketik nama obat di kotak pencarian
+   - Gunakan nama parsial atau bahkan kesalahan ketik
+   - Pilih dari saran cerdas
+
+2. **Periksa interaksi**
+   - Pilih dua obat dari menu dropdown
+   - Klik "Periksa Interaksi"
+   - Tinjau analisis AI dan data FDA
+
+3. **Lihat informasi terperinci**
+   - Klik nama obat apa pun untuk informasi terperinci
+   - Tambahkan obat langsung ke pemeriksa interaksi
+
+### 🔬 Fitur Analisis AI
+
+- **Penilaian Risiko**: Penilaian tingkat risiko komprehensif
+- **Wawasan Klinis**: Rekomendasi medis profesional
+- **Mekanisme Interaksi**: Bagaimana obat berinteraksi di tingkat molekuler
+- **Tanda Darurat**: Kapan mencari perhatian medis segera
+- **Laporan Terstruktur**: Analisis terformat yang mudah dibaca
+
+### ⚠️ Penafian Medis Penting
+
+> **Alat ini hanya untuk tujuan informasi dan tidak boleh menggantikan saran medis profesional. Selalu konsultasikan dengan penyedia layanan kesehatan sebelum membuat keputusan tentang obat.**
+
+### 🤝 Berkontribusi
+
+1. Fork repositori
+2. Buat branch fitur (`git checkout -b feature/amazing-feature`)
+3. Commit perubahan (`git commit -m 'Add amazing feature'`)
+4. Push ke branch (`git push origin feature/amazing-feature`)
+5. Buka Pull Request
+
+### 📄 Lisensi
+
+Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detail.
+
+### 🙏 Ucapan Terima Kasih
+
+- FDA OpenFDA untuk data obat yang komprehensif
+- Penyedia AI untuk kemampuan analisis canggih
+- Profesional medis untuk panduan tentang interaksi obat
+- Institusi medis Indonesia: BPOM, Kementerian Kesehatan, IAI
 
 ### 🔗 Sumber Daya Medis
 
