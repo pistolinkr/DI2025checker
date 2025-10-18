@@ -572,76 +572,174 @@ NMPA_API_KEY=your_nmpa_api_key_here        # 中国
 - **セキュリティ** - `.env`ファイルはgitignore処理
 - **効率性** - 一箇所ですべての設定管理
 
-### 🚀 クイックスタート
+### 🚀 はじめに
 
-```bash
-# リポジトリをクローン
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
+#### 🌐 言語サポート
+このプロジェクトは独立した言語フォルダで完全に最適化されています：
+- **日本語**: `/ja-jp/` - ローカライズされたコンテンツの日本語版
+- **英語（デフォルト）**: `/en-us/` - ローカライズされたコンテンツの英語版
+- **言語切り替え**: フッターの言語スイッチャーを使用するか、言語フォルダに直接移動
+- 各言語フォルダには独立した `config.js`、`index.html`、`scripts.js`、`styles.css` が含まれています
 
-# 環境変数を設定
-cp env.example .env
-# .envファイルを編集してAPIキーを追加
-
-# ローカルサーバーを起動
-python3 -m http.server 8080
-
-# ブラウザでアクセス
-open http://localhost:8080
-```
-
-### 📁 プロジェクト構造
+#### 📁 プロジェクト構造
 
 ```
-drug-interaction-checker/
-├── en-us/                    # 🇺🇸 英語版
-├── ko-kr/                    # 🇰🇷 韓国語版
-├── ja-jp/                    # 🇯🇵 日本語版
-├── zh-cn/                    # 🇨🇳 中国語版
-├── es-es/                    # 🇪🇸 スペイン語版
-├── fr-fr/                    # 🇫🇷 フランス語版
-├── de-de/                    # 🇩🇪 ドイツ語版
-├── it-it/                    # 🇮🇹 イタリア語版
-├── pt-pt/                    # 🇵🇹 ポルトガル語版
-├── ar-sa/                    # 🇸🇦 アラビア語版
-├── hi-in/                    # 🇮🇳 ヒンディー語版
-├── ru-ru/                    # 🇷🇺 ロシア語版
-├── id-id/                    # 🇮🇩 インドネシア語版
-├── vi-vn/                    # 🇻🇳 ベトナム語版
-├── tr-tr/                    # 🇹🇷 トルコ語版
-├── es-mx/                    # 🇲🇽 メキシコスペイン語版
-├── i18n.js                   # 🌍 多言語サポート
-├── language-selector.js      # 🔄 言語切り替え
-├── vercel.json              # ⚡ Vercel設定
-├── .env                     # 🔐 環境変数（統合）
-└── env.example              # 📋 設定テンプレート
+DI2025checker/
+├── vercel.json          # Vercelデプロイ設定
+├── ja-jp/               # 日本語フォルダ
+│   ├── config.js        # 日本語EmailJS設定
+│   ├── index.html       # 日本語メインページ
+│   ├── ai-test.html     # 日本語AIテストページ
+│   ├── scripts.js       # 日本語ローカライズスクリプト
+│   └── styles.css       # 共有スタイル
+├── en-us/               # 英語フォルダ
+│   ├── config.js        # 英語EmailJS設定
+│   ├── index.html       # 英語メインページ
+│   ├── ai-test.html     # 英語AIテストページ
+│   ├── scripts.js       # 英語ローカライズスクリプト
+│   └── styles.css       # 共有スタイル
+├── i18n.js              # 多言語サポート
+├── language-selector.js # 言語切り替え
+├── logo/                # 共有アセット
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
 ```
 
-### 🌍 多言語サポート
+#### 前提条件
+- モダンなWebブラウザ（Chrome、Firefox、Safari、Edge）
+- APIアクセス用のインターネット接続
+- 少なくとも1つのAI APIキー（オプションですが推奨）
 
-**自動言語検出：**
-- **位置ベース検出** - ユーザーのIP位置に基づく自動言語選択
-- **ブラウザ言語** - ブラウザ設定に基づくフォールバック
-- **URLパラメータ** - `?lang=ja-jp`で手動言語指定
-- **ローカルストレージ** - ユーザー選択の記憶
+#### インストール
 
-**サポート言語：**
-- 🇺🇸 **英語** (en-us) - アメリカ、カナダ、イギリス、オーストラリア
-- 🇰🇷 **韓国語** (ko-kr) - 韓国
-- 🇯🇵 **日本語** (ja-jp) - 日本
-- 🇨🇳 **中国語** (zh-cn) - 中国
-- 🇪🇸 **スペイン語** (es-es) - スペイン
-- 🇫🇷 **フランス語** (fr-fr) - フランス、カナダ
-- 🇩🇪 **ドイツ語** (de-de) - ドイツ、オーストリア
-- 🇮🇹 **イタリア語** (it-it) - イタリア
-- 🇵🇹 **ポルトガル語** (pt-pt) - ポルトガル、ブラジル
-- 🇸🇦 **アラビア語** (ar-sa) - サウジアラビア、UAE
-- 🇮🇳 **ヒンディー語** (hi-in) - インド
-- 🇷🇺 **ロシア語** (ru-ru) - ロシア
-- 🇮🇩 **インドネシア語** (id-id) - インドネシア
-- 🇻🇳 **ベトナム語** (vi-vn) - ベトナム
-- 🇹🇷 **トルコ語** (tr-tr) - トルコ
-- 🇲🇽 **メキシコスペイン語** (es-mx) - メキシコ
+1. **リポジトリのクローン**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **ローカル開発**
+   ```bash
+   # ローカルサーバーで提供
+   python3 -m http.server 8000
+   
+   # 次にアクセス：
+   # 日本語: http://localhost:8000/ja-jp/
+   # 英語: http://localhost:8000/en-us/
+   ```
+
+3. **Vercelへのデプロイ（推奨）**
+   ```bash
+   # Vercel CLIのインストール
+   npm i -g vercel
+   
+   # デプロイ
+   vercel
+   
+   # vercel.json設定により"/"が自動的に"/en-us/index.html"にリダイレクトされます
+   ```
+
+4. **AI APIの設定（オプション）**
+   - ⚙️ 設定ボタンをクリック
+   - 希望するサービスのAPIキーを追加
+   - 🧪 APIテストボタンで接続をテスト
+
+#### APIキーのセットアップ
+
+##### OpenAI（推奨）
+1. [OpenAI Platform](https://platform.openai.com/api-keys) にアクセス
+2. アカウントを作成してAPIキーを生成
+3. 形式：`sk-...`
+
+##### Anthropic Claude
+1. [Anthropic Console](https://console.anthropic.com/) にアクセス
+2. APIキーを生成
+3. 形式：`sk-ant-...`
+
+##### Perplexity AI
+1. [Perplexity Settings](https://www.perplexity.ai/settings/api) にアクセス
+2. APIキーを生成
+3. 形式：`pplx-...`
+
+##### Google Gemini
+1. [Google AI Studio](https://aistudio.google.com/app/apikey) にアクセス
+2. APIキーを生成
+3. 形式：`AI...`
+
+#### EmailJSセットアップ（フィードバック機能用）
+
+1. **EmailJSアカウントの作成**
+   - [EmailJS](https://www.emailjs.com/) にアクセス
+   - 無料アカウントを作成
+
+2. **メールサービスの接続**
+   - メールサービス（Gmail、Outlookなど）を追加
+   - サービスIDをメモ
+
+3. **メールテンプレートの作成**
+   - これらの変数を含むフィードバックテンプレートを作成：
+     - `{{from_name}}` - 送信者の名前
+     - `{{from_email}}` - 送信者のメール
+     - `{{subject}}` - フィードバックの件名
+     - `{{message}}` - フィードバックメッセージ
+   - テンプレートIDをメモ
+
+4. **環境変数の設定**
+   - ルートの `.env` ファイルを編集
+   - プレースホルダー値を置き換え：
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 使い方
+
+1. **薬物の検索**
+   - 検索ボックスに薬物名を入力
+   - 部分名やタイプミスでも使用可能
+   - インテリジェントな提案から選択
+
+2. **相互作用のチェック**
+   - ドロップダウンから2つの薬物を選択
+   - 「相互作用をチェック」をクリック
+   - AI分析とFDAデータの両方を確認
+
+3. **詳細情報の表示**
+   - 任意の薬物名をクリックして詳細情報を表示
+   - 薬物を相互作用チェッカーに直接追加
+
+### 🔬 AI分析機能
+
+- **リスク評価**: 包括的なリスクレベル評価
+- **臨床的洞察**: 専門的な医療推奨事項
+- **相互作用メカニズム**: 分子レベルでの薬物相互作用
+- **緊急サイン**: 即座に医療を受けるべき時
+- **構造化レポート**: 読みやすい形式の分析
+
+### ⚠️ 重要な医療免責事項
+
+> **このツールは情報提供のみを目的としており、専門的な医療アドバイスに代わるものではありません。薬物に関する決定を行う前に、必ず医療提供者に相談してください。**
+
+### 🤝 貢献
+
+1. リポジトリをフォーク
+2. 機能ブランチを作成（`git checkout -b feature/amazing-feature`）
+3. 変更をコミット（`git commit -m 'Add amazing feature'`）
+4. ブランチにプッシュ（`git push origin feature/amazing-feature`）
+5. プルリクエストを開く
+
+### 📄 ライセンス
+
+このプロジェクトはMITライセンスの下でライセンスされています - 詳細は [LICENSE](LICENSE) ファイルを参照してください。
+
+### 🙏 謝辞
+
+- 包括的な薬物データを提供するFDA OpenFDA
+- 高度な分析機能を提供するAIプロバイダー
+- 薬物相互作用に関するガイダンスを提供する医療専門家
+- 日本の医療機関：PMDA、厚生労働省、日本薬剤師会
 
 ### 🔗 医療リソース
 
