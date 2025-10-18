@@ -3330,27 +3330,243 @@ Kiểm tra Tương tác Thuốc là một ứng dụng web tiên tiến giúp ng
 
 ### ✨ Tính Năng Chính
 
-- **Tìm kiếm thông minh thời gian thực** với khả năng chịu lỗi chính tả
-- **Phân tích Đa-AI**: OpenAI, Claude, Perplexity, Gemini
-- **Đánh giá rủi ro**: Thấp/Trung bình/Cao/Rất cao
-- **Cơ sở dữ liệu 50+ loại thuốc** với tên thương mại
-- **Chế độ tối/sáng** với thiết kế glassmorphism
-- **Hỗ trợ đa ngôn ngữ** - 16 ngôn ngữ với phát hiện tự động
+#### 🔍 **Công Cụ Tìm Kiếm Thông Minh**
+- **Tìm kiếm thời gian thực** với debounce 300ms
+- **Khả năng chịu lỗi chính tả** và khớp mờ
+- **Tìm kiếm từng phần** (vd: "aspir" → "Aspirin")
+- **Hỗ trợ sử dụng kết hợp** Tiếng Việt-Tiếng Anh
+- **Sắp xếp dựa trên mức độ liên quan** với thuật toán tương đồng
 
-### 🔧 Cấu Hình
+#### 🤖 **Phân Tích Đa-AI**
+- Hỗ trợ **4 dịch vụ AI chính**: OpenAI, Claude, Perplexity, Gemini
+- **Phân tích y tế chuyên nghiệp** với báo cáo có cấu trúc
+- **Đánh giá rủi ro**: Thấp/Trung bình/Cao/Rất cao
+- **Khuyến nghị lâm sàng** và dấu hiệu khẩn cấp
+- **Hệ thống dự phòng tự động** cho kết nối thất bại
+
+#### 📊 **Dữ Liệu Toàn Diện**
+- Tích hợp **API FDA OpenFDA**
+- **Cơ sở dữ liệu 50+ loại thuốc** với tên thương mại
+- **Thông tin chi tiết về thuốc** với thông tin nhà sản xuất
+- **Cơ chế tương tác** và cảnh báo
+- **Lịch sử tìm kiếm gần đây** và yêu thích
+
+#### 🎨 **UI/UX Hiện Đại**
+- **Thiết kế glassmorphism** với hiệu ứng làm mờ
+- **Chủ đề xám chuyên nghiệp** với gradient tinh tế
+- **Hỗ trợ chế độ tối/sáng**
+- **Thiết kế responsive** cho tất cả thiết bị
+- **Tính năng truy cập** với nhãn ARIA
+- **Bố cục footer sạch sẽ** với liên kết đến tài nguyên y tế
+
+### 🔧 Cấu Hình Biến Môi Trường
+
+**Quản Lý Cấu Hình Thống Nhất:**
+Tất cả ngôn ngữ sử dụng một file `.env` root duy nhất cho cấu hình tập trung:
 
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/drug-interaction-checker.git
-cd drug-interaction-checker
-
-# Cấu hình biến môi trường
+# Sao chép file mẫu
 cp env.example .env
-# Chỉnh sửa file .env với API keys của bạn
 
-# Khởi động server cục bộ
-python3 -m http.server 8080
+# Chỉnh sửa với giá trị thực của bạn
+nano .env
 ```
+
+**Cấu Hình Bắt Buộc:**
+```env
+# Cấu hình EmailJS (Phổ biến)
+EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+
+# Khóa API Dịch vụ AI (Tùy chọn)
+OPENAI_API_KEY=your_openai_api_key_here
+CLAUDE_API_KEY=your_claude_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# API Cơ sở Dữ liệu Thuốc theo Quốc gia
+FDA_API_KEY=your_fda_api_key_here          # Hoa Kỳ
+MFDS_API_KEY=your_mfds_api_key_here       # Hàn Quốc
+PMDA_API_KEY=your_pmda_api_key_here       # Nhật Bản
+NMPA_API_KEY=your_nmpa_api_key_here        # Trung Quốc
+# ... các API khác theo quốc gia
+```
+
+**Lợi Ích của Quản Lý Thống Nhất:**
+- **File cấu hình đơn lẻ** để quản lý 16 ngôn ngữ
+- **Bảo trì đơn giản** - không có khóa API trùng lặp
+- **Bảo mật** - file `.env` được xử lý bởi gitignore
+- **Hiệu quả** - một nơi để quản lý tất cả cài đặt
+
+### 🚀 Bắt Đầu
+
+#### 🌐 Hỗ Trợ Ngôn Ngữ
+Dự án này được tối ưu hóa hoàn toàn với các thư mục ngôn ngữ độc lập:
+- **Tiếng Việt**: `/vi-vn/` - Phiên bản tiếng Việt với nội dung địa phương hóa
+- **Tiếng Anh (Mặc định)**: `/en-us/` - Phiên bản tiếng Anh với nội dung địa phương hóa
+- **Chuyển đổi ngôn ngữ**: Sử dụng bộ chọn ngôn ngữ ở footer hoặc điều hướng trực tiếp đến thư mục ngôn ngữ
+- Mỗi thư mục ngôn ngữ chứa các file `config.js`, `index.html`, `scripts.js` và `styles.css` độc lập
+
+#### 📁 Cấu Trúc Dự Án
+
+```
+DI2025checker/
+├── vercel.json          # Cấu hình triển khai Vercel
+├── vi-vn/               # Thư mục tiếng Việt
+│   ├── config.js        # Cấu hình EmailJS tiếng Việt
+│   ├── index.html       # Trang chính tiếng Việt
+│   ├── ai-test.html     # Trang kiểm tra AI tiếng Việt
+│   ├── scripts.js       # Script địa phương hóa tiếng Việt
+│   └── styles.css       # Kiểu dáng chung
+├── en-us/               # Thư mục tiếng Anh
+│   ├── config.js        # Cấu hình EmailJS tiếng Anh
+│   ├── index.html       # Trang chính tiếng Anh
+│   ├── ai-test.html     # Trang kiểm tra AI tiếng Anh
+│   ├── scripts.js       # Script địa phương hóa tiếng Anh
+│   └── styles.css       # Kiểu dáng chung
+├── i18n.js              # Hỗ trợ đa ngôn ngữ
+├── language-selector.js # Bộ chọn ngôn ngữ
+├── logo/                # Tài nguyên chung
+│   ├── logo-dark.png
+│   └── logo-light.png
+└── README.md
+```
+
+#### Yêu Cầu Tiên Quyết
+- Trình duyệt web hiện đại (Chrome, Firefox, Safari, Edge)
+- Kết nối Internet để truy cập API
+- Ít nhất một khóa API AI (tùy chọn nhưng được khuyến nghị)
+
+#### Cài Đặt
+
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/pistolinkr/DI2025checker.git
+   cd DI2025checker
+   ```
+
+2. **Phát Triển Cục Bộ**
+   ```bash
+   # Chạy với server cục bộ
+   python3 -m http.server 8000
+   
+   # Sau đó truy cập:
+   # Tiếng Việt: http://localhost:8000/vi-vn/
+   # Tiếng Anh: http://localhost:8000/en-us/
+   ```
+
+3. **Triển Khai lên Vercel (Khuyến nghị)**
+   ```bash
+   # Cài đặt Vercel CLI
+   npm i -g vercel
+   
+   # Triển khai
+   vercel
+   
+   # Cấu hình vercel.json tự động chuyển hướng "/" đến "/en-us/index.html"
+   ```
+
+4. **Cấu Hình AI APIs (Tùy chọn)**
+   - Nhấp vào nút cài đặt ⚙️
+   - Thêm khóa API của bạn cho các dịch vụ mong muốn
+   - Kiểm tra kết nối bằng nút kiểm tra API 🧪
+
+#### Thiết Lập Khóa API
+
+##### OpenAI (Khuyến nghị)
+1. Truy cập [OpenAI Platform](https://platform.openai.com/api-keys)
+2. Tạo tài khoản và tạo khóa API
+3. Định dạng: `sk-...`
+
+##### Anthropic Claude
+1. Truy cập [Anthropic Console](https://console.anthropic.com/)
+2. Tạo khóa API
+3. Định dạng: `sk-ant-...`
+
+##### Perplexity AI
+1. Truy cập [Perplexity Settings](https://www.perplexity.ai/settings/api)
+2. Tạo khóa API
+3. Định dạng: `pplx-...`
+
+##### Google Gemini
+1. Truy cập [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Tạo khóa API
+3. Định dạng: `AI...`
+
+#### Thiết Lập EmailJS (cho Tính năng Phản hồi)
+
+1. **Tạo Tài Khoản EmailJS**
+   - Truy cập [EmailJS](https://www.emailjs.com/)
+   - Tạo tài khoản miễn phí
+
+2. **Kết Nối Dịch Vụ Email**
+   - Thêm dịch vụ email của bạn (Gmail, Outlook, v.v.)
+   - Ghi chú Service ID của bạn
+
+3. **Tạo Template Email**
+   - Tạo template phản hồi với các biến này:
+     - `{{from_name}}` - Tên người gửi
+     - `{{from_email}}` - Email người gửi
+     - `{{subject}}` - Chủ đề phản hồi
+     - `{{message}}` - Tin nhắn phản hồi
+   - Ghi chú Template ID của bạn
+
+4. **Cấu Hình Biến Môi Trường**
+   - Chỉnh sửa file `.env` ở root
+   - Thay thế giá trị placeholder:
+     ```env
+     EMAILJS_PUBLIC_KEY=your_actual_public_key
+     EMAILJS_SERVICE_ID=your_actual_service_id
+     EMAILJS_TEMPLATE_ID=your_actual_template_id
+     ```
+
+### 📖 Sử Dụng
+
+1. **Tìm kiếm thuốc**
+   - Nhập tên thuốc vào hộp tìm kiếm
+   - Sử dụng tên từng phần hoặc thậm chí lỗi chính tả
+   - Chọn từ gợi ý thông minh
+
+2. **Kiểm tra tương tác**
+   - Chọn hai loại thuốc từ menu thả xuống
+   - Nhấp vào "Kiểm Tra Tương Tác"
+   - Xem xét cả phân tích AI và dữ liệu FDA
+
+3. **Xem thông tin chi tiết**
+   - Nhấp vào bất kỳ tên thuốc nào để xem thông tin chi tiết
+   - Thêm thuốc trực tiếp vào bộ kiểm tra tương tác
+
+### 🔬 Tính Năng Phân Tích AI
+
+- **Đánh Giá Rủi Ro**: Đánh giá mức độ rủi ro toàn diện
+- **Thông Tin Lâm Sàng**: Khuyến nghị y tế chuyên nghiệp
+- **Cơ Chế Tương Tác**: Thuốc tương tác như thế nào ở cấp độ phân tử
+- **Dấu Hiệu Khẩn Cấp**: Khi nào cần chăm sóc y tế ngay lập tức
+- **Báo Cáo Có Cấu Trúc**: Phân tích được định dạng dễ đọc
+
+### ⚠️ Tuyên Bố Y Tế Quan Trọng
+
+> **Công cụ này chỉ dành cho mục đích thông tin và không nên thay thế lời khuyên y tế chuyên nghiệp. Luôn tham khảo ý kiến nhà cung cấp dịch vụ chăm sóc sức khỏe trước khi đưa ra quyết định về thuốc.**
+
+### 🤝 Đóng Góp
+
+1. Fork repository
+2. Tạo nhánh tính năng (`git checkout -b feature/amazing-feature`)
+3. Commit thay đổi (`git commit -m 'Add amazing feature'`)
+4. Push lên nhánh (`git push origin feature/amazing-feature`)
+5. Mở Pull Request
+
+### 📄 Giấy Phép
+
+Dự án này được cấp phép theo Giấy phép MIT - xem file [LICENSE](LICENSE) để biết chi tiết.
+
+### 🙏 Lời Cảm Ơn
+
+- FDA OpenFDA cho dữ liệu thuốc toàn diện
+- Nhà cung cấp AI cho khả năng phân tích tiên tiến
+- Chuyên gia y tế cho hướng dẫn về tương tác thuốc
+- Các tổ chức y tế Việt Nam: Bộ Y tế, Cục Quản lý Dược, Hội Dược học
 
 ### 🔗 Tài Nguyên Y Tế
 
