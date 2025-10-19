@@ -58,21 +58,25 @@
                 align-items: center;
                 gap: 0.5rem;
                 padding: 0.5rem 1rem;
-                background: var(--surface, #ffffff);
-                border: 1px solid var(--border, #e2e8f0);
-                border-radius: 8px;
+                background: var(--surface);
+                border: 2px solid var(--border);
+                border-radius: var(--radius);
                 cursor: pointer;
                 font-size: 0.9rem;
                 font-weight: 500;
-                color: var(--text-primary, #1e293b);
-                transition: all 0.3s ease;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                color: var(--text);
+                transition: var(--transition);
+                box-shadow: var(--shadow-md);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
             
             .lang-selector-btn:hover {
-                background: var(--surface-hover, #f8fafc);
-                border-color: var(--primary, #667eea);
-                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+                background: var(--bg);
+                border-color: var(--primary);
+                color: var(--primary);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
             }
             
             .lang-flag {
@@ -99,17 +103,20 @@
                 position: absolute;
                 top: calc(100% + 0.5rem);
                 right: 0;
-                background: var(--surface, #ffffff);
-                border: 1px solid var(--border, #e2e8f0);
-                border-radius: 8px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                background: var(--surface);
+                border: 2px solid var(--border);
+                border-radius: var(--radius);
+                box-shadow: var(--shadow-lg);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 opacity: 0;
                 visibility: hidden;
                 transform: translateY(-10px);
-                transition: all 0.3s ease;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 min-width: 200px;
                 max-height: 400px;
                 overflow-y: auto;
+                z-index: 1000;
             }
             
             .lang-dropdown.show {
@@ -129,18 +136,20 @@
                 padding: 0.75rem 1rem;
                 border-radius: 6px;
                 text-decoration: none;
-                color: var(--text-primary, #1e293b);
-                transition: all 0.2s ease;
+                color: var(--text);
+                transition: var(--transition);
                 cursor: pointer;
             }
             
             .lang-option:hover {
-                background: var(--surface-hover, #f8fafc);
+                background: rgba(var(--primary-rgb), 0.1);
+                color: var(--primary);
+                transform: translateX(4px);
             }
             
             .lang-option.active {
-                background: var(--primary-light, #e0e7ff);
-                color: var(--primary, #667eea);
+                background: rgba(var(--primary-rgb), 0.15);
+                color: var(--primary);
                 font-weight: 600;
             }
             
@@ -150,28 +159,6 @@
             
             .lang-option .lang-name {
                 flex: 1;
-            }
-            
-            /* 다크 모드 지원 */
-            @media (prefers-color-scheme: dark) {
-                .lang-selector-btn {
-                    background: var(--surface, #1e293b);
-                    border-color: var(--border, #334155);
-                    color: var(--text-primary, #f1f5f9);
-                }
-                
-                .lang-dropdown {
-                    background: var(--surface, #1e293b);
-                    border-color: var(--border, #334155);
-                }
-                
-                .lang-option {
-                    color: var(--text-primary, #f1f5f9);
-                }
-                
-                .lang-option:hover {
-                    background: var(--surface-hover, #334155);
-                }
             }
             
             /* 모바일 최적화 */
