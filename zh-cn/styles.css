@@ -1375,6 +1375,141 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Language Selector Button */
+.lang-selector-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.lang-selector-btn:hover {
+    background: var(--bg);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
+}
+
+.lang-selector-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(var(--primary-rgb), 0.1);
+}
+
+.lang-selector-btn .flag {
+    font-size: 1rem;
+}
+
+.lang-selector-btn .arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.lang-selector-btn:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/* Language Dropdown */
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    min-width: 200px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lang-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border);
+}
+
+.lang-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.lang-dropdown-item:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+.lang-dropdown-item.active {
+    background: rgba(var(--primary-rgb), 0.15);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.lang-dropdown-item .flag {
+    font-size: 1rem;
+}
+
+/* Responsive adjustments for language selector */
+@media (max-width: 768px) {
+    .lang-selector-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .lang-dropdown {
+        min-width: 180px;
+    }
+    
+    .lang-dropdown-item {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .lang-selector-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+    
+    .lang-dropdown {
+        min-width: 160px;
+    }
+    
+    .lang-dropdown-item {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
 /* 알림 */
 .alert {
     position: fixed;
