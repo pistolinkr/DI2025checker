@@ -3188,7 +3188,7 @@ function checkAPIKeyStatus() {
         // Displaying the guide message when AI service is available
         const providerNames = availableProviders.map(p => AI_CONFIGS[p].name).join(', ');
         setTimeout(() => {
-            utils.showAlert(`${providerNames} A análise de IA está pronta!`, 'success');
+            utils.showAlert(`A análise de IA está pronta!`, 'success');
         }, 1000);
     }
 }
