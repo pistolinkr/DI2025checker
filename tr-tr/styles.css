@@ -837,10 +837,27 @@ body {
     cursor: pointer;
 }
 
+.form-select:hover {
+    border-color: var(--primary);
+    background: var(--bg);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
+}
+
 .form-select:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.form-select option {
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.5rem;
+}
+
+.form-select option:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
 }
 
 .provider-icon {
