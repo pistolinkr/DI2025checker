@@ -2138,7 +2138,6 @@ function detectAvailableFiles() {
         
         // 개발자 콘솔에 상세 정보 표시
         if (typeof window !== 'undefined' && window.console) {
-            console.group('🔍 파일 감지 상세 정보');
             console.table(detectedFiles.map(file => ({ 
                 파일명: file, 
                 상태: '✅ 사용 가능',
@@ -3700,7 +3699,6 @@ async function searchDrug(query = null) {
 
     // 개발자 모드 로그
     if (state.developerMode) {
-        utils.logToDevConsole(`🔍 Searching for: "${SecurityUtils.escapeHtml(searchInput)}"`, 'info');
     }
 
     const resultsDiv = document.getElementById('searchResultsContent');
@@ -3733,7 +3731,6 @@ async function searchDrug(query = null) {
         const results = [];
         
                 if (state.developerMode) {
-            utils.logToDevConsole(`🔍 Searching in Korean drug database for: "${searchQuery}"`, 'info');
         }
         
         // 한국 의약품 데이터베이스에서 검색
@@ -3992,7 +3989,6 @@ function displaySearchResults(data) {
 
     resultsDiv.innerHTML = sortedDrugs.map((drug, index) => {
         const isExactMatch = drug.relevanceScore >= 90;
-        const matchIcon = isExactMatch ? '🎯' : drug.relevanceScore >= 80 ? '✨' : '🔍';
         
         return `
             <div class="drug-item scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)} ${isExactMatch ? 'exact-match' : ''}" 
@@ -4291,7 +4287,6 @@ function addDrugToCheck(drugName) {
     }
     
     // 디버깅 로그
-    console.log('🔍 약물 추가 완료:', {
         drug1: drug1.value,
         drug2: drug2.value,
         added: sanitizedDrugName
@@ -4576,7 +4571,6 @@ function fallbackShare(drug1, drug2) {
 
 // Check interaction
 async function checkInteraction() {
-    console.log('🔍 상호작용 검사 시작');
     
     // 약물 아이템들 블러 및 위로 사라지는 애니메이션
     const drugItems = document.querySelectorAll('.drug-item');
@@ -4601,7 +4595,6 @@ async function checkInteraction() {
     const drug1 = SecurityUtils.sanitizeInput(drug1Element.value.trim());
     const drug2 = SecurityUtils.sanitizeInput(drug2Element.value.trim());
     
-    console.log('🔍 입력된 약물 정보:', {
         drug1: drug1,
         drug2: drug2,
         drug1Raw: drug1Element.value,
@@ -4730,7 +4723,6 @@ async function checkInteraction() {
         }
         
         // Drug 1, 2 정보 검색
-        console.log(`🔍 약물 검색 시작: "${drug1}" vs "${drug2}"`);
         drug1Info = findDrugInfo(drug1);
         drug2Info = findDrugInfo(drug2);
 
@@ -4800,7 +4792,6 @@ async function checkInteraction() {
         }
 
         // Display result
-        console.log('🔍 결과 섹션 표시 시작');
         console.log('resultSection:', resultSection);
         console.log('resultDiv:', resultDiv);
         
@@ -5576,7 +5567,6 @@ const devTools = {
             apiKeys: utils.getAvailableProviders()
         };
         
-        utils.logToDevConsole('🔍 Debug Info:', 'info');
         Object.entries(info).forEach(([key, value]) => {
             utils.logToDevConsole(`  ${key}: ${JSON.stringify(value)}`, 'info');
         });

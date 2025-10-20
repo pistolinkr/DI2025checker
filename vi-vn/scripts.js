@@ -684,7 +684,6 @@ function detectAvailableFiles() {
         
         // Display detailed information in developer console
         if (typeof window !== 'undefined' && window.console) {
-            console.group('🔍 File Detection Details');
             console.table(detectedFiles.map(file => ({ 
                 File: file, 
                 Status: '✅ Available',
@@ -1944,7 +1943,6 @@ async function searchDrug(query = null) {
 
     // 개발자 모드 로그
     if (state.developerMode) {
-        utils.logToDevConsole(`🔍 Searching for: "${SecurityUtils.escapeHtml(searchInput)}"`, 'info');
     }
 
     const resultsDiv = document.getElementById('searchResultsContent');
@@ -2149,7 +2147,6 @@ function displaySearchResults(data) {
 
     resultsDiv.innerHTML = sortedDrugs.map((drug, index) => {
         const isExactMatch = drug.relevanceScore >= 90;
-        const matchIcon = isExactMatch ? '🎯' : drug.relevanceScore >= 80 ? '✨' : '🔍';
         
         return `
             <div class="drug-item scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)} ${isExactMatch ? 'exact-match' : ''}" 
@@ -2491,7 +2488,6 @@ function isValidDrugName(drugName) {
 
 // checkInteraction 수정: 입력값이 유효한 약물명일 때만 검사
 async function checkInteraction() {
-    console.log('🔍 Interaction check started');
     const drug1Element = document.getElementById('drug1');
     const drug2Element = document.getElementById('drug2');
     if (!drug1Element || !drug2Element) {
@@ -2598,7 +2594,6 @@ async function checkInteraction() {
             interactions2.toLowerCase().includes(drug1.toLowerCase());
 
         // Display result
-        console.log('🔍 Result section display start');
         console.log('resultSection:', resultSection);
         console.log('resultDiv:', resultDiv);
         
@@ -3288,7 +3283,6 @@ const devTools = {
             apiKeys: utils.getAvailableProviders()
         };
         
-        utils.logToDevConsole('🔍 Debug Info:', 'info');
         Object.entries(info).forEach(([key, value]) => {
             utils.logToDevConsole(`  ${key}: ${JSON.stringify(value)}`, 'info');
         });
