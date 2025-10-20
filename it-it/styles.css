@@ -2,7 +2,3 @@
 /* Allow title wrapping */
 .header h1 { white-space: normal !important; word-break: keep-all; overflow-wrap: anywhere; }
 
-
-/* Hide explicit Search button; rely on auto-search */
-.search-box .btn { display: none !important; }
-

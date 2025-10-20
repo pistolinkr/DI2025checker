@@ -2345,7 +2345,7 @@ async function showDrugDetail(drugName, element = null) {
                 <button class="btn btn-primary add-to-check-btn" onclick="addDrugToCheck('${safeContent.drugName}')" title="Add to interaction check">
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Add to interaction check</span>
-                </button>
+
             </div>
         `;
     } catch (error) {
@@ -2695,7 +2695,7 @@ async function checkInteraction() {
                                     <span class="toggle-icon">📋</span>
                                     <span class="toggle-text">View FDA Original Data</span>
                                     <span class="toggle-arrow">▼</span>
-                                </button>
+                
                                 <div class="fda-data-container" style="display: none;">
                                     <div class="fda-data">
                                         <p><strong>${drug1}</strong> and <strong>${drug2}</strong> combination:</p>
@@ -2748,7 +2748,7 @@ async function checkInteraction() {
                                 <span class="toggle-icon">📋</span>
                                 <span class="toggle-text">View FDA Basic Information</span>
                                 <span class="toggle-arrow">▼</span>
-                            </button>
+            
                             <div class="fda-data-container" style="display: none;">
                                 <div class="basic-info">
                                     <p><strong>${drug1}</strong> and <strong>${drug2}</strong> combination: No major interactions found in FDA data.</p>

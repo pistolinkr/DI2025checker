@@ -4214,7 +4214,7 @@ async function showDrugDetail(drugName, element = null) {
                 <button class="btn btn-primary add-to-check-btn" onclick="addDrugToCheck('${safeContent.drugName}')" title="Add to interaction check">
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Add to interaction check</span>
-                </button>
+
             </div>
         `;
     } catch (error) {
@@ -4913,7 +4913,7 @@ async function checkInteraction() {
                                     <span class="toggle-icon">📋</span>
                                     <span class="toggle-text">한국 의약품 정보 보기</span>
                                     <span class="toggle-arrow">▼</span>
-                                </button>
+                
                                 <div class="fda-data-container" style="display: none;">
                                     <div class="fda-data">
                                         <p><strong>${drug1}</strong>과 <strong>${drug2}</strong> 조합:</p>
@@ -4972,7 +4972,7 @@ async function checkInteraction() {
                                 <span class="toggle-icon">📋</span>
                                 <span class="toggle-text">기본 의약품 정보 보기</span>
                                 <span class="toggle-arrow">▼</span>
-                            </button>
+            
                             <div class="fda-data-container" style="display: none;">
                                 <div class="basic-info">
                                     <p><strong>${drug1}</strong>과 <strong>${drug2}</strong> 조합: 한국 의약품 데이터에서 주요 상호작용이 발견되지 않았습니다.</p>

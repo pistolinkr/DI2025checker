@@ -226,6 +226,7 @@ body {
 
 /* 검색 섹션 */
 .search-box {
+    justify-content: center;
     display: flex;
     gap: 0.75rem !important;
 }
@@ -234,14 +235,7 @@ body {
     flex: 1;
 }
 
-.search-box .btn-primary::after {
-    content: "";
-    font-size: 0.9rem;
-}
 
-.search-box .btn-primary::before {
-    display: none;
-}
 
 /* Mask removed */
 
@@ -1614,6 +1608,7 @@ body {
     }
 
     .search-box {
+    justify-content: center;
         flex-direction: column;
         gap: 0;
         align-items: stretch;
@@ -1824,6 +1819,7 @@ body {
     }
 
     .search-box {
+    justify-content: center;
         flex-direction: column;
         gap: 0.5rem;
         align-items: stretch;
@@ -3331,8 +3327,4 @@ html {
 }
 /* Allow title wrapping */
 .header h1 { white-space: normal !important; word-break: keep-all; overflow-wrap: anywhere; }
-
-
-/* Hide explicit Search button; rely on auto-search */
-.search-box .btn { display: none !important; }
 
