@@ -5563,6 +5563,14 @@ const devTools = {
 };
 
 // Initialize event listeners
+// 전역 에러/Promise 거부 핸들러 (초기화 중단 방지)
+window.addEventListener('error', (e) => {
+    console.warn('Global error (ko-kr):', e.message);
+});
+window.addEventListener('unhandledrejection', (e) => {
+    console.warn('Unhandled rejection (ko-kr):', e.reason);
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 한국어 페이지 초기화 시작');
     
@@ -5580,26 +5588,25 @@ document.addEventListener('DOMContentLoaded', function() {
         updateAPIStatus();
     }, 100);
 
-    // Search input event
-    document.getElementById('drugSearch').addEventListener('input', realTimeSearchHandler);
-    
-    document.getElementById('drugSearch').addEventListener('keypress', function(e) {
+    // Search input event (존재 여부 가드)
+    const koSearchInput = document.getElementById('drugSearch');
+    if (koSearchInput) {
+        koSearchInput.addEventListener('input', realTimeSearchHandler);
+        koSearchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             searchDrug();
         }
-    });
+        });
+    }
 
     // Drug selection input event
-    document.getElementById('drug1').addEventListener('input', function() {
-        drugSearchHandler('drug1', 1);
-    });
-
-    document.getElementById('drug2').addEventListener('input', function() {
-        drugSearchHandler('drug2', 2);
-    });
+    const koDrug1 = document.getElementById('drug1');
+    const koDrug2 = document.getElementById('drug2');
+    if (koDrug1) koDrug1.addEventListener('input', function() { drugSearchHandler('drug1', 1); });
+    if (koDrug2) koDrug2.addEventListener('input', function() { drugSearchHandler('drug2', 2); });
 
     // 약물 입력 필드에서 Enter 키 처리
-    document.getElementById('drug1').addEventListener('keypress', function(e) {
+    if (koDrug1) koDrug1.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             const drug2Element = document.getElementById('drug2');
             if (drug2Element) {
@@ -5608,7 +5615,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById('drug2').addEventListener('keypress', function(e) {
+    if (koDrug2) koDrug2.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             // Enter 키로 상호작용 검사 버튼 클릭
             const checkButton = document.querySelector('.btn.btn-primary.btn-block');
@@ -5628,14 +5635,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close modal when clicking outside
-    document.getElementById('drugDetailModal').addEventListener('click', function(e) {
+    const koDetailModal = document.getElementById('drugDetailModal');
+    if (koDetailModal) koDetailModal.addEventListener('click', function(e) {
         if (e.target === this) {
             closeDrugDetail();
         }
     });
 
     // Close settings modal when clicking outside
-    document.getElementById('settingsModal').addEventListener('click', function(e) {
+    const koSettingsModal = document.getElementById('settingsModal');
+    if (koSettingsModal) koSettingsModal.addEventListener('click', function(e) {
         if (e.target === this) {
             closeSettings();
         }
