@@ -4280,6 +4280,7 @@ function addDrugToCheck(drugName) {
     }
     
     // 디버깅 로그
+    console.log('약물 추가 완료:', {
         drug1: drug1.value,
         drug2: drug2.value,
         added: sanitizedDrugName
