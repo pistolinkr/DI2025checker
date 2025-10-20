@@ -7113,11 +7113,14 @@ function handleFeedbackSubmit(event) {
 
 // EmailJS 초기화
 document.addEventListener('DOMContentLoaded', async function() {
-    // 환경변수 로드 완료까지 대기
+    // 환경변수 로드 완료까지 대기 (최대 2초 대기 후 진행)
     await new Promise(resolve => {
+        const start = Date.now();
         const checkConfig = () => {
-            if (EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+            if (window.EMAILJS_CONFIG && EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
                 resolve();
+            } else if (Date.now() - start > 2000) {
+                resolve(); // 타임아웃 시에도 진행
             } else {
                 setTimeout(checkConfig, 100);
             }
@@ -7125,8 +7128,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         checkConfig();
     });
     
-    // EmailJS 초기화 (config.js에서 환경변수 사용)
-    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    // EmailJS SDK/키 가드: 없으면 건너뛰고 나머지 로직은 계속 실행
+    if (window.emailjs && window.EMAILJS_CONFIG && EMAILJS_CONFIG.PUBLIC_KEY && EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+        try {
+            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        } catch (e) {
+            console.warn('EmailJS init skipped:', e);
+        }
+    } else {
+        console.warn('EmailJS not configured; skipping init.');
+    }
     
     const feedbackForm = document.getElementById('feedbackForm');
     if (feedbackForm) {

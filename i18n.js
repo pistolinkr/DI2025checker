@@ -1108,6 +1108,20 @@ function detectCountryFromCity(cityName) {
 
 // 위치 기반 국가 코드 가져오기
 async function getCountryFromLocation() {
+    // JSON 파싱 안전 헬퍼 (HTML/텍스트 응답 시 무시)
+    async function safeJson(response) {
+        try {
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.includes('application/json')) {
+                // JSON이 아니면 파싱 시도 대신 텍스트만 소모하고 스킵
+                await response.text().catch(() => {});
+                throw new Error('Non-JSON response');
+            }
+            return await response.json();
+        } catch (err) {
+            throw new Error('Invalid JSON');
+        }
+    }
     try {
         // 여러 IP 기반 위치 서비스 시도
         const services = [
@@ -1118,8 +1132,8 @@ async function getCountryFromLocation() {
         
         for (const service of services) {
             try {
-                const response = await fetch(service);
-                const data = await response.json();
+                const response = await fetch(service, { credentials: 'omit', mode: 'cors' });
+                const data = await safeJson(response);
                 
                 let countryCode = null;
                 if (service.includes('ipapi.co') && data.country_code) {
