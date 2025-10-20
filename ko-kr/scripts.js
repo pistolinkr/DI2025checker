@@ -2132,7 +2132,7 @@ function detectAvailableFiles() {
         
         // 사용자에게 알림 표시
         if (detectedFiles.length > 0) {
-            showAlert(`📁 ${detectedFiles.length}개의 파일이 감지되었습니다.`, 'success');
+            utils.showAlert(`📁 ${detectedFiles.length}개의 파일이 감지되었습니다.`, 'success');
         }
         
         // 개발자 콘솔에 상세 정보 표시
@@ -3984,6 +3984,7 @@ function displaySearchResults(data) {
 
     resultsDiv.innerHTML = sortedDrugs.map((drug, index) => {
         const isExactMatch = drug.relevanceScore >= 90;
+        const matchIcon = isExactMatch ? '<span class="match-type">Exact</span>' : '';
         
         return `
             <div class="drug-item ${isExactMatch ? 'exact-match' : ''}" 
