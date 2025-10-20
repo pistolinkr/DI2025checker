@@ -4576,7 +4576,9 @@ async function checkInteraction() {
     
     const drug1 = SecurityUtils.sanitizeInput(drug1Element.value.trim());
     const drug2 = SecurityUtils.sanitizeInput(drug2Element.value.trim());
-    
+
+    // 디버깅 로그: 입력 값 확인 (SyntaxError 방지용 올바른 객체 리터럴)
+    console.log('입력값 확인:', {
         drug1: drug1,
         drug2: drug2,
         drug1Raw: drug1Element.value,
