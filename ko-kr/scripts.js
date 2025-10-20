@@ -3735,29 +3735,29 @@ async function searchDrug(query = null) {
             let relevanceScore = 0;
             
             // 약물명으로 검색
-            if (drugName.toLowerCase().includes(searchQuery.toLowerCase())) {
+            if ((drugName || '').toLowerCase().includes(searchQuery.toLowerCase())) {
                 relevanceScore = 100;
-            } else if (drugInfo.englishName.toLowerCase().includes(searchQuery.toLowerCase())) {
+            } else if ((drugInfo?.englishName || '').toLowerCase().includes(searchQuery.toLowerCase())) {
                 relevanceScore = 90;
-            } else if (drugInfo.category.toLowerCase().includes(searchQuery.toLowerCase())) {
+            } else if ((drugInfo?.category || '').toLowerCase().includes(searchQuery.toLowerCase())) {
                 relevanceScore = 70;
-            } else if (drugInfo.manufacturer.toLowerCase().includes(searchQuery.toLowerCase())) {
+            } else if ((drugInfo?.manufacturer || '').toLowerCase().includes(searchQuery.toLowerCase())) {
                 relevanceScore = 60;
             }
             
             if (relevanceScore > 0) {
                 results.push({
                     openfda: {
-                        brand_name: [drugInfo.name],
-                        generic_name: [drugInfo.englishName],
-                        manufacturer_name: [drugInfo.manufacturer],
-                        route: [drugInfo.category]
+                        brand_name: [drugInfo?.name || drugName],
+                        generic_name: [drugInfo?.englishName || ''],
+                        manufacturer_name: [drugInfo?.manufacturer || ''],
+                        route: [drugInfo?.category || '']
                     },
-                    description: [drugInfo.description],
-                    indications_and_usage: [drugInfo.indications],
-                    warnings: [drugInfo.warnings],
-                    dosage_and_administration: [drugInfo.dosage],
-                    drug_interactions: [drugInfo.interactions.join(', ')],
+                    description: [drugInfo?.description || ''],
+                    indications_and_usage: [drugInfo?.indications || ''],
+                    warnings: [drugInfo?.warnings || ''],
+                    dosage_and_administration: [drugInfo?.dosage || ''],
+                    drug_interactions: [Array.isArray(drugInfo?.interactions) ? drugInfo.interactions.join(', ') : ''],
                     _korean_info: drugInfo,
                     _relevance: relevanceScore
                 });
@@ -3780,16 +3780,16 @@ async function searchDrug(query = null) {
                     if (drugInfo) {
                         results.push({
                             openfda: {
-                                brand_name: [drugInfo.name],
-                                generic_name: [drugInfo.englishName],
-                                manufacturer_name: [drugInfo.manufacturer],
-                                route: [drugInfo.category]
+                                brand_name: [drugInfo?.name || korean],
+                                generic_name: [drugInfo?.englishName || english],
+                                manufacturer_name: [drugInfo?.manufacturer || ''],
+                                route: [drugInfo?.category || '']
                             },
-                            description: [drugInfo.description],
-                            indications_and_usage: [drugInfo.indications],
-                            warnings: [drugInfo.warnings],
-                            dosage_and_administration: [drugInfo.dosage],
-                            drug_interactions: [drugInfo.interactions.join(', ')],
+                            description: [drugInfo?.description || ''],
+                            indications_and_usage: [drugInfo?.indications || ''],
+                            warnings: [drugInfo?.warnings || ''],
+                            dosage_and_administration: [drugInfo?.dosage || ''],
+                            drug_interactions: [Array.isArray(drugInfo?.interactions) ? drugInfo.interactions.join(', ') : ''],
                             _korean_info: drugInfo,
                             _relevance: 80
                         });
