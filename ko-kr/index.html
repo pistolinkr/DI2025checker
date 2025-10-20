@@ -346,34 +346,10 @@
         <div id="drug2List" class="drug-list">
             <div class="drug-items"></div>
         </div>
-        <!-- 카드 바깥쪽에 글로벌 약물 검색 결과 영역 추가 -->
-        <div id="globalDrugResultList" class="drug-list" style="position: static; margin: 1.5rem 0 2rem 0; display: none;">
-            <div class="drug-items"></div>
-        </div>
 
         <!-- 결과 섹션 -->
         <section id="resultSection" class="result-section scroll-scale">
-            <div class="result-container">
-                <div class="result-header">
-                    <div class="result-actions">
-                        <button class="result-action-btn" onclick="exportResults()" title="결과 내보내기">
-                            📤
-        
-                        <button class="result-action-btn" onclick="shareResults()" title="결과 공유">
-                            🔗
-        
-                    </div>
-                </div>
-                <div class="result-content">
-                    <div id="result"></div>
-                </div>
-                <div class="result-footer">
-                    <div class="result-disclaimer">
-                        <span class="disclaimer-icon">⚠️</span>
-                        <span class="disclaimer-text">이 분석은 참고용이며, 의료진과 상담하시기 바랍니다.</span>
-                    </div>
-                </div>
-            </div>
+            <div id="result"></div>
         </section>
     </div>
 
@@ -469,18 +445,18 @@
                             <span>피드백</span>
         
                     </div>
-                </div>
-            </div>
+                        </div>
+                        </div>
 
-            <!-- 푸터 구분선 -->
+            <!-- Footer Divider -->
             <div class="footer-divider"></div>
 
-            <!-- 하단 바 -->
+            <!-- Bottom Bar -->
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <div class="footer-version-language">
                         <div class="footer-version">
-                            <span>v2.1 | G.gear® Pistol™</span>
+                            <span>Beta v2.1 | G.gear® Pistol™</span>
                         </div>
                         <div class="footer-language">
                             <span class="current-language">🇰🇷 한국어</span>
@@ -490,7 +466,7 @@
                         <a href="#" onclick="showPrivacyPolicy()">개인정보처리방침</a>
                         <a href="#" onclick="showTermsOfService()">이용약관</a>
                         <a href="#" onclick="showDataSources()">데이터 출처</a>
-                    </div>
+                            </div>
                     <div class="footer-copyright">
                         <p>&copy; 2025 Pistolinkr. All rights reserved.</p>
                     </div>

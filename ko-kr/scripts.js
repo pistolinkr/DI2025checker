@@ -1576,8 +1576,7 @@ const state = {
     isLoading: false,
     recentSearches: JSON.parse(SecurityUtils.secureLocalStorage.getItem('recentDrugs') || '[]'),
     drugCache: new Map(),
-    developerMode: SecurityUtils.secureLocalStorage.getItem('developer_mode') === 'true',
-    isFirstVisit: true // 사이트 방문 처음인지 추적
+    developerMode: SecurityUtils.secureLocalStorage.getItem('developer_mode') === 'true'
 };
 
 // 개발자 모드 설정
@@ -2388,7 +2387,6 @@ const utils = {
         
         // 패널 애니메이션 적용
         setTimeout(() => {
-            panel.classList.add('scroll-visible');
         }, 50);
         
         // 실시간 업데이트
@@ -2418,13 +2416,12 @@ const utils = {
         const console = document.getElementById('devConsole');
         if (console) {
             const line = document.createElement('div');
-            line.className = `console-line console-${type} scroll-fade`;
+            line.className = `console-line console-${type}`;
             line.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
             console.appendChild(line);
             
             // 새 로그 라인에 애니메이션 적용
             setTimeout(() => {
-                line.classList.add('scroll-visible');
             }, 50);
             
             console.scrollTop = console.scrollHeight;
@@ -3909,7 +3906,6 @@ function displaySearchResults(data) {
         // 새로 추가된 요소에 애니메이션 적용
         setTimeout(() => {
             const fadeElements = resultsDiv.querySelectorAll('.scroll-fade');
-            fadeElements.forEach(el => el.classList.add('scroll-visible'));
             
             // 빈 결과일 때도 스크롤 상태 초기화
             setInitialScrollState(searchContainer);
@@ -3976,7 +3972,6 @@ function displaySearchResults(data) {
         
         setTimeout(() => {
             const fadeElements = resultsDiv.querySelectorAll('.scroll-fade');
-            fadeElements.forEach(el => el.classList.add('scroll-visible'));
             setInitialScrollState(searchContainer);
         }, 50);
         return;
@@ -3991,7 +3986,7 @@ function displaySearchResults(data) {
         const isExactMatch = drug.relevanceScore >= 90;
         
         return `
-            <div class="drug-item scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)} ${isExactMatch ? 'exact-match' : ''}" 
+            <div class="drug-item ${isExactMatch ? 'exact-match' : ''}" 
                  onclick="showDrugDetail('${drug.name}', this)" 
                  data-drug='${JSON.stringify(drug.drugData).replace(/'/g, "&apos;")}'>
                 <div class="drug-item-name">
@@ -4008,8 +4003,6 @@ function displaySearchResults(data) {
     
     // 새로 추가된 요소들에 애니메이션 적용
     setTimeout(() => {
-        const newElements = resultsDiv.querySelectorAll('.scroll-hidden');
-        newElements.forEach(el => el.classList.add('scroll-visible'));
         
         // 검색 결과 컨테이너에 스크롤 그라데이션 적용
         setTimeout(() => {
@@ -4383,7 +4376,7 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
             if (!uniqueDrugs.has(drug.name)) {
                 uniqueDrugs.add(drug.name);
                     html += `
-                    <div class="drug-item scroll-hidden scroll-delay-${Math.min((index % 4) + 1, 4)}" onclick="selectDrug('${inputId}', '${drug.name}')">
+                    <div class="drug-item" onclick="selectDrug('${inputId}', '${drug.name}')">
                         <div class="drug-item-name">${drug.name}</div>
                         <div style="font-size: 0.8em; color: var(--text-secondary);">${drug.englishName} · ${drug.manufacturer}</div>
                         </div>
@@ -4395,8 +4388,6 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
         
         // 드롭다운 항목들에 애니메이션 적용
         setTimeout(() => {
-            const newItems = itemsContainer.querySelectorAll('.scroll-hidden');
-            newItems.forEach(item => item.classList.add('scroll-visible'));
             
             // 드롭다운 리스트에 스크롤 그라데이션 적용
             setInitialScrollState(list);
@@ -4572,16 +4563,6 @@ function fallbackShare(drug1, drug2) {
 // Check interaction
 async function checkInteraction() {
     
-    // 약물 아이템들 블러 및 위로 사라지는 애니메이션
-    const drugItems = document.querySelectorAll('.drug-item');
-    drugItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.style.transition = 'all 0.5s ease-out';
-            item.style.filter = 'blur(5px)';
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(-20px)';
-        }, index * 100); // 각 아이템마다 100ms씩 지연
-    });
     
     const drug1Element = document.getElementById('drug1');
     const drug2Element = document.getElementById('drug2');
@@ -4810,7 +4791,6 @@ async function checkInteraction() {
         resultSection.style.display = 'block';
         resultSection.style.visibility = 'visible';
         resultSection.style.opacity = '1';
-        resultSection.classList.remove('scroll-visible'); // 애니메이션 리셋
         
         // 결과창이 표시될 때 푸터도 함께 표시
         showFooterWithResult();
@@ -4845,7 +4825,6 @@ async function checkInteraction() {
                 // 로딩 카드 애니메이션 적용
                 setTimeout(() => {
                     const loadingCard = resultDiv.querySelector('.scroll-fade');
-                    if (loadingCard) loadingCard.classList.add('scroll-visible');
                 }, 50);
                 
                 const response = await utils.analyzeInteraction(drug1, drug2, interactions1, interactions2, drug1Info, drug2Info);
@@ -4873,13 +4852,13 @@ async function checkInteraction() {
                     </div>
                     <div class="result-content">
                         ${durInfo ? `
-                            <div class="dur-analysis scroll-slide-left scroll-delay-1">
+                            <div class="dur-analysis">
                                 ${displayDURInfo(durInfo, drug1, drug2)}
                             </div>
                         ` : ''}
                         
                         ${aiAnalysis ? `
-                            <div class="ai-analysis scroll-slide-left scroll-delay-2">
+                            <div class="ai-analysis">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
                                     <h4>AI 분석</h4>
@@ -4899,7 +4878,7 @@ async function checkInteraction() {
                         ` : ''}
                         
                         ${(interactions1 || interactions2) ? `
-                            <div class="fda-toggle-section scroll-slide-right scroll-delay-3">
+                            <div class="fda-toggle-section">
                                 <button class="fda-toggle-btn" onclick="toggleFDAData(this)">
                                     <span class="toggle-icon">📋</span>
                                     <span class="toggle-text">한국 의약품 정보 보기</span>
@@ -4933,13 +4912,13 @@ async function checkInteraction() {
                     </div>
                     <div class="result-content">
                         ${durInfo ? `
-                            <div class="dur-analysis scroll-slide-left scroll-delay-1">
+                            <div class="dur-analysis">
                                 ${displayDURInfo(durInfo, drug1, drug2)}
                             </div>
                         ` : ''}
                         
                         ${aiAnalysis ? `
-                            <div class="ai-analysis scroll-slide-left scroll-delay-2">
+                            <div class="ai-analysis">
                                 <div class="ai-analysis-header">
                                     <span class="ai-icon">🤖</span>
                                     <h4>AI 분석</h4>
@@ -5089,21 +5068,9 @@ function updateRecentSearches() {
     const searchesToShow = state.recentSearches.slice(0, displayCount);
     
     list.innerHTML = searchesToShow.map((term, index) => {
-        // 사이트 방문 처음에만 애니메이션 클래스 추가
-        const animationClass = state.isFirstVisit ? 'scroll-hidden' : '';
-        const delayClass = state.isFirstVisit ? `scroll-delay-${Math.min(index % 4 + 1, 4)}` : '';
-        
-        return `<span class="tag ${animationClass} ${delayClass}" onclick="useRecentSearch('${term}')">${term}</span>`;
+        return `<span class="tag" onclick="useRecentSearch('${term}')">${term}</span>`;
     }).join('');
     
-    // 사이트 방문 처음에만 애니메이션 적용
-    if (state.isFirstVisit) {
-    setTimeout(() => {
-        const newTags = list.querySelectorAll('.scroll-hidden');
-        newTags.forEach(tag => tag.classList.add('scroll-visible'));
-    }, 50);
-        state.isFirstVisit = false; // 첫 방문 플래그 해제
-    }
 }
 
 // Use recent search
@@ -6968,8 +6935,6 @@ const globalDrugSearchHandler = utils.debounce(async function(inputId) {
         });
         itemsContainer.innerHTML = html;
         setTimeout(() => {
-            const newItems = itemsContainer.querySelectorAll('.scroll-hidden');
-            newItems.forEach(item => item.classList.add('scroll-visible'));
             setInitialScrollState(globalList);
             if (!globalList.hasAttribute('data-scroll-listener')) {
                 globalList.addEventListener('scroll', () => handleElementScroll(globalList), { passive: true });
