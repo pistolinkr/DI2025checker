@@ -2787,6 +2787,12 @@ const utils = {
 
     // Select the best AI service
     selectBestProvider() {
+        // 한국어 페이지: MFDS 기준 보조 분석은 Hugging Face 우선
+        try {
+            if (document?.documentElement?.lang === 'ko' && AI_CONFIGS.huggingface) {
+                return 'huggingface';
+            }
+        } catch (_) {}
         const selected = getSelectedProvider();
         
         if (selected !== 'auto') {
@@ -2800,7 +2806,7 @@ const utils = {
         }
         
         // Auto-select - Priority: Free > Hugging Face > Ollama > Groq > Together > Replicate > OpenAI > Claude > Perplexity > Gemini
-        const priority = ['free', 'huggingface', 'ollama', 'groq', 'together', 'replicate', 'openai', 'claude', 'perplexity', 'gemini'];
+        const priority = ['huggingface', 'free', 'ollama', 'groq', 'together', 'replicate', 'openai', 'claude', 'perplexity', 'gemini'];
         for (const provider of priority) {
             if (AI_CONFIGS[provider].isFree) {
                 return provider;
@@ -2846,56 +2852,28 @@ const utils = {
         }
     },
 
-    // Hugging Face API 시도 (무료)
+    // Hugging Face API 시도 (무료/키 옵션)
     async tryHuggingFaceAPI(messages, options = {}) {
-        try {
-            // 토큰 없이 사용 가능한 모델들 시도
-            const models = [
-                'microsoft/DialoGPT-medium',
-                'facebook/blenderbot-400M-distill',
-                'microsoft/DialoGPT-small'
-            ];
-            
-            const lastMessage = messages[messages.length - 1].content;
-            
-            for (const model of models) {
-                try {
-                    const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                            inputs: lastMessage,
-                parameters: {
-                                max_length: 300,
-                    temperature: 0.7,
-                    do_sample: true
-                }
-            })
-        });
-
-                    if (response.ok) {
-        const data = await response.json();
-        
-        if (Array.isArray(data) && data.length > 0) {
-            return data[0].generated_text || '';
-        } else if (data.error) {
-                            console.warn(`Model ${model} error:`, data.error);
-                            continue;
-                        }
-                    }
-                } catch (modelError) {
-                    console.warn(`Model ${model} failed:`, modelError.message);
-                    continue;
-                }
-            }
-            
-            return null;
-        } catch (error) {
-            console.warn('Hugging Face API failed:', error.message);
-            return null;
+        const lastMessage = messages[messages.length - 1]?.content || '';
+        const apiKey = getAPIKey('huggingface') || window.HF_API_KEY || '';
+        const models = [AI_CONFIGS.huggingface?.model || 'microsoft/DialoGPT-medium', 'facebook/blenderbot-400M-distill'];
+        for (const model of models) {
+            try {
+                const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(apiKey ? { 'Authorization': `Bearer ${apiKey}` } : {})
+                    },
+                    body: JSON.stringify({ inputs: lastMessage, parameters: { max_new_tokens: 256, temperature: 0.3 } })
+                });
+                if (!response.ok) continue;
+                const data = await response.json();
+                const text = Array.isArray(data) ? (data[0]?.generated_text || data[0]?.summary_text || '') : (data.generated_text || data.summary_text || '');
+                if (text && text.trim()) return text.trim();
+            } catch (e) { continue; }
         }
+        return null;
     },
 
     // Groq API 시도 (무료 티어)

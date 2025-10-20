@@ -28,6 +28,9 @@ async function loadEnvConfig() {
                         case 'EMAILJS_TEMPLATE_ID':
                             EMAILJS_CONFIG.TEMPLATE_ID = value.trim();
                             break;
+                        case 'HF_API_KEY':
+                            window.HF_API_KEY = value.trim();
+                            break;
                     }
                 }
             }
