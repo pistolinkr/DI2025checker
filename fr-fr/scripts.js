@@ -3845,26 +3845,26 @@ function updateFooterStats() {
 
 // Privacy Policy 모달
 function showPrivacyPolicy() {
-    const modal = createInfoModal('Privacy Policy', `
+    const modal = createInfoModal('Politique de Confidentialité', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 개인정보 보호정책</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 Politique de Confidentialité</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 수집</h5>
-            <p>본 서비스는 다음 정보를 수집합니다:</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Collecte de Données</h5>
+            <p>Ce service collecte les informations suivantes :</p>
             <ul style="margin-left: 1rem;">
-                <li>검색한 약물명 (로컬 저장소에만 저장)</li>
-                <li>AI 분석을 위한 API 키 (로컬 저장소에만 저장)</li>
-                <li>사용 통계 (익명화)</li>
+                <li>Noms de médicaments recherchés (stockés uniquement en stockage local)</li>
+                <li>Clés API pour l'analyse IA (stockées uniquement en stockage local)</li>
+                <li>Statistiques d'utilisation (anonymisées)</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 보안</h5>
-            <p>모든 민감한 데이터는 브라우저의 로컬 저장소에만 저장되며, 외부 서버로 전송되지 않습니다. API 키는 암호화되어 저장됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Sécurité des Données</h5>
+            <p>Toutes les données sensibles sont stockées uniquement dans le stockage local du navigateur et ne sont pas transmises à des serveurs externes. Les clés API sont chiffrées avant stockage.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">쿠키 사용</h5>
-            <p>본 서비스는 필수 기능을 위한 로컬 저장소만 사용하며, 추적 쿠키는 사용하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Utilisation des Cookies</h5>
+            <p>Ce service n'utilise que le stockage local pour les fonctionnalités essentielles et n'utilise pas de cookies de suivi.</p>
             
             <p style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>중요:</strong> 본 도구는 교육 목적으로만 사용되며, 의료진의 조언을 대체하지 않습니다.
+                <strong>Important :</strong> Cet outil est uniquement à des fins éducatives et ne remplace pas les conseils médicaux professionnels.
             </p>
         </div>
     `);
