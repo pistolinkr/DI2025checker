@@ -3845,26 +3845,26 @@ function updateFooterStats() {
 
 // Privacy Policy 모달
 function showPrivacyPolicy() {
-    const modal = createInfoModal('Privacy Policy', `
+    const modal = createInfoModal('Politica sulla Privacy', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 개인정보 보호정책</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 Politica sulla Privacy</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 수집</h5>
-            <p>본 서비스는 다음 정보를 수집합니다:</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Raccolta Dati</h5>
+            <p>Questo servizio raccoglie le seguenti informazioni:</p>
             <ul style="margin-left: 1rem;">
-                <li>검색한 약물명 (로컬 저장소에만 저장)</li>
-                <li>AI 분석을 위한 API 키 (로컬 저장소에만 저장)</li>
-                <li>사용 통계 (익명화)</li>
+                <li>Nomi di farmaci cercati (memorizzati solo in archiviazione locale)</li>
+                <li>Chiavi API per analisi IA (memorizzate solo in archiviazione locale)</li>
+                <li>Statistiche di utilizzo (anonimizzate)</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 보안</h5>
-            <p>모든 민감한 데이터는 브라우저의 로컬 저장소에만 저장되며, 외부 서버로 전송되지 않습니다. API 키는 암호화되어 저장됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Sicurezza Dati</h5>
+            <p>Tutti i dati sensibili sono memorizzati solo nell'archiviazione locale del browser e non vengono trasmessi a server esterni. Le chiavi API vengono crittografate prima della memorizzazione.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">쿠키 사용</h5>
-            <p>본 서비스는 필수 기능을 위한 로컬 저장소만 사용하며, 추적 쿠키는 사용하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Uso dei Cookie</h5>
+            <p>Questo servizio utilizza solo l'archiviazione locale per funzionalità essenziali e non utilizza cookie di tracciamento.</p>
             
             <p style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>중요:</strong> 본 도구는 교육 목적으로만 사용되며, 의료진의 조언을 대체하지 않습니다.
+                <strong>Importante:</strong> Questo strumento è solo a scopo educativo e non sostituisce il consiglio medico professionale.
             </p>
         </div>
     `);
@@ -3872,30 +3872,30 @@ function showPrivacyPolicy() {
 
 // Terms of Service 모달
 function showTermsOfService() {
-    const modal = createInfoModal('Terms of Service', `
+    const modal = createInfoModal('Termini di Servizio', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">📋 이용약관</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">📋 Termini di Servizio</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 목적</h5>
-            <p>Drug Interaction Checker는 교육 및 정보 제공 목적으로만 사용됩니다. 의료 조언, 진단 또는 치료를 목적으로 하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Scopo del Servizio</h5>
+            <p>Il Verificatore di Interazioni Farmacologiche è destinato solo a scopi educativi e informativi. Non è destinato a consigli medici, diagnosi o trattamento.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">사용자 책임</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Responsabilità dell'Utente</h5>
             <ul style="margin-left: 1rem;">
-                <li>약물 복용 전 반드시 의료진과 상담</li>
-                <li>도구 결과에만 의존하지 않기</li>
-                <li>응급상황 시 즉시 의료진에게 연락</li>
-                <li>API 키의 안전한 관리</li>
+                <li>Consultare sempre professionisti sanitari prima di assumere farmaci</li>
+                <li>Non fare affidamento esclusivamente sui risultati dello strumento</li>
+                <li>Contattare professionisti sanitari immediatamente in situazioni di emergenza</li>
+                <li>Gestire in sicurezza le chiavi API</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">책임 제한</h5>
-            <p>본 서비스는 정보 제공만을 목적으로 하며, 약물 상호작용으로 인한 어떠한 문제에 대해서도 책임을 지지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Limitazione di Responsabilità</h5>
+            <p>Questo servizio è fornito solo a scopo informativo e non si assume responsabilità per problemi derivanti da interazioni farmacologiche.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 변경</h5>
-            <p>서비스 내용은 사전 통지 없이 변경될 수 있습니다. 지속적인 개선을 위해 기능이 추가되거나 수정될 수 있습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Modifiche del Servizio</h5>
+            <p>Il contenuto del servizio può essere modificato senza preavviso. Le funzionalità possono essere aggiunte o modificate per miglioramenti continui.</p>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>⚠️ 의료 면책 조항:</strong><br>
-                본 도구는 의료 전문가의 조언을 대체할 수 없습니다. 약물 복용에 관한 모든 결정은 의료진과 상담 후 내리시기 바랍니다.
+                <strong>⚠️ Clausola di Esclusione Medica:</strong><br>
+                Questo strumento non può sostituire il consiglio medico professionale. Consultare professionisti sanitari prima di prendere decisioni sull'uso di farmaci.
             </div>
         </div>
     `);
@@ -3903,38 +3903,38 @@ function showTermsOfService() {
 
 // Data Sources 모달  
 function showDataSources() {
-    const modal = createInfoModal('Data Sources', `
+    const modal = createInfoModal('Fonti di Dati', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">📊 데이터 출처</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">📊 Fonti di Dati</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">주요 데이터베이스</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Database Principale</h5>
             <div style="margin-bottom: 1rem;">
-                <strong>FDA Drug Database</strong><br>
-                <span style="font-size: 0.9rem;">미국 식품의약국(FDA)의 공식 약물 데이터베이스</span><br>
-                <a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener" style="color: var(--primary);">→ API 문서 보기</a>
+                <strong>Database Farmaci FDA</strong><br>
+                <span style="font-size: 0.9rem;">Database ufficiale di farmaci della Food and Drug Administration degli Stati Uniti</span><br>
+                <a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener" style="color: var(--primary);">→ Visualizza Documentazione API</a>
             </div>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">AI 분석 서비스</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Servizi di Analisi IA</h5>
             <ul style="margin-left: 1rem;">
-                <li><strong>OpenAI GPT-4o-mini:</strong> 약물 상호작용 분석</li>
-                <li><strong>Anthropic Claude:</strong> 의료 정보 해석</li>
-                <li><strong>Google Gemini:</strong> 다각도 분석</li>
-                <li><strong>Perplexity AI:</strong> 실시간 정보 검색</li>
+                <li><strong>OpenAI GPT-4o-mini:</strong> Analisi interazioni farmacologiche</li>
+                <li><strong>Anthropic Claude:</strong> Interpretazione informazioni mediche</li>
+                <li><strong>Google Gemini:</strong> Analisi multiprospettica</li>
+                <li><strong>Perplexity AI:</strong> Ricerca informazioni in tempo reale</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">참고 자료</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Materiali di Riferimento</h5>
             <ul style="margin-left: 1rem;">
-                <li><a href="https://www.fda.gov" target="_blank" rel="noopener" style="color: var(--primary);">FDA 공식 웹사이트</a></li>
-                <li><a href="https://www.drugs.com" target="_blank" rel="noopener" style="color: var(--primary);">Drugs.com 상호작용 데이터</a></li>
-                <li><a href="https://medlineplus.gov" target="_blank" rel="noopener" style="color: var(--primary);">MedlinePlus 의료정보</a></li>
+                <li><a href="https://www.fda.gov" target="_blank" rel="noopener" style="color: var(--primary);">Sito Web Ufficiale FDA</a></li>
+                <li><a href="https://www.drugs.com" target="_blank" rel="noopener" style="color: var(--primary);">Dati Interazioni Drugs.com</a></li>
+                <li><a href="https://medlineplus.gov" target="_blank" rel="noopener" style="color: var(--primary);">Informazioni Mediche MedlinePlus</a></li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 업데이트</h5>
-            <p>FDA 데이터는 실시간으로 조회되며, AI 분석은 최신 의학 지식을 바탕으로 수행됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Aggiornamenti Dati</h5>
+            <p>I dati FDA vengono interrogati in tempo reale e l'analisi IA viene eseguita basandosi sulla conoscenza medica più recente.</p>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>ℹ️ 참고:</strong><br>
-                모든 데이터는 신뢰할 수 있는 공식 소스에서 가져오지만, 개별 환자의 상황은 다를 수 있으므로 의료진과의 상담이 필수입니다.
+                <strong>ℹ️ Nota:</strong><br>
+                Tutti i dati provengono da fonti ufficiali affidabili, ma le situazioni individuali dei pazienti possono variare, quindi la consultazione con professionisti sanitari è essenziale.
             </div>
         </div>
     `);
