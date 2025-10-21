@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// Donanım hızlandırmasını etkinleştir
+function enableHardwareAcceleration() {
+    // GPU hızlandırması gereken öğeleri seç
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // GPU hızlandırması için transform3d uygula
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // Animasyonlu öğelere will-change ekle
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ Donanım hızlandırması etkinleştirildi');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 Türkçe sayfa başlatma başladı');
+    
+    // Donanım hızlandırmasını etkinleştir
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

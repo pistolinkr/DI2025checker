@@ -5552,8 +5552,46 @@ window.addEventListener('unhandledrejection', (e) => {
     console.warn('Unhandled rejection (ko-kr):', e.reason);
 });
 
+// 하드웨어 가속 활성화 함수
+function enableHardwareAcceleration() {
+    // GPU 가속이 필요한 요소들 선택
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // GPU 가속을 위한 transform3d 적용
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // 애니메이션 요소에 will-change 추가
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ 하드웨어 가속 활성화 완료');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 한국어 페이지 초기화 시작');
+    
+    // 하드웨어 가속 활성화
+    enableHardwareAcceleration();
     
     // 파일 감지 기능 실행
     detectAvailableFiles();

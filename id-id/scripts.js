@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// Aktifkan akselerasi perangkat keras
+function enableHardwareAcceleration() {
+    // Pilih elemen yang memerlukan akselerasi GPU
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // Terapkan transform3d untuk akselerasi GPU
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // Tambahkan will-change ke elemen animasi
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ Akselerasi perangkat keras diaktifkan');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 Inisialisasi halaman Indonesia dimulai');
+    
+    // Aktifkan akselerasi perangkat keras
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

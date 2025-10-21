@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// Hardware-Beschleunigung aktivieren
+function enableHardwareAcceleration() {
+    // Elemente auswählen, die GPU-Beschleunigung benötigen
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // Transform3d für GPU-Beschleunigung anwenden
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // Will-change zu animierten Elementen hinzufügen
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ Hardware-Beschleunigung aktiviert');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 Deutsche Seiteninitialisierung gestartet');
+    
+    // Hardware-Beschleunigung aktivieren
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

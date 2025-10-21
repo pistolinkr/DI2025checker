@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// ハードウェアアクセラレーション有効化関数
+function enableHardwareAcceleration() {
+    // GPU加速が必要な要素を選択
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // GPU加速のためのtransform3dを適用
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // アニメーション要素にwill-changeを追加
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ ハードウェアアクセラレーション有効化完了');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 日本語ページ初期化開始');
+    
+    // ハードウェアアクセラレーション有効化
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

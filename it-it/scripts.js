@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// Abilita accelerazione hardware
+function enableHardwareAcceleration() {
+    // Seleziona elementi che necessitano di accelerazione GPU
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // Applicare transform3d per accelerazione GPU
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // Aggiungere will-change agli elementi animati
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ Accelerazione hardware abilitata');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 Inizializzazione pagina italiana avviata');
+    
+    // Abilita accelerazione hardware
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

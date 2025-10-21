@@ -3325,8 +3325,46 @@ window.addEventListener('unhandledrejection', (e) => {
     console.warn('Unhandled rejection (en-us):', e.reason);
 });
 
+// Enable hardware acceleration
+function enableHardwareAcceleration() {
+    // Select elements that need GPU acceleration
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // Apply transform3d for GPU acceleration
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // Add will-change to animated elements
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ Hardware acceleration enabled');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 English page initialization started');
+    
+    // Enable hardware acceleration
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

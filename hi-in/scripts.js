@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// हार्डवेयर त्वरण सक्षम करें
+function enableHardwareAcceleration() {
+    // GPU त्वरण की आवश्यकता वाले तत्वों का चयन करें
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // GPU त्वरण के लिए transform3d लागू करें
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // एनिमेटेड तत्वों में will-change जोड़ें
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ हार्डवेयर त्वरण सक्षम हो गया');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 हिंदी पृष्ठ आरंभीकरण शुरू हुआ');
+    
+    // हार्डवेयर त्वरण सक्षम करें
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// تفعيل تسريع الأجهزة
+function enableHardwareAcceleration() {
+    // تحديد العناصر التي تحتاج إلى تسريع GPU
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // تطبيق transform3d لتسريع GPU
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // إضافة will-change للعناصر المتحركة
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ تم تفعيل تسريع الأجهزة');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 بدأ تهيئة الصفحة العربية');
+    
+    // تفعيل تسريع الأجهزة
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();

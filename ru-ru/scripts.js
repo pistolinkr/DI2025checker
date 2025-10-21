@@ -3310,9 +3310,47 @@ const devTools = {
     }
 };
 
+// Включить аппаратное ускорение
+function enableHardwareAcceleration() {
+    // Выбрать элементы, требующие GPU ускорения
+    const acceleratedElements = [
+        '.modal',
+        '.settings-modal',
+        '.loading-overlay',
+        '.drug-list',
+        '.search-results',
+        '.result-section',
+        '.fab',
+        '.settings-fab',
+        '.card',
+        '.header'
+    ];
+    
+    acceleratedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            // Применить transform3d для GPU ускорения
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.backfaceVisibility = 'hidden';
+            el.style.perspective = '1000px';
+        });
+    });
+    
+    // Добавить will-change к анимированным элементам
+    const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
+    animatedElements.forEach(el => {
+        el.style.willChange = 'opacity, transform';
+    });
+    
+    console.log('⚡ Аппаратное ускорение включено');
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 English page initialization started');
+    console.log('🚀 Инициализация русской страницы начата');
+    
+    // Включить аппаратное ускорение
+    enableHardwareAcceleration();
     
     // File detection functionality
     detectAvailableFiles();
