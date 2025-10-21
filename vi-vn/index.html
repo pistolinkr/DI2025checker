@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dịch vụ kiểm tra tương tác thuốc giúp đảm bảo sử dụng thuốc an toàn">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        font-src 'self' https://cdn.jsdelivr.net;
+        connect-src 'self' https://api.fda.gov https://api.openai.com https://api.anthropic.com https://api.perplexity.ai https://generativelanguage.googleapis.com https://ipapi.co https://ip-api.com https://api.ipify.org;
+        img-src 'self' data:;
+        object-src 'none';
+        frame-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        upgrade-insecure-requests;
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="/en-us/styles.css?v=1.0">
+    
+    <!-- 인라인 CSS 테스트 -->
+    <style>
+        /* CSS 로딩 테스트 - 이 스타일이 보이면 CSS가 정상 로드됨 */
+        body {
+            background-color: #ffffff !important;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a !important;
+            }
+        }
+    </style>
+    
+    <!-- 기본 파비콘 (라이트 모드용) -->
+    <link rel="icon" type="image/png" href="../logo/logo-dark.png">
+    
+    <!-- 다크 모드용 파비콘 -->
+    <link rel="icon" type="image/png" href="../logo/logo-light.png" media="(prefers-color-scheme: dark)">
+    
+    <!-- 라이트 모드용 파비콘 -->
+    <link rel="icon" type="image/png" href="../logo/logo-dark.png" media="(prefers-color-scheme: light)">
+    <title>Kiểm Tra Tương Tác Thuốc</title>
+</head>
+<body class="preload">
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p id="loadingText" style="margin-top: 1rem;">Đang xử lý...</p>
+        </div>
+    </div>
+
+    <!-- Drug Detail Information Modal -->
+    <div id="drugDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="drugDetailTitle"></h3>
+                <button class="modal-close" onclick="closeDrugDetail()" aria-label="Đóng">×</button>
+            </div>
+            <div class="modal-body" id="drugDetailBody"></div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3 class="settings-title">
+                    🤖 Cài Đặt Phân Tích AI
+                </h3>
+                <button class="modal-close" onclick="closeSettings()" aria-label="Đóng">×</button>
+            </div>
+            <div class="settings-body">
+                <!-- AI Service Selection -->
+                <div class="form-group">
+                    <label for="aiProvider" class="form-label">🎯 Dịch vụ AI sử dụng</label>
+                    <select id="aiProvider" class="form-select">
+                        <option value="free">🆓 Dịch vụ AI Miễn phí (Mặc định)</option>
+                        <option value="openai">OpenAI (GPT-4o-mini)</option>
+                        <option value="claude">Anthropic Claude</option>
+                        <option value="perplexity">Perplexity AI</option>
+                        <option value="gemini">Google Gemini</option>
+                        <option value="auto">🎲 Tự Động Chọn (Có sẵn)</option>
+                    </select>
+                    <div class="form-help">
+                        Dịch vụ AI miễn phí được cung cấp theo mặc định. Để phân tích chất lượng cao hơn, nhập khóa API cá nhân của bạn.
+                    </div>
+                </div>
+                
+                <!-- Free AI Service Information -->
+                <div class="form-group ai-config" data-provider="free">
+                    <div class="free-ai-info">
+                        <h4>🆓 Dịch vụ AI Miễn phí</h4>
+                        <p>Dịch vụ này sử dụng các API AI miễn phí sau:</p>
+                        <ul>
+                            <li><strong>Hugging Face Inference API</strong> - Mô hình nguồn mở</li>
+                            <li><strong>Ollama API</strong> - Mô hình thực thi cục bộ</li>
+                            <li><strong>Groq API</strong> - Dịch vụ suy luận nhanh</li>
+                        </ul>
+                        <div class="license-info">
+                            <h5>📄 Thông Tin Giấy Phép</h5>
+                            <p>Dịch vụ AI miễn phí được cung cấp theo các điều kiện sau:</p>
+                            <ul>
+                                <li>Giới hạn sử dụng hàng ngày: 100 yêu cầu</li>
+                                <li>Giới hạn thời gian phản hồi: 30 giây</li>
+                                <li>Hạn chế sử dụng thương mại</li>
+                                <li>Bảo mật dữ liệu: Dữ liệu đầu vào được mã hóa trong quá trình xử lý</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ai-config" data-provider="openai">
+                    <label for="openaiApiKey" class="form-label">
+                        <span class="provider-icon" alt="OpenAI"> 
+                        Khóa API OpenAI
+                    </label>
+                    <input type="password" 
+                           id="openaiApiKey" 
+                           class="form-input" 
+                           placeholder="sk-..."
+                           aria-label="Khóa API OpenAI">
+                    <div class="form-help">
+                        <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style="color: var(--primary);">
+                            Lấy khóa API OpenAI từ trang web OpenAI →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Claude Settings -->
+                <div class="form-group ai-config" data-provider="claude">
+                    <label for="claudeApiKey" class="form-label">
+                        Khóa API Anthropic Claude
+                    </label>
+                    <input type="password" 
+                           id="claudeApiKey" 
+                           class="form-input" 
+                           placeholder="sk-ant-..."
+                           aria-label="Khóa API Claude">
+                    <div class="form-help">
+                        <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color: var(--primary);">
+                            Lấy khóa API Anthropic từ bảng điều khiển Anthropic →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Perplexity Settings -->
+                <div class="form-group ai-config" data-provider="perplexity">
+                    <label for="perplexityApiKey" class="form-label">
+                        Khóa API Perplexity
+                    </label>
+                    <input type="password" 
+                           id="perplexityApiKey" 
+                           class="form-input" 
+                           placeholder="pplx-..."
+                           aria-label="Khóa API Perplexity">
+                    <div class="form-help">
+                        <a href="https://www.perplexity.ai/settings/api" target="_blank" rel="noopener" style="color: var(--primary);">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Gemini Settings -->
+                <div class="form-group ai-config" data-provider="gemini">
+                    <label for="geminiApiKey" class="form-label">
+                        Khóa API Google Gemini
+                    </label>
+                    <input type="password" 
+                           id="geminiApiKey" 
+                           class="form-input" 
+                           placeholder="AI..."
+                           aria-label="Khóa API Gemini">
+                    <div class="form-help">
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--primary);">
+                            Lấy khóa API Gemini từ Google AI Studio →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Status Display -->
+                <div class="api-status">
+                    <h4>🔑 Trạng Thái Khóa API</h4>
+                    <div class="status-grid">
+                        <div class="status-item" id="openai-status">
+                            <span class="status-icon">⚪</span>
+                            <span>OpenAI</span>
+                        </div>
+                        <div class="status-item" id="claude-status">
+                            <span class="status-icon">⚪</span>
+                            <span>Claude</span>
+                        </div>
+                        <div class="status-item" id="perplexity-status">
+                            <span class="status-icon">⚪</span>
+                            <span>Perplexity</span>
+                        </div>
+                        <div class="status-item" id="gemini-status">
+                            <span class="status-icon">⚪</span>
+                            <span>Gemini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-actions">
+                <button class="btn btn-secondary" onclick="closeSettings()">Hủy</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Lưu</button>
+                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 Kiểm Tra API</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Gửi Phản Hồi</h3>
+                <button class="modal-close" onclick="closeFeedbackModal()" aria-label="Đóng">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedbackName" class="form-label">Tên</label>
+                        <input type="text" 
+                               id="feedbackName" 
+                               class="form-input" 
+                               placeholder="Nhập tên của bạn"
+                               required
+                               aria-label="Tên">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackEmail" class="form-label">Email</label>
+                        <input type="email" 
+                               id="feedbackEmail" 
+                               class="form-input" 
+                               placeholder="Nhập email của bạn"
+                               required
+                               aria-label="Email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackSubject" class="form-label">Chủ Đề</label>
+                        <input type="text" 
+                               id="feedbackSubject" 
+                               class="form-input" 
+                               placeholder="Nhập chủ đề phản hồi"
+                               required
+                               aria-label="Chủ Đề">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackMessage" class="form-label">Tin Nhắn</label>
+                        <textarea id="feedbackMessage" 
+                                  class="form-textarea" 
+                                  placeholder="Nhập phản hồi của bạn"
+                                  rows="5"
+                                  required
+                                  aria-label="Tin Nhắn"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header scroll-fade">
+            <h1>Kiểm Tra Tương Tác Thuốc</h1>
+            <p>Kiểm tra tương tác giữa<br>các loại thuốc để sử dụng an toàn</p>
+        </header>
+
+        <!-- Drug Search Section -->
+        <section class="card scroll-hidden scroll-delay-1">
+            <h2 class="sr-only">Tìm Kiếm Thuốc</h2>
+            <div class="search-box">
+                <input type="text" 
+                       id="drugSearch" 
+                       class="input-field" 
+                       placeholder="Tìm thuốc (ví dụ: Aspirin)"
+                       autocomplete="off"
+                       aria-label="Tìm Kiếm Thuốc">
+
+            </div>
+            
+            <div id="searchResults" class="search-results scroll-fade">
+                <div id="searchResultsContent" class="search-results-content"></div>
+            </div>
+            
+            <div class="recent-searches" style="margin-top: 1rem;">
+                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Tìm kiếm Gần đây</div>
+                <div id="recentSearchesList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+            </div>
+        </section>
+
+
+        <!-- Drug Selection Section -->
+        <section class="card scroll-hidden scroll-delay-3">
+            <h2 class="sr-only">Lựa chọn Thuốc</h2>
+            <div class="drug-select-section">
+                <div class="drug-select-container">
+                    <div class="input-wrapper">
+                        <input type="text" 
+                               id="drug1" 
+                               class="input-field" 
+                               placeholder="Thuốc Thứ Nhất"
+                               autocomplete="off"
+                               aria-label="Thuốc Thứ Nhất">
+                    </div>
+                </div>
+                
+                <div class="drug-select-container">
+                    <div class="input-wrapper">
+                        <input type="text" 
+                               id="drug2" 
+                               class="input-field" 
+                               placeholder="Thuốc Thứ Hai"
+                               autocomplete="off"
+                               aria-label="Thuốc Thứ Hai">
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary btn-block" onclick="checkInteraction()">
+                Kiểm Tra Tương Tác
+            </button>
+        </section>
+        
+        <!-- 페이지 상단에 고정된 드러그 검색 결과 -->
+        <div id="drug1List" class="drug-list">
+            <div class="drug-items"></div>
+        </div>
+        <div id="drug2List" class="drug-list">
+            <div class="drug-items"></div>
+        </div>
+
+        <!-- Result Section -->
+        <section id="resultSection" class="result-section scroll-scale">
+            <div id="result"></div>
+        </section>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Lên Đầu Trang" aria-label="Lên Đầu Trang">
+        ↑
+    </button>
+
+    <!-- Settings Button -->
+    <button class="settings-fab" title="Cài Đặt AI" aria-label="Cài Đặt AI">
+        ⚙️
+    </button>
+
+    <!-- Notify Message -->
+    <span id="alertMessage" class="alert" role="alert"></span>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Medical Disclaimer -->
+            <div class="footer-disclaimer">
+                <div class="disclaimer-content">
+                    <h4>⚠️ Tuyên Bố Từ Chối Trách Nhiệm Y Tế Quan Trọng</h4>
+                    <p>
+                        Công cụ này chỉ dành cho mục đích giáo dục và thông tin. Nó không nhằm mục đích làm lời khuyên y tế, chẩn đoán hoặc điều trị.
+                        Luôn tham khảo ý kiến chuyên gia y tế có trình độ trước khi đưa ra bất kỳ quyết định nào về thuốc hoặc điều trị y tế.
+                        Tương tác thuốc có thể phức tạp và khác nhau ở mỗi cá nhân.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section footer-about" style="padding-top: 2rem;">
+                    <p>Công cụ toàn diện để kiểm tra tương tác thuốc nhằm giúp đảm bảo sử dụng thuốc an toàn. Luôn tham khảo ý kiến chuyên gia y tế để được tư vấn y tế.</p>
+                    <div class="footer-badges">
+                        <span class="badge">Cơ sở dữ liệu Y tế</span>
+                        <span class="badge">Hỗ trợ AI</span>
+                        <span class="badge">Công cụ Miễn phí</span>
+                    </div>
+                </div>
+
+                <!-- Similar Sites -->
+                <div class="footer-section footer-links">
+                    <h4>Trang Web Tương Tự</h4>
+                    <div class="medical-links">
+                        <a href="https://biolabs.world" target="_blank" rel="noopener">biolabs.world</a>
+                    </div>
+                </div>
+
+                <!-- Medical Resources -->
+                <div class="footer-section footer-resources">
+                    <h4>Tài Nguyên Y Tế</h4>
+                    <div class="medical-links">
+                        <a href="https://moh.gov.vn" target="_blank" rel="noopener">Bộ Y tế</a>
+                        <a href="https://www.who.int" target="_blank" rel="noopener">WHO</a>
+                        <a href="https://www.webmd.com" target="_blank" rel="noopener">WebMD</a>
+                        <a href="https://medlineplus.gov" target="_blank" rel="noopener">MedlinePlus</a>
+                    </div>
+                </div>
+
+                <!-- Contact & Social -->
+                <div class="footer-section footer-contact">
+                    <h4>Liên Hệ</h4>
+                    <style>
+                        h4 {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            margin-bottom: 0.2rem;
+                        }
+                        a {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            font-size: 0.8rem;
+                            color: var(--text-secondary);
+                        }
+                    </style>
+                    <div class="social-links">
+                        <a href="mailto:pistolinkr@icloud.com" title="Email">
+                            <span>Email</span>
+                        </a>
+                        <a href="https://github.com/pistolinkr" target="_blank" rel="noopener" title="GitHub">
+                            <span>GitHub</span>
+                        </a>
+                        <button class="feedback-btn" onclick="openFeedbackModal()" title="Gửi Phản Hồi">
+                            <span>Phản Hồi</span>
+        
+                    </div>
+                        </div>
+                        </div>
+
+            <!-- Footer Divider -->
+            <div class="footer-divider"></div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-version-language">
+                        <div class="footer-version">
+                            <span>Beta v2.1 | G.gear® Pistol™</span>
+                        </div>
+                        <div class="footer-language">
+                            <span class="current-language">🇻🇳 Tiếng Việt</span>
+                        </div>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#" onclick="showPrivacyPolicy()">Chính Sách Bảo Mật</a>
+                        <a href="#" onclick="showTermsOfService()">Điều Khoản Dịch Vụ</a>
+                        <a href="#" onclick="showDataSources()">Nguồn Dữ Liệu</a>
+                            </div>
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 Pistolinkr. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../i18n.js"></script>
+    <script src="config.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+

@@ -101,21 +101,21 @@
                 <!-- Free AI Service Information -->
                 <div class="form-group ai-config" data-provider="free">
                     <div class="free-ai-info">
-                        <h4>🆓 Free AI Service</h4>
-                        <p>This service uses the following free AI APIs:</p>
+                        <h4>🆓 خدمة الذكاء الاصطناعي المجانية</h4>
+                        <p>تستخدم هذه الخدمة واجهات برمجة التطبيقات المجانية التالية للذكاء الاصطناعي:</p>
                         <ul>
-                            <li><strong>Hugging Face Inference API</strong> - Open source models</li>
-                            <li><strong>Ollama API</strong> - Local execution models</li>
-                            <li><strong>Groq API</strong> - Fast inference service</li>
+                            <li><strong>Hugging Face Inference API</strong> - نماذج مفتوحة المصدر</li>
+                            <li><strong>Ollama API</strong> - نماذج التنفيذ المحلية</li>
+                            <li><strong>Groq API</strong> - خدمة الاستدلال السريع</li>
                         </ul>
                         <div class="license-info">
-                            <h5>📄 License Information</h5>
-                            <p>Free AI service is provided under the following conditions:</p>
+                            <h5>📄 معلومات الترخيص</h5>
+                            <p>يتم توفير خدمة الذكاء الاصطناعي المجانية بالشروط التالية:</p>
                             <ul>
-                                <li>Daily usage limit: 100 requests</li>
-                                <li>Response time limit: 30 seconds</li>
-                                <li>Commercial use restrictions</li>
-                                <li>Data security: Input data is encrypted during processing</li>
+                                <li>حد الاستخدام اليومي: 100 طلب</li>
+                                <li>حد وقت الاستجابة: 30 ثانية</li>
+                                <li>قيود الاستخدام التجاري</li>
+                                <li>أمان البيانات: يتم تشفير بيانات الإدخال أثناء المعالجة</li>
                             </ul>
                         </div>
                     </div>
@@ -125,16 +125,16 @@
                 <div class="form-group ai-config" data-provider="openai">
                     <label for="openaiApiKey" class="form-label">
                         <span class="provider-icon" alt="OpenAI"> 
-                        OpenAI API Key
+                        مفتاح API OpenAI
                     </label>
                     <input type="password" 
                            id="openaiApiKey" 
                            class="form-input" 
                            placeholder="sk-..."
-                           aria-label="OpenAI API Key">
+                           aria-label="مفتاح API OpenAI">
                     <div class="form-help">
                         <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get OpenAI API Key from OpenAI Site →
+                            احصل على مفتاح API OpenAI من موقع OpenAI →
                         </a>
                     </div>
                 </div>
@@ -142,16 +142,16 @@
                 <!-- Claude Settings -->
                 <div class="form-group ai-config" data-provider="claude">
                     <label for="claudeApiKey" class="form-label">
-                        Anthropic Claude API Key
+                        مفتاح API Anthropic Claude
                     </label>
                     <input type="password" 
                            id="claudeApiKey" 
                            class="form-input" 
                            placeholder="sk-ant-..."
-                           aria-label="Claude API Key">
+                           aria-label="مفتاح API Claude">
                     <div class="form-help">
                         <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get Anthropic API Key from Anthropic Console →
+                            احصل على مفتاح API Anthropic من وحدة التحكم Anthropic →
                         </a>
                     </div>
                 </div>
@@ -159,13 +159,13 @@
                 <!-- Perplexity Settings -->
                 <div class="form-group ai-config" data-provider="perplexity">
                     <label for="perplexityApiKey" class="form-label">
-                        Perplexity API Key
+                        مفتاح API Perplexity
                     </label>
                     <input type="password" 
                            id="perplexityApiKey" 
                            class="form-input" 
                            placeholder="pplx-..."
-                           aria-label="Perplexity API Key">
+                           aria-label="مفتاح API Perplexity">
                     <div class="form-help">
                         <a href="https://www.perplexity.ai/settings/api" target="_blank" rel="noopener" style="color: var(--primary);">
                         </a>
@@ -175,23 +175,23 @@
                 <!-- Gemini Settings -->
                 <div class="form-group ai-config" data-provider="gemini">
                     <label for="geminiApiKey" class="form-label">
-                        Google Gemini API Key
+                        مفتاح API Google Gemini
                     </label>
                     <input type="password" 
                            id="geminiApiKey" 
                            class="form-input" 
                            placeholder="AI..."
-                           aria-label="Gemini API Key">
+                           aria-label="مفتاح API Gemini">
                     <div class="form-help">
                         <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get Gemini API Key from Google AI Studio →
+                            احصل على مفتاح API Gemini من Google AI Studio →
                         </a>
                     </div>
                 </div>
 
                 <!-- Status Display -->
                 <div class="api-status">
-                    <h4>🔑 API Key Status</h4>
+                    <h4>🔑 حالة مفتاح API</h4>
                     <div class="status-grid">
                         <div class="status-item" id="openai-status">
                             <span class="status-icon">⚪</span>
@@ -213,9 +213,9 @@
                 </div>
             </div>
             <div class="settings-actions">
-                <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
-                <button class="btn btn-primary" onclick="saveSettings()">Save</button>
-                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 API Test</button>
+                <button class="btn btn-secondary" onclick="closeSettings()">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveSettings()">حفظ</button>
+                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 اختبار API</button>
             </div>
         </div>
     </div>

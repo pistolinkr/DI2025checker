@@ -102,20 +102,20 @@
                 <div class="form-group ai-config" data-provider="free">
                     <div class="free-ai-info">
                         <h4>🆓 免费AI服务</h4>
-                        <p>This service uses the following free AI APIs:</p>
+                        <p>此服务使用以下免费AI API:</p>
                         <ul>
-                            <li><strong>Hugging Face Inference API</strong> - Open source models</li>
-                            <li><strong>Ollama API</strong> - Local execution models</li>
-                            <li><strong>Groq API</strong> - Fast inference service</li>
+                            <li><strong>Hugging Face Inference API</strong> - 开源模型</li>
+                            <li><strong>Ollama API</strong> - 本地执行模型</li>
+                            <li><strong>Groq API</strong> - 快速推理服务</li>
                         </ul>
                         <div class="license-info">
-                            <h5>📄 License Information</h5>
-                            <p>Free AI service is provided under the following conditions:</p>
+                            <h5>📄 许可信息</h5>
+                            <p>免费AI服务在以下条件下提供:</p>
                             <ul>
-                                <li>Daily usage limit: 100 requests</li>
-                                <li>Response time limit: 30 seconds</li>
-                                <li>Commercial use restrictions</li>
-                                <li>Data security: Input data is encrypted during processing</li>
+                                <li>每日使用限制: 100次请求</li>
+                                <li>响应时间限制: 30秒</li>
+                                <li>商业使用限制</li>
+                                <li>数据安全: 输入数据在处理期间加密</li>
                             </ul>
                         </div>
                     </div>
@@ -125,16 +125,16 @@
                 <div class="form-group ai-config" data-provider="openai">
                     <label for="openaiApiKey" class="form-label">
                         <span class="provider-icon" alt="OpenAI"> 
-                        OpenAI API Key
+                        OpenAI API密钥
                     </label>
                     <input type="password" 
                            id="openaiApiKey" 
                            class="form-input" 
                            placeholder="sk-..."
-                           aria-label="OpenAI API Key">
+                           aria-label="OpenAI API密钥">
                     <div class="form-help">
                         <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get OpenAI API Key from OpenAI Site →
+                            从OpenAI网站获取API密钥 →
                         </a>
                     </div>
                 </div>
@@ -142,16 +142,16 @@
                 <!-- Claude Settings -->
                 <div class="form-group ai-config" data-provider="claude">
                     <label for="claudeApiKey" class="form-label">
-                        Anthropic Claude API Key
+                        Anthropic Claude API密钥
                     </label>
                     <input type="password" 
                            id="claudeApiKey" 
                            class="form-input" 
                            placeholder="sk-ant-..."
-                           aria-label="Claude API Key">
+                           aria-label="Claude API密钥">
                     <div class="form-help">
                         <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get Anthropic API Key from Anthropic Console →
+                            从Anthropic控制台获取API密钥 →
                         </a>
                     </div>
                 </div>
@@ -159,13 +159,13 @@
                 <!-- Perplexity Settings -->
                 <div class="form-group ai-config" data-provider="perplexity">
                     <label for="perplexityApiKey" class="form-label">
-                        Perplexity API Key
+                        Perplexity API密钥
                     </label>
                     <input type="password" 
                            id="perplexityApiKey" 
                            class="form-input" 
                            placeholder="pplx-..."
-                           aria-label="Perplexity API Key">
+                           aria-label="Perplexity API密钥">
                     <div class="form-help">
                         <a href="https://www.perplexity.ai/settings/api" target="_blank" rel="noopener" style="color: var(--primary);">
                         </a>
@@ -175,23 +175,23 @@
                 <!-- Gemini Settings -->
                 <div class="form-group ai-config" data-provider="gemini">
                     <label for="geminiApiKey" class="form-label">
-                        Google Gemini API Key
+                        Google Gemini API密钥
                     </label>
                     <input type="password" 
                            id="geminiApiKey" 
                            class="form-input" 
                            placeholder="AI..."
-                           aria-label="Gemini API Key">
+                           aria-label="Gemini API密钥">
                     <div class="form-help">
                         <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get Gemini API Key from Google AI Studio →
+                            从Google AI Studio获取Gemini API密钥 →
                         </a>
                     </div>
                 </div>
 
                 <!-- Status Display -->
                 <div class="api-status">
-                    <h4>🔑 API Key Status</h4>
+                    <h4>🔑 API密钥状态</h4>
                     <div class="status-grid">
                         <div class="status-item" id="openai-status">
                             <span class="status-icon">⚪</span>
@@ -215,7 +215,7 @@
             <div class="settings-actions">
                 <button class="btn btn-secondary" onclick="closeSettings()">取消</button>
                 <button class="btn btn-primary" onclick="saveSettings()">保存</button>
-                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 API Test</button>
+                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 API测试</button>
             </div>
         </div>
     </div>

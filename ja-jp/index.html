@@ -102,20 +102,20 @@
                 <div class="form-group ai-config" data-provider="free">
                     <div class="free-ai-info">
                         <h4>🆓 無料AIサービス</h4>
-                        <p>This service uses the following free AI APIs:</p>
+                        <p>このサービスは以下の無料AI APIを使用します:</p>
                         <ul>
-                            <li><strong>Hugging Face Inference API</strong> - Open source models</li>
-                            <li><strong>Ollama API</strong> - Local execution models</li>
-                            <li><strong>Groq API</strong> - Fast inference service</li>
+                            <li><strong>Hugging Face Inference API</strong> - オープンソースモデル</li>
+                            <li><strong>Ollama API</strong> - ローカル実行モデル</li>
+                            <li><strong>Groq API</strong> - 高速推論サービス</li>
                         </ul>
                         <div class="license-info">
-                            <h5>📄 License Information</h5>
-                            <p>Free AI service is provided under the following conditions:</p>
+                            <h5>📄 ライセンス情報</h5>
+                            <p>無料AIサービスは以下の条件で提供されます:</p>
                             <ul>
-                                <li>Daily usage limit: 100 requests</li>
-                                <li>Response time limit: 30 seconds</li>
-                                <li>Commercial use restrictions</li>
-                                <li>Data security: Input data is encrypted during processing</li>
+                                <li>1日の使用制限: 100回</li>
+                                <li>応答時間制限: 30秒</li>
+                                <li>商用利用制限</li>
+                                <li>データセキュリティ: 入力データは暗号化されて処理されます</li>
                             </ul>
                         </div>
                     </div>
@@ -125,16 +125,16 @@
                 <div class="form-group ai-config" data-provider="openai">
                     <label for="openaiApiKey" class="form-label">
                         <span class="provider-icon" alt="OpenAI"> 
-                        OpenAI API Key
+                        OpenAI APIキー
                     </label>
                     <input type="password" 
                            id="openaiApiKey" 
                            class="form-input" 
                            placeholder="sk-..."
-                           aria-label="OpenAI API Key">
+                           aria-label="OpenAI APIキー">
                     <div class="form-help">
                         <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get OpenAI API Key from OpenAI Site →
+                            OpenAIサイトからAPIキーを取得 →
                         </a>
                     </div>
                 </div>
@@ -142,16 +142,16 @@
                 <!-- Claude Settings -->
                 <div class="form-group ai-config" data-provider="claude">
                     <label for="claudeApiKey" class="form-label">
-                        Anthropic Claude API Key
+                        Anthropic Claude APIキー
                     </label>
                     <input type="password" 
                            id="claudeApiKey" 
                            class="form-input" 
                            placeholder="sk-ant-..."
-                           aria-label="Claude API Key">
+                           aria-label="Claude APIキー">
                     <div class="form-help">
                         <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get Anthropic API Key from Anthropic Console →
+                            AnthropicコンソールからAPIキーを取得 →
                         </a>
                     </div>
                 </div>
@@ -159,13 +159,13 @@
                 <!-- Perplexity Settings -->
                 <div class="form-group ai-config" data-provider="perplexity">
                     <label for="perplexityApiKey" class="form-label">
-                        Perplexity API Key
+                        Perplexity APIキー
                     </label>
                     <input type="password" 
                            id="perplexityApiKey" 
                            class="form-input" 
                            placeholder="pplx-..."
-                           aria-label="Perplexity API Key">
+                           aria-label="Perplexity APIキー">
                     <div class="form-help">
                         <a href="https://www.perplexity.ai/settings/api" target="_blank" rel="noopener" style="color: var(--primary);">
                         </a>
@@ -175,23 +175,23 @@
                 <!-- Gemini Settings -->
                 <div class="form-group ai-config" data-provider="gemini">
                     <label for="geminiApiKey" class="form-label">
-                        Google Gemini API Key
+                        Google Gemini APIキー
                     </label>
                     <input type="password" 
                            id="geminiApiKey" 
                            class="form-input" 
                            placeholder="AI..."
-                           aria-label="Gemini API Key">
+                           aria-label="Gemini APIキー">
                     <div class="form-help">
                         <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--primary);">
-                            Get Gemini API Key from Google AI Studio →
+                            Google AI StudioからGemini APIキーを取得 →
                         </a>
                     </div>
                 </div>
 
                 <!-- Status Display -->
                 <div class="api-status">
-                    <h4>🔑 API Key Status</h4>
+                    <h4>🔑 APIキーのステータス</h4>
                     <div class="status-grid">
                         <div class="status-item" id="openai-status">
                             <span class="status-icon">⚪</span>
@@ -215,7 +215,7 @@
             <div class="settings-actions">
                 <button class="btn btn-secondary" onclick="closeSettings()">キャンセル</button>
                 <button class="btn btn-primary" onclick="saveSettings()">保存</button>
-                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 API Test</button>
+                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 APIテスト</button>
             </div>
         </div>
     </div>

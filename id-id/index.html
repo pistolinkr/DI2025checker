@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Layanan pemeriksa interaksi obat untuk membantu memastikan penggunaan obat yang aman">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        font-src 'self' https://cdn.jsdelivr.net;
+        connect-src 'self' https://api.fda.gov https://api.openai.com https://api.anthropic.com https://api.perplexity.ai https://generativelanguage.googleapis.com https://ipapi.co https://ip-api.com https://api.ipify.org;
+        img-src 'self' data:;
+        object-src 'none';
+        frame-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        upgrade-insecure-requests;
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="/en-us/styles.css?v=1.0">
+    
+    <!-- 인라인 CSS 테스트 -->
+    <style>
+        /* CSS 로딩 테스트 - 이 스타일이 보이면 CSS가 정상 로드됨 */
+        body {
+            background-color: #ffffff !important;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a !important;
+            }
+        }
+    </style>
+    
+    <!-- 기본 파비콘 (라이트 모드용) -->
+    <link rel="icon" type="image/png" href="../logo/logo-dark.png">
+    
+    <!-- 다크 모드용 파비콘 -->
+    <link rel="icon" type="image/png" href="../logo/logo-light.png" media="(prefers-color-scheme: dark)">
+    
+    <!-- 라이트 모드용 파비콘 -->
+    <link rel="icon" type="image/png" href="../logo/logo-dark.png" media="(prefers-color-scheme: light)">
+    <title>Pemeriksa Interaksi Obat</title>
+</head>
+<body class="preload">
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p id="loadingText" style="margin-top: 1rem;">Memproses...</p>
+        </div>
+    </div>
+
+    <!-- Drug Detail Information Modal -->
+    <div id="drugDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="drugDetailTitle"></h3>
+                <button class="modal-close" onclick="closeDrugDetail()" aria-label="Tutup">×</button>
+            </div>
+            <div class="modal-body" id="drugDetailBody"></div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3 class="settings-title">
+                    🤖 Pengaturan Analisis AI
+                </h3>
+                <button class="modal-close" onclick="closeSettings()" aria-label="Tutup">×</button>
+            </div>
+            <div class="settings-body">
+                <!-- AI Service Selection -->
+                <div class="form-group">
+                    <label for="aiProvider" class="form-label">🎯 Layanan AI yang digunakan</label>
+                    <select id="aiProvider" class="form-select">
+                        <option value="free">🆓 Layanan AI Gratis (Default)</option>
+                        <option value="openai">OpenAI (GPT-4o-mini)</option>
+                        <option value="claude">Anthropic Claude</option>
+                        <option value="perplexity">Perplexity AI</option>
+                        <option value="gemini">Google Gemini</option>
+                        <option value="auto">🎲 Pilih Otomatis (Tersedia)</option>
+                    </select>
+                    <div class="form-help">
+                        Layanan AI gratis disediakan secara default. Untuk analisis berkualitas lebih tinggi, masukkan kunci API pribadi Anda.
+                    </div>
+                </div>
+                
+                <!-- Free AI Service Information -->
+                <div class="form-group ai-config" data-provider="free">
+                    <div class="free-ai-info">
+                        <h4>🆓 Layanan AI Gratis</h4>
+                        <p>Layanan ini menggunakan API AI gratis berikut:</p>
+                        <ul>
+                            <li><strong>Hugging Face Inference API</strong> - Model sumber terbuka</li>
+                            <li><strong>Ollama API</strong> - Model eksekusi lokal</li>
+                            <li><strong>Groq API</strong> - Layanan inferensi cepat</li>
+                        </ul>
+                        <div class="license-info">
+                            <h5>📄 Informasi Lisensi</h5>
+                            <p>Layanan AI gratis disediakan dengan ketentuan berikut:</p>
+                            <ul>
+                                <li>Batas penggunaan harian: 100 permintaan</li>
+                                <li>Batas waktu respons: 30 detik</li>
+                                <li>Pembatasan penggunaan komersial</li>
+                                <li>Keamanan data: Data input dienkripsi selama pemrosesan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ai-config" data-provider="openai">
+                    <label for="openaiApiKey" class="form-label">
+                        <span class="provider-icon" alt="OpenAI"> 
+                        Kunci API OpenAI
+                    </label>
+                    <input type="password" 
+                           id="openaiApiKey" 
+                           class="form-input" 
+                           placeholder="sk-..."
+                           aria-label="Kunci API OpenAI">
+                    <div class="form-help">
+                        <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style="color: var(--primary);">
+                            Dapatkan kunci API OpenAI dari situs OpenAI →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Claude Settings -->
+                <div class="form-group ai-config" data-provider="claude">
+                    <label for="claudeApiKey" class="form-label">
+                        Kunci API Anthropic Claude
+                    </label>
+                    <input type="password" 
+                           id="claudeApiKey" 
+                           class="form-input" 
+                           placeholder="sk-ant-..."
+                           aria-label="Kunci API Claude">
+                    <div class="form-help">
+                        <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color: var(--primary);">
+                            Dapatkan kunci API Anthropic dari konsol Anthropic →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Perplexity Settings -->
+                <div class="form-group ai-config" data-provider="perplexity">
+                    <label for="perplexityApiKey" class="form-label">
+                        Kunci API Perplexity
+                    </label>
+                    <input type="password" 
+                           id="perplexityApiKey" 
+                           class="form-input" 
+                           placeholder="pplx-..."
+                           aria-label="Kunci API Perplexity">
+                    <div class="form-help">
+                        <a href="https://www.perplexity.ai/settings/api" target="_blank" rel="noopener" style="color: var(--primary);">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Gemini Settings -->
+                <div class="form-group ai-config" data-provider="gemini">
+                    <label for="geminiApiKey" class="form-label">
+                        Kunci API Google Gemini
+                    </label>
+                    <input type="password" 
+                           id="geminiApiKey" 
+                           class="form-input" 
+                           placeholder="AI..."
+                           aria-label="Kunci API Gemini">
+                    <div class="form-help">
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--primary);">
+                            Dapatkan kunci API Gemini dari Google AI Studio →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Status Display -->
+                <div class="api-status">
+                    <h4>🔑 Status Kunci API</h4>
+                    <div class="status-grid">
+                        <div class="status-item" id="openai-status">
+                            <span class="status-icon">⚪</span>
+                            <span>OpenAI</span>
+                        </div>
+                        <div class="status-item" id="claude-status">
+                            <span class="status-icon">⚪</span>
+                            <span>Claude</span>
+                        </div>
+                        <div class="status-item" id="perplexity-status">
+                            <span class="status-icon">⚪</span>
+                            <span>Perplexity</span>
+                        </div>
+                        <div class="status-item" id="gemini-status">
+                            <span class="status-icon">⚪</span>
+                            <span>Gemini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-actions">
+                <button class="btn btn-secondary" onclick="closeSettings()">Batal</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Simpan</button>
+                <button class="btn btn-secondary" onclick="testAllAPIs()">🧪 Tes API</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Kirim Umpan Balik</h3>
+                <button class="modal-close" onclick="closeFeedbackModal()" aria-label="Tutup">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedbackName" class="form-label">Nama</label>
+                        <input type="text" 
+                               id="feedbackName" 
+                               class="form-input" 
+                               placeholder="Masukkan nama Anda"
+                               required
+                               aria-label="Nama">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackEmail" class="form-label">Email</label>
+                        <input type="email" 
+                               id="feedbackEmail" 
+                               class="form-input" 
+                               placeholder="Masukkan email Anda"
+                               required
+                               aria-label="Email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackSubject" class="form-label">Subjek</label>
+                        <input type="text" 
+                               id="feedbackSubject" 
+                               class="form-input" 
+                               placeholder="Masukkan subjek umpan balik"
+                               required
+                               aria-label="Subjek">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackMessage" class="form-label">Pesan</label>
+                        <textarea id="feedbackMessage" 
+                                  class="form-textarea" 
+                                  placeholder="Masukkan umpan balik Anda"
+                                  rows="5"
+                                  required
+                                  aria-label="Pesan"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Batal</button>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header scroll-fade">
+            <h1>Pemeriksa Interaksi Obat</h1>
+            <p>Periksa interaksi antara<br>obat untuk penggunaan yang aman</p>
+        </header>
+
+        <!-- Drug Search Section -->
+        <section class="card scroll-hidden scroll-delay-1">
+            <h2 class="sr-only">Pencarian Obat</h2>
+            <div class="search-box">
+                <input type="text" 
+                       id="drugSearch" 
+                       class="input-field" 
+                       placeholder="Cari obat (mis: Aspirin)"
+                       autocomplete="off"
+                       aria-label="Pencarian Obat">
+
+            </div>
+            
+            <div id="searchResults" class="search-results scroll-fade">
+                <div id="searchResultsContent" class="search-results-content"></div>
+            </div>
+            
+            <div class="recent-searches" style="margin-top: 1rem;">
+                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Pencarian Terkini</div>
+                <div id="recentSearchesList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+            </div>
+        </section>
+
+
+        <!-- Drug Selection Section -->
+        <section class="card scroll-hidden scroll-delay-3">
+            <h2 class="sr-only">Pilihan Obat</h2>
+            <div class="drug-select-section">
+                <div class="drug-select-container">
+                    <div class="input-wrapper">
+                        <input type="text" 
+                               id="drug1" 
+                               class="input-field" 
+                               placeholder="Obat Pertama"
+                               autocomplete="off"
+                               aria-label="Obat Pertama">
+                    </div>
+                </div>
+                
+                <div class="drug-select-container">
+                    <div class="input-wrapper">
+                        <input type="text" 
+                               id="drug2" 
+                               class="input-field" 
+                               placeholder="Obat Kedua"
+                               autocomplete="off"
+                               aria-label="Obat Kedua">
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary btn-block" onclick="checkInteraction()">
+                Periksa Interaksi
+            </button>
+        </section>
+        
+        <!-- 페이지 상단에 고정된 드러그 검색 결과 -->
+        <div id="drug1List" class="drug-list">
+            <div class="drug-items"></div>
+        </div>
+        <div id="drug2List" class="drug-list">
+            <div class="drug-items"></div>
+        </div>
+
+        <!-- Result Section -->
+        <section id="resultSection" class="result-section scroll-scale">
+            <div id="result"></div>
+        </section>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Kembali ke Atas" aria-label="Kembali ke Atas">
+        ↑
+    </button>
+
+    <!-- Settings Button -->
+    <button class="settings-fab" title="Pengaturan AI" aria-label="Pengaturan AI">
+        ⚙️
+    </button>
+
+    <!-- Notify Message -->
+    <span id="alertMessage" class="alert" role="alert"></span>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Medical Disclaimer -->
+            <div class="footer-disclaimer">
+                <div class="disclaimer-content">
+                    <h4>⚠️ Penafian Medis Penting</h4>
+                    <p>
+                        Alat ini hanya untuk tujuan pendidikan dan informasi. Ini tidak dimaksudkan sebagai nasihat medis, diagnosis, atau pengobatan.
+                        Selalu konsultasikan dengan profesional kesehatan yang berkualitas sebelum membuat keputusan tentang obat atau perawatan medis.
+                        Interaksi obat bisa menjadi kompleks dan individual.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section footer-about" style="padding-top: 2rem;">
+                    <p>Alat komprehensif untuk memeriksa interaksi obat guna membantu memastikan penggunaan obat yang aman. Selalu konsultasikan dengan profesional kesehatan untuk nasihat medis.</p>
+                    <div class="footer-badges">
+                        <span class="badge">Database BPOM</span>
+                        <span class="badge">Bertenaga AI</span>
+                        <span class="badge">Alat Gratis</span>
+                    </div>
+                </div>
+
+                <!-- Similar Sites -->
+                <div class="footer-section footer-links">
+                    <h4>Situs Serupa</h4>
+                    <div class="medical-links">
+                        <a href="https://biolabs.world" target="_blank" rel="noopener">biolabs.world</a>
+                    </div>
+                </div>
+
+                <!-- Medical Resources -->
+                <div class="footer-section footer-resources">
+                    <h4>Sumber Daya Medis</h4>
+                    <div class="medical-links">
+                        <a href="https://www.pom.go.id" target="_blank" rel="noopener">BPOM</a>
+                        <a href="https://www.kemkes.go.id" target="_blank" rel="noopener">Kemenkes</a>
+                        <a href="https://www.who.int" target="_blank" rel="noopener">WHO</a>
+                        <a href="https://medlineplus.gov" target="_blank" rel="noopener">MedlinePlus</a>
+                    </div>
+                </div>
+
+                <!-- Contact & Social -->
+                <div class="footer-section footer-contact">
+                    <h4>Hubungi Kami</h4>
+                    <style>
+                        h4 {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            margin-bottom: 0.2rem;
+                        }
+                        a {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            font-size: 0.8rem;
+                            color: var(--text-secondary);
+                        }
+                    </style>
+                    <div class="social-links">
+                        <a href="mailto:pistolinkr@icloud.com" title="Email">
+                            <span>Email</span>
+                        </a>
+                        <a href="https://github.com/pistolinkr" target="_blank" rel="noopener" title="GitHub">
+                            <span>GitHub</span>
+                        </a>
+                        <button class="feedback-btn" onclick="openFeedbackModal()" title="Kirim Umpan Balik">
+                            <span>Umpan Balik</span>
+        
+                    </div>
+                        </div>
+                        </div>
+
+            <!-- Footer Divider -->
+            <div class="footer-divider"></div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-version-language">
+                        <div class="footer-version">
+                            <span>Beta v2.1 | G.gear® Pistol™</span>
+                        </div>
+                        <div class="footer-language">
+                            <span class="current-language">🇮🇩 Indonesia</span>
+                        </div>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#" onclick="showPrivacyPolicy()">Kebijakan Privasi</a>
+                        <a href="#" onclick="showTermsOfService()">Ketentuan Layanan</a>
+                        <a href="#" onclick="showDataSources()">Sumber Data</a>
+                            </div>
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 Pistolinkr. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../i18n.js"></script>
+    <script src="config.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+
