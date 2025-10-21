@@ -2582,7 +2582,7 @@ html {
 
 .footer-copyright p {
     color: var(--primary);
-    font-size: 0.875rem;
+    font-size: 0.86rem;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -2595,7 +2595,7 @@ html {
 .footer-legal a {
     color: var(--primary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.86rem;
     transition: var(--transition);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -2630,7 +2630,7 @@ html {
     align-items: center;
     gap: 0.25rem;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 0.875rem;
+    font-size: 0.86rem;
     height: 1.5rem;
     line-height: 1.5rem;
 }
@@ -2645,7 +2645,7 @@ html {
 .footer-version {
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 0.875rem;
+    font-size: 0.86rem;
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
