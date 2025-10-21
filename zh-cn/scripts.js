@@ -3845,26 +3845,26 @@ function updateFooterStats() {
 
 // Privacy Policy 모달
 function showPrivacyPolicy() {
-    const modal = createInfoModal('Privacy Policy', `
+    const modal = createInfoModal('隐私政策', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 개인정보 보호정책</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 隐私政策</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 수집</h5>
-            <p>본 서비스는 다음 정보를 수집합니다:</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">数据收集</h5>
+            <p>本服务收集以下信息：</p>
             <ul style="margin-left: 1rem;">
-                <li>검색한 약물명 (로컬 저장소에만 저장)</li>
-                <li>AI 분석을 위한 API 키 (로컬 저장소에만 저장)</li>
-                <li>사용 통계 (익명화)</li>
+                <li>搜索的药物名称（仅存储在本地存储中）</li>
+                <li>AI分析的API密钥（仅存储在本地存储中）</li>
+                <li>使用统计（匿名化）</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 보안</h5>
-            <p>모든 민감한 데이터는 브라우저의 로컬 저장소에만 저장되며, 외부 서버로 전송되지 않습니다. API 키는 암호화되어 저장됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">数据安全</h5>
+            <p>所有敏感数据仅存储在浏览器的本地存储中，不会传输到外部服务器。API密钥在存储前会被加密。</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">쿠키 사용</h5>
-            <p>본 서비스는 필수 기능을 위한 로컬 저장소만 사용하며, 추적 쿠키는 사용하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Cookie使用</h5>
+            <p>本服务仅使用本地存储进行基本功能，不使用跟踪Cookie。</p>
             
             <p style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>중요:</strong> 본 도구는 교육 목적으로만 사용되며, 의료진의 조언을 대체하지 않습니다.
+                <strong>重要：</strong> 此工具仅用于教育目的，不能替代专业医疗建议。
             </p>
         </div>
     `);
@@ -3872,30 +3872,30 @@ function showPrivacyPolicy() {
 
 // Terms of Service 모달
 function showTermsOfService() {
-    const modal = createInfoModal('Terms of Service', `
+    const modal = createInfoModal('服务条款', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">📋 이용약관</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">📋 服务条款</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 목적</h5>
-            <p>Drug Interaction Checker는 교육 및 정보 제공 목적으로만 사용됩니다. 의료 조언, 진단 또는 치료를 목적으로 하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">服务目的</h5>
+            <p>药物相互作用检查器仅用于教育和信息提供目的。不用于医疗建议、诊断或治疗。</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">사용자 책임</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">用户责任</h5>
             <ul style="margin-left: 1rem;">
-                <li>약물 복용 전 반드시 의료진과 상담</li>
-                <li>도구 결과에만 의존하지 않기</li>
-                <li>응급상황 시 즉시 의료진에게 연락</li>
-                <li>API 키의 안전한 관리</li>
+                <li>服药前务必咨询医疗专业人员</li>
+                <li>不要仅依赖工具结果</li>
+                <li>紧急情况下立即联系医疗专业人员</li>
+                <li>安全管理API密钥</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">책임 제한</h5>
-            <p>본 서비스는 정보 제공만을 목적으로 하며, 약물 상호작용으로 인한 어떠한 문제에 대해서도 책임을 지지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">责任限制</h5>
+            <p>本服务仅用于信息提供，对药物相互作用引起的任何问题不承担责任。</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 변경</h5>
-            <p>서비스 내용은 사전 통지 없이 변경될 수 있습니다. 지속적인 개선을 위해 기능이 추가되거나 수정될 수 있습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">服务变更</h5>
+            <p>服务内容可能会在没有事先通知的情况下更改。为了持续改进，可能会添加或修改功能。</p>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>⚠️ 의료 면책 조항:</strong><br>
-                본 도구는 의료 전문가의 조언을 대체할 수 없습니다. 약물 복용에 관한 모든 결정은 의료진과 상담 후 내리시기 바랍니다.
+                <strong>⚠️ 医疗免责声明：</strong><br>
+                此工具不能替代专业医疗建议。在做出药物使用决定之前，请咨询医疗专业人员。
             </div>
         </div>
     `);
@@ -3903,38 +3903,38 @@ function showTermsOfService() {
 
 // Data Sources 모달  
 function showDataSources() {
-    const modal = createInfoModal('Data Sources', `
+    const modal = createInfoModal('数据来源', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">📊 데이터 출처</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">📊 数据来源</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">주요 데이터베이스</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">主要数据库</h5>
             <div style="margin-bottom: 1rem;">
-                <strong>FDA Drug Database</strong><br>
-                <span style="font-size: 0.9rem;">미국 식품의약국(FDA)의 공식 약물 데이터베이스</span><br>
-                <a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener" style="color: var(--primary);">→ API 문서 보기</a>
+                <strong>FDA药物数据库</strong><br>
+                <span style="font-size: 0.9rem;">美国食品药品监督管理局的官方药物数据库</span><br>
+                <a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener" style="color: var(--primary);">→ 查看API文档</a>
             </div>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">AI 분석 서비스</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">AI分析服务</h5>
             <ul style="margin-left: 1rem;">
-                <li><strong>OpenAI GPT-4o-mini:</strong> 약물 상호작용 분석</li>
-                <li><strong>Anthropic Claude:</strong> 의료 정보 해석</li>
-                <li><strong>Google Gemini:</strong> 다각도 분석</li>
-                <li><strong>Perplexity AI:</strong> 실시간 정보 검색</li>
+                <li><strong>OpenAI GPT-4o-mini:</strong> 药物相互作用分析</li>
+                <li><strong>Anthropic Claude:</strong> 医疗信息解释</li>
+                <li><strong>Google Gemini:</strong> 多角度分析</li>
+                <li><strong>Perplexity AI:</strong> 实时信息搜索</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">참고 자료</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">参考资料</h5>
             <ul style="margin-left: 1rem;">
-                <li><a href="https://www.fda.gov" target="_blank" rel="noopener" style="color: var(--primary);">FDA 공식 웹사이트</a></li>
-                <li><a href="https://www.drugs.com" target="_blank" rel="noopener" style="color: var(--primary);">Drugs.com 상호작용 데이터</a></li>
-                <li><a href="https://medlineplus.gov" target="_blank" rel="noopener" style="color: var(--primary);">MedlinePlus 의료정보</a></li>
+                <li><a href="https://www.fda.gov" target="_blank" rel="noopener" style="color: var(--primary);">FDA官方网站</a></li>
+                <li><a href="https://www.drugs.com" target="_blank" rel="noopener" style="color: var(--primary);">Drugs.com相互作用数据</a></li>
+                <li><a href="https://medlineplus.gov" target="_blank" rel="noopener" style="color: var(--primary);">MedlinePlus医疗信息</a></li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 업데이트</h5>
-            <p>FDA 데이터는 실시간으로 조회되며, AI 분석은 최신 의학 지식을 바탕으로 수행됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">数据更新</h5>
+            <p>FDA数据实时查询，AI分析基于最新医学知识进行。</p>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>ℹ️ 참고:</strong><br>
-                모든 데이터는 신뢰할 수 있는 공식 소스에서 가져오지만, 개별 환자의 상황은 다를 수 있으므로 의료진과의 상담이 필수입니다.
+                <strong>ℹ️ 注意：</strong><br>
+                所有数据均来自可靠的官方来源，但个别患者情况可能有所不同，因此咨询医疗专业人员至关重要。
             </div>
         </div>
     `);
