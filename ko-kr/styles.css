@@ -2579,7 +2579,7 @@ html {
 }
 
 .footer-copyright p {
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--primary);
     font-size: 0.875rem;
     margin: 0;
 }
@@ -2590,7 +2590,7 @@ html {
 }
 
 .footer-legal a {
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--primary);
     text-decoration: none;
     font-size: 0.875rem;
     transition: var(--transition);
@@ -2615,7 +2615,7 @@ html {
 }
 
 .footer-language a {
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--primary);
     text-decoration: none;
     padding: 0.25rem 0.75rem;
     border: 1px solid var(--border);
@@ -2638,7 +2638,7 @@ html {
 }
 
 .footer-version {
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--primary);
     font-family: 'Courier New', monospace;
     font-size: 0.8rem;
     background: rgba(var(--surface-rgb), 0.5);
