@@ -1395,7 +1395,7 @@ body {
 }
 
 .alert.show {
-    top: 100px;
+    top: 40px;
     transform: translateX(-50%);
 }
 
