@@ -2327,6 +2327,12 @@ body {
     border-radius: 24px;
 }
 
+/* 특정 카드 섹션들의 border-radius 설정 */
+section.card.scroll-hidden.scroll-delay-1.scroll-visible,
+section.card.scroll-hidden.scroll-delay-3.scroll-visible {
+    border-radius: 36px;
+}
+
 /* 부드러운 스크롤 */
 html {
     scroll-behavior: smooth;
