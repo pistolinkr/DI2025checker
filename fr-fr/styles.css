@@ -1047,7 +1047,6 @@ body {
 .result-warning {
     background: rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 24px;
 }
 
 .result-warning::before {
@@ -2325,6 +2324,7 @@ body {
     opacity: 1;
     visibility: visible;
     transform: none;
+    border-radius: 24px;
 }
 
 /* 부드러운 스크롤 */
