@@ -120,7 +120,7 @@ body {
     background: var(--surface);
     backdrop-filter: blur(100px);
     -webkit-backdrop-filter: blur(100px);
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
     padding: 1rem !important;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-md);
@@ -146,7 +146,7 @@ body {
     padding: 1rem 1.25rem;
     font-size: 1.05rem;
     border: 2px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     background: var(--surface);
     color: var(--text);
     transition: var(--transition);
@@ -177,7 +177,7 @@ body {
     font-size: 1.05rem;
     font-weight: 600;
     border: none;
-    border-radius: var(--radius);
+    border-radius: 24px;
     cursor: pointer;
     transition: var(--transition);
     font-family: inherit;
@@ -246,7 +246,7 @@ body {
     position: relative;
     scroll-behavior: smooth;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     background: var(--surface);
     display: none;
     opacity: 0;
@@ -297,7 +297,7 @@ body {
     right: 0;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 0 0 var(--radius) var(--radius);
+    border-radius: 24px;
     box-shadow: var(--shadow-lg);
     max-height: 5px;
     overflow: hidden;
@@ -382,7 +382,7 @@ body {
     color: white;
     font-size: 0.7rem;
     padding: 0.2rem 0.5rem;
-    border-radius: 8px;
+    border-radius: 24px;
     font-weight: 700;
     margin-left: auto;
 }
@@ -390,7 +390,7 @@ body {
 .match-type {
     font-size: 0.75rem;
     padding: 0.2rem 0.5rem;
-    border-radius: 12px;
+    border-radius: 24px;
     background: rgba(var(--primary-rgb), 0.1);
     color: var(--primary);
     margin-left: 0.5rem;
@@ -401,7 +401,7 @@ body {
 .ai-analysis {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     position: relative;
@@ -547,7 +547,7 @@ body {
 .basic-info {
     padding: 1rem;
     background: rgba(var(--primary-rgb), 0.03);
-    border-radius: var(--radius);
+    border-radius: 24px;
 }
 
 .fda-data h4,
@@ -574,7 +574,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 24px;
     padding: 12px 16px;
     color: var(--text);
     cursor: pointer;
@@ -623,7 +623,7 @@ body {
     padding: 16px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 24px;
     animation: fadeInDown 0.3s ease-out;
 }
 
@@ -661,7 +661,7 @@ body {
     width: 100%;
     max-width: 500px;
     max-height: 90vh;
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
     box-shadow: var(--shadow-lg);
     transform: scale(0.9);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -777,12 +777,12 @@ body {
 
 .settings-body::-webkit-scrollbar-track {
     background: var(--border);
-    border-radius: 3px;
+    border-radius: 24px;
 }
 
 .settings-body::-webkit-scrollbar-thumb {
     background: var(--primary);
-    border-radius: 3px;
+    border-radius: 24px;
 }
 
 .settings-body::-webkit-scrollbar-thumb:hover {
@@ -805,7 +805,7 @@ body {
     padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 2px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     background: var(--surface);
     color: var(--text);
     transition: var(--transition);
@@ -823,7 +823,7 @@ body {
     padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 2px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     background: var(--surface);
     color: var(--text);
     transition: var(--transition);
@@ -872,10 +872,10 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     padding: 1rem;
     margin-top: 1.5rem;
-    border-radius: 26px;
+    border-radius: 24px;
 }
 
 .api-status h4 {
@@ -1037,7 +1037,7 @@ body {
 
 .result-card {
     padding: 1.5rem;
-    border-radius: var(--radius);
+    border-radius: 24px;
     position: relative;
     overflow: hidden;
 }
@@ -1116,7 +1116,7 @@ body {
 .loading-content {
     background: var(--surface);
     padding: 2rem;
-    border-radius: var(--radius);
+    border-radius: 24px;
     text-align: center;
     box-shadow: var(--shadow-lg);
 }
@@ -1156,7 +1156,7 @@ body {
     max-width: 600px;
     max-height: 85vh;
     overflow-y: auto;
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
     box-shadow: var(--shadow-lg);
     transform: scale(0.9);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1320,7 +1320,7 @@ body {
     background: var(--surface);
     backdrop-filter: blur(100px);
     -webkit-backdrop-filter: blur(100px);
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
     padding: 1rem;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-md);
@@ -2027,7 +2027,7 @@ body {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
     box-shadow: var(--shadow-lg);
     z-index: 9999;
     display: flex;
@@ -2115,7 +2115,7 @@ body {
     z-index: 10;
     pointer-events: none;
     margin-top: -15px;
-    border-radius: 0 0 var(--radius) var(--radius);
+    border-radius: 24px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -2490,7 +2490,7 @@ html {
     background: rgba(var(--primary-rgb), 0.1);
     color: var(--primary);
     padding: 0.25rem 0.75rem;
-    border-radius: 12px;
+    border-radius: 24px;
     font-size: 0.75rem;
     font-weight: 500;
     border: 1px solid rgba(var(--primary-rgb), 0.2);
@@ -2507,7 +2507,7 @@ html {
 .social-links a {
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.5rem 0.75rem;
-    border-radius: 8px;
+    border-radius: 24px;
     border: 1px solid var(--border);
     transition: var(--transition);
 }
@@ -2522,7 +2522,7 @@ html {
 .footer-stats {
     background: rgba(var(--surface-rgb), 0.7);
     padding: 1rem;
-    border-radius: 12px;
+    border-radius: 24px;
     border: 1px solid var(--border);
     text-align: center;
 }
@@ -2546,7 +2546,7 @@ html {
 .footer-disclaimer {
     background: rgba(var(--warning-rgb, 255, 193, 7), 0.05);
     border: 1px solid rgba(var(--warning-rgb, 255, 193, 7), 0.2);
-    border-radius: 12px;
+    border-radius: 24px;
     padding: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -2623,7 +2623,7 @@ html {
     text-decoration: none;
     padding: 0.25rem 0.75rem;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 24px;
     background: rgba(var(--surface-rgb), 0.5);
     transition: var(--transition);
     display: flex;
@@ -2648,7 +2648,7 @@ html {
     font-size: 0.86rem;
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.25rem 0.75rem;
-    border-radius: 12px;
+    border-radius: 24px;
     border: 1px solid var(--border);
     z-index: 100002;
     position: relative;
@@ -2741,7 +2741,7 @@ html {
 .contribution-item {
     background: rgba(var(--surface-rgb), 0.5);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 24px;
     border: 1px solid var(--border);
     transition: var(--transition);
 }
@@ -2760,7 +2760,7 @@ html {
 .update-item {
     background: rgba(var(--surface-rgb), 0.3);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 24px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     transition: var(--transition);
@@ -2826,7 +2826,7 @@ html {
     padding: 1.5rem;
     background: rgba(var(--surface-rgb), 0.3);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 24px;
     transition: var(--transition);
 }
 
@@ -2844,7 +2844,7 @@ html {
     text-align: center;
     padding: 0.5rem;
     background: rgba(var(--primary-rgb), 0.1);
-    border-radius: 8px;
+    border-radius: 24px;
     height: fit-content;
 }
 
@@ -2929,7 +2929,7 @@ html {
         padding: 0;
         width: 50px;
         height: 50px;
-        border-radius: 12px;
+        border-radius: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3190,7 +3190,7 @@ html {
 .free-ai-info {
     background: linear-gradient(135deg, var(--surface) 0%, var(--surface-secondary) 100%);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     padding: 1.5rem;
     margin: 1rem 0;
 }
@@ -3235,7 +3235,7 @@ html {
 .feedback-btn {
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.5rem 0.75rem;
-    border-radius: 8px;
+    border-radius: 24px;
     border: 1px solid var(--border);
     transition: var(--transition);
     cursor: pointer;
@@ -3278,7 +3278,7 @@ html {
     padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 2px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 24px;
     background: var(--surface);
     color: var(--text);
     transition: var(--transition);
