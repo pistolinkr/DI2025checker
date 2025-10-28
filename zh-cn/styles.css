@@ -142,7 +142,7 @@ body {
 }
 
 .input-field {
-    width: 100%;
+    width: auto;
     padding: 1rem 1.25rem;
     font-size: 1.05rem;
     border: 2px solid var(--border);
@@ -221,7 +221,7 @@ body {
 }
 
 .btn-block {
-    width: 100%;
+    width: auto;
 }
 
 /* 검색 섹션 */
@@ -395,7 +395,7 @@ body {
     color: var(--primary);
     margin-left: 0.5rem;
     white-space: nowrap;
-    width: 100%;
+    width: auto;
 }
 
 /* AI 분석 스타일 */
@@ -570,7 +570,7 @@ body {
 }
 
 .fda-toggle-btn {
-    width: 100%;
+    width: auto;
     background: var(--surface);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -659,7 +659,7 @@ body {
 
 .settings-content {
     background: var(--surface);
-    width: 100%;
+    width: auto;
     max-width: 500px;
     max-height: 90vh;
     border-radius: 24px;
@@ -802,7 +802,7 @@ body {
 }
 
 .form-input {
-    width: 100%;
+    width: auto;
     padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 2px solid var(--border);
@@ -820,7 +820,7 @@ body {
 }
 
 .form-select {
-    width: 100%;
+    width: auto;
     padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 2px solid var(--border);
@@ -1153,7 +1153,7 @@ body {
 
 .modal-content {
     background: var(--surface);
-    width: 100%;
+    width: auto;
     max-width: 600px;
     max-height: 85vh;
     overflow-y: auto;
@@ -1391,7 +1391,7 @@ body {
     user-select: none;
     -webkit-user-select: none;
     white-space: nowrap;
-    width: 100%;
+    width: auto;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -1436,7 +1436,7 @@ body {
     color: var(--text);
     border: 1px solid var(--border);
     white-space: nowrap;
-    width: 100%;
+    width: auto;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -1526,7 +1526,7 @@ body {
 /* 반응형 */
 @media (max-width: 768px) {
     #drugSearchInput{
-        width: 100%;
+        width: auto;
         margin-top: 0.2rem !important;
         margin-bottom: 0.5rem;
         padding: 0.5rem;
@@ -1614,7 +1614,7 @@ body {
     justify-content: center;
         flex-direction: column;
         gap: 0;
-        align-items: stretch;
+        align-items: flex-start;
     }
 
     .search-box .input-field {
@@ -1678,7 +1678,7 @@ body {
         font-size: 1.2rem;
     }
     .input-field{
-        width: 100%;
+        width: auto;
         height: 2.5rem;
         padding: 0.75rem;
     }   
@@ -1689,7 +1689,7 @@ body {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         padding: 0.25rem;
-        width: 100%;
+        width: auto;
         justify-content: space-between;
     }
     .btn.btn-secondary {
@@ -1726,7 +1726,7 @@ body {
     .btn.btn-primary.btn-block{
         border-radius: 25px;
         box-shadow: none;
-        width: 100%;
+        width: auto;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         padding: 0.5rem;
@@ -1741,12 +1741,12 @@ body {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         padding: 0.25rem;
-        width: 100%;
+        width: auto;
         justify-content: space-between;
         background-color: var(--surface) !important;
     }
     #aiProvider{
-        width: 100%;
+        width: auto;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         padding: 0.5rem;
@@ -1825,7 +1825,7 @@ body {
     justify-content: center;
         flex-direction: column;
         gap: 0.5rem;
-        align-items: stretch;
+        align-items: flex-start;
     }
 
     .search-box .input-field {
@@ -1912,7 +1912,7 @@ body {
     }
 
     .btn.btn-secondary, .btn.btn-primary {
-        width: 100%;
+        width: auto;
         padding: 0.6rem;
         font-size: 0.8rem;
         border-radius: 20px;
@@ -2306,7 +2306,7 @@ body {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
-    width: 100%;
+    width: auto;
     border: 0;
 }
 
@@ -2464,7 +2464,7 @@ html {
     flex-wrap: nowrap;
     align-content: flex-start;
     justify-content: flex-end;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 1rem;
     margin-top: 0.5rem;
     padding-left: 2rem;
@@ -2482,7 +2482,7 @@ html {
     background: rgba(var(--surface-rgb), 0.5);
     transition: var(--transition);
     white-space: nowrap;
-    width: 100%;
+    width: auto;
     z-index: 10;
 }
 
@@ -2680,7 +2680,7 @@ html {
     display: flex;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: auto;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -3289,7 +3289,7 @@ html {
 }
 
 .form-textarea {
-    width: 100%;
+    width: auto;
     padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 2px solid var(--border);
@@ -3335,7 +3335,7 @@ html {
     }
     
     .form-actions .btn {
-        width: 100%;
+        width: auto;
     }
 }
 

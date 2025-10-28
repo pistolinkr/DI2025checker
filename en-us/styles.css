@@ -2460,7 +2460,7 @@ html {
     flex-wrap: nowrap;
     align-content: flex-start;
     justify-content: flex-end;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 1rem;
     margin-top: 0.5rem;
     padding-left: 2rem;
@@ -2478,7 +2478,7 @@ html {
     background: rgba(var(--surface-rgb), 0.5);
     transition: var(--transition);
     white-space: nowrap;
-    width: 100%;
+    width: auto;
     z-index: 10;
 }
 
