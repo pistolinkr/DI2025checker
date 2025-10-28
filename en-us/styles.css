@@ -2478,6 +2478,7 @@ html {
     background: rgba(var(--surface-rgb), 0.5);
     transition: var(--transition);
     white-space: nowrap;
+    width: 100%;
     z-index: 10;
 }
 
