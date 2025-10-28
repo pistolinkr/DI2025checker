@@ -2318,6 +2318,10 @@ body {
     opacity: 1;
     visibility: visible;
     transform: none;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    box-shadow: none;
 }
 
 .scroll-visible {
@@ -2325,12 +2329,16 @@ body {
     visibility: visible;
     transform: none;
     border-radius: 24px;
+
+}
 }
 
 /* 특정 카드 섹션들의 border-radius 설정 */
 section.card.scroll-hidden.scroll-delay-1.scroll-visible,
 section.card.scroll-hidden.scroll-delay-3.scroll-visible {
     border-radius: 36px;
+
+}
 }
 
 /* 부드러운 스크롤 */
@@ -3340,3 +3348,30 @@ html {
 /* Allow title wrapping */
 .header h1 { white-space: normal !important; word-break: keep-all; overflow-wrap: anywhere; }
 
+
+/* 입력 필드와 버튼이 scroll 상태에서도 동일한 스타일 유지 */
+.input-field.scroll-hidden,
+.input-field.scroll-fade,
+.input-field.scroll-scale,
+.btn.scroll-hidden,
+.btn.scroll-fade,
+.btn.scroll-scale {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: var(--surface);
+    border: 2px solid var(--border);
+}
+
+/* scroll-visible 상태에서도 입력 필드와 버튼 스타일 유지 */
+.input-field.scroll-visible,
+.btn.scroll-visible {
+    background: var(--surface);
+}
+
+.btn-primary.scroll-visible {
+    background: var(--bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
