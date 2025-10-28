@@ -40,14 +40,46 @@
             padding: 2rem;
         }
         
+        .loader-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+        }
+        
         .loader {
-            width: 80px;
-            height: 80px;
-            border: 8px solid rgba(255, 255, 255, 0.2);
-            border-top: 8px solid white;
+            width: 120px;
+            height: 120px;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top: 8px solid #667eea;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 2rem;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .loader {
+                border: 8px solid rgba(255, 255, 255, 0.2);
+                border-top: 8px solid white;
+            }
+        }
+        
+        .loader-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background-image: url('logo/darkx3.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .loader-logo {
+                background-image: url('logo/whitex3.png');
+            }
         }
         
         @keyframes spin {
@@ -117,8 +149,10 @@
 </head>
 <body>
     <div class="loader-container">
-        <div class="loader"></div>
-        <h1>💊 Drug Interaction Checker</h1>
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+            <div class="loader-logo"></div>
+        </div>
         <p id="statusText">Detecting your language...</p>
         <p class="status" id="detailText">Please wait...</p>
         
