@@ -2464,7 +2464,11 @@ html {
 /* Medical Links */
 .medical-links {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-end;
+    align-items: stretch;
     gap: 1rem;
     margin-top: 0.5rem;
     padding-left: 2rem;
