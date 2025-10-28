@@ -2587,7 +2587,6 @@ html {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    filter: brightness(0.7);
 }
 
 .footer-copyright p {
