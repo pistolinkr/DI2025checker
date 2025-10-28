@@ -108,12 +108,32 @@
         .manual-links {
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+            border-top: none;
+        }
+        
+        .manual-links::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #667eea 20%, 
+                #667eea 80%, 
+                transparent 100%);
+            opacity: 0.5;
         }
         
         @media (prefers-color-scheme: dark) {
-            .manual-links {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            .manual-links::before {
+                background: linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(255, 255, 255, 0.3) 20%, 
+                    rgba(255, 255, 255, 0.3) 80%, 
+                    transparent 100%);
             }
         }
         
