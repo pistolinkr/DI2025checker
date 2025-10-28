@@ -9033,44 +9033,10 @@ function enhanceScrollObserver() {
                 footerDisclaimerObserver.unobserve(footer);
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     }, {
         root: null,
         rootMargin: '0px 0px -20% 0px', // 푸터의 하단 20%가 보일 때 트리거
         threshold: 0.1
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // 푸터 요소 관찰
