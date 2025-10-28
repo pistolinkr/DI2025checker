@@ -3342,10 +3342,12 @@ html {
 
 /* Desktop header styles */
 @media (min-width: 1024px) {
+    .header.scroll-fade,
     .header.scroll-fade.scroll-visible {
         display: inline-table;
     }
     
+    .header.scroll-fade p,
     .header.scroll-fade.scroll-visible p {
         text-align: left;
     }
