@@ -108,13 +108,26 @@
         .manual-links {
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .manual-links {
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
         }
         
         .manual-links h3 {
             font-size: 1rem;
             margin-bottom: 1rem;
             opacity: 0.9;
+            color: #000000;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .manual-links h3 {
+                color: #ffffff;
+            }
         }
         
         .lang-grid {
@@ -127,10 +140,10 @@
         
         .lang-link {
             padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            color: white;
+            color: #000000;
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.3s ease;
@@ -141,9 +154,22 @@
         }
         
         .lang-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.2);
             transform: translateY(-2px);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .lang-link {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+            
+            .lang-link:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.4);
+            }
         }
     </style>
 </head>
