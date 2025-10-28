@@ -1,41 +1,3 @@
-// SmoothCorners 클래스
-class SmoothCorners {
-  constructor(element, radius = 20) {
-    this.element = element;
-    this.radius = radius;
-    this.applySmoothCorners();
-  }
-
-  applySmoothCorners() {
-    const width = this.element.offsetWidth;
-    const height = this.element.offsetHeight;
-    
-    // SVG path for squircle
-    const svgPath = this.createSquirclePath(width, height, this.radius);
-    
-    // Apply as clip-path
-    this.element.style.clipPath = `path('${svgPath}')`;
-  }
-
-  createSquirclePath(w, h, r) {
-    // Superellipse formula approximation
-    const c = r * 0.552284749831; // Magic number for cubic bezier approximation
-    
-    return `
-      M ${r},0
-      L ${w - r},0
-      C ${w - r + c},0 ${w},${r - c} ${w},${r}
-      L ${w},${h - r}
-      C ${w},${h - r + c} ${w - r + c},${h} ${w - r},${h}
-      L ${r},${h}
-      C ${r - c},${h} 0,${h - r + c} 0,${h - r}
-      L 0,${r}
-      C 0,${r - c} ${r - c},0 ${r},0
-    `;
-  }
-}
-
-
 // API 설정
 const FDA_API_KEY = 'y15g3aG5icGrBAWcxP7HUkQa5h9pUcBFaD8kkmjk';
 const BASE_URL = 'https://api.fda.gov/drug/label.json';
@@ -145,23 +107,6 @@ const SecurityUtils = {
         
         if (validRequests.length >= config.maxRequests) {
             this.logSecurityEvent('RATE_LIMIT_EXCEEDED', { identifier, count: validRequests.length });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
             return false;
         }
         
@@ -216,46 +161,12 @@ const SecurityUtils = {
     validateDOMOperation(element, operation) {
         if (!element || !element.nodeType) {
             this.logSecurityEvent('INVALID_DOM_OPERATION', { operation });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
             return false;
         }
         
         // 스크립트 태그 삽입 방지
         if (operation === 'innerHTML' && /<script/i.test(element)) {
             this.logSecurityEvent('SCRIPT_INJECTION_ATTEMPT', { operation });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
             return false;
         }
         
@@ -268,23 +179,6 @@ const SecurityUtils = {
             try {
                 if (typeof key !== 'string' || key.length > 50) {
                     SecurityUtils.logSecurityEvent('INVALID_STORAGE_KEY', { key: key?.slice(0, 20) });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                     return false;
                 }
                 
@@ -295,23 +189,6 @@ const SecurityUtils = {
                 return true;
             } catch (error) {
                 SecurityUtils.logSecurityEvent('STORAGE_ERROR', { error: error.message });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 return false;
             }
         },
@@ -322,23 +199,6 @@ const SecurityUtils = {
                 return localStorage.getItem(key);
             } catch (error) {
                 SecurityUtils.logSecurityEvent('STORAGE_READ_ERROR', { error: error.message });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 return null;
             }
         },
@@ -350,23 +210,6 @@ const SecurityUtils = {
                 return true;
             } catch (error) {
                 SecurityUtils.logSecurityEvent('STORAGE_REMOVE_ERROR', { error: error.message });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 return false;
             }
         }
@@ -418,23 +261,6 @@ function initSecurity() {
             SecurityUtils.logSecurityEvent('CONTEXT_MENU_BLOCKED');
         }
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
     // 키보드 단축키 보안 (F12, Ctrl+Shift+I 등)
     document.addEventListener('keydown', (e) => {
@@ -444,42 +270,8 @@ function initSecurity() {
                 (e.ctrlKey && e.key === 'U')) {
                 e.preventDefault();
                 SecurityUtils.logSecurityEvent('DEVTOOLS_SHORTCUT_BLOCKED', { key: e.key });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
             }
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 }
 
@@ -487,23 +279,6 @@ function initSecurity() {
 const getAPIKey = (provider) => {
     if (!provider || typeof provider !== 'string') {
         SecurityUtils.logSecurityEvent('INVALID_API_PROVIDER', { provider });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         return null;
     }
     return SecurityUtils.secureLocalStorage.getItem(`${provider}_api_key`) || null;
@@ -894,40 +669,6 @@ function detectAvailableFiles() {
                 undetectedFiles.push(filePath);
                 console.log(`❌ Detection failed: ${filePath} - ${error.message}`);
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // Output results when all checks are complete
@@ -943,6 +684,7 @@ function detectAvailableFiles() {
         
         // Display detailed information in developer console
         if (typeof window !== 'undefined' && window.console) {
+            console.group('🔍 File Detection Details');
             console.table(detectedFiles.map(file => ({ 
                 File: file, 
                 Status: '✅ Available',
@@ -957,23 +699,6 @@ function detectAvailableFiles() {
             }
             console.groupEnd();
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 }
 
@@ -1084,43 +809,9 @@ const utils = {
         // 이벤트 리스너 추가
         alert.addEventListener('mousedown', startDrag);
         alert.addEventListener('touchstart', startDrag, { passive: false });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
         document.addEventListener('mousemove', drag);
         document.addEventListener('touchmove', drag, { passive: false });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
         document.addEventListener('mouseup', endDrag);
         document.addEventListener('touchend', endDrag);
@@ -1134,23 +825,6 @@ const utils = {
                 document.removeEventListener('touchend', endDrag);
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     },
 
     hideAlert(alert) {
@@ -1409,23 +1083,6 @@ const utils = {
                 fuzzyTerms.add(term.replace(new RegExp(from, 'g'), to));
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
         return Array.from(fuzzyTerms);
     },
@@ -1509,60 +1166,9 @@ const utils = {
                         drugData: drug,
                         relevanceScore
                     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 }
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         // Sort by relevance
         const sortedDrugs = Array.from(uniqueDrugs.values())
@@ -1638,23 +1244,6 @@ const utils = {
                 ...options
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1692,23 +1281,6 @@ const utils = {
                 temperature: options.temperature || 0.3
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1740,23 +1312,6 @@ const utils = {
                 max_tokens: options.max_tokens || 1500
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1798,23 +1353,6 @@ const utils = {
                 role: role,
                 parts: [{ text: content }]
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         }
 
         const url = `${AI_CONFIGS.gemini.baseUrl}?key=${apiKey}`;
@@ -1831,23 +1369,6 @@ const utils = {
                 }
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1940,23 +1461,6 @@ const utils = {
                 }
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             throw new Error(`Hugging Face API error: ${response.statusText}`);
@@ -1988,23 +1492,6 @@ const utils = {
                 temperature: 0.7
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             throw new Error(`Groq API error: ${response.statusText}`);
@@ -2027,23 +1514,6 @@ const utils = {
                 stream: false
             })
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         if (!response.ok) {
             throw new Error(`Ollama API error: ${response.statusText}`);
@@ -2353,23 +1823,6 @@ We recommend using personal API keys for more stable service.`;
                 foundDrugs.push(match[0]);
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
         return foundDrugs;
     },
@@ -2475,23 +1928,6 @@ async function searchDrug(query = null) {
     if (!searchInput) {
         utils.showAlert('Invalid search input detected.', 'warning');
         SecurityUtils.logSecurityEvent('INVALID_SEARCH_INPUT', { originalInput: query });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         return;
     }
 
@@ -2505,26 +1941,10 @@ async function searchDrug(query = null) {
         term: SecurityUtils.escapeHtml(searchInput),
         length: searchInput.length
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
     // 개발자 모드 로그
     if (state.developerMode) {
+        utils.logToDevConsole(`🔍 Searching for: "${SecurityUtils.escapeHtml(searchInput)}"`, 'info');
     }
 
     const resultsDiv = document.getElementById('searchResultsContent');
@@ -2565,23 +1985,6 @@ async function searchDrug(query = null) {
                 // URL 보안 검증
                 if (!SecurityUtils.validateURL(apiUrl)) {
                     SecurityUtils.logSecurityEvent('INVALID_API_URL', { url: apiUrl.slice(0, 100) });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                     throw new Error('Invalid API URL detected');
                 }
                 
@@ -2611,23 +2014,6 @@ async function searchDrug(query = null) {
                     queryIndex: i + 1, 
                     error: err.message 
                 });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 console.warn(`검색 패턴 ${i + 1} 실패:`, err);
                 continue;
             }
@@ -2654,23 +2040,6 @@ async function searchDrug(query = null) {
             error: error.message,
             term: SecurityUtils.escapeHtml(searchInput)
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
         if (state.developerMode) {
             utils.logToDevConsole(`💥 Search error: ${error.message}`, 'error');
@@ -2769,59 +2138,8 @@ function displaySearchResults(data) {
                     relevanceScore,
                     matchType
                 });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // Sort by relevance
@@ -2831,6 +2149,7 @@ function displaySearchResults(data) {
 
     resultsDiv.innerHTML = sortedDrugs.map((drug, index) => {
         const isExactMatch = drug.relevanceScore >= 90;
+        const matchIcon = isExactMatch ? '🎯' : drug.relevanceScore >= 80 ? '✨' : '🔍';
         
         return `
             <div class="drug-item scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)} ${isExactMatch ? 'exact-match' : ''}" 
@@ -2860,23 +2179,6 @@ function displaySearchResults(data) {
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!searchContainer.hasAttribute('data-scroll-listener')) {
                 searchContainer.addEventListener('scroll', () => handleElementScroll(searchContainer), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 searchContainer.setAttribute('data-scroll-listener', 'true');
             }
             
@@ -2906,23 +2208,6 @@ async function showDrugDetail(drugName, element = null) {
     const sanitizedDrugName = SecurityUtils.sanitizeInput(drugName, 100);
     if (!sanitizedDrugName) {
         SecurityUtils.logSecurityEvent('INVALID_DRUG_NAME', { originalName: drugName });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         utils.showAlert('Invalid drug name detected.', 'warning');
         return;
     }
@@ -2952,23 +2237,6 @@ async function showDrugDetail(drugName, element = null) {
         // 스크롤 이벤트 리스너가 없다면 추가
         if (!modalContent.hasAttribute('data-scroll-listener')) {
             modalContent.addEventListener('scroll', () => handleElementScroll(modalContent), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
             modalContent.setAttribute('data-scroll-listener', 'true');
         }
     }
@@ -2976,23 +2244,6 @@ async function showDrugDetail(drugName, element = null) {
     // 보안 이벤트 로깅
     SecurityUtils.logSecurityEvent('DRUG_DETAIL_VIEWED', { 
         drugName: SecurityUtils.escapeHtml(sanitizedDrugName)
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     try {
@@ -3005,23 +2256,6 @@ async function showDrugDetail(drugName, element = null) {
                     error: parseError.message,
                     drugName: SecurityUtils.escapeHtml(sanitizedDrugName)
                 });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 throw new Error('Invalid drug data format');
             }
         } else {
@@ -3030,23 +2264,6 @@ async function showDrugDetail(drugName, element = null) {
             // URL 보안 검증
             if (!SecurityUtils.validateURL(apiUrl)) {
                 SecurityUtils.logSecurityEvent('INVALID_API_URL', { url: apiUrl.slice(0, 100) });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 throw new Error('Invalid API URL detected');
             }
             
@@ -3082,23 +2299,6 @@ async function showDrugDetail(drugName, element = null) {
         Object.keys(sections).forEach((key, index) => {
             translatedSections[key] = translations[index];
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         // HTML 이스케이프 적용
         const safeContent = {
@@ -3145,7 +2345,7 @@ async function showDrugDetail(drugName, element = null) {
                 <button class="btn btn-primary add-to-check-btn" onclick="addDrugToCheck('${safeContent.drugName}')" title="Add to interaction check">
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Add to interaction check</span>
-
+                </button>
             </div>
         `;
     } catch (error) {
@@ -3155,23 +2355,6 @@ async function showDrugDetail(drugName, element = null) {
             error: error.message,
             drugName: SecurityUtils.escapeHtml(sanitizedDrugName)
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
         body.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">정보를 불러오는 중 오류가 발생했습니다.</p>';
     }
@@ -3258,41 +2441,7 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
                     `;
                 }
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
         itemsContainer.innerHTML = html;
         
@@ -3307,23 +2456,6 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!list.hasAttribute('data-scroll-listener')) {
                 list.addEventListener('scroll', () => handleElementScroll(list), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 list.setAttribute('data-scroll-listener', 'true');
             }
         }, 50);
@@ -3359,6 +2491,7 @@ function isValidDrugName(drugName) {
 
 // checkInteraction 수정: 입력값이 유효한 약물명일 때만 검사
 async function checkInteraction() {
+    console.log('🔍 Interaction check started');
     const drug1Element = document.getElementById('drug1');
     const drug2Element = document.getElementById('drug2');
     if (!drug1Element || !drug2Element) {
@@ -3465,6 +2598,7 @@ async function checkInteraction() {
             interactions2.toLowerCase().includes(drug1.toLowerCase());
 
         // Display result
+        console.log('🔍 Result section display start');
         console.log('resultSection:', resultSection);
         console.log('resultDiv:', resultDiv);
         
@@ -3561,7 +2695,7 @@ async function checkInteraction() {
                                     <span class="toggle-icon">📋</span>
                                     <span class="toggle-text">View FDA Original Data</span>
                                     <span class="toggle-arrow">▼</span>
-                
+                                </button>
                                 <div class="fda-data-container" style="display: none;">
                                     <div class="fda-data">
                                         <p><strong>${drug1}</strong> and <strong>${drug2}</strong> combination:</p>
@@ -3614,7 +2748,7 @@ async function checkInteraction() {
                                 <span class="toggle-icon">📋</span>
                                 <span class="toggle-text">View FDA Basic Information</span>
                                 <span class="toggle-arrow">▼</span>
-            
+                            </button>
                             <div class="fda-data-container" style="display: none;">
                                 <div class="basic-info">
                                     <p><strong>${drug1}</strong> and <strong>${drug2}</strong> combination: No major interactions found in FDA data.</p>
@@ -3640,46 +2774,12 @@ async function checkInteraction() {
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!resultSection.hasAttribute('data-scroll-listener')) {
                 resultSection.addEventListener('scroll', () => handleElementScroll(resultSection), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 resultSection.setAttribute('data-scroll-listener', 'true');
             }
         }, 100);
 
         // Smooth scroll
         resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         
     } catch (error) {
         console.error('Interaction check error:', error);
@@ -3711,23 +2811,6 @@ async function checkInteraction() {
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!resultSection.hasAttribute('data-scroll-listener')) {
                 resultSection.addEventListener('scroll', () => handleElementScroll(resultSection), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 resultSection.setAttribute('data-scroll-listener', 'true');
             }
         }, 100);
@@ -3800,23 +2883,6 @@ function closeDrugDetail() {
 // Scroll to top
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 }
 
 // Open settings modal
@@ -3838,23 +2904,6 @@ function openSettings() {
         }
     });
     
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    
     // Update API status
     updateAPIStatus();
     
@@ -3869,23 +2918,6 @@ function openSettings() {
             // 스크롤 이벤트 리스너가 없다면 추가
             if (!settingsBody.hasAttribute('data-scroll-listener')) {
                 settingsBody.addEventListener('scroll', () => handleElementScroll(settingsBody), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 settingsBody.setAttribute('data-scroll-listener', 'true');
             }
         }
@@ -3916,23 +2948,6 @@ function saveSettings() {
     const formToken = SECURITY_CONFIG.csrfToken;
     if (!SecurityUtils.validateCSRFToken(formToken)) {
         SecurityUtils.logSecurityEvent('INVALID_CSRF_TOKEN', { action: 'saveSettings' });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         utils.showAlert('Security validation failed. Please refresh the page.', 'warning');
         return;
     }
@@ -3945,23 +2960,6 @@ function saveSettings() {
     const sanitizedProvider = SecurityUtils.sanitizeInput(aiProvider, 20);
     if (!sanitizedProvider || !AI_CONFIGS[sanitizedProvider]) {
         SecurityUtils.logSecurityEvent('INVALID_AI_PROVIDER', { provider: aiProvider });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         utils.showAlert('Invalid AI provider selected.', 'warning');
         return;
     }
@@ -3969,23 +2967,6 @@ function saveSettings() {
     // 보안 이벤트 로깅
     SecurityUtils.logSecurityEvent('SETTINGS_SAVE_ATTEMPT', { 
         provider: sanitizedProvider 
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // Save selected AI service (보안 강화된 저장)
@@ -4010,23 +2991,6 @@ function saveSettings() {
                         provider: provider,
                         length: apiKey.length 
                     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                     return;
                 }
                 
@@ -4042,23 +3006,6 @@ function saveSettings() {
                             provider: provider,
                             keyMask: SecurityUtils.maskApiKey(apiKey)
                         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                         
                         // 메모리에서 민감한 데이터 제거
                         input.value = '***SAVED***';
@@ -4076,65 +3023,14 @@ function saveSettings() {
                         provider: provider,
                         keyMask: SecurityUtils.maskApiKey(apiKey)
                     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 }
             } else {
                 // Remove existing key if empty (보안 강화된 제거)
                 if (SecurityUtils.secureLocalStorage.removeItem(`${provider}_api_key`)) {
                     SecurityUtils.logSecurityEvent('API_KEY_REMOVED', { provider: provider });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 }
             }
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // Update API status
@@ -4147,67 +3043,16 @@ function saveSettings() {
             errors: errors,
             savedCount: savedCount
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         utils.showAlert(errorMessage, 'warning');
     } else if (savedCount > 0) {
         SecurityUtils.logSecurityEvent('SETTINGS_SAVE_SUCCESS', { 
             savedCount: savedCount,
             provider: sanitizedProvider
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         utils.showAlert(`${savedCount} API keys have been saved! AI analysis features are now available.`, 'success');
         closeSettings();
     } else {
         SecurityUtils.logSecurityEvent('SETTINGS_SAVE_NO_KEYS', {});
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         utils.showAlert('No API keys saved. To use AI analysis, please enter at least one API key.', 'info');
     }
 }
@@ -4242,23 +3087,6 @@ function updateAPIStatus() {
                 statusIcon.textContent = '⚪';
             }
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 }
 
@@ -4360,7 +3188,7 @@ function checkAPIKeyStatus() {
         // Displaying the guide message when AI service is available
         const providerNames = availableProviders.map(p => AI_CONFIGS[p].name).join(', ');
         setTimeout(() => {
-            utils.showAlert(`AI analizi hazır!`, 'success');
+            utils.showAlert(`AI analysis is ready!`, 'success');
         }, 1000);
     }
 }
@@ -4388,23 +3216,6 @@ const devTools = {
             consoleEl.querySelectorAll('.console-line').forEach(line => {
                 logs.push(line.textContent);
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         }
         
         const dataStr = JSON.stringify({
@@ -4419,23 +3230,6 @@ const devTools = {
         }, null, 2);
         
         const dataBlob = new Blob([dataStr], {type: 'application/json'});
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         const url = URL.createObjectURL(dataBlob);
         const link = document.createElement('a');
         link.href = url;
@@ -4494,26 +3288,10 @@ const devTools = {
             apiKeys: utils.getAvailableProviders()
         };
         
+        utils.logToDevConsole('🔍 Debug Info:', 'info');
         Object.entries(info).forEach(([key, value]) => {
             utils.logToDevConsole(`  ${key}: ${JSON.stringify(value)}`, 'info');
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     },
 
     async performanceTest() {
@@ -4538,9 +3316,18 @@ const devTools = {
     }
 };
 
-// Donanım hızlandırmasını etkinleştir
+// Initialize event listeners
+// Global error guards to avoid init breakage
+window.addEventListener('error', (e) => {
+    console.warn('Global error (en-us):', e.message);
+});
+window.addEventListener('unhandledrejection', (e) => {
+    console.warn('Unhandled rejection (en-us):', e.reason);
+});
+
+// Enable hardware acceleration
 function enableHardwareAcceleration() {
-    // GPU hızlandırması gereken öğeleri seç
+    // Select elements that need GPU acceleration
     const acceleratedElements = [
         '.modal',
         '.settings-modal',
@@ -4557,78 +3344,26 @@ function enableHardwareAcceleration() {
     acceleratedElements.forEach(selector => {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
-            // GPU hızlandırması için transform3d uygula
+            // Apply transform3d for GPU acceleration
             el.style.transform = 'translate3d(0, 0, 0)';
             el.style.backfaceVisibility = 'hidden';
             el.style.perspective = '1000px';
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
     });
     
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    
-    // Animasyonlu öğelere will-change ekle
+    // Add will-change to animated elements
     const animatedElements = document.querySelectorAll('.scroll-fade, .scroll-hidden, .scroll-scale');
     animatedElements.forEach(el => {
         el.style.willChange = 'opacity, transform';
     });
     
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    
-    console.log('⚡ Donanım hızlandırması etkinleştirildi');
+    console.log('⚡ Hardware acceleration enabled');
 }
 
-// Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Türkçe sayfa başlatma başladı');
+    console.log('🚀 English page initialization started');
     
-    // Donanım hızlandırmasını etkinleştir
+    // Enable hardware acceleration
     enableHardwareAcceleration();
     
     // File detection functionality
@@ -4645,77 +3380,25 @@ document.addEventListener('DOMContentLoaded', function() {
         updateAPIStatus();
     }, 100);
 
-    // Search input event
-    document.getElementById('drugSearch').addEventListener('input', realTimeSearchHandler);
-    
-    document.getElementById('drugSearch').addEventListener('keypress', function(e) {
+    // Search input event (guarded)
+    const enSearchInput = document.getElementById('drugSearch');
+    if (enSearchInput) {
+        enSearchInput.addEventListener('input', realTimeSearchHandler);
+        enSearchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             searchDrug();
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
+        });
+    }
 
     // Drug selection input event
-    document.getElementById('drug1').addEventListener('input', function() {
-        drugSearchHandler('drug1', 1);
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-
-    document.getElementById('drug2').addEventListener('input', function() {
-        drugSearchHandler('drug2', 2);
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
+    const enDrug1 = document.getElementById('drug1');
+    const enDrug2 = document.getElementById('drug2');
+    if (enDrug1) enDrug1.addEventListener('input', function() { drugSearchHandler('drug1', 1); });
+    if (enDrug2) enDrug2.addEventListener('input', function() { drugSearchHandler('drug2', 2); });
 
     // 약물 입력 필드에서 Enter 키 처리
-    document.getElementById('drug1').addEventListener('keypress', function(e) {
+    if (enDrug1) enDrug1.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             const drug2Element = document.getElementById('drug2');
             if (drug2Element) {
@@ -4723,25 +3406,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
-    document.getElementById('drug2').addEventListener('keypress', function(e) {
+    if (enDrug2) enDrug2.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             // Enter 키로 상호작용 검사 버튼 클릭
             const checkButton = document.querySelector('.btn.btn-primary.btn-block');
@@ -4750,23 +3416,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
     // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
@@ -4774,89 +3423,23 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.drug-list').forEach(list => {
                 list.classList.remove('show');
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // Close modal when clicking outside
-    document.getElementById('drugDetailModal').addEventListener('click', function(e) {
+    const enDetailModal = document.getElementById('drugDetailModal');
+    if (enDetailModal) enDetailModal.addEventListener('click', function(e) {
         if (e.target === this) {
             closeDrugDetail();
         }
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
     // Close settings modal when clicking outside
-    document.getElementById('settingsModal').addEventListener('click', function(e) {
+    const enSettingsModal = document.getElementById('settingsModal');
+    if (enSettingsModal) enSettingsModal.addEventListener('click', function(e) {
         if (e.target === this) {
             closeSettings();
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // Close modal when pressing ESC key
@@ -4869,23 +3452,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
     // Save settings when pressing Enter key
     Object.keys(AI_CONFIGS).forEach(provider => {
@@ -4896,41 +3462,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     saveSettings();
                 }
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // Display/hide FAB when scrolling
@@ -4950,23 +3482,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         lastScrollTop = scrollTop;
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // 개발자 모드가 활성화되어 있으면 패널 표시
@@ -4997,23 +3512,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('preload');
     }, 100);
 });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
 // 설정 버튼 드래그 기능 초기화
 function initSettingsFabDrag() {
@@ -5172,59 +3670,8 @@ function initSettingsFabDrag() {
     
     // 이벤트 리스너 추가
     settingsFab.addEventListener('touchstart', handleTouchStart, { passive: false });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     document.addEventListener('touchend', handleTouchEnd, { passive: false });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     
     // 마우스 이벤트 (데스크탑에서도 드래그 가능)
     settingsFab.addEventListener('mousedown', handleMouseStart);
@@ -5239,43 +3686,9 @@ function initSettingsFabDrag() {
         }
     });
     
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    
     // 화면 크기 변경 시 위치 재조정
     window.addEventListener('resize', () => {
         adjustSettingsFabPosition(settingsFab);
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 }
 
@@ -5372,23 +3785,6 @@ function initScrollAnimations() {
                 observer.unobserve(entry.target);
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     }, observerOptions);
     
     // 애니메이션 대상 요소들 선택
@@ -5399,23 +3795,6 @@ function initScrollAnimations() {
     // 각 요소를 관찰 대상에 추가
     animateElements.forEach(element => {
         observer.observe(element);
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // 동적으로 추가되는 요소들을 위한 MutationObserver
@@ -5436,77 +3815,9 @@ function initScrollAnimations() {
                     childAnimateElements.forEach(childElement => {
                         observer.observe(childElement);
                     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 }
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // DOM 변화 관찰 시작
@@ -5515,46 +3826,12 @@ function initScrollAnimations() {
         subtree: true
     });
     
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    
     // 페이지 상단에 있는 요소들은 즉시 표시 (이미 뷰포트에 있을 경우)
     const topElements = document.querySelectorAll('.header, .container > section:first-of-type');
     topElements.forEach(element => {
         if (element.getBoundingClientRect().top < window.innerHeight) {
             element.classList.add('scroll-visible');
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 }
 
@@ -5623,24 +3900,24 @@ function updateFooterStats() {
 function showPrivacyPolicy() {
     const modal = createInfoModal('Privacy Policy', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 개인정보 보호정책</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">🔒 Privacy Policy</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 수집</h5>
-            <p>본 서비스는 다음 정보를 수집합니다:</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Data Collection</h5>
+            <p>This service collects the following information:</p>
             <ul style="margin-left: 1rem;">
-                <li>검색한 약물명 (로컬 저장소에만 저장)</li>
-                <li>AI 분석을 위한 API 키 (로컬 저장소에만 저장)</li>
-                <li>사용 통계 (익명화)</li>
+                <li>Drug names searched (stored only in local storage)</li>
+                <li>API keys for AI analysis (stored only in local storage)</li>
+                <li>Usage statistics (anonymized)</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 보안</h5>
-            <p>모든 민감한 데이터는 브라우저의 로컬 저장소에만 저장되며, 외부 서버로 전송되지 않습니다. API 키는 암호화되어 저장됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Data Security</h5>
+            <p>All sensitive data is stored only in the browser's local storage and is not transmitted to external servers. API keys are encrypted before storage.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">쿠키 사용</h5>
-            <p>본 서비스는 필수 기능을 위한 로컬 저장소만 사용하며, 추적 쿠키는 사용하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Cookie Usage</h5>
+            <p>This service only uses local storage for essential functionality and does not use tracking cookies.</p>
             
             <p style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>중요:</strong> 본 도구는 교육 목적으로만 사용되며, 의료진의 조언을 대체하지 않습니다.
+                <strong>Important:</strong> This tool is for educational purposes only and does not replace professional medical advice.
             </p>
         </div>
     `);
@@ -5650,28 +3927,28 @@ function showPrivacyPolicy() {
 function showTermsOfService() {
     const modal = createInfoModal('Terms of Service', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">📋 이용약관</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">📋 Terms of Service</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 목적</h5>
-            <p>Drug Interaction Checker는 교육 및 정보 제공 목적으로만 사용됩니다. 의료 조언, 진단 또는 치료를 목적으로 하지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Service Purpose</h5>
+            <p>Drug Interaction Checker is intended for educational and informational purposes only. It is not intended for medical advice, diagnosis, or treatment.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">사용자 책임</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">User Responsibility</h5>
             <ul style="margin-left: 1rem;">
-                <li>약물 복용 전 반드시 의료진과 상담</li>
-                <li>도구 결과에만 의존하지 않기</li>
-                <li>응급상황 시 즉시 의료진에게 연락</li>
-                <li>API 키의 안전한 관리</li>
+                <li>Always consult with healthcare professionals before taking medications</li>
+                <li>Do not rely solely on tool results</li>
+                <li>Contact healthcare professionals immediately in emergency situations</li>
+                <li>Maintain secure management of API keys</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">책임 제한</h5>
-            <p>본 서비스는 정보 제공만을 목적으로 하며, 약물 상호작용으로 인한 어떠한 문제에 대해서도 책임을 지지 않습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Liability Limitation</h5>
+            <p>This service is provided for informational purposes only and assumes no responsibility for any issues arising from drug interactions.</p>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">서비스 변경</h5>
-            <p>서비스 내용은 사전 통지 없이 변경될 수 있습니다. 지속적인 개선을 위해 기능이 추가되거나 수정될 수 있습니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Service Changes</h5>
+            <p>Service content may be changed without prior notice. Features may be added or modified for continuous improvement.</p>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>⚠️ 의료 면책 조항:</strong><br>
-                본 도구는 의료 전문가의 조언을 대체할 수 없습니다. 약물 복용에 관한 모든 결정은 의료진과 상담 후 내리시기 바랍니다.
+                <strong>⚠️ Medical Disclaimer:</strong><br>
+                This tool cannot replace professional medical advice. Please consult with healthcare professionals before making any decisions regarding medication use.
             </div>
         </div>
     `);
@@ -5681,36 +3958,36 @@ function showTermsOfService() {
 function showDataSources() {
     const modal = createInfoModal('Data Sources', `
         <div style="line-height: 1.6; color: var(--text-secondary);">
-            <h4 style="color: var(--text); margin-bottom: 1rem;">📊 데이터 출처</h4>
+            <h4 style="color: var(--text); margin-bottom: 1rem;">📊 Data Sources</h4>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">주요 데이터베이스</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Primary Database</h5>
             <div style="margin-bottom: 1rem;">
                 <strong>FDA Drug Database</strong><br>
-                <span style="font-size: 0.9rem;">미국 식품의약국(FDA)의 공식 약물 데이터베이스</span><br>
-                <a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener" style="color: var(--primary);">→ API 문서 보기</a>
+                <span style="font-size: 0.9rem;">Official drug database from the U.S. Food and Drug Administration</span><br>
+                <a href="https://api.fda.gov/drug/label.json" target="_blank" rel="noopener" style="color: var(--primary);">→ View API Documentation</a>
             </div>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">AI 분석 서비스</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">AI Analysis Services</h5>
             <ul style="margin-left: 1rem;">
-                <li><strong>OpenAI GPT-4o-mini:</strong> 약물 상호작용 분석</li>
-                <li><strong>Anthropic Claude:</strong> 의료 정보 해석</li>
-                <li><strong>Google Gemini:</strong> 다각도 분석</li>
-                <li><strong>Perplexity AI:</strong> 실시간 정보 검색</li>
+                <li><strong>OpenAI GPT-4o-mini:</strong> Drug interaction analysis</li>
+                <li><strong>Anthropic Claude:</strong> Medical information interpretation</li>
+                <li><strong>Google Gemini:</strong> Multi-perspective analysis</li>
+                <li><strong>Perplexity AI:</strong> Real-time information search</li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">참고 자료</h5>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Reference Materials</h5>
             <ul style="margin-left: 1rem;">
-                <li><a href="https://www.fda.gov" target="_blank" rel="noopener" style="color: var(--primary);">FDA 공식 웹사이트</a></li>
-                <li><a href="https://www.drugs.com" target="_blank" rel="noopener" style="color: var(--primary);">Drugs.com 상호작용 데이터</a></li>
-                <li><a href="https://medlineplus.gov" target="_blank" rel="noopener" style="color: var(--primary);">MedlinePlus 의료정보</a></li>
+                <li><a href="https://www.fda.gov" target="_blank" rel="noopener" style="color: var(--primary);">FDA Official Website</a></li>
+                <li><a href="https://www.drugs.com" target="_blank" rel="noopener" style="color: var(--primary);">Drugs.com Interaction Data</a></li>
+                <li><a href="https://medlineplus.gov" target="_blank" rel="noopener" style="color: var(--primary);">MedlinePlus Medical Information</a></li>
             </ul>
             
-            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">데이터 업데이트</h5>
-            <p>FDA 데이터는 실시간으로 조회되며, AI 분석은 최신 의학 지식을 바탕으로 수행됩니다.</p>
+            <h5 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Data Updates</h5>
+            <p>FDA data is queried in real-time, and AI analysis is performed based on the latest medical knowledge.</p>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);">
-                <strong>ℹ️ 참고:</strong><br>
-                모든 데이터는 신뢰할 수 있는 공식 소스에서 가져오지만, 개별 환자의 상황은 다를 수 있으므로 의료진과의 상담이 필수입니다.
+                <strong>ℹ️ Note:</strong><br>
+                All data comes from reliable official sources, but individual patient situations may vary, so consultation with healthcare professionals is essential.
             </div>
         </div>
     `);
@@ -5750,23 +4027,6 @@ function createInfoModal(title, content) {
         if (e.target === this) {
             closeInfoModal();
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     return modal;
@@ -5872,23 +4132,6 @@ function initScrollGradients() {
     const searchResults = document.getElementById('searchResults');
     if (searchResults) {
         searchResults.addEventListener('scroll', () => handleElementScroll(searchResults), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         searchResults.setAttribute('data-scroll-listener', 'true');
         setInitialScrollState(searchResults);
     }
@@ -5897,64 +4140,13 @@ function initScrollGradients() {
     const drugLists = document.querySelectorAll('.drug-list');
     drugLists.forEach(list => {
         list.addEventListener('scroll', () => handleElementScroll(list), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         setInitialScrollState(list);
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // 설정 모달 바디
     const settingsBody = document.querySelector('.settings-body');
     if (settingsBody) {
         settingsBody.addEventListener('scroll', () => handleElementScroll(settingsBody), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         setInitialScrollState(settingsBody);
     }
     
@@ -5962,64 +4154,13 @@ function initScrollGradients() {
     const modalContents = document.querySelectorAll('.modal-content');
     modalContents.forEach(modal => {
         modal.addEventListener('scroll', () => handleElementScroll(modal), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         setInitialScrollState(modal);
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // 개발자 패널 콘텐츠
     const devContent = document.querySelector('.dev-content');
     if (devContent) {
         devContent.addEventListener('scroll', () => handleElementScroll(devContent), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         setInitialScrollState(devContent);
     }
     
@@ -6027,23 +4168,6 @@ function initScrollGradients() {
     const devConsole = document.querySelector('.dev-console');
     if (devConsole) {
         devConsole.addEventListener('scroll', () => handleElementScroll(devConsole), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         setInitialScrollState(devConsole);
     }
     
@@ -6055,23 +4179,6 @@ function initScrollGradients() {
                     // 약물 리스트가 새로 추가된 경우
                     if (node.classList && node.classList.contains('drug-list')) {
                         node.addEventListener('scroll', () => handleElementScroll(node), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                         // 약간의 지연 후 초기 상태 설정 (렌더링 완료 후)
                         setTimeout(() => setInitialScrollState(node), 50);
                     }
@@ -6083,120 +4190,18 @@ function initScrollGradients() {
                     
                     scrollableElements.forEach(element => {
                         element.addEventListener('scroll', () => handleElementScroll(element), { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                         // 약간의 지연 후 초기 상태 설정 (렌더링 완료 후)
                         setTimeout(() => setInitialScrollState(element), 50);
                     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
                 }
             });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
     
     // DOM 변화 관찰
     observer.observe(document.body, {
         childList: true,
         subtree: true
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 }
 
@@ -6249,23 +4254,6 @@ function enhanceScrollObserver() {
                 }
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     }, observerOptions);
 
     // 스크롤 애니메이션 요소들을 관찰
@@ -6301,44 +4289,10 @@ function enhanceScrollObserver() {
                 footerDisclaimerObserver.unobserve(footer);
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     }, {
         root: null,
         rootMargin: '0px 0px -20% 0px', // 푸터의 하단 20%가 보일 때 트리거
         threshold: 0.1
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 
     // 푸터 요소 관찰
@@ -6350,23 +4304,6 @@ function enhanceScrollObserver() {
 
 // 스크롤 이벤트 리스너 등록
 window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
 // 피드백 모달 관련 함수들
 function openFeedbackModal() {
@@ -6462,31 +4399,17 @@ function handleFeedbackSubmit(event) {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 }
 
 // EmailJS 초기화
 document.addEventListener('DOMContentLoaded', async function() {
-    // 환경변수 로드 완료까지 대기
+    // 환경변수 로드 완료까지 대기 (최대 2초)
     await new Promise(resolve => {
+        const start = Date.now();
         const checkConfig = () => {
-            if (EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+            if (window.EMAILJS_CONFIG && EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+                resolve();
+            } else if (Date.now() - start > 2000) {
                 resolve();
             } else {
                 setTimeout(checkConfig, 100);
@@ -6495,25 +4418,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         checkConfig();
     });
     
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
-    
-    // EmailJS 초기화 (config.js에서 환경변수 사용)
-    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    // EmailJS SDK/키 가드
+    if (window.emailjs && window.EMAILJS_CONFIG && EMAILJS_CONFIG.PUBLIC_KEY && EMAILJS_CONFIG.PUBLIC_KEY !== 'your_emailjs_public_key_here') {
+        try {
+            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        } catch (e) {
+            console.warn('EmailJS init skipped:', e);
+        }
+    } else {
+        console.warn('EmailJS not configured; skipping init.');
+    }
     
     const feedbackForm = document.getElementById('feedbackForm');
     if (feedbackForm) {
@@ -6528,23 +4442,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 closeFeedbackModal();
             }
         });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
     }
     
     // ESC 키로 모달 닫기
@@ -6556,40 +4453,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
     });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
-    });
 
  
