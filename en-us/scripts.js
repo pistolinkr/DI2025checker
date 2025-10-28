@@ -1,40 +1,3 @@
-// SmoothCorners 클래스
-class SmoothCorners {
-  constructor(element, radius = 20) {
-    this.element = element;
-    this.radius = radius;
-    this.applySmoothCorners();
-  }
-
-  applySmoothCorners() {
-    const width = this.element.offsetWidth;
-    const height = this.element.offsetHeight;
-    
-    // SVG path for squircle
-    const svgPath = this.createSquirclePath(width, height, this.radius);
-    
-    // Apply as clip-path
-    this.element.style.clipPath = `path('${svgPath}')`;
-  }
-
-  createSquirclePath(w, h, r) {
-    // Superellipse formula approximation
-    const c = r * 0.552284749831; // Magic number for cubic bezier approximation
-    
-    return `
-      M ${r},0
-      L ${w - r},0
-      C ${w - r + c},0 ${w},${r - c} ${w},${r}
-      L ${w},${h - r}
-      C ${w},${h - r + c} ${w - r + c},${h} ${w - r},${h}
-      L ${r},${h}
-      C ${r - c},${h} 0,${h - r + c} 0,${h - r}
-      L 0,${r}
-      C 0,${r - c} ${r - c},0 ${r},0
-    `;
-  }
-}
-
 // API 설정
 const FDA_API_KEY = 'y15g3aG5icGrBAWcxP7HUkQa5h9pUcBFaD8kkmjk';
 const BASE_URL = 'https://api.fda.gov/drug/label.json';
@@ -4489,23 +4452,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 closeFeedbackModal();
             }
         }
-    });
-    
-    // SmoothCorners 적용 - 모든 카드 요소에
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        new SmoothCorners(card, 24);
-    });
-    
-    // 리사이즈 시에도 적용
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            cards.forEach(card => {
-                new SmoothCorners(card, 24);
-            });
-        }, 250);
     });
 });
 
