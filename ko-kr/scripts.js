@@ -824,7 +824,7 @@ const utils = {
                 document.removeEventListener('mouseup', endDrag);
                 document.removeEventListener('touchend', endDrag);
             }
-        });
+    });
     },
 
     hideAlert(alert) {
@@ -1082,7 +1082,7 @@ const utils = {
             if (term.includes(from)) {
                 fuzzyTerms.add(term.replace(new RegExp(from, 'g'), to));
             }
-        });
+    });
         
         return Array.from(fuzzyTerms);
     },
@@ -1165,10 +1165,10 @@ const utils = {
                         manufacturer: drug.openfda.manufacturer_name?.[0] || 'No info',
                         drugData: drug,
                         relevanceScore
-                    });
+    });
                 }
             });
-        });
+    });
 
         // Sort by relevance
         const sortedDrugs = Array.from(uniqueDrugs.values())
@@ -1243,7 +1243,7 @@ const utils = {
                 max_tokens: options.max_tokens || 1500,
                 ...options
             })
-        });
+    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1280,7 +1280,7 @@ const utils = {
                 max_tokens: options.max_tokens || 1500,
                 temperature: options.temperature || 0.3
             })
-        });
+    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1311,7 +1311,7 @@ const utils = {
                 temperature: options.temperature || 0.3,
                 max_tokens: options.max_tokens || 1500
             })
-        });
+    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -1352,7 +1352,7 @@ const utils = {
             contents.push({
                 role: role,
                 parts: [{ text: content }]
-            });
+    });
         }
 
         const url = `${AI_CONFIGS.gemini.baseUrl}?key=${apiKey}`;
@@ -1368,7 +1368,7 @@ const utils = {
                     maxOutputTokens: options.max_tokens || 1500
                 }
             })
-        });
+    });
 
         if (!response.ok) {
             const error = await response.json();
@@ -2039,7 +2039,7 @@ async function searchDrug(query = null) {
         SecurityUtils.logSecurityEvent('SEARCH_ERROR', { 
             error: error.message,
             term: SecurityUtils.escapeHtml(searchInput)
-        });
+    });
         
         if (state.developerMode) {
             utils.logToDevConsole(`💥 Search error: ${error.message}`, 'error');
@@ -2137,7 +2137,7 @@ function displaySearchResults(data) {
                     drugData: drug,
                     relevanceScore,
                     matchType
-                });
+    });
             }
         });
     });
@@ -2255,7 +2255,7 @@ async function showDrugDetail(drugName, element = null) {
                 SecurityUtils.logSecurityEvent('INVALID_DRUG_DATA', { 
                     error: parseError.message,
                     drugName: SecurityUtils.escapeHtml(sanitizedDrugName)
-                });
+    });
                 throw new Error('Invalid drug data format');
             }
         } else {
@@ -2298,7 +2298,7 @@ async function showDrugDetail(drugName, element = null) {
         const translatedSections = {};
         Object.keys(sections).forEach((key, index) => {
             translatedSections[key] = translations[index];
-        });
+    });
 
         // HTML 이스케이프 적용
         const safeContent = {
@@ -2354,7 +2354,7 @@ async function showDrugDetail(drugName, element = null) {
         SecurityUtils.logSecurityEvent('DRUG_DETAIL_ERROR', { 
             error: error.message,
             drugName: SecurityUtils.escapeHtml(sanitizedDrugName)
-        });
+    });
         
         body.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">정보를 불러오는 중 오류가 발생했습니다.</p>';
     }
@@ -2440,8 +2440,8 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
                         </div>
                     `;
                 }
-            });
         });
+    });
 
         itemsContainer.innerHTML = html;
         
@@ -3005,7 +3005,7 @@ function saveSettings() {
                         SecurityUtils.logSecurityEvent('API_KEY_SAVED', { 
                             provider: provider,
                             keyMask: SecurityUtils.maskApiKey(apiKey)
-                        });
+    });
                         
                         // 메모리에서 민감한 데이터 제거
                         input.value = '***SAVED***';
@@ -3022,7 +3022,7 @@ function saveSettings() {
                     SecurityUtils.logSecurityEvent('INVALID_API_KEY_FORMAT', { 
                         provider: provider,
                         keyMask: SecurityUtils.maskApiKey(apiKey)
-                    });
+    });
                 }
             } else {
                 // Remove existing key if empty (보안 강화된 제거)
@@ -3042,7 +3042,7 @@ function saveSettings() {
         SecurityUtils.logSecurityEvent('SETTINGS_SAVE_ERRORS', { 
             errors: errors,
             savedCount: savedCount
-        });
+    });
         utils.showAlert(errorMessage, 'warning');
     } else if (savedCount > 0) {
         SecurityUtils.logSecurityEvent('SETTINGS_SAVE_SUCCESS', { 
@@ -3215,7 +3215,7 @@ const devTools = {
         if (consoleEl) {
             consoleEl.querySelectorAll('.console-line').forEach(line => {
                 logs.push(line.textContent);
-            });
+    });
         }
         
         const dataStr = JSON.stringify({
@@ -3291,7 +3291,7 @@ const devTools = {
         utils.logToDevConsole('🔍 Debug Info:', 'info');
         Object.entries(info).forEach(([key, value]) => {
             utils.logToDevConsole(`  ${key}: ${JSON.stringify(value)}`, 'info');
-        });
+    });
     },
 
     async performanceTest() {
@@ -3320,7 +3320,7 @@ const devTools = {
 // Global error guards to avoid init breakage
 window.addEventListener('error', (e) => {
     console.warn('Global error (en-us):', e.message);
-});
+    });
 window.addEventListener('unhandledrejection', (e) => {
     console.warn('Unhandled rejection (en-us):', e.reason);
 });
@@ -3388,7 +3388,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') {
             searchDrug();
         }
-        });
+    });
     }
 
     // Drug selection input event
@@ -3406,7 +3406,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
+    
     if (enDrug2) enDrug2.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             // Enter 키로 상호작용 검사 버튼 클릭
@@ -3422,7 +3422,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!e.target.closest('.drug-select-container')) {
             document.querySelectorAll('.drug-list').forEach(list => {
                 list.classList.remove('show');
-            });
+    });
         }
     });
 
@@ -3461,7 +3461,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (e.key === 'Enter') {
                     saveSettings();
                 }
-            });
+    });
         }
     });
 
@@ -3511,7 +3511,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         document.body.classList.remove('preload');
     }, 100);
-});
+    });
 
 // 설정 버튼 드래그 기능 초기화
 function initSettingsFabDrag() {
@@ -3784,7 +3784,7 @@ function initScrollAnimations() {
                 // 한 번 보인 요소는 더 이상 관찰하지 않음 (성능 최적화)
                 observer.unobserve(entry.target);
             }
-        });
+    });
     }, observerOptions);
     
     // 애니메이션 대상 요소들 선택
@@ -3814,7 +3814,7 @@ function initScrollAnimations() {
                     
                     childAnimateElements.forEach(childElement => {
                         observer.observe(childElement);
-                    });
+    });
                 }
             });
         });
@@ -4192,7 +4192,7 @@ function initScrollGradients() {
                         element.addEventListener('scroll', () => handleElementScroll(element), { passive: true });
                         // 약간의 지연 후 초기 상태 설정 (렌더링 완료 후)
                         setTimeout(() => setInitialScrollState(element), 50);
-                    });
+    });
                 }
             });
         });
@@ -4253,7 +4253,7 @@ function enhanceScrollObserver() {
                     element.style.opacity = '0';
                 }
             }
-        });
+    });
     }, observerOptions);
 
     // 스크롤 애니메이션 요소들을 관찰
@@ -4288,7 +4288,7 @@ function enhanceScrollObserver() {
                 // 한 번 나타난 후에는 옵저버를 중단
                 footerDisclaimerObserver.unobserve(footer);
             }
-        });
+    });
     }, {
         root: null,
         rootMargin: '0px 0px -20% 0px', // 푸터의 하단 20%가 보일 때 트리거
@@ -4398,7 +4398,7 @@ function handleFeedbackSubmit(event) {
             // 버튼 상태 복원
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-        });
+    });
 }
 
 // EmailJS 초기화
@@ -4441,7 +4441,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (event.target === feedbackModal) {
                 closeFeedbackModal();
             }
-        });
+    });
     }
     
     // ESC 키로 모달 닫기

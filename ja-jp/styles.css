@@ -2458,14 +2458,16 @@ html {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-content: flex-start;
+    align-content: center;
     justify-content: flex-end;
-    align-items: stretch;
+    align-items: center;
     gap: 1rem;
     margin-top: 0.5rem;
     padding-left: 0;
     padding-right: 0;
     max-width: 180px;
+    margin-left: auto;
+    margin-right: auto;
     z-index: 10;
 }
 
@@ -2473,6 +2475,8 @@ html {
 .footer-section.footer-resources .medical-links,
 .footer-section.footer-contact .medical-links {
     max-width: 180px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .medical-links a {
