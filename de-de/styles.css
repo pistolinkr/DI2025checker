@@ -245,7 +245,7 @@ body {
     margin-top: 1rem;
     position: relative;
     scroll-behavior: smooth;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     background: var(--surface);
     display: none;
@@ -296,7 +296,7 @@ body {
     left: 0;
     right: 0;
     background: var(--surface);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-lg);
     max-height: 5px;
@@ -400,7 +400,7 @@ body {
 /* AI 분석 스타일 */
 .ai-analysis {
     background: var(--surface);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -573,7 +573,7 @@ body {
     background: var(--surface);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 12px 16px;
     color: var(--text);
@@ -622,7 +622,7 @@ body {
     margin-top: 12px;
     padding: 16px;
     background: var(--surface);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     animation: fadeInDown 0.3s ease-out;
 }
@@ -871,7 +871,7 @@ body {
     background: var(--surface);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 1rem;
     margin-top: 1.5rem;
@@ -955,7 +955,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--text);
-    border: none;
+    border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
@@ -1303,7 +1303,7 @@ body {
     margin: 0.25rem;
     transition: var(--transition);
     cursor: pointer;
-    border: none;
+    border: 1px solid var(--border);
 }
 
 .tag:hover {
@@ -1324,7 +1324,7 @@ body {
     padding: 1rem;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-md);
-    border: none;
+    border: 1px solid var(--border);
     transition: var(--transition);
     animation: fadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
@@ -1357,7 +1357,7 @@ body {
     margin: 0.25rem;
     transition: var(--transition);
     cursor: pointer;
-    border: none;
+    border: 1px solid var(--border);
 }
 
 .example-drugs li:hover {
@@ -1415,7 +1415,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(5px);
     color: var(--text);
-    border: none;
+    border: 1px solid var(--border);
 }
 
 .alert-warning {
@@ -1423,7 +1423,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--text);
-    border: none;
+    border: 1px solid var(--border);
 }
 
 .alert-info {
@@ -1432,7 +1432,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--text);
-    border: none;
+    border: 1px solid var(--border);
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -1530,7 +1530,7 @@ body {
         font-size: 0.8rem;
         font-weight: 500;
         border-radius: 0.5rem;
-        border: none;
+        border: 1px solid var(--border);
         background: var(--surface);
         color: var(--text);
         cursor: pointer;
@@ -1712,7 +1712,7 @@ body {
         font-size: 0.8rem;
         font-weight: 500;
         border-radius: 25px;
-        border: none;
+        border: 1px solid var(--border);
         background: var(--bg) !important;
         color: var(--text);
         cursor: pointer;
@@ -1750,7 +1750,7 @@ body {
         font-size: 0.8rem;
         font-weight: 500;
         border-radius: 0.5rem;
-        border: none;
+        border: 1px solid var(--border);
         background: var(--surface);
         color: var(--text);
         cursor: pointer;
@@ -2026,7 +2026,7 @@ body {
     background: var(--surface);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-lg);
     z-index: 9999;
@@ -2177,7 +2177,7 @@ body {
 .dev-btn {
     padding: 0.5rem 0.75rem;
     font-size: 0.8rem;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 6px;
     background: var(--surface);
     color: var(--text);
@@ -2196,7 +2196,7 @@ body {
     max-height: 200px;
     overflow-y: auto;
     background: var(--bg);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 0.75rem;
     font-family: 'Courier New', monospace;
@@ -2318,10 +2318,6 @@ body {
     opacity: 1;
     visibility: visible;
     transform: none;
-    background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: 24px;
-    box-shadow: none;
 }
 
 .scroll-visible {
@@ -2329,16 +2325,12 @@ body {
     visibility: visible;
     transform: none;
     border-radius: 24px;
-
-}
 }
 
 /* 특정 카드 섹션들의 border-radius 설정 */
 section.card.scroll-hidden.scroll-delay-1.scroll-visible,
 section.card.scroll-hidden.scroll-delay-3.scroll-visible {
     border-radius: 36px;
-
-}
 }
 
 /* 부드러운 스크롤 */
@@ -2464,8 +2456,8 @@ html {
 /* Medical Links */
 .medical-links {
     display: flex;
-    flex-wrap: nowrap;
     flex-direction: column;
+    flex-wrap: nowrap;
     align-content: flex-start;
     justify-content: flex-end;
     align-items: stretch;
@@ -2481,7 +2473,7 @@ html {
     text-decoration: none;
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 20px;
     background: rgba(var(--surface-rgb), 0.5);
     transition: var(--transition);
@@ -2526,7 +2518,7 @@ html {
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.5rem 0.75rem;
     border-radius: 24px;
-    border: none;
+    border: 1px solid var(--border);
     transition: var(--transition);
 }
 
@@ -2541,7 +2533,7 @@ html {
     background: rgba(var(--surface-rgb), 0.7);
     padding: 1rem;
     border-radius: 24px;
-    border: none;
+    border: 1px solid var(--border);
     text-align: center;
 }
 
@@ -2641,7 +2633,7 @@ html {
     color: var(--primary);
     text-decoration: none;
     padding: 0.25rem 0.75rem;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     background: rgba(var(--surface-rgb), 0.5);
     transition: var(--transition);
@@ -2649,7 +2641,7 @@ html {
     align-items: center;
     gap: 0.25rem;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 0.86rem;
+    font-size: 0.8rem;
     height: 1.5rem;
     line-height: 1.5rem;
 }
@@ -2664,11 +2656,11 @@ html {
 .footer-version {
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 0.86rem;
+    font-size: 0.8rem;
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.25rem 0.75rem;
     border-radius: 24px;
-    border: none;
+    border: 1px solid var(--border);
     z-index: 100002;
     position: relative;
     height: 1.5rem;
@@ -2761,7 +2753,7 @@ html {
     background: rgba(var(--surface-rgb), 0.5);
     padding: 1.5rem;
     border-radius: 24px;
-    border: none;
+    border: 1px solid var(--border);
     transition: var(--transition);
 }
 
@@ -2778,7 +2770,7 @@ html {
 
 .update-item {
     background: rgba(var(--surface-rgb), 0.3);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -2844,7 +2836,7 @@ html {
     margin-bottom: 2rem;
     padding: 1.5rem;
     background: rgba(var(--surface-rgb), 0.3);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     transition: var(--transition);
 }
@@ -3208,7 +3200,7 @@ html {
 /* Free AI Service Information Styles */
 .free-ai-info {
     background: linear-gradient(135deg, var(--surface) 0%, var(--surface-secondary) 100%);
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 1.5rem;
     margin: 1rem 0;
@@ -3255,7 +3247,7 @@ html {
     background: rgba(var(--surface-rgb), 0.5);
     padding: 0.5rem 0.75rem;
     border-radius: 24px;
-    border: none;
+    border: 1px solid var(--border);
     transition: var(--transition);
     cursor: pointer;
     font-size: 0.8rem;
@@ -3352,30 +3344,16 @@ html {
 /* Allow title wrapping */
 .header h1 { white-space: normal !important; word-break: keep-all; overflow-wrap: anywhere; }
 
-
-/* 입력 필드와 버튼이 scroll 상태에서도 동일한 스타일 유지 */
-.input-field.scroll-hidden,
-.input-field.scroll-fade,
-.input-field.scroll-scale,
-.btn.scroll-hidden,
-.btn.scroll-fade,
-.btn.scroll-scale {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    background: var(--surface);
-    border: 2px solid var(--border);
+/* Desktop header styles */
+@media (min-width: 1024px) {
+    .header.scroll-fade,
+    .header.scroll-fade.scroll-visible {
+        display: inline-table;
+    }
+    
+    .header.scroll-fade p,
+    .header.scroll-fade.scroll-visible p {
+        text-align: left;
+    }
 }
 
-/* scroll-visible 상태에서도 입력 필드와 버튼 스타일 유지 */
-.input-field.scroll-visible,
-.btn.scroll-visible {
-    background: var(--surface);
-}
-
-.btn-primary.scroll-visible {
-    background: var(--bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
