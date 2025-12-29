@@ -2153,7 +2153,7 @@ function displaySearchResults(data) {
         
         return `
             <div class="drug-item scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)} ${isExactMatch ? 'exact-match' : ''}" 
-                 onclick="showDrugDetail('${drug.name}', this)" 
+                 data-show-drug-detail="${SecurityUtils.escapeHtml(drug.name)}" 
                  data-drug='${JSON.stringify(drug.drugData).replace(/'/g, "&apos;")}'>
                 <div class="drug-item-name">
                     ${matchIcon} ${drug.name}
@@ -2342,7 +2342,7 @@ async function showDrugDetail(drugName, element = null) {
                 </div>
             ` : ''}
             <div style="text-align: center; margin-top: 24px;">
-                <button class="btn btn-primary add-to-check-btn" onclick="addDrugToCheck('${safeContent.drugName}')" title="Add to interaction check">
+                <button class="btn btn-primary add-to-check-btn" data-add-drug="${SecurityUtils.escapeHtml(safeContent.drugName)}" title="Add to interaction check">
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Add to interaction check</span>
                 </button>
@@ -2435,7 +2435,7 @@ const drugSearchHandler = utils.debounce(async function(inputId, drugNumber) {
                 if (!uniqueDrugs.has(name)) {
                     uniqueDrugs.add(name);
                     html += `
-                        <div class="drug-item scroll-hidden scroll-delay-${Math.min((uniqueDrugs.size % 4) + 1, 4)}" onclick="selectDrug('${inputId}', '${name}')">
+                        <div class="drug-item scroll-hidden scroll-delay-${Math.min((uniqueDrugs.size % 4) + 1, 4)}" data-drug-input="${inputId}" data-drug-name="${SecurityUtils.escapeHtml(name)}">
                             <div class="drug-item-name">${name}</div>
                         </div>
                     `;
@@ -2691,7 +2691,7 @@ async function checkInteraction() {
                         
                         ${(interactions1 || interactions2) ? `
                             <div class="fda-toggle-section scroll-slide-right scroll-delay-2">
-                                <button class="fda-toggle-btn" onclick="toggleFDAData(this)">
+                                <button class="fda-toggle-btn" data-toggle-fda>
                                     <span class="toggle-icon">📋</span>
                                     <span class="toggle-text">View FDA Original Data</span>
                                     <span class="toggle-arrow">▼</span>
@@ -2744,7 +2744,7 @@ async function checkInteraction() {
                         ` : ''}
                         
                         <div class="fda-toggle-section scroll-slide-right scroll-delay-2">
-                            <button class="fda-toggle-btn" onclick="toggleFDAData(this)">
+                                <button class="fda-toggle-btn" data-toggle-fda>
                                 <span class="toggle-icon">📋</span>
                                 <span class="toggle-text">View FDA Basic Information</span>
                                 <span class="toggle-arrow">▼</span>
@@ -2823,7 +2823,7 @@ async function checkInteraction() {
 function updateRecentSearches() {
     const list = document.getElementById('recentSearchesList');
     list.innerHTML = state.recentSearches.map((term, index) => `
-        <span class="tag scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)}" onclick="useRecentSearch('${term}')">${term}</span>
+        <span class="tag scroll-hidden scroll-delay-${Math.min(index % 4 + 1, 4)}" data-recent-search="${SecurityUtils.escapeHtml(term)}">${term}</span>
     `).join('');
     
     // 새로 추가된 태그들에 애니메이션 적용
@@ -3417,14 +3417,152 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Close dropdown when clicking outside
+    // 이벤트 위임: 동적으로 생성되는 요소들에 대한 클릭/터치 이벤트 처리
     document.addEventListener('click', function(e) {
+        // 약물 선택 항목 클릭
+        const drugItem = e.target.closest('.drug-item[data-drug-input]');
+        if (drugItem) {
+            const inputId = drugItem.getAttribute('data-drug-input');
+            const drugName = drugItem.getAttribute('data-drug-name');
+            if (inputId && drugName) {
+                selectDrug(inputId, drugName);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // Add to check 버튼 클릭
+        const addDrugBtn = e.target.closest('[data-add-drug]');
+        if (addDrugBtn) {
+            const drugName = addDrugBtn.getAttribute('data-add-drug');
+            if (drugName) {
+                addDrugToCheck(drugName);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // 최근 검색 태그 클릭
+        const recentSearchTag = e.target.closest('[data-recent-search]');
+        if (recentSearchTag) {
+            const term = recentSearchTag.getAttribute('data-recent-search');
+            if (term) {
+                useRecentSearch(term);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // Check interaction 버튼 클릭
+        const checkBtn = e.target.closest('[data-check-interaction]');
+        if (checkBtn) {
+            checkInteraction();
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // 약물 상세 정보 표시 (검색 결과에서)
+        const showDrugDetailItem = e.target.closest('[data-show-drug-detail]');
+        if (showDrugDetailItem) {
+            const drugName = showDrugDetailItem.getAttribute('data-show-drug-detail');
+            if (drugName) {
+                showDrugDetail(drugName, showDrugDetailItem);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // FDA 데이터 토글 버튼
+        const toggleFDABtn = e.target.closest('[data-toggle-fda]');
+        if (toggleFDABtn) {
+            toggleFDAData(toggleFDABtn);
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // Close dropdown when clicking outside
         if (!e.target.closest('.drug-select-container')) {
             document.querySelectorAll('.drug-list').forEach(list => {
                 list.classList.remove('show');
             });
         }
     });
+    
+    // 모바일 터치 이벤트 처리
+    document.addEventListener('touchend', function(e) {
+        // 약물 선택 항목 터치
+        const drugItem = e.target.closest('.drug-item[data-drug-input]');
+        if (drugItem) {
+            const inputId = drugItem.getAttribute('data-drug-input');
+            const drugName = drugItem.getAttribute('data-drug-name');
+            if (inputId && drugName) {
+                selectDrug(inputId, drugName);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // Add to check 버튼 터치
+        const addDrugBtn = e.target.closest('[data-add-drug]');
+        if (addDrugBtn) {
+            const drugName = addDrugBtn.getAttribute('data-add-drug');
+            if (drugName) {
+                addDrugToCheck(drugName);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // 최근 검색 태그 터치
+        const recentSearchTag = e.target.closest('[data-recent-search]');
+        if (recentSearchTag) {
+            const term = recentSearchTag.getAttribute('data-recent-search');
+            if (term) {
+                useRecentSearch(term);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // Check interaction 버튼 터치
+        const checkBtn = e.target.closest('[data-check-interaction]');
+        if (checkBtn) {
+            checkInteraction();
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // 약물 상세 정보 표시 (검색 결과에서)
+        const showDrugDetailItem = e.target.closest('[data-show-drug-detail]');
+        if (showDrugDetailItem) {
+            const drugName = showDrugDetailItem.getAttribute('data-show-drug-detail');
+            if (drugName) {
+                showDrugDetail(drugName, showDrugDetailItem);
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+        }
+        
+        // FDA 데이터 토글 버튼
+        const toggleFDABtn = e.target.closest('[data-toggle-fda]');
+        if (toggleFDABtn) {
+            toggleFDAData(toggleFDABtn);
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+    }, { passive: false });
 
     // Close modal when clicking outside
     const enDetailModal = document.getElementById('drugDetailModal');
